@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -46,5 +47,20 @@ public class Controller_Food : MonoBehaviour
         //spawn new
         foodPellets_list.Add(Instantiate(foodPellet_basic, mousePos, Quaternion.identity));
 
+    }
+
+    public List<GameObject> GetAllFood(){
+        return foodPellets_list;
+    }
+
+    public void TrashThisFood(GameObject foodObj){
+
+        Destroy(foodObj);
+        foodPellets_list.Remove(foodObj);
+
+    }
+
+    public int GetFoodLength(){
+        return foodPellets_list.Count;
     }
 }

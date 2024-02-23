@@ -21,7 +21,7 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] Transform sprite;
 
 
-    private Vector2 target;
+    private Vector2 idleTarget;
     [SerializeField] float getNewTargetRange = 3f;
 
 
@@ -31,12 +31,17 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] int hungryRange = 50;
 
 
+    [SerializeField] Controller_Food controller_Food;
+    private GameObject foodTarget;
+    private bool targetingFood = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
         fishCurrentState = Fish_States.idle;
 
-        NewTarget_Tank();
+        NewRandomIdleTarget_Tank();
 
         stomach = maxStomach;
 
@@ -71,35 +76,22 @@ public class Fish_SM : MonoBehaviour
         //move around the tank
         //get a random point on the screen
 
-        //are we hungry
-        if(stomach < hungryRange){
+        //are we hungry and food is on screen
+        if(stomach < hungryRange && controller_Food.GetFoodLength() > 0){
             ChangeState(Fish_States.hungry);
             return;
         }
 
-        var distance = Vector2.Distance(target, transform.position);
+        var distance = Vector2.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > getNewTargetRange){
             
-            //head towards target 
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                target,
-                velocity * Time.deltaTime
-            );
-
-            //sprite fliping
-            if(transform.position.x - target.x < 0){
-                sprite.localScale = new Vector3(-1f, 1f, 1f);
-            }
-            else{
-                sprite.localScale = new Vector3(1f, 1f, 1f);
-            }
+            updatePosition(idleTarget);
         }
 
         //get new point once fish reaches it
         else{
-            NewTarget_Tank();
+            NewRandomIdleTarget_Tank();
 
             //and lower stomach
             stomach -= burnRate;
@@ -109,7 +101,41 @@ public class Fish_SM : MonoBehaviour
     private void HungryMode(){
         //look for food, until full
 
+        //is there food on screen to target
+        if(controller_Food.GetFoodLength() == 0){
+            ChangeState(Fish_States.idle);
+            return;
+        }
+
+        //if wer not targeting food
+        //or our current target is null
+        //          : target a food
+        if(!targetingFood || foodTarget == null){
+
+            //find food to followe
+            var closestDis = float.PositiveInfinity;
+            var allFoods = controller_Food.GetAllFood();
+
+            foreach (GameObject food in allFoods){
+
+                var newDis = (transform.position - food.transform.position).sqrMagnitude;
+
+                if(newDis < closestDis){
+
+                    closestDis = newDis;
+                    foodTarget = food;  
+                }
+            }
+
+            targetingFood = true;
+        }
         
+
+        //follow food
+        //head towards target 
+        updatePosition(foodTarget.transform.position);
+        
+
 
     }
 
@@ -118,10 +144,41 @@ public class Fish_SM : MonoBehaviour
 
     }
 
-    private void NewTarget_Tank(){
-        target = new Vector2(
+    private void NewRandomIdleTarget_Tank(){
+        idleTarget = new Vector2(
                 Random.Range(-8.9f, 9.0f),
                 Random.Range(-4.5f, 4.5f)
             );
+    }
+
+
+    private void updatePosition(Vector2 targetTypePosition){
+
+        //head towards target 
+        transform.position = Vector2.MoveTowards(
+            transform.position,
+            targetTypePosition,
+            velocity * Time.deltaTime
+        );
+
+        //sprite fliping
+        if(transform.position.x - idleTarget.x < 0){
+            sprite.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else{
+            sprite.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
+
+
+    private void OnCollisionEnter2D(Collision2D other){
+
+        if(Fish_States.hungry == fishCurrentState && other.gameObject.tag == "Food"){
+
+            //eat
+            controller_Food.TrashThisFood(other.gameObject);
+            stomach = maxStomach;
+            
+        }
     }
 }
