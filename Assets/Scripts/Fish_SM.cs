@@ -27,7 +27,7 @@ public class Fish_SM : MonoBehaviour
 
     [SerializeField] float stomach;
     [SerializeField] const int maxStomach = 100;
-    [SerializeField] float burnRate = 2;
+    [SerializeField] float burnRate = 30;
     [SerializeField] int hungryRange = 50;
 
 
@@ -39,6 +39,7 @@ public class Fish_SM : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         fishCurrentState = Fish_States.idle;
 
         NewRandomIdleTarget_Tank();
@@ -180,5 +181,10 @@ public class Fish_SM : MonoBehaviour
             stomach = maxStomach;
             
         }
+    }
+
+
+    public void SetFoodController(Controller_Food food_c){
+        controller_Food = food_c;
     }
 }

@@ -49,6 +49,14 @@ public class Controller_Food : MonoBehaviour
 
     }
 
+
+
+
+
+
+
+
+    /// FUNCTIONS FOR OTHER SCRIPTS TO CALL 
     public List<GameObject> GetAllFood(){
         return foodPellets_list;
     }
@@ -63,4 +71,7 @@ public class Controller_Food : MonoBehaviour
     public int GetFoodLength(){
         return foodPellets_list.Count;
     }
+
+
+    
 }
