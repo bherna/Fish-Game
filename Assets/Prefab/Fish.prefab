@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6790573988325366524}
   - component: {fileID: 7301870579390221737}
   - component: {fileID: 2749740470348012892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,6 +141,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea25ba5002dda645b959391a6b3a422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  secTillMoney: 2
+  coin: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
 --- !u!1 &6472766418797195519
 GameObject:
   m_ObjectHideFlags: 0
@@ -151,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5531745865357060858}
   - component: {fileID: 1933414546361625060}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fish_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

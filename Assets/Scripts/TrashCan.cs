@@ -24,5 +24,9 @@ public class TrashCan : MonoBehaviour
         if(other.gameObject.tag == "Food"){
             controller_Food.TrashThisFood(other.gameObject);
         }
+
+        if(other.gameObject.tag == "Money"){
+            Destroy(other.gameObject);
+        }
     }
 }
