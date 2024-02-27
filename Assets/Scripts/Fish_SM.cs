@@ -51,6 +51,12 @@ public class Fish_SM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        //check if fish starved to death
+        if(stomach <= 0){
+            Destroy(gameObject);
+        }
+
         switch(fishCurrentState){
             case Fish_States.idle:
                 IdleMode();
