@@ -1,17 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Wallet : MonoBehaviour
 {
 
-    [SerializeField] int current_money;
+    //current money
+    int current_money = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        current_money = 0;
-    }
+    //reference to self
+    public static Wallet instance {get; private set; }
+
+    private void Awake() {
+        
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }   
 
     
     public void AddMoney(int money){
@@ -27,5 +38,5 @@ public class Wallet : MonoBehaviour
         return price < current_money;
     }
 
-    
+
 }
