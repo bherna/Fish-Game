@@ -24,15 +24,11 @@ public class Controller_Fish : MonoBehaviour
     void Update()
     {
 
-        //spawn fish
-        if(Input.GetKeyDown("space")){
-            
-            SpawnFish();
-        }
+        
     }
 
 
-    private void SpawnFish(){
+    public void SpawnFish(){
 
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
