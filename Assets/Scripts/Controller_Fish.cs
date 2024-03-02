@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using JetBrains.Annotations;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Controller_Fish : MonoBehaviour
@@ -40,6 +42,13 @@ public class Controller_Fish : MonoBehaviour
         //spawn at top of tank
         fish_list.Add(Instantiate(fishObj, new Vector2(0, 4), Quaternion.identity));
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
+        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
+    }
+
+    public void RemoveFish(GameObject fish){
+
+        fish_list.Remove(fish);
+
     }
 
 

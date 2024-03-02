@@ -32,6 +32,7 @@ public class Fish_SM : MonoBehaviour
 
 
     [SerializeField] Controller_Food controller_Food;
+    [SerializeField] Controller_Fish controller_Fish;
     private GameObject foodTarget;
     private bool targetingFood = false;
 
@@ -54,7 +55,7 @@ public class Fish_SM : MonoBehaviour
 
         //check if fish starved to death
         if(stomach <= 0){
-            Destroy(gameObject);
+            Died();
         }
 
         switch(fishCurrentState){
@@ -193,4 +194,16 @@ public class Fish_SM : MonoBehaviour
     public void SetFoodController(Controller_Food food_c){
         controller_Food = food_c;
     }
+
+    public void SetFishController(Controller_Fish fish_c){
+        controller_Fish = fish_c;
+    }
+
+    public void Died(){
+
+        controller_Fish.RemoveFish(gameObject);
+
+        Destroy(gameObject);
+    }
+
 }
