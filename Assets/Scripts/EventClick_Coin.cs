@@ -5,15 +5,11 @@ using UnityEngine.EventSystems;
 
 public class EventClick_Coin : MonoBehaviour, IPointerClickHandler
 {
-    private Coin coin;
-
-    private void Awake(){
-
-        coin = GetComponent<Coin>();
-    }
+    [SerializeField] int coinValue = 10;
 
     public void OnPointerClick(PointerEventData eventData){
 
+        Wallet.instance.AddMoney(coinValue);
         Destroy(gameObject);
     }
 }
