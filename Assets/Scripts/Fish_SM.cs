@@ -16,7 +16,6 @@ public class Fish_SM : MonoBehaviour
 
     [SerializeField] Fish_States fishCurrentState;
     [SerializeField] Collision2D fishCollision;
-    [SerializeField] Rigidbody2D rb;
     [SerializeField] float velocity = 2;
     [SerializeField] Transform sprite;
 

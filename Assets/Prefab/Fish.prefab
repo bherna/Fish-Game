@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3570511211699522400}
   - component: {fileID: 4727634519042051010}
-  - component: {fileID: 6790573988325366524}
   - component: {fileID: 7301870579390221737}
   - component: {fileID: 2749740470348012892}
   m_Layer: 6
@@ -51,7 +50,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 68
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -81,33 +80,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!50 &6790573988325366524
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957995739772778605}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &7301870579390221737
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +93,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishCurrentState: 0
-  rb: {fileID: 6790573988325366524}
   velocity: 2
   sprite: {fileID: 5531745865357060858}
   getNewTargetRange: 3
@@ -129,6 +100,7 @@ MonoBehaviour:
   burnRate: 30
   hungryRange: 50
   controller_Food: {fileID: 0}
+  controller_Fish: {fileID: 0}
 --- !u!114 &2749740470348012892
 MonoBehaviour:
   m_ObjectHideFlags: 0
