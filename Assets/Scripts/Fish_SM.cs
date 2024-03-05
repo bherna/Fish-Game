@@ -37,6 +37,14 @@ public class Fish_SM : MonoBehaviour
     private bool targetingFood = false;
 
 
+
+    //Getting new targets within tank    
+    private float tank_xLower = 0;
+    private float tank_xUpper = 0;
+    private float tank_yLower = 0;
+    private float tank_yUpper = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -152,10 +160,28 @@ public class Fish_SM : MonoBehaviour
 
     }
 
+
+    public void GetTankDem(GameObject tankColl){
+
+        var w = tankColl.GetComponent<BoxCollider2D>().size.x;
+        var h = tankColl.GetComponent<BoxCollider2D>().size.y;
+
+        var pos = tankColl.transform.position;
+
+        tank_xLower = pos.x - w/2;
+        tank_xUpper = pos.x + w/2;
+
+        tank_yLower = pos.y - w/2;
+        tank_yUpper = pos.y + w/2;
+
+       
+    }
+
+
     private void NewRandomIdleTarget_Tank(){
         idleTarget = new Vector2(
-                Random.Range(-8.9f, 9.0f),
-                Random.Range(-4.5f, 4.5f)
+                Random.Range(tank_xLower, tank_xUpper),
+                Random.Range(tank_yLower, tank_yUpper)
             );
     }
 

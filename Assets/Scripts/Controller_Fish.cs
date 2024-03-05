@@ -14,6 +14,8 @@ public class Controller_Fish : MonoBehaviour
 
     [SerializeField] Controller_Food food_c;
 
+    [SerializeField] GameObject tankColl;
+
 
 
     // Start is called before the first frame update
@@ -43,6 +45,7 @@ public class Controller_Fish : MonoBehaviour
         fish_list.Add(Instantiate(fishObj, new Vector2(0, 4), Quaternion.identity));
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
+        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().GetTankDem(tankColl);
     }
 
     public void RemoveFish(GameObject fish){
