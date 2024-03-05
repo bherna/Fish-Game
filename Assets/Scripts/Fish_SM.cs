@@ -44,6 +44,9 @@ public class Fish_SM : MonoBehaviour
     private float tank_yLower = 0;
     private float tank_yUpper = 0;
 
+    private Vector2 tank_pos;
+    private Vector2 tank_size;
+
 
     // Start is called before the first frame update
     void Start()
@@ -163,16 +166,17 @@ public class Fish_SM : MonoBehaviour
 
     public void GetTankDem(GameObject tankColl){
 
-        var w = tankColl.GetComponent<BoxCollider2D>().size.x;
-        var h = tankColl.GetComponent<BoxCollider2D>().size.y;
+        tank_size = tankColl.GetComponent<BoxCollider2D>().size;
+        var w = tank_size.x;
+        var h = tank_size.y;
 
-        var pos = tankColl.transform.position;
+        tank_pos = tankColl.transform.position;
 
-        tank_xLower = pos.x - w/2;
-        tank_xUpper = pos.x + w/2;
+        tank_xLower = tank_pos.x - w/2;
+        tank_xUpper = tank_pos.x + w/2;
 
-        tank_yLower = pos.y - w/2;
-        tank_yUpper = pos.y + w/2;
+        tank_yLower = tank_pos.y - h/2;
+        tank_yUpper = tank_pos.y + h/2;
 
        
     }
@@ -230,6 +234,17 @@ public class Fish_SM : MonoBehaviour
         controller_Fish.RemoveFish(gameObject);
 
         Destroy(gameObject);
+    }
+
+
+    private void OnDrawGizmosSelected() {
+    
+        Gizmos.color = new Color(1,1,0,0.75f);
+        Gizmos.DrawWireSphere(idleTarget, getNewTargetRange);
+
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(tank_pos, tank_size);
     }
 
 }
