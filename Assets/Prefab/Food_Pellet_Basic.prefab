@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6865941456071360280}
   - component: {fileID: 2499901471311194591}
   - component: {fileID: -2243787666379401709}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Food_Pellet_Basic
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -49,7 +49,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0.14
+  m_GravityScale: 0.1
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -60,7 +60,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &-2243787666379401709
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -90,7 +90,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -116,7 +116,7 @@ GameObject:
   m_Component:
   - component: {fileID: 517447491267850987}
   - component: {fileID: 6057529380079702357}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FoodP_B_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

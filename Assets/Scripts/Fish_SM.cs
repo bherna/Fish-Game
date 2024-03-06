@@ -208,7 +208,7 @@ public class Fish_SM : MonoBehaviour
     }
 
 
-    private void OnCollisionEnter2D(Collision2D other){
+    private void OnTriggerStay2D(Collider2D other){
 
         if(Fish_States.hungry == fishCurrentState && other.gameObject.tag == "Food"){
 
@@ -218,6 +218,8 @@ public class Fish_SM : MonoBehaviour
             
         }
     }
+
+    
 
 
     public void SetFoodController(Controller_Food food_c){
