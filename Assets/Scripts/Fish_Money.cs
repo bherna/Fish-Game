@@ -38,4 +38,11 @@ public class Fish_Money : MonoBehaviour
 
         }
     }
+
+    public void updateMoneyVal(){
+        
+    }
+
+
+
 }

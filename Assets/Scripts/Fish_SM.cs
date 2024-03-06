@@ -63,6 +63,9 @@ public class Fish_SM : MonoBehaviour
     void Update()
     {
 
+        //burn stomach
+        stomach -= burnRate * Time.deltaTime;
+
         //check if fish starved to death
         if(stomach <= 0){
             Died();
@@ -111,8 +114,6 @@ public class Fish_SM : MonoBehaviour
         else{
             NewRandomIdleTarget_Tank();
 
-            //and lower stomach
-            stomach -= burnRate;
         }
     }
 
