@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class EventClick_Coin : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] int coinValue = 10;
+    [SerializeField] int coinValue = 0;
 
     /*
     public void OnPointerClick(PointerEventData eventData){
@@ -14,7 +14,9 @@ public class EventClick_Coin : MonoBehaviour, IPointerDownHandler
         Destroy(gameObject);
     }
     */
-    
+    public void UpdateCoinVal(int newCoinVal){
+        coinValue = newCoinVal;
+    }
 
     public void OnPointerDown(PointerEventData eventData){
 

@@ -1,34 +1,57 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Controller_Fish : MonoBehaviour
 {
 
+    //max fish to have in the tank at a given time
     [SerializeField] int maxFish = 3;
+    //prefab
     [SerializeField] GameObject fishObj;
+    //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
 
+
+
+    //references to in-game objects
     [SerializeField] Controller_Food food_c;
 
     [SerializeField] GameObject tankColl;
 
 
 
+    //static variable for fish coin value
+    public static Controller_Fish instance {get; private set; }
+
+    [SerializeField] List<string> fish_stages;
+
+
     // Start is called before the first frame update
     void Start()
     {
         fish_list = new List<GameObject>();
+
+
+        fish_stages = new List<string>
+        {
+            "Baby",
+            "Teen",
+            "Adult"
+        };
+
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void Awake (){
 
-        
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
     }
 
 
@@ -55,5 +78,9 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-    
+    //return whole fish stages list
+    public List<string> GetFishStages(){
+
+        return fish_stages;
+    }
 }

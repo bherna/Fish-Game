@@ -13,34 +13,57 @@ public class Fish_Money : MonoBehaviour
 
     //money prefabs
     [SerializeField] GameObject coin;
+    [SerializeField] Fish_Age fish_Age;
 
-    //
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] int teenCoinVal = 10;
+    [SerializeField] int adultCoinVal = 15;
+
+    
 
     // Update is called once per frame
     void Update()
     {
 
-        //update timer
-        currTime += Time.deltaTime;
+        //drop money
+        switch(fish_Age.current_age_stage){
 
+            case 0:
+                //do nothing
+                Debug.Log("nothing");
+                break;
+            case 1:
+                //drop money
+                Debug.Log("teen mone");
+                currTime += Time.deltaTime;//update timer
+                DropMoney(teenCoinVal);
+                break;
+            case 2:
+                //drop money     
+                Debug.Log("adult money");         
+                currTime += Time.deltaTime;//update timer
+                DropMoney(adultCoinVal);
+                break;
+            default:
+                Debug.Log("Should not be this old...");
+                break;
+        }
+        
+    }
+
+   
+
+    private void DropMoney(int moneyVal){
+
+        
         if(currTime >= secTillMoney){
 
             //reset timer
             currTime = 0;
 
             //drop coin
-            Instantiate(coin, transform.position, Quaternion.identity);
-
+            var temp = Instantiate(coin, transform.position, Quaternion.identity);
+            temp.GetComponent<EventClick_Coin>().UpdateCoinVal(moneyVal);
         }
-    }
-
-    public void updateMoneyVal(){
-        
     }
 
 
