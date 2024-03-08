@@ -29,17 +29,14 @@ public class Fish_Money : MonoBehaviour
 
             case 0:
                 //do nothing
-                Debug.Log("nothing");
                 break;
             case 1:
                 //drop money
-                Debug.Log("teen mone");
                 currTime += Time.deltaTime;//update timer
                 DropMoney(teenCoinVal);
                 break;
             case 2:
-                //drop money     
-                Debug.Log("adult money");         
+                //drop money              
                 currTime += Time.deltaTime;//update timer
                 DropMoney(adultCoinVal);
                 break;
