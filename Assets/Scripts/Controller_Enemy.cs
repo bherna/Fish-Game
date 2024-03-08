@@ -11,6 +11,15 @@ public class Controller_Enemy : MonoBehaviour
 
     private List<GameObject> enemyList;
 
+    [SerializeField] GameObject tankColl;
+
+    //tank dem
+    private float tank_xLower;
+    private float tank_xUpper;
+    private float tank_yLower;
+    private float tank_yUpper;
+
+
 
     //spawning
     private int secs_till_next_enemyWave = 10;
@@ -20,11 +29,16 @@ public class Controller_Enemy : MonoBehaviour
     private bool spawning = true;
 
 
+
     
 
     private void Start() {
         
+        //create empty enemy list
         enemyList = new List<GameObject>();
+        
+        //update tank demension for spawning
+        GetTankDem();
     }
 
 
@@ -48,8 +62,36 @@ public class Controller_Enemy : MonoBehaviour
 
     private void SpawnWave(){
 
-        Instantiate(enemy, new Vector2(0, 0), Quaternion.identity); 
+        var randSpot = NewRandomTankSpot();
+        Instantiate(enemy, randSpot, Quaternion.identity); 
 
+    }
+
+    public void GetTankDem(){
+
+        var tank_size = tankColl.GetComponent<BoxCollider2D>().size;
+        var w = tank_size.x;
+        var h = tank_size.y;
+
+        var tank_pos = tankColl.transform.position;
+
+        tank_xLower = tank_pos.x - w/2;
+        tank_xUpper = tank_pos.x + w/2;
+
+        tank_yLower = tank_pos.y - h/2;
+        tank_yUpper = tank_pos.y + h/2;
+
+       
+    }
+
+
+    private Vector2 NewRandomTankSpot(){
+        var idleTarget = new Vector2(
+                Random.Range(tank_xLower, tank_xUpper),
+                Random.Range(tank_yLower, tank_yUpper)
+            );
+
+        return idleTarget;
     }
 
 }
