@@ -114,4 +114,16 @@ public class Controller_Fish : MonoBehaviour
 
        
     }
+
+    public Transform GetRandomFish(){
+
+        //if fish list is empty
+        if(fish_list.Count == 0){
+            return null;
+        }
+
+        var rand = Random.Range(0, fish_list.Count-1);
+
+        return fish_list[rand].transform;
+    }
 }

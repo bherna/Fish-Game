@@ -29,6 +29,8 @@ public class Controller_Enemy : MonoBehaviour
     private bool spawning = true;
 
 
+    //controller
+    [SerializeField] Controller_Fish controller_Fish;
 
     
 
@@ -63,9 +65,17 @@ public class Controller_Enemy : MonoBehaviour
     private void SpawnWave(){
 
         var randSpot = NewRandomTankSpot();
-        Instantiate(enemy, randSpot, Quaternion.identity); 
+        var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
+        temp.GetComponent<Enemy>().SetController_Enemy(this);
+        temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
 
     }
+
+    public Transform GetRandomFish(){
+
+        return controller_Fish.GetRandomFish();
+    }
+
 
     public void GetTankDem(){
 

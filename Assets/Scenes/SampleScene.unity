@@ -475,6 +475,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
+  tankColl: {fileID: 1083778155}
+  controller_Fish: {fileID: 2041627117}
 --- !u!4 &1952306335
 Transform:
   m_ObjectHideFlags: 0

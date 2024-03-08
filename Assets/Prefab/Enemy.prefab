@@ -129,3 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3f7f0cad68f4a9408b98064fe4cf570, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller_Enemy: {fileID: 0}
+  sprite: {fileID: 592658867979437195}
+  velocity: 2
