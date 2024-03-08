@@ -43,9 +43,6 @@ public class Fish_SM : MonoBehaviour
     private float tank_yLower = 0;
     private float tank_yUpper = 0;
 
-    private Vector2 tank_pos;
-    private Vector2 tank_size;
-
 
     // Start is called before the first frame update
     void Start()
@@ -164,21 +161,12 @@ public class Fish_SM : MonoBehaviour
     }
 
 
-    public void GetTankDem(GameObject tankColl){
+    public void SetTankDem(float xL, float xU, float yL, float yU){
 
-        tank_size = tankColl.GetComponent<BoxCollider2D>().size;
-        var w = tank_size.x;
-        var h = tank_size.y;
-
-        tank_pos = tankColl.transform.position;
-
-        tank_xLower = tank_pos.x - w/2;
-        tank_xUpper = tank_pos.x + w/2;
-
-        tank_yLower = tank_pos.y - h/2;
-        tank_yUpper = tank_pos.y + h/2;
-
-       
+        tank_xLower = xL;
+        tank_xUpper = xU;
+        tank_yLower = yL;
+        tank_yUpper = yU;
     }
 
 
@@ -241,12 +229,12 @@ public class Fish_SM : MonoBehaviour
 
     private void OnDrawGizmosSelected() {
     
+        //current target for fish
         Gizmos.color = new Color(1,1,0,0.75f);
         Gizmos.DrawWireSphere(idleTarget, getNewTargetRange);
 
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(tank_pos, tank_size);
+        
     }
 
 }

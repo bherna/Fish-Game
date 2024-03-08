@@ -26,18 +26,30 @@ public class Controller_Fish : MonoBehaviour
     [SerializeField] List<string> fish_stages;
 
 
+    //tank demensions
+    private float tank_xLower = 0;
+    private float tank_xUpper = 0;
+    private float tank_yLower = 0;
+    private float tank_yUpper = 0;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        //create empty fish list
         fish_list = new List<GameObject>();
 
 
+        //fish stages list
         fish_stages = new List<string>
         {
             "Baby",
             "Teen",
             "Adult"
         };
+
+        //update fish tank demensions
+        GetTankDem();
 
 
     }
@@ -68,7 +80,7 @@ public class Controller_Fish : MonoBehaviour
         fish_list.Add(Instantiate(fishObj, new Vector2(0, 4), Quaternion.identity));
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
-        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().GetTankDem(tankColl);
+        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankDem(tank_xLower, tank_xUpper, tank_yLower, tank_yUpper);
     }
 
     public void RemoveFish(GameObject fish){
@@ -82,5 +94,24 @@ public class Controller_Fish : MonoBehaviour
     public List<string> GetFishStages(){
 
         return fish_stages;
+    }
+
+
+
+    public void GetTankDem(){
+
+        var tank_size = tankColl.GetComponent<BoxCollider2D>().size;
+        var w = tank_size.x;
+        var h = tank_size.y;
+
+        var tank_pos = tankColl.transform.position;
+
+        tank_xLower = tank_pos.x - w/2;
+        tank_xUpper = tank_pos.x + w/2;
+
+        tank_yLower = tank_pos.y - h/2;
+        tank_yUpper = tank_pos.y + h/2;
+
+       
     }
 }
