@@ -94,10 +94,19 @@ public class Fish_SM : MonoBehaviour
         //move around the tank
         //get a random point on the screen
 
-        //are we hungry and food is on screen
-        if(stomach < hungryRange && controller_Food.GetFoodLength() > 0){
-            ChangeState(Fish_States.hungry);
-            return;
+        //if hungry
+        if(stomach < hungryRange ){
+
+            //change sprite transparancy
+            sprite.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.5f);
+
+            //if food on screen aswell, change to hungry state
+            if(controller_Food.GetFoodLength() > 0){
+                //are we hungry and food is on screen
+                ChangeState(Fish_States.hungry);
+                return;
+            }
+            
         }
 
         var distance = Vector2.Distance(idleTarget, transform.position);
@@ -205,6 +214,7 @@ public class Fish_SM : MonoBehaviour
             //eat
             controller_Food.TrashThisFood(other.gameObject);
             stomach = maxStomach;
+            sprite.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
             
         }
     }
