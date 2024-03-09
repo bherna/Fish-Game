@@ -13,6 +13,8 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] float velocity = 2f;
 
+    public int damageValue {get; private set; } = 1;
+
 
 
     // Start is called before the first frame update
@@ -40,7 +42,7 @@ public class Enemy : MonoBehaviour
             if(currFishTarget == null){
 
                 //wait a few seconds before checking again
-                StartCoroutine(waitForCheck(5f));
+                StartCoroutine(waitSomeSeconds(5f));
                 return;
             }
             
@@ -71,7 +73,11 @@ public class Enemy : MonoBehaviour
         controller_Enemy = enemy_c;
     }
 
-    private IEnumerator waitForCheck(float seconds){
+    public IEnumerator waitSomeSeconds(float seconds){
         yield return new WaitForSeconds(seconds);
     }
+
+    
+    
+    
 }

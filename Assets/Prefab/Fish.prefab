@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 7301870579390221737}
   - component: {fileID: 2749740470348012892}
   - component: {fileID: -5030118377382371271}
+  - component: {fileID: 1057085207811496155}
   m_Layer: 6
   m_Name: Fish
-  m_TagString: Untagged
+  m_TagString: Fish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,7 +52,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 68
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -131,7 +132,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b23eef2bb967d4a9ba6c5aa493130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  curr_sec_age: 0
   until_next_stage: 15
+--- !u!114 &1057085207811496155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957995739772778605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ecf78ef175eee849bdd9e97fa88510b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  controller_Fish: {fileID: 0}
 --- !u!1 &6472766418797195519
 GameObject:
   m_ObjectHideFlags: 0

@@ -199,7 +199,8 @@ public class Fish_SM : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other){
 
-        if(Fish_States.hungry == fishCurrentState && other.gameObject.tag == "Food"){
+        if(Fish_States.hungry == fishCurrentState && other.gameObject.CompareTag("Food"))
+        {
 
             //eat
             controller_Food.TrashThisFood(other.gameObject);
@@ -235,6 +236,11 @@ public class Fish_SM : MonoBehaviour
 
 
         
+    }
+
+
+    public Controller_Fish GetControllerFish(){
+        return controller_Fish;
     }
 
 }

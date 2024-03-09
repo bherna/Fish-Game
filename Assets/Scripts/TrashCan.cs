@@ -12,11 +12,13 @@ public class TrashCan : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
 
-        if(other.gameObject.tag == "Food"){
+        if(other.gameObject.CompareTag("Food"))
+        {
             controller_Food.TrashThisFood(other.gameObject);
         }
 
-        if(other.gameObject.tag == "Money"){
+        if(other.gameObject.CompareTag("Money"))
+        {
             Destroy(other.gameObject);
         }
     }
