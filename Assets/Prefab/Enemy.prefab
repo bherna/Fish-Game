@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 592658867979437195}
   - component: {fileID: 4089720225324533272}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy_sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 7394080560007591877}
   - component: {fileID: 3532589112204402079}
   - component: {fileID: 3524755028111661717}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.057706475, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.2695434, y: 1}
   m_EdgeRadius: 0
 --- !u!114 &3524755028111661717
 MonoBehaviour:
@@ -206,3 +206,4 @@ MonoBehaviour:
   controller_Enemy: {fileID: 0}
   sprite: {fileID: 592658867979437195}
   velocity: 2
+  health: 0

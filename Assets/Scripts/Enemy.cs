@@ -1,8 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
     [SerializeField] Controller_Enemy controller_Enemy;
@@ -15,12 +15,15 @@ public class Enemy : MonoBehaviour
 
     public int damageValue {get; private set; } = 1;
 
+    public int health;
+    private const int maxHealth = 20; 
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -78,6 +81,15 @@ public class Enemy : MonoBehaviour
     }
 
     
+    public void OnPointerClick(PointerEventData eventData){
+
+        health -= 5;
+
+        if(health <= 0){
+            Destroy(gameObject);
+        }
+        
+    }
     
     
 }
