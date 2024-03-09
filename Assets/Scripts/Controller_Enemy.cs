@@ -32,6 +32,11 @@ public class Controller_Enemy : MonoBehaviour
     //controller
     [SerializeField] Controller_Fish controller_Fish;
 
+
+
+    //list for spawning
+    [SerializeField] List<int> wave_mat;
+    private int currWaveIndex = 0;
     
 
     private void Start() {
@@ -41,6 +46,8 @@ public class Controller_Enemy : MonoBehaviour
         
         //update tank demension for spawning
         GetTankDem();
+
+
     }
 
 
@@ -57,6 +64,13 @@ public class Controller_Enemy : MonoBehaviour
 
                 SpawnWave();
                 curr_sec = 0;
+
+                currWaveIndex += 1;
+                if(currWaveIndex >= wave_mat.Count){
+                    spawning = false;
+                    Debug.Log("End of enemy waves");
+                }
+
             }
         }
     }
@@ -64,12 +78,20 @@ public class Controller_Enemy : MonoBehaviour
 
     private void SpawnWave(){
 
-        var randSpot = NewRandomTankSpot();
-        var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
-        temp.GetComponent<Enemy>().SetController_Enemy(this);
-        temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
+        for(int i = 0; i < wave_mat[currWaveIndex]; i++){
 
+            var randSpot = NewRandomTankSpot();
+            var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
+            temp.GetComponent<Enemy>().SetController_Enemy(this);
+            temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
+
+        }
+        
     }
+
+
+
+
 
     public Transform GetRandomFish(){
 
