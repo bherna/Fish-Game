@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
     [SerializeField] Controller_Enemy controller_Enemy;
+    [SerializeField] Rigidbody2D rb;
 
     private Transform currFishTarget;
 
@@ -17,6 +18,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     public int health;
     private const int maxHealth = 20; 
+    [SerializeField] float forceMod = 1f;
 
 
 
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
             currFishTarget.position,
             velocity * Time.deltaTime
         );
+        
 
         //sprite fliping
         if(transform.position.x - currFishTarget.position.x < 0){
@@ -83,8 +86,15 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData){
 
+        //damage
         health -= 5;
 
+        //knockback
+        var kbVector = new Vector2(transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x, transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y).normalized;
+        Debug.Log("vector: " + kbVector.ToString());
+        rb.AddForce(kbVector * forceMod, ForceMode2D.Impulse);
+
+        //die
         if(health <= 0){
             Destroy(gameObject);
         }

@@ -22,7 +22,7 @@ public class Controller_Enemy : MonoBehaviour
 
 
     //spawning
-    private int secs_till_next_enemyWave = 10;
+    [SerializeField]  int secs_till_next_enemyWave = 10;
 
     private float curr_sec = 0f;
 
