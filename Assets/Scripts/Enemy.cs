@@ -12,7 +12,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] Transform sprite;
 
-    [SerializeField] float velocity = 2f;
+    [SerializeField] float velocity = 1f;
 
     public int damageValue {get; private set; } = 1;
 
@@ -54,12 +54,8 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         }
 
         //head towards target 
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            currFishTarget.position,
-            velocity * Time.deltaTime
-        );
-        
+        var newVelocity = (currFishTarget.position - transform.position).normalized;
+        rb.AddForce(newVelocity * velocity, ForceMode2D.Force);
 
         //sprite fliping
         if(transform.position.x - currFishTarget.position.x < 0){
