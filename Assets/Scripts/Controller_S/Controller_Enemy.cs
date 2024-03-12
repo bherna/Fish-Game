@@ -5,12 +5,8 @@ using UnityEngine;
 public class Controller_Enemy : MonoBehaviour
 {
    
-   
-   //enemy prefabs
-   [SerializeField] GameObject enemy;
 
-    private List<GameObject> enemyList;
-
+    //tank collider
     [SerializeField] GameObject tankColl;
 
     //tank dem
@@ -29,25 +25,24 @@ public class Controller_Enemy : MonoBehaviour
     private bool spawning = true;
 
 
-    //controller
+    //controller referencess
     [SerializeField] Controller_Fish controller_Fish;
 
 
 
     //list for spawning
-    [SerializeField] List<int> wave_mat;
+    [SerializeField] List<List<GameObject>> wave_mat; 
     private int currWaveIndex = 0;
     
 
     private void Start() {
         
-        //create empty enemy list
-        enemyList = new List<GameObject>();
-        
         //update tank demension for spawning
         GetTankDem();
 
-
+        //update wave mat
+        wave_mat = GetComponent<Enemy_Waves>().Get_WaveMat();
+        
     }
 
 
@@ -78,14 +73,21 @@ public class Controller_Enemy : MonoBehaviour
 
     private void SpawnWave(){
 
+        /*
         for(int i = 0; i < wave_mat[currWaveIndex]; i++){
 
             var randSpot = NewRandomTankSpot();
-            var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
+            var temp = Instantiate(enemy1, randSpot, Quaternion.identity); 
             temp.GetComponent<Enemy>().SetController_Enemy(this);
             temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
 
         }
+        */
+
+        wave_mat[currWaveIndex].ForEach(delegate(GameObject enemy)
+        {
+            Debug.Log(enemy.name);
+        });
         
     }
 
