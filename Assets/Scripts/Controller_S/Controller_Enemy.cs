@@ -73,20 +73,16 @@ public class Controller_Enemy : MonoBehaviour
 
     private void SpawnWave(){
 
-        /*
-        for(int i = 0; i < wave_mat[currWaveIndex]; i++){
-
-            var randSpot = NewRandomTankSpot();
-            var temp = Instantiate(enemy1, randSpot, Quaternion.identity); 
-            temp.GetComponent<Enemy>().SetController_Enemy(this);
-            temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
-
-        }
-        */
+        
 
         wave_mat[currWaveIndex].ForEach(delegate(GameObject enemy)
         {
-            Debug.Log(enemy.name);
+            //Debug.Log(enemy.name);
+            
+            var randSpot = NewRandomTankSpot();
+            var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
+            temp.GetComponent<Enemy>().SetController_Enemy(this);
+            temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
         });
         
     }
