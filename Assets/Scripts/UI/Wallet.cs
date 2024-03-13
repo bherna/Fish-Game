@@ -44,7 +44,7 @@ public class Wallet : MonoBehaviour
     }
 
     public bool IsAffordable(int price){
-        return price < current_money;
+        return price <= current_money;
     }
 
 

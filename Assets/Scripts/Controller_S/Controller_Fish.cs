@@ -31,6 +31,10 @@ public class Controller_Fish : MonoBehaviour
     private float swim_yUpper;
 
 
+    //fish price
+    [SerializeField] int fish1Price;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -66,6 +70,17 @@ public class Controller_Fish : MonoBehaviour
 
 
     public void SpawnFish(){
+
+        //is the fish affordable
+        if(!Wallet.instance.IsAffordable(fish1Price)){
+
+            Debug.Log("Not enough money to buy fish. ");
+            return;
+        }
+        else{
+            //purchase fish to spawn
+            Wallet.instance.SubMoney(fish1Price);
+        }
 
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
