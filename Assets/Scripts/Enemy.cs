@@ -87,7 +87,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
         //knockback
         var kbVector = new Vector2(transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x, transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y).normalized;
-        Debug.Log("vector: " + kbVector.ToString());
+        //Debug.Log("vector: " + kbVector.ToString());
         rb.AddForce(kbVector * forceMod, ForceMode2D.Impulse);
 
         //die
