@@ -16,8 +16,6 @@ public class Controller_Fish : MonoBehaviour
     //references to in-game objects
     [SerializeField] Controller_Food food_c;
 
-    [SerializeField] GameObject tankColl;
-
 
 
     //static variable for fish coin value
@@ -27,10 +25,10 @@ public class Controller_Fish : MonoBehaviour
 
 
     //tank demensions
-    private float tank_xLower = 0;
-    private float tank_xUpper = 0;
-    private float tank_yLower = 0;
-    private float tank_yUpper = 0;
+    private float swim_xLower;
+    private float swim_xUpper;
+    private float swim_yLower;
+    private float swim_yUpper;
 
 
     // Start is called before the first frame update
@@ -49,7 +47,7 @@ public class Controller_Fish : MonoBehaviour
         };
 
         //update fish tank demensions
-        GetTankDem();
+        (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper) = TankCollision.instance.GetTankSwimSpawnArea();
 
 
     }
@@ -80,7 +78,7 @@ public class Controller_Fish : MonoBehaviour
         fish_list.Add(Instantiate(fishObj, new Vector2(0, 4), Quaternion.identity));
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
-        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankDem(tank_xLower, tank_xUpper, tank_yLower, tank_yUpper);
+        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankSwimDimensions(swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
     }
 
     public void RemoveFish(GameObject fish){
@@ -97,23 +95,6 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-
-    public void GetTankDem(){
-
-        var tank_size = tankColl.GetComponent<BoxCollider2D>().size;
-        var w = tank_size.x;
-        var h = tank_size.y;
-
-        var tank_pos = tankColl.transform.position;
-
-        tank_xLower = tank_pos.x - w/2;
-        tank_xUpper = tank_pos.x + w/2;
-
-        tank_yLower = tank_pos.y - h/2;
-        tank_yUpper = tank_pos.y + h/2;
-
-       
-    }
 
     public Transform GetRandomFish(){
 

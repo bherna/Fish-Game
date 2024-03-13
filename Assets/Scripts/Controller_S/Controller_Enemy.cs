@@ -6,8 +6,7 @@ public class Controller_Enemy : MonoBehaviour
 {
    
 
-    //tank collider
-    [SerializeField] GameObject tankColl;
+    
 
     //tank dem
     private float tank_xLower;
@@ -38,7 +37,7 @@ public class Controller_Enemy : MonoBehaviour
     private void Start() {
         
         //update tank demension for spawning
-        GetTankDem();
+        (tank_xLower, tank_xUpper, tank_yLower, tank_yUpper) = TankCollision.instance.GetTankSpawnArea();
 
         //update wave mat
         wave_mat = GetComponent<Enemy_Waves>().Get_WaveMat();
@@ -114,22 +113,7 @@ public class Controller_Enemy : MonoBehaviour
     }
 
 
-    public void GetTankDem(){
-
-        var tank_size = tankColl.GetComponent<BoxCollider2D>().size;
-        var w = tank_size.x;
-        var h = tank_size.y;
-
-        var tank_pos = tankColl.transform.position;
-
-        tank_xLower = tank_pos.x - w/2;
-        tank_xUpper = tank_pos.x + w/2;
-
-        tank_yLower = tank_pos.y - h/2;
-        tank_yUpper = tank_pos.y + h/2;
-
-       
-    }
+    
 
 
     private Vector2 NewRandomTankSpot(){

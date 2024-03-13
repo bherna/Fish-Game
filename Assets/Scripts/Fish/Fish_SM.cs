@@ -170,7 +170,7 @@ public class Fish_SM : MonoBehaviour
     }
 
 
-    public void SetTankDem(float xL, float xU, float yL, float yU){
+    public void SetTankSwimDimensions(float xL, float xU, float yL, float yU){
 
         tank_xLower = xL;
         tank_xUpper = xU;
