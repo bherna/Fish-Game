@@ -35,9 +35,11 @@ public class Controller_Fish : MonoBehaviour
     [SerializeField] int fish1Price;
 
 
+
     // Start is called before the first frame update
     void Start()
     {
+
         //create empty fish list
         fish_list = new List<GameObject>();
 
@@ -121,5 +123,10 @@ public class Controller_Fish : MonoBehaviour
         var rand = Random.Range(0, fish_list.Count-1);
 
         return fish_list[rand].transform;
+    }
+
+
+    public int GetFishCount(){
+        return fish_list.Count;
     }
 }

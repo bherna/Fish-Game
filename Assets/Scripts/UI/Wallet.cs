@@ -8,7 +8,7 @@ public class Wallet : MonoBehaviour
 {
 
     //current money
-    int current_money = 0;
+    public int current_money {get; private set; } = 0;
 
     //post current money
     [SerializeField] TextMeshProUGUI ui_text;
