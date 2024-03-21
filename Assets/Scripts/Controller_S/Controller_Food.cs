@@ -25,6 +25,11 @@ public class Controller_Food : MonoBehaviour
     void Update()
     {
 
+        //is the game currently paused
+        if(Controller_Main.instance.paused){
+            return;
+        }
+
         //spawn pellet
         if(Input.GetMouseButtonDown(1)){
             

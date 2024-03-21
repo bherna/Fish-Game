@@ -13,6 +13,25 @@ public class Controller_Main : MonoBehaviour
 
     private int timeTillNextCheck = 5;
 
+    //reference to self
+    public static Controller_Main instance {get; private set; }
+    //is the game currently paused
+    public bool paused {get; private set;} = false;
+
+
+    private void Awake() {
+        
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }   
+
+
     private void Start() {
         
         Wallet.instance.AddMoney(startMoney);
@@ -21,6 +40,21 @@ public class Controller_Main : MonoBehaviour
         coroutine = CheckGameState(timeTillNextCheck);
         StartCoroutine(coroutine);
 
+    }
+
+
+    private void Update() {
+        
+
+        //escape - open menu
+        if(Input.GetKeyDown(KeyCode.Escape)){
+            
+            //pause game
+            PauseLevel();
+
+            //open escape menu
+
+        }
     }
 
     
@@ -40,5 +74,22 @@ public class Controller_Main : MonoBehaviour
                 }
             print("yearafds");
         }
+    }
+
+
+
+
+    public void PauseLevel(){
+
+        Time.timeScale = 0;
+        AudioListener.pause = true;
+        paused = true;
+    }
+
+    public void UnPauseLevel(){
+
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        paused = false;
     }
 }

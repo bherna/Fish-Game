@@ -20,6 +20,10 @@ public class EventClick_Coin : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData){
 
+        if(Controller_Main.instance.paused){
+            return;
+        }
+
         Wallet.instance.AddMoney(coinValue);
         Destroy(gameObject);
     }

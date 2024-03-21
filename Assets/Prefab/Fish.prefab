@@ -97,7 +97,7 @@ MonoBehaviour:
   fishCurrentState: 0
   velocity: 2
   sprite: {fileID: 5531745865357060858}
-  getNewTargetRange: 1.5
+  getNewTargetRange: 0.1
   stomach: 0
   burnRate: 5
   hungryRange: 50

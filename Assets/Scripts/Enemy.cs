@@ -82,6 +82,12 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData){
 
+
+        //if the game is paused, return
+        if(Controller_Main.instance.paused){
+            return;
+        }
+
         //damage
         health -= 5;
 
