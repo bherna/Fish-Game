@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Controller_Main : MonoBehaviour
 {
@@ -18,6 +19,10 @@ public class Controller_Main : MonoBehaviour
     //is the game currently paused
     public bool paused {get; private set;} = false;
     private bool escMenuOpen = false;
+
+    //reference to ui tab holding store items
+    [SerializeField] GameObject ui_tab;
+
 
 
     private void Awake() {
@@ -93,9 +98,17 @@ public class Controller_Main : MonoBehaviour
 
     public void PauseLevel(){
 
+        //pause all time references (physics, time)
         Time.timeScale = 0;
+        //pause audio listeners
         AudioListener.pause = true;
+        //paused boolean (other scripts reference this for user onclick event)
         paused = true;
+
+        //disable ui buttons (so player can't purchase)
+        foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
+            btn.interactable = false;
+        }
     }
 
     public void UnPauseLevel(){
@@ -103,5 +116,9 @@ public class Controller_Main : MonoBehaviour
         Time.timeScale = 1;
         AudioListener.pause = false;
         paused = false;
+
+        foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
+            btn.interactable = true;
+        }
     }
 }
