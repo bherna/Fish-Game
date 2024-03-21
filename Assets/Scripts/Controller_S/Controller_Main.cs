@@ -17,6 +17,7 @@ public class Controller_Main : MonoBehaviour
     public static Controller_Main instance {get; private set; }
     //is the game currently paused
     public bool paused {get; private set;} = false;
+    private bool escMenuOpen = false;
 
 
     private void Awake() {
@@ -47,12 +48,23 @@ public class Controller_Main : MonoBehaviour
         
 
         //escape - open menu
-        if(Input.GetKeyDown(KeyCode.Escape)){
+        if(Input.GetKeyUp(KeyCode.Escape) && !escMenuOpen){
             
+            Debug.Log("afdad");
             //pause game
             PauseLevel();
+            escMenuOpen = true;
 
             //open escape menu
+
+        }
+        else if(Input.GetKeyUp(KeyCode.Escape) && escMenuOpen) {
+
+            //unpause game
+            UnPauseLevel();
+            escMenuOpen = false;
+
+            //close escape menu
 
         }
     }
