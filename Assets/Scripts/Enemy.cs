@@ -37,6 +37,11 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     private void updatePos(){
 
+        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
+        if(Controller_Main.instance.paused){
+            return;
+        }
+
         //did our fish get destroyed
         if(currFishTarget == null){
             
