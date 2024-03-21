@@ -22,6 +22,7 @@ public class Controller_Main : MonoBehaviour
 
     //reference to ui tab holding store items
     [SerializeField] GameObject ui_tab;
+    [SerializeField] GameObject ui_esc;
 
 
 
@@ -109,6 +110,9 @@ public class Controller_Main : MonoBehaviour
         foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
             btn.interactable = false;
         }
+
+        //enable esc ui
+        ui_esc.SetActive(true);
     }
 
     public void UnPauseLevel(){
@@ -120,5 +124,8 @@ public class Controller_Main : MonoBehaviour
         foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
             btn.interactable = true;
         }
+
+        //disable esc ui
+        ui_esc.SetActive(false);
     }
 }
