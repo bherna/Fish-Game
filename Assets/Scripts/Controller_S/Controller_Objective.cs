@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class Controller_Objective : MonoBehaviour
 {
@@ -19,11 +20,18 @@ public class Controller_Objective : MonoBehaviour
 
     [SerializeField] GameObject buttonSprite;
 
+    //display current obj cost on screen
+    [SerializeField] TextMeshProUGUI ui_displayCost;
+
 
     private void Start() {
         
         //update sprite
         buttonSprite.GetComponent<Image>().sprite = obj_sprite_list[obj_index];
+
+        //display obj cost
+        ui_displayCost.text = obj_price_list[obj_index].ToString();
+
     }
 
     //when button pushed to purchase
@@ -46,6 +54,8 @@ public class Controller_Objective : MonoBehaviour
             else{
                 //update sprite
                 buttonSprite.GetComponent<Image>().sprite = obj_sprite_list[obj_index];
+                //update display obj cost
+                ui_displayCost.text = obj_price_list[obj_index].ToString();
 
             }
         }
