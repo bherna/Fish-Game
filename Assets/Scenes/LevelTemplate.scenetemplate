@@ -17,6 +17,8 @@ MonoBehaviour:
   description: Use for creating levels.
   preview: {fileID: 1450752330997228892}
   dependencies:
+  - dependency: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+    instantiationMode: 0
   - dependency: {fileID: 6257003776929468886, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: dd5950b4b8275b040a83839895633bfc, type: 3}

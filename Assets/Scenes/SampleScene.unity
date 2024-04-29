@@ -1045,11 +1045,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[0].wave.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[1].wave.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[0].secTillWaveSpawn
