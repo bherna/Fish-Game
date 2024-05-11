@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,9 +31,6 @@ public class Controller_Fish : MonoBehaviour
     private float swim_yLower;
     private float swim_yUpper;
 
-
-    //fish price
-    [SerializeField] int fish1Price;
 
 
 
@@ -71,24 +69,24 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-    public void SpawnFish(){
+    public Boolean SpawnFish(int fishPrice){
 
         //is the fish affordable
-        if(!Wallet.instance.IsAffordable(fish1Price)){
+        if(!Wallet.instance.IsAffordable(fishPrice)){
 
             Debug.Log("Not enough money to buy fish. ");
-            return;
+            return false;
         }
         else{
             //purchase fish to spawn
-            Wallet.instance.SubMoney(fish1Price);
+            Wallet.instance.SubMoney(fishPrice);
         }
 
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
 
             Debug.Log("max fish reached");
-            return;
+            return false;
         }
 
         //spawn at top of tank
@@ -96,6 +94,9 @@ public class Controller_Fish : MonoBehaviour
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankSwimDimensions(swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
+
+        //return success
+        return true;    
     }
 
     public void RemoveFish(GameObject fish){
@@ -120,7 +121,7 @@ public class Controller_Fish : MonoBehaviour
             return null;
         }
 
-        var rand = Random.Range(0, fish_list.Count-1);
+        var rand = UnityEngine.Random.Range(0, fish_list.Count-1);
 
         return fish_list[rand].transform;
     }

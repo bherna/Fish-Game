@@ -60,8 +60,10 @@ public class Controller_Objective : MonoBehaviour
             }
         }
 
-        //else
-        Debug.Log("Not enough money");
+        else{
+            Debug.Log("Not enough money");
+        }
+        
     }
 
 

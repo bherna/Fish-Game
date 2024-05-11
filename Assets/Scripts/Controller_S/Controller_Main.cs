@@ -76,7 +76,7 @@ public class Controller_Main : MonoBehaviour
     }
 
     
-    //has the player lost function
+    //checks to see if the player lost 
     IEnumerator CheckGameState(int time){
 
         while(true){
@@ -90,7 +90,7 @@ public class Controller_Main : MonoBehaviour
                     //end game
                     SceneManager.LoadScene("MainMenu");
                 }
-            print("yearafds");
+            print("Didn't lose yet");
         }
     }
 
