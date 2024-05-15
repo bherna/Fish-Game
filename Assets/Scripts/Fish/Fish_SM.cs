@@ -18,6 +18,7 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] Collision2D fishCollision;
     [SerializeField] float velocity = 2;
     [SerializeField] Transform sprite;
+    [SerializeField] int fish_obj_size = 100;
 
 
     private Vector2 idleTarget;
@@ -98,7 +99,7 @@ public class Fish_SM : MonoBehaviour
         if(stomach < hungryRange ){
 
             //change sprite transparancy
-            sprite.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1,0.5f);
+            sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
 
             //if food on screen aswell, change to hungry state
             if(controller_Food.GetFoodLength() > 0){
@@ -198,10 +199,10 @@ public class Fish_SM : MonoBehaviour
 
         //sprite fliping
         if(transform.position.x - idleTarget.x < 0){
-            sprite.localScale = new Vector3(-1f, 1f, 1f);
+            sprite.localScale = new Vector3(-fish_obj_size, fish_obj_size, fish_obj_size);
         }
         else{
-            sprite.localScale = new Vector3(1f, 1f, 1f);
+            sprite.localScale = new Vector3(fish_obj_size, fish_obj_size, fish_obj_size);
         }
     }
 
@@ -214,7 +215,8 @@ public class Fish_SM : MonoBehaviour
             //eat
             controller_Food.TrashThisFood(other.gameObject);
             stomach = maxStomach;
-            sprite.gameObject.GetComponent<SpriteRenderer>().color = new Color(1,1,1,1);
+            sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));
+
             
         }
     }
