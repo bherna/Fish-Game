@@ -97,6 +97,7 @@ MonoBehaviour:
   fishCurrentState: 0
   velocity: 2
   sprite: {fileID: 7627139098948824260}
+  fish_obj_size: 100
   getNewTargetRange: 0.1
   stomach: 0
   burnRate: 5
@@ -116,10 +117,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   secTillMoney: 2
-  coin: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
   fish_Age: {fileID: -5030118377382371271}
-  teenCoinVal: 10
-  adultCoinVal: 15
+  coin_silver: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
+  coin_gold: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
 --- !u!114 &-5030118377382371271
 MonoBehaviour:
   m_ObjectHideFlags: 0

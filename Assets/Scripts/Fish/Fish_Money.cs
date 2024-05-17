@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Fish_Money : MonoBehaviour
@@ -11,12 +9,12 @@ public class Fish_Money : MonoBehaviour
     //current time (in delta time)
     private float currTime;
 
-    //money prefabs
-    [SerializeField] GameObject coin;
+    
     [SerializeField] Fish_Age fish_Age;
 
-    [SerializeField] int teenCoinVal = 10;
-    [SerializeField] int adultCoinVal = 15;
+//money prefabs
+    [SerializeField] GameObject coin_silver; //teen
+    [SerializeField] GameObject coin_gold; //adult
 
     
 
@@ -33,12 +31,12 @@ public class Fish_Money : MonoBehaviour
             case 1:
                 //drop money
                 currTime += Time.deltaTime;//update timer
-                DropMoney(teenCoinVal);
+                DropMoney(coin_silver);
                 break;
             case 2:
                 //drop money              
                 currTime += Time.deltaTime;//update timer
-                DropMoney(adultCoinVal);
+                DropMoney(coin_gold);
                 break;
             default:
                 Debug.Log("Should not be this old...");
@@ -49,7 +47,7 @@ public class Fish_Money : MonoBehaviour
 
    
 
-    private void DropMoney(int moneyVal){
+    private void DropMoney(GameObject coinType){
 
         
         if(currTime >= secTillMoney){
@@ -58,8 +56,7 @@ public class Fish_Money : MonoBehaviour
             currTime = 0;
 
             //drop coin
-            var temp = Instantiate(coin, transform.position, Quaternion.identity);
-            temp.GetComponent<EventClick_Coin>().UpdateCoinVal(moneyVal);
+            Instantiate(coinType, transform.position, Quaternion.identity);
         }
     }
 
