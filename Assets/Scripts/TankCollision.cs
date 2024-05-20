@@ -43,11 +43,10 @@ public class TankCollision : MonoBehaviour
 
     private void GetSwimDimensions(){
 
-        var tank_size = swimRange.size;
-        var w = tank_size.x;
-        var h = tank_size.y;
+        var w = swimRange.size.x;
+        var h = swimRange.size.y;
 
-        var tank_pos = transform.position;
+        var tank_pos = swimRange.offset;
 
         swim_xLower = tank_pos.x - w/2;
         swim_xUpper = tank_pos.x + w/2;
@@ -59,11 +58,10 @@ public class TankCollision : MonoBehaviour
 
     private void GetSpawnDimensions(){
 
-        var tank_size = spawnRange.size;
-        var w = tank_size.x;
-        var h = tank_size.y;
+        var w = spawnRange.size.x;
+        var h = spawnRange.size.y;
 
-        var tank_pos = transform.position;
+        var tank_pos = spawnRange.offset;
 
         spawn_xLower = tank_pos.x - w/2;
         spawn_xUpper = tank_pos.x + w/2;
