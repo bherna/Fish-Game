@@ -66,7 +66,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 81cc8b66d5d5ec845b2c4c960b2ba303, type: 2}
     - target: {fileID: 919132149155446097, guid: a21ef57b3cbfbb44eaee2fab7b997c98, type: 3}
       propertyPath: m_Name
-      value: fish-Goldfish
+      value: obj_fish-Goldfish
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

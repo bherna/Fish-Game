@@ -15,7 +15,7 @@ public class GravelSpawn : MonoBehaviour
     float pebble_amount = 2.5f;
 
     //size of each pebble (from original)
-    [SerializeField] float pebble_size = 1;
+    //[SerializeField] float pebble_size = 1;
 
     //spawn dimensions
     float spawn_xLower;
