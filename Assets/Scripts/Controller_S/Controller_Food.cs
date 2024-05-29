@@ -15,6 +15,9 @@ public class Controller_Food : MonoBehaviour
 
     [SerializeField] List<GameObject> foodPellets_list;
 
+    //used for getting mouse position (what is our target z axis)
+    [SerializeField] Transform targetZ;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,8 +36,10 @@ public class Controller_Food : MonoBehaviour
         //spawn pellet
         if(Input.GetMouseButtonDown(1)){
             
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePos.z = 0f;
+            //var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //orthagraphic
+            var screenPos = Input.mousePosition;
+            screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
+            var mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
             SpawnFoodPellet(mousePos);
         }
     }
