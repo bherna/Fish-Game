@@ -19,7 +19,7 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float velocity = 2;
     [SerializeField] Transform sprite_transparency;
     [SerializeField] Transform fishObj_transform;
-    [SerializeField] int fish_obj_size = 100;
+    [SerializeField] int fish_obj_size = 1;
 
 
     private Vector2 idleTarget;
@@ -30,6 +30,7 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] const int startStomach = 70;
     [SerializeField] float burnRate = 30;
     [SerializeField] int hungryRange = 50;
+    private float nextCheckCounter = 0; //seconds untilNextCheck for food target
 
 
     [SerializeField] Controller_Food controller_Food;
@@ -136,7 +137,10 @@ public class Fish_SM : MonoBehaviour
 
         //if wer not targeting food (ie:current target food is null)
         //          : target a food
-        if(foodTarget == null){
+        if(foodTarget == null || 1 < nextCheckCounter){
+
+            nextCheckCounter = 0;
+
 
             //find food to followe 
             var closestDis = float.PositiveInfinity;
@@ -160,7 +164,10 @@ public class Fish_SM : MonoBehaviour
         //follow food
         //head towards target 
         updatePosition(foodTarget.transform.position);
-        
+
+
+        //update next check counter, 
+        nextCheckCounter += Time.deltaTime;
 
 
     }
