@@ -73,9 +73,8 @@ public class Controller_Food : MonoBehaviour
 
     public void TrashThisFood(GameObject foodObj){
 
-        Destroy(foodObj);
         foodPellets_list.Remove(foodObj);
-
+        Destroy(foodObj);
     }
 
     public int GetFoodLength(){

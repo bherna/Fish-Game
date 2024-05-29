@@ -27,7 +27,7 @@ public class Fish_SM : MonoBehaviour
 
 
     [SerializeField] float stomach;
-    [SerializeField] const int maxStomach = 100;
+    [SerializeField] const int startStomach = 70;
     [SerializeField] float burnRate = 30;
     [SerializeField] int hungryRange = 50;
 
@@ -35,7 +35,6 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] Controller_Food controller_Food;
     [SerializeField] Controller_Fish controller_Fish;
     private GameObject foodTarget;
-    private bool targetingFood = false;
 
 
 
@@ -50,11 +49,11 @@ public class Fish_SM : MonoBehaviour
     void Start()
     {
 
-        fishCurrentState = Fish_States.idle;
+        ChangeState(Fish_States.idle);
 
         NewRandomIdleTarget_Tank();
 
-        stomach = maxStomach;
+        stomach = startStomach;
 
     }
 
@@ -69,6 +68,21 @@ public class Fish_SM : MonoBehaviour
         if(stomach <= 0){
             Died();
         }
+        //if hungry
+        else if(stomach < hungryRange ){
+
+            //change sprite transparancy
+            //sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
+            sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
+
+            //if food on screen aswell, change to hungry state
+            if(controller_Food.GetFoodLength() > 0){
+                //are we hungry and food is on screen
+                ChangeState(Fish_States.hungry);
+            }
+            
+        }
+        
 
         switch(fishCurrentState){
             case Fish_States.idle:
@@ -96,22 +110,6 @@ public class Fish_SM : MonoBehaviour
         //move around the tank
         //get a random point on the screen
 
-        //if hungry
-        if(stomach < hungryRange ){
-
-            //change sprite transparancy
-            //sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
-            sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
-
-            //if food on screen aswell, change to hungry state
-            if(controller_Food.GetFoodLength() > 0){
-                //are we hungry and food is on screen
-                ChangeState(Fish_States.hungry);
-                return;
-            }
-            
-        }
-
         var distance = Vector2.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > getNewTargetRange){
@@ -130,20 +128,21 @@ public class Fish_SM : MonoBehaviour
         //look for food, until full
 
         //is there food on screen to target
+        //if not then we can't chase food, return to idle state
         if(controller_Food.GetFoodLength() == 0){
             ChangeState(Fish_States.idle);
             return;
         }
 
-        //if wer not targeting food
-        //or our current target is null
+        //if wer not targeting food (ie:current target food is null)
         //          : target a food
-        if(!targetingFood || foodTarget == null){
+        if(foodTarget == null){
 
-            //find food to followe
+            //find food to followe 
             var closestDis = float.PositiveInfinity;
             var allFoods = controller_Food.GetAllFood();
 
+            //for all food objs in scene, get the closest
             foreach (GameObject food in allFoods){
 
                 var newDis = (transform.position - food.transform.position).sqrMagnitude;
@@ -154,11 +153,10 @@ public class Fish_SM : MonoBehaviour
                     foodTarget = food;  
                 }
             }
-
-            targetingFood = true;
+            //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
         }
         
-
+        //now
         //follow food
         //head towards target 
         updatePosition(foodTarget.transform.position);
@@ -169,6 +167,7 @@ public class Fish_SM : MonoBehaviour
 
     private void SleepyMode(){
         //look for a spot to sleep in
+        //not in use yet
 
     }
 
@@ -200,7 +199,7 @@ public class Fish_SM : MonoBehaviour
         );
 
         //sprite fliping
-        if(transform.position.x - idleTarget.x < 0){
+        if(transform.position.x - targetTypePosition.x < 0){
             fishObj_transform.localScale = new Vector3(-fish_obj_size, fish_obj_size, fish_obj_size);
         }
         else{
@@ -214,10 +213,20 @@ public class Fish_SM : MonoBehaviour
         if(Fish_States.hungry == fishCurrentState && other.gameObject.CompareTag("Food"))
         {
 
-            //eat
+            //eat + destroy obj
+            stomach += other.GetComponent<FoodValue>().GetFoodValue();
             controller_Food.TrashThisFood(other.gameObject);
-            stomach = maxStomach;
-            sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));
+
+            //did fish get full (enough)
+            if(stomach > hungryRange){
+
+                //return color to fish
+                sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));
+
+                //set our state to idle again
+                ChangeState(Fish_States.idle);
+            }
+            
 
             
         }
@@ -226,6 +235,7 @@ public class Fish_SM : MonoBehaviour
     
 
 
+    //functions used in other scripts
     public void SetFoodController(Controller_Food food_c){
         controller_Food = food_c;
     }
@@ -236,6 +246,7 @@ public class Fish_SM : MonoBehaviour
 
     public void Died(){
 
+        //removes self from the list of current fish known to the fish controller
         controller_Fish.RemoveFish(gameObject);
 
         Destroy(gameObject);
