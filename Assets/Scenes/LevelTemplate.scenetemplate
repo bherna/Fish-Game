@@ -19,6 +19,8 @@ MonoBehaviour:
   dependencies:
   - dependency: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
     instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 4605ebc51e55f944baec35d635aaef2f, type: 2}
+    instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 98a774ce33e1dff48a535bdc09176099, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
@@ -31,15 +33,19 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
     instantiationMode: 1
-  - dependency: {fileID: 2100000, guid: 04d1a8140ad37a44cb458e65c26a182a, type: 2}
-    instantiationMode: 0
   - dependency: {fileID: 2100000, guid: 1b592b3d1a5cabe40bcce265c4e214aa, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 04d1a8140ad37a44cb458e65c26a182a, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: c4b542ae92afdea4a857dacc59be95bb, type: 3}
     instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 7cac9bc279dd40b4bbabab442a6004e1, type: 2}
+    instantiationMode: 0
   - dependency: {fileID: 1213281205517056372, guid: 4be66602672a1474ca95950aa1148fd1, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 919132149155446097, guid: 8b3515fdbc037494e9d8796ef3ecd67d, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 6432539f72e9e7f4c80e38c1b1915cc1, type: 3}
     instantiationMode: 0
@@ -64,6 +70,8 @@ MonoBehaviour:
   - dependency: {fileID: 6597783853402747907, guid: e61354cb3a31a7a4ca3b769b5a738a98, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 5292263530791328344, guid: 0914d4eaf7f777d4586440e43221dfb8, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 0d9200f92f19c2f42bfface8e48e936c, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 5292263530791328344, guid: 28f17bae6938f8741815e929952ea62e, type: 3}
     instantiationMode: 0
