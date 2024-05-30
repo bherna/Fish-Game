@@ -98,7 +98,8 @@ MonoBehaviour:
   velocity: 2
   sprite_transparency: {fileID: 8915303353283537638}
   fishObj_transform: {fileID: 4246823355796075121}
-  fish_obj_size: 1
+  h_turningSpeed: 1.5
+  v_turningSpeed: 6
   getNewTargetRange: 0.1
   stomach: 0
   burnRate: 5

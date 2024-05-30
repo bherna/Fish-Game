@@ -19,7 +19,11 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float velocity = 2;
     [SerializeField] Transform sprite_transparency;
     [SerializeField] Transform fishObj_transform;
-    [SerializeField] int fish_obj_size = 1;
+
+    //used in the update position function
+    [SerializeField] float h_turningSpeed = 1;
+    [SerializeField] float v_turningSpeed = 1;
+    private float startTime = 0;
 
 
     private Vector2 idleTarget;
@@ -70,7 +74,7 @@ public class Fish_SM : MonoBehaviour
             Died();
         }
         //if hungry
-        else if(stomach < hungryRange ){
+        else if(stomach < hungryRange && fishCurrentState != Fish_States.hungry){
 
             //change sprite transparancy
             //sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
@@ -105,6 +109,7 @@ public class Fish_SM : MonoBehaviour
     public void ChangeState (Fish_States newState){
 
         fishCurrentState = newState;
+        startTime = Time.time;
     }
 
     private void IdleMode(){
@@ -141,12 +146,12 @@ public class Fish_SM : MonoBehaviour
 
             nextCheckCounter = 0;
 
-
             //find food to followe 
             var closestDis = float.PositiveInfinity;
             var allFoods = controller_Food.GetAllFood();
 
             //for all food objs in scene, get the closest
+            var tempTarget = allFoods[0];
             foreach (GameObject food in allFoods){
 
                 var newDis = (transform.position - food.transform.position).sqrMagnitude;
@@ -154,9 +159,23 @@ public class Fish_SM : MonoBehaviour
                 if(newDis < closestDis){
 
                     closestDis = newDis;
-                    foodTarget = food;  
+                    tempTarget = food;  
                 }
             }
+            //if this is our first food target found, set instant
+            //if this new food we found is closer, set that as new target
+            //else nothing
+            if(foodTarget == null){
+                foodTarget = tempTarget;
+                //update targeting variables
+                NewTargetVariables();
+            }
+            else if(foodTarget != tempTarget){
+                foodTarget = tempTarget;
+                //update targeting variables
+                NewTargetVariables();
+            }
+            
             //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
         }
         
@@ -189,10 +208,21 @@ public class Fish_SM : MonoBehaviour
 
 
     private void NewRandomIdleTarget_Tank(){
+        
+        //update variables
+        NewTargetVariables();
+
+        //new target
         idleTarget = new Vector2(
                 Random.Range(tank_xLower, tank_xUpper),
                 Random.Range(tank_yLower, tank_yUpper)
             );
+    }
+
+    //whenever a new target is set
+    //run this
+    private void NewTargetVariables(){
+        startTime = Time.time;
     }
 
 
@@ -205,26 +235,61 @@ public class Fish_SM : MonoBehaviour
             velocity * Time.deltaTime
         );
 
-        float angle;
+        
+        float z_curr_angle = (Time.time - startTime) / v_turningSpeed;
+        float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
+        float y_angle;
+        float z_angle;
 
-        //fish local facing position (towards target)
-        if(transform.position.x - targetTypePosition.x < 0){
-            //sprite fliping (horizonal
-            fishObj_transform.localScale = new Vector3(-fish_obj_size, fish_obj_size, fish_obj_size);
-            //sprite rotation (vertical)
-            angle = Mathf.Rad2Deg * Mathf.Atan2(targetTypePosition.y - transform.position.y, targetTypePosition.x - transform.position.x);
-            
+        //fish local facing position (towards target) 
+        //sprite (left or right)
+        //aswell verticality
+        if(transform.position.x - targetTypePosition.x < 0 && fishObj_transform.localRotation.eulerAngles.y < 180){
+            //turn right
+            y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
+  
+        }
+        else if (transform.position.x - targetTypePosition.x > 0){
+            //return to left
+            y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
+
+        }
+        else {
+            //else keep curr pos rotation
+            y_angle = fishObj_transform.localRotation.eulerAngles.y;
+        }
+        
+        //vertical rotation 
+        z_angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);
+        z_angle = ClampAngle(z_angle, 30);
+        z_angle = Mathf.SmoothStep(0, z_angle, z_curr_angle);
+        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle);
+    }
+
+    //given a max angle, check if our angle goes outside that bound (checks both - and +)
+    private float ClampAngle(float angle, float maxAngle){
+
+        //negative check
+        if(angle < -maxAngle){
+            return -maxAngle;
+        }
+
+        if(angle > maxAngle){
+            return maxAngle;
+        }
+
+        //else return the angle, since its between
+        return angle;
+    }
+
+    private int LR_Angle(float angle){
+
+        if(angle < 90){
+            return 0;
         }
         else{
-            //sprite fliping (horizonal
-            fishObj_transform.localScale = new Vector3(fish_obj_size, fish_obj_size, fish_obj_size);
-            //sprite rotation (vertical)
-            angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);
+            return 180;
         }
-
-        
-        //update rotation
-        fishObj_transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
 
