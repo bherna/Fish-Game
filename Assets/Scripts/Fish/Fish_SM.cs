@@ -205,13 +205,26 @@ public class Fish_SM : MonoBehaviour
             velocity * Time.deltaTime
         );
 
-        //sprite fliping
+        float angle;
+
+        //fish local facing position (towards target)
         if(transform.position.x - targetTypePosition.x < 0){
+            //sprite fliping (horizonal
             fishObj_transform.localScale = new Vector3(-fish_obj_size, fish_obj_size, fish_obj_size);
+            //sprite rotation (vertical)
+            angle = Mathf.Rad2Deg * Mathf.Atan2(targetTypePosition.y - transform.position.y, targetTypePosition.x - transform.position.x);
+            
         }
         else{
+            //sprite fliping (horizonal
             fishObj_transform.localScale = new Vector3(fish_obj_size, fish_obj_size, fish_obj_size);
+            //sprite rotation (vertical)
+            angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);
         }
+
+        
+        //update rotation
+        fishObj_transform.localRotation = Quaternion.Euler(0, 0, angle);
     }
 
 
