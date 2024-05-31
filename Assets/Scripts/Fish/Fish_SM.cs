@@ -14,13 +14,17 @@ public class Fish_SM : MonoBehaviour
     //idle, walk around
     public enum Fish_States {idle, hungry, sleepy};
 
+
     [SerializeField] Fish_States fishCurrentState;
-    [SerializeField] Collision2D fishCollision;
-    [SerializeField] float velocity = 2;
-    [SerializeField] Transform sprite_transparency;
-    [SerializeField] Transform fishObj_transform;
+    [SerializeField] Transform sprite_transparency; //reference to fish sprite
+    [SerializeField] Transform fishObj_transform;   //reference to fish object
+
 
     //used in the update position function
+    [SerializeField] float idle_velocity = 1;
+    [SerializeField] float hungry_velocity = 2;
+    private float current_Vel = 0; 
+
     [SerializeField] float h_turningSpeed = 1;
     [SerializeField] float v_turningSpeed = 1;
     private float startTime = 0;
@@ -59,6 +63,8 @@ public class Fish_SM : MonoBehaviour
         NewRandomIdleTarget_Tank();
 
         stomach = startStomach;
+
+        current_Vel = idle_velocity;
 
     }
 
@@ -110,6 +116,13 @@ public class Fish_SM : MonoBehaviour
 
         fishCurrentState = newState;
         startTime = Time.time;
+
+        if(newState == Fish_States.idle){
+            current_Vel = idle_velocity;
+        }
+        else if(newState == Fish_States.hungry){
+            current_Vel = hungry_velocity;
+        }
     }
 
     private void IdleMode(){
@@ -167,13 +180,9 @@ public class Fish_SM : MonoBehaviour
             //else nothing
             if(foodTarget == null){
                 foodTarget = tempTarget;
-                //update targeting variables
-                NewTargetVariables();
             }
             else if(foodTarget != tempTarget){
                 foodTarget = tempTarget;
-                //update targeting variables
-                NewTargetVariables();
             }
             
             //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
@@ -232,7 +241,7 @@ public class Fish_SM : MonoBehaviour
         transform.position = Vector2.MoveTowards(
             transform.position,
             targetTypePosition,
-            velocity * Time.deltaTime
+            current_Vel * Time.deltaTime
         );
 
         
@@ -310,6 +319,8 @@ public class Fish_SM : MonoBehaviour
 
                 //set our state to idle again
                 ChangeState(Fish_States.idle);
+
+                gameObject.GetComponent<Fish_Age>().Ate();
             }
             
 

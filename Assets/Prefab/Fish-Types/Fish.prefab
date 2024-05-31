@@ -95,9 +95,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishCurrentState: 0
-  velocity: 2
   sprite_transparency: {fileID: 8915303353283537638}
   fishObj_transform: {fileID: 4246823355796075121}
+  idle_velocity: 1
+  hungry_velocity: 2.4
   h_turningSpeed: 1.5
   v_turningSpeed: 6
   getNewTargetRange: 0.1
@@ -136,6 +137,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   curr_sec_age: 0
   until_next_stage: 15
+  sprite_render: {fileID: 4246823355796075121}
+  fish_size_current: 0.6
+  fish_size_scale: 0.2
 --- !u!114 &1057085207811496155
 MonoBehaviour:
   m_ObjectHideFlags: 0

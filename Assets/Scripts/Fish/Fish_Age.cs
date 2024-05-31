@@ -8,33 +8,38 @@ public class Fish_Age : MonoBehaviour
     //fish stage
     public int current_age_stage {get; private set; } = 0;
 
-    //fish current age until next fish_stage
-    [SerializeField] float curr_sec_age = 0;
 
-    //takes how many seconds till next fish stage
-    [SerializeField] int until_next_stage = 15;
+    [SerializeField] float amount_food_ate = 0;
+    [SerializeField] int food_until_next_stage = 3;
+    [SerializeField] Transform sprite_render;
 
     //bool if we should keep age-ing
     private bool updateAge = true;
 
+    [SerializeField] private float fish_size_current = 1;
+    [SerializeField] private float fish_size_scale = 0.5f;
 
-    
 
-    // Update is called once per frame
-    void Update()
-    {
+
+
+    private void Start() {
+
+        sprite_render.transform.localScale = new Vector3(fish_size_current, fish_size_current, fish_size_current);
+
+    }
+ 
+
+    public void Ate(){
 
         if(updateAge){
 
             //update age of fish
-            curr_sec_age += Time.deltaTime;
+            amount_food_ate += 1;
 
-            if(curr_sec_age > until_next_stage){
+            if(amount_food_ate >= food_until_next_stage){
                 UpdateFishStage();
             }
         }
-        
-           
     }
 
     private void UpdateFishStage(){
@@ -44,9 +49,11 @@ public class Fish_Age : MonoBehaviour
             
             //update 
             current_age_stage += 1;
+            fish_size_current += fish_size_scale;
+            sprite_render.transform.localScale = new Vector3(fish_size_current, fish_size_current, fish_size_current);
 
             //reset
-            curr_sec_age = 0;
+            amount_food_ate = 0;
             
         }
         else{
