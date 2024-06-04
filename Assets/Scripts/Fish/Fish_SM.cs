@@ -237,7 +237,7 @@ public class Fish_SM : MonoBehaviour
 
     private void updatePosition(Vector2 targetTypePosition){
 
-        //head towards target 
+        //update physical position towards the target
         transform.position = Vector2.MoveTowards(
             transform.position,
             targetTypePosition,
@@ -245,44 +245,70 @@ public class Fish_SM : MonoBehaviour
         );
 
         
+
+        //everything now is sprite visuals
+        //in other words, updating the rotations on the fish, making it look like its actually swimming towards the target position//
         float z_curr_angle = (Time.time - startTime) / v_turningSpeed;
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
-        float y_angle;
-        float z_angle;
+        float y_angle = 0;
+        float z_angle = 0;
 
         //fish local facing position (towards target) 
         //sprite (left or right)
-        //aswell verticality
-        if(transform.position.x - targetTypePosition.x < 0 && fishObj_transform.localRotation.eulerAngles.y < 180){
-            //turn right
-            y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
-  
+        if(transform.position.x - targetTypePosition.x < 0){
+            Debug.Log("turning Right");
+
+            //turn right  (0 degrees to 180 degress)
+            
+            
+            if(fishObj_transform.localRotation.eulerAngles.y == 0){
+                y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
+            }
+            else{
+                y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
+            }
+            
         }
         else if (transform.position.x - targetTypePosition.x > 0){
-            //return to left
-            y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
+            Debug.Log("turning Left");
+
+            //return to left (180 degress to 0 degrees)
+            if(fishObj_transform.localRotation.eulerAngles.y == 180){
+                y_angle = Mathf.SmoothStep(180, 0 , y_curr_angle);
+            }
+            else{
+                y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
+            }
 
         }
         else {
+            Debug.Log("turning None");
+
             //else keep curr pos rotation
             y_angle = fishObj_transform.localRotation.eulerAngles.y;
         }
         
         //vertical rotation 
-        z_angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);
-        z_angle = ClampAngle(z_angle, 30);
-        z_angle = Mathf.SmoothStep(0, z_angle, z_curr_angle);
-        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle);
-    }
+        z_angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);//get the angle to pivot to
+        z_angle = ClampAngle(z_angle, 30); //clamp that to be a max of -30 to +30 degrees from a vector3.forward position
+        z_angle = Mathf.SmoothStep(0, z_angle, z_curr_angle); //smooth 
 
-    //given a max angle, check if our angle goes outside that bound (checks both - and +)
+        //apply rotations
+        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle); 
+    }
+    
+
+    //for the current postion of the fish (depending on which way) get a new angle to pivot too, 
+    //given a max angle pivot
     private float ClampAngle(float angle, float maxAngle){
 
-        //negative check
+
+        //negative check (up)
         if(angle < -maxAngle){
             return -maxAngle;
         }
-
+        
+        //positive check (down)
         if(angle > maxAngle){
             return maxAngle;
         }
@@ -291,15 +317,7 @@ public class Fish_SM : MonoBehaviour
         return angle;
     }
 
-    private int LR_Angle(float angle){
-
-        if(angle < 90){
-            return 0;
-        }
-        else{
-            return 180;
-        }
-    }
+    
 
 
     private void OnTriggerStay2D(Collider2D other){
