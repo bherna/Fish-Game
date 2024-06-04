@@ -28,10 +28,12 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float h_turningSpeed = 1;
     [SerializeField] float v_turningSpeed = 1;
     private float startTime = 0;
+    private float z_angle = 0;
 
 
     private Vector2 idleTarget;
-    [SerializeField] float getNewTargetRange = 3f;
+    [SerializeField] float targetRadius = 3f;
+    [SerializeField] float newTargetMinLengthRadius = 0; //the minimum length away from our fish current position
 
 
     [SerializeField] float stomach;
@@ -115,7 +117,7 @@ public class Fish_SM : MonoBehaviour
     public void ChangeState (Fish_States newState){
 
         fishCurrentState = newState;
-        startTime = Time.time;
+        NewTargetVariables();
 
         if(newState == Fish_States.idle){
             current_Vel = idle_velocity;
@@ -131,7 +133,7 @@ public class Fish_SM : MonoBehaviour
 
         var distance = Vector2.Distance(idleTarget, transform.position);
 
-        if(Mathf.Abs(distance) > getNewTargetRange){
+        if(Mathf.Abs(distance) > targetRadius){
             
             updatePosition(idleTarget);
         }
@@ -180,9 +182,11 @@ public class Fish_SM : MonoBehaviour
             //else nothing
             if(foodTarget == null){
                 foodTarget = tempTarget;
+                NewTargetVariables();
             }
             else if(foodTarget != tempTarget){
                 foodTarget = tempTarget;
+                NewTargetVariables();
             }
             
             //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
@@ -222,10 +226,14 @@ public class Fish_SM : MonoBehaviour
         NewTargetVariables();
 
         //new target
-        idleTarget = new Vector2(
+        var curr_pos = new Vector2 (transform.position.x, transform.position.y);
+        while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
+            idleTarget = new Vector2(
                 Random.Range(tank_xLower, tank_xUpper),
                 Random.Range(tank_yLower, tank_yUpper)
             );
+        }
+        
     }
 
     //whenever a new target is set
@@ -251,7 +259,7 @@ public class Fish_SM : MonoBehaviour
         float z_curr_angle = (Time.time - startTime) / v_turningSpeed;
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
         float y_angle = 0;
-        float z_angle = 0;
+        float z_angle_pivotTo = 0;
 
         //fish local facing position (towards target) 
         //sprite (left or right)
@@ -285,12 +293,20 @@ public class Fish_SM : MonoBehaviour
         else {
             //else keep curr pos rotation
             y_angle = fishObj_transform.localRotation.eulerAngles.y;
+            //this shouldnt happen
+            //so
+            Debug.Log("Fish y_angle is not working");
         }
         
         //vertical rotation 
-        z_angle = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);//get the angle to pivot to
-        z_angle = ClampAngle(z_angle, 30); //clamp that to be a max of -30 to +30 degrees from a vector3.forward position
-        z_angle = Mathf.SmoothStep(0, z_angle, z_curr_angle); //smooth 
+        var maxAngle = 30;
+        z_angle_pivotTo = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);//get the angle to pivot to
+        Debug.Log("z-angle-pivot-to: " + z_angle_pivotTo.ToString());
+        z_angle_pivotTo = ClampAngle(z_angle_pivotTo, maxAngle); //clamp that to be a max of -30 to +30 degrees from a vector3.forward position
+        z_angle_pivotTo = Mathf.Lerp(z_angle, z_angle_pivotTo, z_curr_angle);//smooth the angle
+        z_angle =  z_angle_pivotTo;
+        z_angle = ClampAngle(z_angle, maxAngle);
+
 
         //apply rotations
         fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle); 
@@ -370,7 +386,11 @@ public class Fish_SM : MonoBehaviour
     
         //current target for fish
         Gizmos.color = new Color(1,1,0,0.75f);
-        Gizmos.DrawWireSphere(idleTarget, getNewTargetRange);
+        Gizmos.DrawWireSphere(idleTarget, targetRadius);
+
+        //current target for fish
+        Gizmos.color = new Color(0,1,1,0.75f);
+        Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
 
 
         
