@@ -99,7 +99,7 @@ MonoBehaviour:
   fishObj_transform: {fileID: 4246823355796075121}
   idle_velocity: 1
   hungry_velocity: 2.4
-  h_turningSpeed: 1.5
+  h_turningSpeed: 1
   v_turningSpeed: 6
   getNewTargetRange: 0.1
   stomach: 0
@@ -135,8 +135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84b23eef2bb967d4a9ba6c5aa493130e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curr_sec_age: 0
-  until_next_stage: 15
+  amount_food_ate: 0
+  food_until_next_stage: 3
   sprite_render: {fileID: 4246823355796075121}
   fish_size_current: 0.6
   fish_size_scale: 0.2

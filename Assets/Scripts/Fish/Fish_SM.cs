@@ -256,34 +256,33 @@ public class Fish_SM : MonoBehaviour
         //fish local facing position (towards target) 
         //sprite (left or right)
         if(transform.position.x - targetTypePosition.x < 0){
-            Debug.Log("turning Right");
+
 
             //turn right  (0 degrees to 180 degress)
-            
-            
+            //if we are in the most left most position
             if(fishObj_transform.localRotation.eulerAngles.y == 0){
                 y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
             }
             else{
+            //else start at current y
                 y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
             }
             
         }
         else if (transform.position.x - targetTypePosition.x > 0){
-            Debug.Log("turning Left");
 
             //return to left (180 degress to 0 degrees)
+            //if we are currently at the right most position
             if(fishObj_transform.localRotation.eulerAngles.y == 180){
                 y_angle = Mathf.SmoothStep(180, 0 , y_curr_angle);
             }
+            //else start at current y
             else{
                 y_angle = Mathf.SmoothStep(fishObj_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
             }
 
         }
         else {
-            Debug.Log("turning None");
-
             //else keep curr pos rotation
             y_angle = fishObj_transform.localRotation.eulerAngles.y;
         }
