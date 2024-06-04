@@ -17,9 +17,9 @@ MonoBehaviour:
   description: Use for creating levels.
   preview: {fileID: 1450752330997228892}
   dependencies:
-  - dependency: {fileID: 2100000, guid: 4605ebc51e55f944baec35d635aaef2f, type: 2}
-    instantiationMode: 0
   - dependency: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
+    instantiationMode: 0
+  - dependency: {fileID: 2100000, guid: 4605ebc51e55f944baec35d635aaef2f, type: 2}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 98a774ce33e1dff48a535bdc09176099, type: 3}
     instantiationMode: 0
@@ -29,10 +29,12 @@ MonoBehaviour:
     instantiationMode: 0
   - dependency: {fileID: 2100000, guid: 62cfeccd30524dc49b138aed73768696, type: 2}
     instantiationMode: 0
-  - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
-    instantiationMode: 1
+  - dependency: {fileID: 7989386241410265437, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
+    instantiationMode: 0
   - dependency: {fileID: 2100000, guid: 1b592b3d1a5cabe40bcce265c4e214aa, type: 2}
     instantiationMode: 0
+  - dependency: {fileID: 2800000, guid: 2fd6421f253b4ef1a19526541f9ffc0c, type: 3}
+    instantiationMode: 1
   - dependency: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
@@ -172,6 +174,8 @@ MonoBehaviour:
   - dependency: {fileID: 2800000, guid: 61825ec4e4ad77d43b32531a9b41041e, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 2800000, guid: 6d8f9c5d94d50c1478927d52a8c1dfe0, type: 3}
+    instantiationMode: 0
+  - dependency: {fileID: 6806463760457618325, guid: e67a470392b0cd84a861bf0c0301beb0, type: 3}
     instantiationMode: 0
   - dependency: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     instantiationMode: 1

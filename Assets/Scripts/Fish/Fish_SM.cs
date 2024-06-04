@@ -301,11 +301,10 @@ public class Fish_SM : MonoBehaviour
         //vertical rotation 
         var maxAngle = 30;
         z_angle_pivotTo = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);//get the angle to pivot to
-        Debug.Log("z-angle-pivot-to: " + z_angle_pivotTo.ToString());
-        z_angle_pivotTo = ClampAngle(z_angle_pivotTo, maxAngle); //clamp that to be a max of -30 to +30 degrees from a vector3.forward position
-        z_angle_pivotTo = Mathf.Lerp(z_angle, z_angle_pivotTo, z_curr_angle);//smooth the angle
-        z_angle =  z_angle_pivotTo;
-        z_angle = ClampAngle(z_angle, maxAngle);
+        z_angle_pivotTo = ClampAngle(z_angle_pivotTo, maxAngle); //clamp that to be a max of -30 to +30 degrees 
+        z_angle_pivotTo = Mathf.Lerp(z_angle, z_angle_pivotTo, z_curr_angle);//smooth the angle (current z -> new pivot) get a value inbetween
+        z_angle =  z_angle_pivotTo; //set that as the new current z
+        z_angle = ClampAngle(z_angle, maxAngle); //clamp that value again to -30 __ +30 max degrees
 
 
         //apply rotations
