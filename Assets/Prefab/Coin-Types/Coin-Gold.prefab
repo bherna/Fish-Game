@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinValue: 20
+  timeTillTrashed: 1.5
+  rb: {fileID: 9203605760568676009}
 --- !u!114 &1450112052067580422
 MonoBehaviour:
   m_ObjectHideFlags: 0

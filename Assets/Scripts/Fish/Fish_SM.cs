@@ -29,9 +29,10 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float v_turningSpeed = 1;
     private float startTime = 0;
     private float z_angle = 0;
+    private float zDepth = 1;
 
 
-    private Vector2 idleTarget;
+    private Vector3 idleTarget;
     [SerializeField] float targetRadius = 3f;
     [SerializeField] float newTargetMinLengthRadius = 0; //the minimum length away from our fish current position
 
@@ -68,6 +69,7 @@ public class Fish_SM : MonoBehaviour
 
         current_Vel = idle_velocity;
 
+        zDepth = transform.position.z;
     }
 
     // Update is called once per frame
@@ -131,7 +133,7 @@ public class Fish_SM : MonoBehaviour
         //move around the tank
         //get a random point on the screen
 
-        var distance = Vector2.Distance(idleTarget, transform.position);
+        var distance = Vector3.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > targetRadius){
             
@@ -226,11 +228,12 @@ public class Fish_SM : MonoBehaviour
         NewTargetVariables();
 
         //new target
-        var curr_pos = new Vector2 (transform.position.x, transform.position.y);
+        var curr_pos = new Vector3 (transform.position.x, transform.position.y, zDepth);
         while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
-            idleTarget = new Vector2(
+            idleTarget = new Vector3(
                 Random.Range(tank_xLower, tank_xUpper),
-                Random.Range(tank_yLower, tank_yUpper)
+                Random.Range(tank_yLower, tank_yUpper),
+                zDepth
             );
         }
         
@@ -243,10 +246,10 @@ public class Fish_SM : MonoBehaviour
     }
 
 
-    private void updatePosition(Vector2 targetTypePosition){
+    private void updatePosition(Vector3 targetTypePosition){
 
         //update physical position towards the target
-        transform.position = Vector2.MoveTowards(
+        transform.position = Vector3.MoveTowards(
             transform.position,
             targetTypePosition,
             current_Vel * Time.deltaTime

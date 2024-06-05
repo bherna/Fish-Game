@@ -117,9 +117,10 @@ public class Controller_Enemy : MonoBehaviour
 
 
     private Vector2 NewRandomTankSpot(){
-        var idleTarget = new Vector2(
+        var idleTarget = new Vector3(
                 Random.Range(tank_xLower, tank_xUpper),
-                Random.Range(tank_yLower, tank_yUpper)
+                Random.Range(tank_yLower, tank_yUpper),
+                transform.position.z
             );
 
         return idleTarget;

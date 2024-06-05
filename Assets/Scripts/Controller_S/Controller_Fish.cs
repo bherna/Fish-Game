@@ -90,7 +90,7 @@ public class Controller_Fish : MonoBehaviour
         }
 
         //spawn at top of tank
-        fish_list.Add(Instantiate(fishObj, new Vector2(0, 4), Quaternion.identity));
+        fish_list.Add(Instantiate(fishObj, new Vector3(0, 4, transform.position.z), Quaternion.identity));
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
         fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankSwimDimensions(swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
