@@ -12,6 +12,7 @@ public class EventOnHover_PlayButton : MonoBehaviour, IPointerEnterHandler, IPoi
     [SerializeField] float ligthChangeSpeed = 1;
 
     private bool isOn = false;
+    private bool weClicked = false;
     private float lightIntensity = 0;
 
 
@@ -22,7 +23,7 @@ public class EventOnHover_PlayButton : MonoBehaviour, IPointerEnterHandler, IPoi
     }
     private void Update() {
 
-        if(isOn && lightIntensity + Time.deltaTime*ligthChangeSpeed <= maxLight){
+        if((isOn || weClicked) && lightIntensity + Time.deltaTime*ligthChangeSpeed <= maxLight){
             //head towards max lighting
             lightIntensity += Time.deltaTime *ligthChangeSpeed;
 
@@ -50,12 +51,11 @@ public class EventOnHover_PlayButton : MonoBehaviour, IPointerEnterHandler, IPoi
     public void OnPointerClick(PointerEventData eventData){
 
         //we clicked to next screen so keep the lights on
-        Debug.Log("Click");
-        isOn = true;
+        weClicked = true;
 
     }
 
     public void OnPointerReturnToTitleScreen(){
-        isOn = false;
+        weClicked = false;
     }
 }
