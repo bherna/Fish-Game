@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Controller_Enemy : MonoBehaviour
 {
@@ -69,33 +70,12 @@ public class Controller_Enemy : MonoBehaviour
             //should we spawn wave
             if(curr_sec >= secs_till_next_enemyWave){
 
-
-                //spawn wave 
+                //spawn wave + post wave stats
                 currently_in_wave = true; // turn off the show we spawn command (since we are spawning)
                 enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
                 IEnumerator coroutine = SpawnWave(preAnnouncerTime);
                 StartCoroutine(coroutine);
                 
-                //set current second to 0
-                curr_sec = 0;
-
-                //update wave index to next wave
-                currWaveIndex += 1;
-
-                //are we now done with spawning waves?
-                if(enemy_Waves.Index_GetWave(currWaveIndex) == null){
-
-                    //stop spawning
-                    keepSpawning = false;
-                    Debug.Log("End of enemy waves");
-                }
-                else{
-                    //set our new seconds till spawn next wave
-                    secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
-                }
-
-                
-
             }
         }
     }
@@ -118,6 +98,29 @@ public class Controller_Enemy : MonoBehaviour
             temp.GetComponent<Enemy>().SetController_Enemy(this);
             temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
         });
+
+
+        //set current second to 0
+        curr_sec = 0;
+
+        //update wave index to next wave
+        currWaveIndex += 1;
+
+        //are we now done with spawning waves?
+        try{
+            //try checking if next wave exists
+            enemy_Waves.Index_GetWave(currWaveIndex);
+            //if yes then...
+            //set our new seconds till spawn next wave
+            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+        }
+        catch(IndexOutOfRangeException ex){
+            //else
+            //stop spawning
+            keepSpawning = false;
+            Debug.Log("End of enemy waves\n" + ex.Message);
+        }
+        
         
     }
 
