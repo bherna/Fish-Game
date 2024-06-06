@@ -512,6 +512,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2000719847796821883, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_Name
+      value: Annouce - Text
+      objectReference: {fileID: 0}
     - target: {fileID: 2692170414909787350, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -547,6 +551,10 @@ PrefabInstance:
     - target: {fileID: 3441302327425348808, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -197.56325
+      objectReference: {fileID: 0}
+    - target: {fileID: 3765098031590160409, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4655479560039159126, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchorMax.y
@@ -683,6 +691,10 @@ PrefabInstance:
     - target: {fileID: 8043002976189517763, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8483300479638855018, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_text
+      value: Enemies are comming
       objectReference: {fileID: 0}
     - target: {fileID: 8625137527499391134, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_Name
@@ -900,6 +912,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38b4225f4965ba84d966169f9b246f77, type: 3}
+--- !u!114 &2137122493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+  m_PrefabInstance: {fileID: 8661661512240468985}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d07bbee1b4aacd449d369e822b4778f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &629229323879373902
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1110,6 +1133,10 @@ PrefabInstance:
       propertyPath: tankColl
       value: 
       objectReference: {fileID: 1083778155}
+    - target: {fileID: 8627190064862608216, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: enemy_Waves
+      value: 
+      objectReference: {fileID: 2137122493}
     - target: {fileID: 8627190064862608216, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: controller_Fish
       value: 

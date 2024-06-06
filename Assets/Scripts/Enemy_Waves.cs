@@ -26,9 +26,13 @@ public class Enemy_Waves : MonoBehaviour
 
     
 
-    public EnemyWave[] Get_WaveMat(){
-
-        return wave_mat;
+    public List<GameObject> Index_GetWave(int waveIndex){
+        return wave_mat[waveIndex].wave;
     }
+    public int Index_GetTimeTillSpawn(int waveIndex){
+        return wave_mat[waveIndex].secTillWaveSpawn;
+    }
+
+
     
 }

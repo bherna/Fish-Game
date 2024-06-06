@@ -103,10 +103,22 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
         //die
         if(health <= 0){
-            Destroy(gameObject);
+            Died();
         }
         
     }
+
+
+    //fish died
+    //will be more than one way to die
+    private void Died(){
+
+        controller_Enemy.CloserToWaveEnded();
+        Destroy(gameObject);
+    }
+
+
+
     
     
 }
