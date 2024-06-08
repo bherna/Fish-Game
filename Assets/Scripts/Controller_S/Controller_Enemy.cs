@@ -96,7 +96,6 @@ public class Controller_Enemy : MonoBehaviour
             var randSpot = NewRandomTankSpot();
             var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
             temp.GetComponent<Enemy>().SetController_Enemy(this);
-            temp.GetComponent<Enemy>().SetTargetFish(GetRandomFish());
         });
 
 

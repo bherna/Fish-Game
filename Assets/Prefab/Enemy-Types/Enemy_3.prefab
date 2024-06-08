@@ -206,6 +206,6 @@ MonoBehaviour:
   controller_Enemy: {fileID: 0}
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 592658867979437195}
-  velocity: 0.3
   health: 0
-  forceMod: 5
+  velocity: 0.3
+  kbForce: 5

@@ -5,20 +5,24 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
+    //references
     [SerializeField] Controller_Enemy controller_Enemy;
     [SerializeField] Rigidbody2D rb;
-
-    private Transform currFishTarget;
-
     [SerializeField] Transform sprite;
+    
 
-    [SerializeField] float velocity = 1f;
+    //targets
+    private Transform currFishTarget;
+    
 
+    //stats
     public int damageValue {get; private set; } = 1;
-
     public int health;
     private const int maxHealth = 20; 
-    [SerializeField] float forceMod = 1f;
+
+    [SerializeField] float velocity = 1f;
+    [SerializeField] float kbForce = 1f;
+    
 
 
 
@@ -31,18 +35,12 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     // Update is called once per frame
     void Update()
     {
-        updatePos();
-    }
-
-
-    private void updatePos(){
-
         //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
         if(Controller_Main.instance.paused){
             return;
         }
 
-        //did our fish get destroyed
+        //if no fish currently pointing to
         if(currFishTarget == null){
             
             //if so get a new fish to follow
@@ -51,12 +49,22 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
             //if we can't find a fish, just return
             if(currFishTarget == null){
 
-                //wait a few seconds before checking again
-                StartCoroutine(waitSomeSeconds(5f));
+                //wait a few seconds before checking again ?
                 return;
+                
             }
             
         }
+
+        else{
+            //update the enemy position towards target fish
+            updatePos();
+        }
+        
+    }
+
+
+    private void updatePos(){
 
         //head towards target 
         var newVelocity = (currFishTarget.position - transform.position).normalized;
@@ -76,12 +84,9 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         currFishTarget = newFishTarget;
     }
 
+    //used for the enemy to reference enemy controller
     public void SetController_Enemy(Controller_Enemy enemy_c){
         controller_Enemy = enemy_c;
-    }
-
-    public IEnumerator waitSomeSeconds(float seconds){
-        yield return new WaitForSeconds(seconds);
     }
 
     
@@ -98,8 +103,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
         //knockback
         var kbVector = new Vector2(transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x, transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y).normalized;
-        //Debug.Log("vector: " + kbVector.ToString());
-        rb.AddForce(kbVector * forceMod, ForceMode2D.Impulse);
+        rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
 
         //die
         if(health <= 0){
