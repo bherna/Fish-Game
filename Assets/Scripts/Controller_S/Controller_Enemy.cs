@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using TMPro;
 
 public class Controller_Enemy : MonoBehaviour
 {
@@ -19,17 +20,32 @@ public class Controller_Enemy : MonoBehaviour
 
     //bot ui
     [SerializeField] GameObject annoucement_ui;
+    [SerializeField] TextMeshProUGUI ui_text;
 
 
 
     //Enemy_wave script variables to hold (current wave to hold)
     [SerializeField] private Enemy_Waves enemy_Waves;
-    private List<GameObject> currentEnemyWaveList;
     private int secs_till_next_enemyWave = 0; 
     private int currWaveIndex = 0;
 
     //current amount of enemies on screen
     private int enemiesOnScreen = 0;
+
+
+    //static variable for fish coin value
+    public static Controller_Enemy instance {get; private set; }
+    void Awake (){
+
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }
     
 
     private void Start() {
@@ -40,7 +56,6 @@ public class Controller_Enemy : MonoBehaviour
         //update wave matrix
         //also make sure we have a matrix to work with
         try{
-            currentEnemyWaveList = enemy_Waves.Index_GetWave(currWaveIndex);
             secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
 
         }catch(IndexOutOfRangeException e){
@@ -70,7 +85,6 @@ public class Controller_Enemy : MonoBehaviour
 
                 //spawn wave + post wave stats
                 currently_in_wave = true; // turn off the show we spawn command (since we are spawning)
-                enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
                 IEnumerator coroutine = SpawnWave(preAnnouncerTime);
                 StartCoroutine(coroutine);
                 
@@ -81,7 +95,8 @@ public class Controller_Enemy : MonoBehaviour
 
     private IEnumerator SpawnWave(float waitTIme){
 
-        //annouce 
+        //annouce (they are comming)
+        ui_text.text = "Enemies are comming!";
         annoucement_ui.SetActive(true);
         
         //wait
@@ -90,12 +105,14 @@ public class Controller_Enemy : MonoBehaviour
         //for each enemy in our current wave
         enemy_Waves.Index_GetWave(currWaveIndex).ForEach(delegate(GameObject enemy)
         {
-            
+            //spawn enemy
             var randSpot = RandomTankSpawnSpot();
             var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
-            temp.GetComponent<Enemy>().SetController_Enemy(this);
         });
 
+        //announce (current enemies count)
+        enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
+        ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
         //set current second to 0
         curr_sec = 0;
@@ -138,8 +155,14 @@ public class Controller_Enemy : MonoBehaviour
 
     //everytime an enemy dies in tank, run this
     public void CloserToWaveEnded(){
+        Debug.Log("erqwrqr");
+        //decrement 
         enemiesOnScreen -= 1;
 
+        //update announcement
+        ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
+
+        //check if no more enemies
         if(enemiesOnScreen <= 0){
 
             //disable annoucement

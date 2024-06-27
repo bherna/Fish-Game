@@ -5,8 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
-    //references
-    [SerializeField] Controller_Enemy controller_Enemy;
+
     [SerializeField] Rigidbody2D rb;
     [SerializeField] Transform sprite;
     
@@ -84,11 +83,6 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         currFishTarget = newFishTarget;
     }
 
-    //used for the enemy to reference enemy controller
-    public void SetController_Enemy(Controller_Enemy enemy_c){
-        controller_Enemy = enemy_c;
-    }
-
     
     public void OnPointerClick(PointerEventData eventData){
 
@@ -117,7 +111,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     //will be more than one way to die
     private void Died(){
 
-        controller_Enemy.CloserToWaveEnded();
+        Controller_Enemy.instance.CloserToWaveEnded();
         Destroy(gameObject);
     }
 
