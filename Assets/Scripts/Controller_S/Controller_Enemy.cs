@@ -8,14 +8,6 @@ public class Controller_Enemy : MonoBehaviour
 {
    
 
-    
-
-    //tank dem
-    private float tank_xLower;
-    private float tank_xUpper;
-    private float tank_yLower;
-    private float tank_yUpper;
-
 
 
     //spawning
@@ -25,8 +17,7 @@ public class Controller_Enemy : MonoBehaviour
     private bool currently_in_wave = false; //used in keeping the wave from spawning multiple times (from coroutine being used)
 
 
-    //controller referencess
-    [SerializeField] Controller_Fish controller_Fish;
+    //bot ui
     [SerializeField] GameObject annoucement_ui;
 
 
@@ -43,17 +34,24 @@ public class Controller_Enemy : MonoBehaviour
 
     private void Start() {
         
-        //update tank demension for spawning
-        (tank_xLower, tank_xUpper, tank_yLower, tank_yUpper) = TankCollision.instance.GetTankSpawnArea();
-
-        //update wave mat
-        currentEnemyWaveList = enemy_Waves.Index_GetWave(currWaveIndex);
-
-        //set seconds for wave spawn
-        secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
-
         //disable annoumcent (just in case)
         annoucement_ui.SetActive(false);
+
+        //update wave matrix
+        //also make sure we have a matrix to work with
+        try{
+            currentEnemyWaveList = enemy_Waves.Index_GetWave(currWaveIndex);
+            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+
+        }catch(IndexOutOfRangeException e){
+            Debug.LogError(e);
+            Debug.Log("No Enemy waves to anticipate :( In Enemy_Waves, add new waves for enemy controller to spawn.");
+            keepSpawning = false;
+        }
+        
+        
+
+    
     }
 
 
@@ -93,7 +91,7 @@ public class Controller_Enemy : MonoBehaviour
         enemy_Waves.Index_GetWave(currWaveIndex).ForEach(delegate(GameObject enemy)
         {
             
-            var randSpot = NewRandomTankSpot();
+            var randSpot = RandomTankSpawnSpot();
             var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
             temp.GetComponent<Enemy>().SetController_Enemy(this);
         });
@@ -123,17 +121,14 @@ public class Controller_Enemy : MonoBehaviour
         
     }
 
-    
-    //enemy in tank calls this when no new enemies are on screen
-    public Transform GetRandomFish(){
 
-        return controller_Fish.GetRandomFish();
-    }
+    private Vector2 RandomTankSpawnSpot(){
 
-    private Vector2 NewRandomTankSpot(){
+        var spawnDem = TankCollision.instance.GetTankSpawnArea();
+        
         var idleTarget = new Vector3(
-                Random.Range(tank_xLower, tank_xUpper),
-                Random.Range(tank_yLower, tank_yUpper),
+                Random.Range(spawnDem.Item1, spawnDem.Item2),
+                Random.Range(spawnDem.Item3, spawnDem.Item4),
                 transform.position.z
             );
 

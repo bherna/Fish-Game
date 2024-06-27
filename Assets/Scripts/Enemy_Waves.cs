@@ -7,7 +7,7 @@ using UnityEngine;
 public struct EnemyWave
 {
     [SerializeField] public int secTillWaveSpawn;
-    [SerializeField] public List<GameObject> wave;
+    [SerializeField] public List<GameObject> wave; //list of enemies to spawn (can also be what ever else dev wants)
 }
 
 
@@ -18,12 +18,6 @@ public class Enemy_Waves : MonoBehaviour
     //main list -> wave list
     //wave list -> enemy prefab list
     [SerializeField] public EnemyWave[] wave_mat; 
-
-    //enemy prefabs
-    [SerializeField] GameObject enemy1;
-    [SerializeField] GameObject enemy2;
-    [SerializeField] GameObject enemy3;
-
     
 
     public List<GameObject> Index_GetWave(int waveIndex){

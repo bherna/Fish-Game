@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEditor;
@@ -15,8 +15,27 @@ public class Controller_Food : MonoBehaviour
 
     [SerializeField] List<GameObject> foodPellets_list;
 
-    //used for getting mouse position (what is our target z axis)
+    //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
+
+    
+
+
+    //static variable for fish coin value
+    public static Controller_Food instance {get; private set; }
+    void Awake (){
+
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }
+
+
 
     // Start is called before the first frame update
     void Start()

@@ -73,7 +73,7 @@ public class TankCollision : MonoBehaviour
 
 
 
-    public (float, float, float, float) GetTankSwimSpawnArea(){
+    public (float, float, float, float) GetTankSwimArea(){
             return (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
     } 
 

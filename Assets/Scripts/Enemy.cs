@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         if(currFishTarget == null){
             
             //if so get a new fish to follow
-            SetTargetFish(controller_Enemy.GetRandomFish());
+            SetTargetFish(Controller_Fish.instance.GetRandomFish());
 
             //if we can't find a fish, just return
             if(currFishTarget == null){

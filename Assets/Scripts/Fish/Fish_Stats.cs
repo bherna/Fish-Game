@@ -8,13 +8,10 @@ public class Fish_Stats : MonoBehaviour
     [SerializeField] int health = 0;
     [SerializeField] const int maxHealth = 100;
 
-    [SerializeField] Controller_Fish controller_Fish;
-
     private void Start() {
         
         health = maxHealth;
 
-        controller_Fish = gameObject.GetComponent<Fish_SM>().GetControllerFish();
     }
 
 
@@ -31,7 +28,7 @@ public class Fish_Stats : MonoBehaviour
 
     public void Died(){
 
-        controller_Fish.RemoveFish(gameObject);
+        Controller_Fish.instance.RemoveFish(gameObject);
 
         Destroy(gameObject);
     }

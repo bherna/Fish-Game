@@ -44,17 +44,7 @@ public class Fish_SM : MonoBehaviour
     private float nextCheckCounter = 0; //seconds untilNextCheck for food target
 
 
-    [SerializeField] Controller_Food controller_Food;
-    [SerializeField] Controller_Fish controller_Fish;
     private GameObject foodTarget;
-
-
-
-    //Getting new targets within tank    
-    private float tank_xLower = 0;
-    private float tank_xUpper = 0;
-    private float tank_yLower = 0;
-    private float tank_yUpper = 0;
 
 
     // Start is called before the first frame update
@@ -91,7 +81,7 @@ public class Fish_SM : MonoBehaviour
             sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
 
             //if food on screen aswell, change to hungry state
-            if(controller_Food.GetFoodLength() > 0){
+            if(Controller_Food.instance.GetFoodLength() > 0){
                 //are we hungry and food is on screen
                 ChangeState(Fish_States.hungry);
             }
@@ -152,7 +142,7 @@ public class Fish_SM : MonoBehaviour
 
         //is there food on screen to target
         //if not then we can't chase food, return to idle state
-        if(controller_Food.GetFoodLength() == 0){
+        if(Controller_Food.instance.GetFoodLength() == 0){
             ChangeState(Fish_States.idle);
             return;
         }
@@ -165,7 +155,7 @@ public class Fish_SM : MonoBehaviour
 
             //find food to followe 
             var closestDis = float.PositiveInfinity;
-            var allFoods = controller_Food.GetAllFood();
+            var allFoods = Controller_Food.instance.GetAllFood();
 
             //for all food objs in scene, get the closest
             var tempTarget = allFoods[0];
@@ -213,15 +203,6 @@ public class Fish_SM : MonoBehaviour
     }
 
 
-    public void SetTankSwimDimensions(float xL, float xU, float yL, float yU){
-
-        tank_xLower = xL;
-        tank_xUpper = xU;
-        tank_yLower = yL;
-        tank_yUpper = yU;
-    }
-
-
     private void NewRandomIdleTarget_Tank(){
         
         //update variables
@@ -229,10 +210,15 @@ public class Fish_SM : MonoBehaviour
 
         //new target
         var curr_pos = new Vector3 (transform.position.x, transform.position.y, zDepth);
+
+        //tanke dememsions
+        var swimDem = TankCollision.instance.GetTankSwimArea();
+
         while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
+            
             idleTarget = new Vector3(
-                Random.Range(tank_xLower, tank_xUpper),
-                Random.Range(tank_yLower, tank_yUpper),
+                Random.Range(swimDem.Item1, swimDem.Item2),
+                Random.Range(swimDem.Item3, swimDem.Item4),
                 zDepth
             );
         }
@@ -344,7 +330,7 @@ public class Fish_SM : MonoBehaviour
 
             //eat + destroy obj
             stomach += other.GetComponent<FoodValue>().GetFoodValue();
-            controller_Food.TrashThisFood(other.gameObject);
+            Controller_Food.instance.TrashThisFood(other.gameObject);
 
             //did fish get full (enough)
             if(stomach > hungryRange){
@@ -366,19 +352,10 @@ public class Fish_SM : MonoBehaviour
     
 
 
-    //functions used in other scripts
-    public void SetFoodController(Controller_Food food_c){
-        controller_Food = food_c;
-    }
-
-    public void SetFishController(Controller_Fish fish_c){
-        controller_Fish = fish_c;
-    }
-
     public void Died(){
 
         //removes self from the list of current fish known to the fish controller
-        controller_Fish.RemoveFish(gameObject);
+        Controller_Fish.instance.RemoveFish(gameObject);
 
         Destroy(gameObject);
     }
@@ -398,9 +375,5 @@ public class Fish_SM : MonoBehaviour
         
     }
 
-
-    public Controller_Fish GetControllerFish(){
-        return controller_Fish;
-    }
 
 }

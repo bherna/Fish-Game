@@ -14,23 +14,11 @@ public class Controller_Fish : MonoBehaviour
 
 
 
-    //references to in-game objects
-    [SerializeField] Controller_Food food_c;
-
-
 
     //static variable for fish coin value
     public static Controller_Fish instance {get; private set; }
 
     [SerializeField] List<string> fish_stages;
-
-
-    //tank demensions
-    private float swim_xLower;
-    private float swim_xUpper;
-    private float swim_yLower;
-    private float swim_yUpper;
-
 
 
 
@@ -49,9 +37,6 @@ public class Controller_Fish : MonoBehaviour
             "Teen",
             "Adult"
         };
-
-        //update fish tank demensions
-        (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper) = TankCollision.instance.GetTankSwimSpawnArea();
 
 
     }
@@ -91,9 +76,6 @@ public class Controller_Fish : MonoBehaviour
 
         //spawn at top of tank
         fish_list.Add(Instantiate(fishObj, new Vector3(0, 4, transform.position.z), Quaternion.identity));
-        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFoodController(food_c);
-        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetFishController(this);
-        fish_list[fish_list.Count-1].GetComponent<Fish_SM>().SetTankSwimDimensions(swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
 
         //return success
         return true;    
