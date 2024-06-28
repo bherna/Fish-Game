@@ -1,12 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class LargeMBass_SM : Enemy
 {
+
+    //Large Mouth Bass _ State Machine
+    //This enemy fish will be the first basic type
+    //Its purpose is to kill what ever fish it sets its gaze upon
+    //its trait is that it ramps up it's speed over time, untill the player clicks on it, restarting its speed
+
     private int damageAmount = 20; 
 
-
+    private float curr_velocity = 0;
+    private float acceleration = 0.2f;
 
 
     void Update()
@@ -39,6 +47,26 @@ public class LargeMBass_SM : Enemy
         
     }
 
+    private new void updatePos(){
+
+        //update curr velocity
+        if(curr_velocity +Time.deltaTime < velocity){ curr_velocity += Time.deltaTime * acceleration; }
+
+        //head towards target 
+        var newVector = (currFishTarget.position - transform.position).normalized;
+        rb.AddForce(newVector * curr_velocity, ForceMode2D.Force);
+
+        //sprite fliping
+        if(transform.position.x - currFishTarget.position.x < 0){
+            sprite.localScale = new Vector3(-1f, 1f, 1f);
+        }
+        else{
+            sprite.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
+
+
+
     private void OnTriggerStay2D(Collider2D other) {
         
         if(other.gameObject.CompareTag("Fish")){
@@ -49,6 +77,12 @@ public class LargeMBass_SM : Enemy
         }
     }
 
+    public new void OnPointerClick(PointerEventData eventData) {
 
+        base.OnPointerClick(eventData);
+
+        //reset current built up velocity of fish
+        curr_velocity = 0;
+    }
 
 }

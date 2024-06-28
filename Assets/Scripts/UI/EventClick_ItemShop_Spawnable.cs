@@ -11,8 +11,9 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
     [SerializeField] TextMeshProUGUI ui_displayCost;
 
     //what are we selling
-    [SerializeField] GameObject purchaseObj;
-
+    public enum FishType {Goldfish, LargeMBass};
+    [SerializeField] FishType fishType;
+    [SerializeField] GameObject fish;
 
 
     void Start()
@@ -31,8 +32,19 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
             //purchase obj
             Wallet.instance.SubMoney(obj_price);
 
-            //spawn or what ever here
-            Controller_Fish.instance.SpawnFish();
+            switch(fishType){
+                case FishType.Goldfish:
+                    //spawn or what ever here
+                    Controller_Fish.instance.SpawnFish();
+                    break;
+                case FishType.LargeMBass:
+                    Instantiate(fish, new Vector3(0, 4, transform.position.z), Quaternion.identity);
+                    break;
+                
+                default:
+                    Debug.Log("no fish selected for this item button.");
+                    break;
+            }
         }
         else{
             

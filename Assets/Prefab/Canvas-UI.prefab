@@ -3441,7 +3441,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   obj_price: 20
   ui_displayCost: {fileID: 3904206638543249348}
-  purchaseObj: {fileID: 0}
+  fishType: 0
+  fish: {fileID: 0}
 --- !u!1 &4970858884240201196
 GameObject:
   m_ObjectHideFlags: 0
@@ -3980,7 +3981,7 @@ GameObject:
   - component: {fileID: 3412520776660711765}
   - component: {fileID: 3988706015845190073}
   - component: {fileID: 8209863526161829592}
-  - component: {fileID: 2827897180504003749}
+  - component: {fileID: 1011404899008528162}
   m_Layer: 5
   m_Name: Button - Item2
   m_TagString: Untagged
@@ -4064,8 +4065,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2827897180504003749}
-        m_TargetAssemblyTypeName: EventClick_ItemShop_Upgrades, Assembly-CSharp
+      - m_Target: {fileID: 1011404899008528162}
+        m_TargetAssemblyTypeName: EventClick_ItemShop_Spawnable, Assembly-CSharp
         m_MethodName: OnPurchase
         m_Mode: 1
         m_Arguments:
@@ -4076,7 +4077,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &2827897180504003749
+--- !u!114 &1011404899008528162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4085,12 +4086,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 5535569093212000654}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0e0a57e7804c0e4880f4e4205733d12, type: 3}
+  m_Script: {fileID: 11500000, guid: e84670bd74fad6e47b49ead384e94084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj_price: 30
+  obj_price: 0
   ui_displayCost: {fileID: 8869384692594763210}
-  upgradeType: 0
+  fishType: 1
+  fish: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
 --- !u!1 &5621661991595375104
 GameObject:
   m_ObjectHideFlags: 0

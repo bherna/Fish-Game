@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
 
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] Transform sprite;
+    [SerializeField] protected Rigidbody2D rb;
+    [SerializeField] protected Transform sprite;
     
 
     //targets
@@ -15,19 +15,19 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     
 
     //stats
-    public int health;
-    private const int maxHealth = 20; 
-
-    [SerializeField] float velocity = 1f;
-    [SerializeField] float kbForce = 1f;
+    protected int curr_health;
+    [SerializeField] protected int maxHealth = 50; 
+    [SerializeField] protected float velocity = 0f;
+    [SerializeField] protected float kbForce = 0f;
     
 
+    
 
 
     // Start is called before the first frame update
     void Start()
     {
-        health = maxHealth;
+        curr_health = maxHealth;
     }
 
     
@@ -35,8 +35,8 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     protected void updatePos(){
 
         //head towards target 
-        var newVelocity = (currFishTarget.position - transform.position).normalized;
-        rb.AddForce(newVelocity * velocity, ForceMode2D.Force);
+        var newVector = (currFishTarget.position - transform.position).normalized;
+        rb.AddForce(newVector * velocity, ForceMode2D.Force);
 
         //sprite fliping
         if(transform.position.x - currFishTarget.position.x < 0){
@@ -62,14 +62,18 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         }
 
         //damage
-        health -= Controller_Main.instance.Get_GunDamage();
+        curr_health -= Controller_Main.instance.Get_GunDamage();
 
         //knockback
-        var kbVector = new Vector2(transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x, transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y).normalized;
+        var kbVector = new Vector2(
+                transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x,
+                transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y
+            ).normalized;
+
         rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
 
         //die
-        if(health <= 0){
+        if(curr_health <= 0){
             Died();
         }
         

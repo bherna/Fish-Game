@@ -189,7 +189,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.2695434, y: 1}
+  m_Size: {x: 1.69, y: 1.25}
   m_EdgeRadius: 0
 --- !u!114 &7659717776646066776
 MonoBehaviour:
@@ -205,6 +205,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 592658867979437195}
-  health: 0
-  velocity: 0.7
-  kbForce: 1
+  maxHealth: 50
+  velocity: 0.5
+  kbForce: 5
