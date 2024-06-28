@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public abstract class Enemy : MonoBehaviour, IPointerClickHandler
+public class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
 
@@ -11,11 +11,10 @@ public abstract class Enemy : MonoBehaviour, IPointerClickHandler
     
 
     //targets
-    private Transform currFishTarget;
+    protected Transform currFishTarget;
     
 
     //stats
-    public int damageValue {get; private set; } = 1;
     public int health;
     private const int maxHealth = 20; 
 
@@ -31,39 +30,9 @@ public abstract class Enemy : MonoBehaviour, IPointerClickHandler
         health = maxHealth;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
-        if(Controller_Main.instance.paused){
-            return;
-        }
+    
 
-        //if no fish currently pointing to
-        if(currFishTarget == null){
-            
-            //if so get a new fish to follow
-            SetTargetFish(Controller_Fish.instance.GetRandomFish());
-
-            //if we can't find a fish, just return
-            if(currFishTarget == null){
-
-                //wait a few seconds before checking again ?
-                return;
-                
-            }
-            
-        }
-
-        else{
-            //update the enemy position towards target fish
-            updatePos();
-        }
-        
-    }
-
-
-    private void updatePos(){
+    protected void updatePos(){
 
         //head towards target 
         var newVelocity = (currFishTarget.position - transform.position).normalized;
@@ -78,7 +47,7 @@ public abstract class Enemy : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public void SetTargetFish(Transform newFishTarget){
+    protected void SetTargetFish(Transform newFishTarget){
 
         currFishTarget = newFishTarget;
     }
@@ -109,7 +78,7 @@ public abstract class Enemy : MonoBehaviour, IPointerClickHandler
 
     //fish died
     //will be more than one way to die
-    private void Died(){
+    protected void Died(){
 
         //remove the enemy from list
         Controller_Enemy.instance.CloserToWaveEnded();

@@ -33,17 +33,7 @@ public class Fish_Stats : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        
-        if(other.gameObject.CompareTag("Enemy")){
-            
-            var component = other.gameObject.GetComponent<Enemy>();
-
-            TakeDamage(component.damageValue);
-
-
-        }
-    }
+    
 
 
 }

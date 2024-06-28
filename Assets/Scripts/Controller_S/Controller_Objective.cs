@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -14,10 +15,12 @@ public class Controller_Objective : MonoBehaviour
     [SerializeField] List<int> obj_price_list = new List<int>();
 
     //current objective index
-    [SerializeField] int obj_index = 0;
+    int obj_index = 0;
 
-    [SerializeField] int final_obj = 3;
+    //final objective index
+    int final_obj = 3;
 
+    //button gameobject 
     [SerializeField] GameObject buttonSprite;
 
     //display current obj cost on screen
@@ -25,12 +28,30 @@ public class Controller_Objective : MonoBehaviour
 
 
     private void Start() {
+
+        try{
+
+            //update the final objective index
+            final_obj = obj_sprite_list.Count;
+
+            //check if our sprite and price list are equal in lenght
+            if(final_obj != obj_price_list.Count){
+                Debug.Log("sprite list and price list is not the same.");
+            }
+
+        }catch(IndexOutOfRangeException e){
+
+            Debug.Log("Error: "+e);
+            Debug.Log("A list for our objectives is missing.");
+        }
         
         //update sprite
         buttonSprite.GetComponent<Image>().sprite = obj_sprite_list[obj_index];
 
         //display obj cost
         ui_displayCost.text = obj_price_list[obj_index].ToString();
+
+        
 
     }
 

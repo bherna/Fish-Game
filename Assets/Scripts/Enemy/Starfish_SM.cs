@@ -10,6 +10,9 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
     [SerializeField] float endSize = 3;
 
     [SerializeField] float rateOfGrowth = 1;
+
+    [SerializeField] int damageAmount = 20;
+
     private int health = 4;
 
     private float currSize = 0;
@@ -57,5 +60,15 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
         //die
         Destroy(gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D other) {
+        
+        if(other.gameObject.CompareTag("Fish")){
+            
+            other.gameObject.GetComponent<Fish_Stats>().TakeDamage(damageAmount);
+
+
+        }
     }
 }
