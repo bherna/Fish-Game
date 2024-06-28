@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 3809900087771002649}
   - component: {fileID: 7394080560007591877}
   - component: {fileID: 3532589112204402079}
+  - component: {fileID: 4898481799985411436}
   m_Layer: 10
   m_Name: Enemy_Starfish
   m_TagString: Enemy
@@ -190,3 +191,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2695434, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4898481799985411436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292263530791328344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b638847a933952143bb74aede9138bf4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 592658867979437195}
+  startSize: 1
+  endSize: 3
+  rateOfGrowth: 1
