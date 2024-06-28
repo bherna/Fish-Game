@@ -54,18 +54,7 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-    public Boolean SpawnFish(int fishPrice){
-
-        //is the fish affordable
-        if(!Wallet.instance.IsAffordable(fishPrice)){
-
-            Debug.Log("Not enough money to buy fish. ");
-            return false;
-        }
-        else{
-            //purchase fish to spawn
-            Wallet.instance.SubMoney(fishPrice);
-        }
+    public Boolean SpawnFish(){
 
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
@@ -111,5 +100,10 @@ public class Controller_Fish : MonoBehaviour
 
     public int GetFishCount(){
         return fish_list.Count;
+    }
+
+
+    public void Upgrade_fishMax(){
+        maxFish += 1;
     }
 }

@@ -10,6 +10,9 @@ public class Controller_Main : MonoBehaviour
     //start money for current level
     [SerializeField] int startMoney;
 
+    //gun stat
+    private int gunPower = 5;
+
     private IEnumerator coroutine;
 
     private int timeTillNextCheck = 5;
@@ -127,5 +130,15 @@ public class Controller_Main : MonoBehaviour
 
         //disable esc ui
         ui_esc.SetActive(false);
+    }
+
+
+
+    public void Upgrade_gunPower() {
+        gunPower += 5;
+    }
+
+    public int Get_GunDamage(){
+        return gunPower;
     }
 }

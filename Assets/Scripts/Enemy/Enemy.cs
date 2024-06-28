@@ -62,7 +62,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         }
 
         //damage
-        health -= 5;
+        health -= Controller_Main.instance.Get_GunDamage();
 
         //knockback
         var kbVector = new Vector2(transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x, transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y).normalized;

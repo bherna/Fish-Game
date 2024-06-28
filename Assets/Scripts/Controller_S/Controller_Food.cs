@@ -100,6 +100,13 @@ public class Controller_Food : MonoBehaviour
         return foodPellets_list.Count;
     }
 
+    public void Upgrade_foodMax(){
+        maxFood += 1;
+    }
+
+    public void Upgrade_FoodPower(){
+        //increment index of food list or something
+    }
 
     
 }
