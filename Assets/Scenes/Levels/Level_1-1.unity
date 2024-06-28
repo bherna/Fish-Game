@@ -246,20 +246,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[0].secTillWaveSpawn
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[1].secTillWaveSpawn
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[0].wave.Array.data[0]
       value: 
       objectReference: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
     - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: wave_mat.Array.data[0].wave.Array.data[1]
+      value: 
+      objectReference: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
+    - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: wave_mat.Array.data[0].wave.Array.data[2]
+      value: 
+      objectReference: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
+    - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: wave_mat.Array.data[1].wave.Array.data[0]
       value: 
-      objectReference: {fileID: 5292263530791328344, guid: 28f17bae6938f8741815e929952ea62e, type: 3}
+      objectReference: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
+    - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: wave_mat.Array.data[1].wave.Array.data[1]
+      value: 
+      objectReference: {fileID: 5292263530791328344, guid: 0914d4eaf7f777d4586440e43221dfb8, type: 3}
+    - target: {fileID: 3594053965177567738, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: wave_mat.Array.data[1].wave.Array.data[2]
+      value: 
+      objectReference: {fileID: 5292263530791328344, guid: 0914d4eaf7f777d4586440e43221dfb8, type: 3}
     - target: {fileID: 8627190064862608216, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: ui_text
       value: 

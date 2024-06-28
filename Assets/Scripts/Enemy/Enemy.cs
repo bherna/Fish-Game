@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPointerClickHandler
+public abstract class Enemy : MonoBehaviour, IPointerClickHandler
 {
 
 
@@ -111,7 +111,10 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     //will be more than one way to die
     private void Died(){
 
+        //remove the enemy from list
         Controller_Enemy.instance.CloserToWaveEnded();
+
+        //die
         Destroy(gameObject);
     }
 

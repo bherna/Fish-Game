@@ -95,9 +95,9 @@ GameObject:
   - component: {fileID: 3809900087771002649}
   - component: {fileID: 7394080560007591877}
   - component: {fileID: 3532589112204402079}
-  - component: {fileID: 3524755028111661717}
+  - component: {fileID: 7659717776646066776}
   m_Layer: 10
-  m_Name: Enemy_1
+  m_Name: Enemy_LargeMBass
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -112,7 +112,7 @@ Transform:
   m_GameObject: {fileID: 5292263530791328344}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12317473, y: -0.10594537, z: 203.33832}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -191,7 +191,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 2.2695434, y: 1}
   m_EdgeRadius: 0
---- !u!114 &3524755028111661717
+--- !u!114 &7659717776646066776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,12 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5292263530791328344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3f7f0cad68f4a9408b98064fe4cf570, type: 3}
+  m_Script: {fileID: 11500000, guid: 32e19f20f46231b4dbcc5d0aea26c86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller_Enemy: {fileID: 0}
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 592658867979437195}
   health: 0
-  velocity: 0.3
-  kbForce: 5
+  velocity: 0.7
+  kbForce: 1

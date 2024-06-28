@@ -155,7 +155,7 @@ public class Controller_Enemy : MonoBehaviour
 
     //everytime an enemy dies in tank, run this
     public void CloserToWaveEnded(){
-        Debug.Log("erqwrqr");
+
         //decrement 
         enemiesOnScreen -= 1;
 
