@@ -106,8 +106,6 @@ MonoBehaviour:
   stomach: 0
   burnRate: 5
   hungryRange: 50
-  controller_Food: {fileID: 0}
-  controller_Fish: {fileID: 0}
 --- !u!114 &2749740470348012892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  controller_Fish: {fileID: 0}
 --- !u!1001 &8230455290358099932
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -10,16 +10,14 @@ public class LargeMBass_SM : Enemy
     //Its purpose is to kill what ever fish it sets its gaze upon
     //its trait is that it ramps up it's speed over time, untill the player clicks on it, restarting its speed
 
+    //there speed is also reset on bite-ing fish
+
     private float curr_velocity = 0;
-    private float acceleration = 0.2f;
+    private float acceleration = 0.3f;
 
 
-    //bite-ing fish vars
-    private int attackPower = 20; 
-    private int attackSpeed = 1; //per second
-    private bool canAttack = true;
-
-
+    
+    [SerializeField] protected GameObject head;
 
     void Update()
     {
@@ -60,44 +58,31 @@ public class LargeMBass_SM : Enemy
         var newVector = (currFishTarget.position - transform.position).normalized;
         rb.AddForce(newVector * curr_velocity, ForceMode2D.Force);
 
-        //sprite fliping
+        //fliping
         if(transform.position.x - currFishTarget.position.x < 0){
             sprite.localScale = new Vector3(-1f, 1f, 1f);
+            head.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else{
             sprite.localScale = new Vector3(1f, 1f, 1f);
+            head.transform.localScale = new Vector3(1f, 1f, 1f);    
         }
     }
 
-
-
-    private void OnTriggerStay2D(Collider2D other) {
-        
-        if(canAttack && other.gameObject.CompareTag("Fish")){
-            
-            //bite
-            other.gameObject.GetComponent<Fish_Stats>().TakeDamage(attackPower);
-
-            //now wait for next bite
-            canAttack = false;
-            IEnumerator co = AttackCooldown();
-            StartCoroutine(co);
-
-        }
+    public void ResetVelocity(){
+        curr_velocity = 0;
     }
 
-    private IEnumerator AttackCooldown() {
-
-        yield return new WaitForSeconds(1/attackSpeed);
-        canAttack = true;
-    }
 
     public new void OnPointerClick(PointerEventData eventData) {
 
         base.OnPointerClick(eventData);
 
         //reset current built up velocity of fish
-        curr_velocity = 0;
+        ResetVelocity();
     }
+
+
+    
 
 }

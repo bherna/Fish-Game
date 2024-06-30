@@ -38,13 +38,15 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         var newVector = (currFishTarget.position - transform.position).normalized;
         rb.AddForce(newVector * velocity, ForceMode2D.Force);
 
-        //sprite fliping
+        //fliping
         if(transform.position.x - currFishTarget.position.x < 0){
             sprite.localScale = new Vector3(-1f, 1f, 1f);
+            
         }
         else{
             sprite.localScale = new Vector3(1f, 1f, 1f);
         }
+
     }
 
     protected void SetTargetFish(Transform newFishTarget){
