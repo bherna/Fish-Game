@@ -1,5 +1,4 @@
-
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,10 +10,15 @@ public class LargeMBass_SM : Enemy
     //Its purpose is to kill what ever fish it sets its gaze upon
     //its trait is that it ramps up it's speed over time, untill the player clicks on it, restarting its speed
 
-    private int damageAmount = 20; 
-
     private float curr_velocity = 0;
     private float acceleration = 0.2f;
+
+
+    //bite-ing fish vars
+    private int attackPower = 20; 
+    private int attackSpeed = 1; //per second
+    private bool canAttack = true;
+
 
 
     void Update()
@@ -69,12 +73,23 @@ public class LargeMBass_SM : Enemy
 
     private void OnTriggerStay2D(Collider2D other) {
         
-        if(other.gameObject.CompareTag("Fish")){
+        if(canAttack && other.gameObject.CompareTag("Fish")){
             
-            other.gameObject.GetComponent<Fish_Stats>().TakeDamage(damageAmount);
+            //bite
+            other.gameObject.GetComponent<Fish_Stats>().TakeDamage(attackPower);
 
+            //now wait for next bite
+            canAttack = false;
+            IEnumerator co = AttackCooldown();
+            StartCoroutine(co);
 
         }
+    }
+
+    private IEnumerator AttackCooldown() {
+
+        yield return new WaitForSeconds(1/attackSpeed);
+        canAttack = true;
     }
 
     public new void OnPointerClick(PointerEventData eventData) {
