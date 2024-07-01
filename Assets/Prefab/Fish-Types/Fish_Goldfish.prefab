@@ -99,8 +99,8 @@ MonoBehaviour:
   fishObj_transform: {fileID: 4689040288185090486}
   idle_velocity: 1
   hungry_velocity: 2.4
-  h_turningSpeed: 3
-  v_turningSpeed: 20
+  h_turningSpeed: 1.5
+  v_turningSpeed: 1
   targetRadius: 0.5
   newTargetMinLengthRadius: 6
   stomach: 0

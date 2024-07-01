@@ -28,8 +28,9 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float h_turningSpeed = 1;
     [SerializeField] float v_turningSpeed = 1;
     private float startTime = 0;
-    private float z_angle = 0;
-    private float zDepth = 1;
+    private float z_angle = 0; //previous z angle we had (should start at 0 angle)
+    float z_angle_pivotTo = 0; //current z we are pivoting to
+    private float zDepth = 1; //the z transform our fish swims at, to reference at flippings
 
 
     private Vector3 idleTarget;
@@ -228,7 +229,8 @@ public class Fish_SM : MonoBehaviour
     //whenever a new target is set
     //run this
     private void NewTargetVariables(){
-        startTime = Time.time;
+        z_angle = z_angle_pivotTo; //set our current z angle as our new old z angle we start at
+        startTime = Time.time;      //reset our turning time for lerp
     }
 
 
@@ -248,7 +250,7 @@ public class Fish_SM : MonoBehaviour
         float z_curr_angle = (Time.time - startTime) / v_turningSpeed;
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
         float y_angle = 0;
-        float z_angle_pivotTo = 0;
+        
 
         //fish local facing position (towards target) 
         //sprite (left or right)
@@ -288,16 +290,16 @@ public class Fish_SM : MonoBehaviour
         }
         
         //vertical rotation 
+        //z angle is the previous angle we were using, its updated everytime we get a new target
         var maxAngle = 30;
         z_angle_pivotTo = Mathf.Rad2Deg * Mathf.Atan2(transform.position.y - targetTypePosition.y, transform.position.x - targetTypePosition.x);//get the angle to pivot to
         z_angle_pivotTo = ClampAngle(z_angle_pivotTo, maxAngle); //clamp that to be a max of -30 to +30 degrees 
         z_angle_pivotTo = Mathf.Lerp(z_angle, z_angle_pivotTo, z_curr_angle);//smooth the angle (current z -> new pivot) get a value inbetween
-        z_angle =  z_angle_pivotTo; //set that as the new current z
-        z_angle = ClampAngle(z_angle, maxAngle); //clamp that value again to -30 __ +30 max degrees
+        z_angle_pivotTo = ClampAngle(z_angle_pivotTo, maxAngle); //clamp that value again to -30 __ +30 max degrees
 
 
         //apply rotations
-        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle); 
+        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, z_angle_pivotTo); 
     }
     
 
