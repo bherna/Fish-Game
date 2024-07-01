@@ -1,4 +1,5 @@
 
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -16,8 +17,8 @@ public class Fish_SM : MonoBehaviour
 
 
     [SerializeField] Fish_States fishCurrentState;
-    [SerializeField] Transform sprite_transparency; //reference to fish sprite
-    [SerializeField] Transform fishObj_transform;   //reference to fish object
+    [SerializeField] List<Transform> sprite_transparency; //fish sprites
+    [SerializeField] Transform fishObj_transform;   //whole fish object 
 
 
     //used in the update position function
@@ -78,8 +79,7 @@ public class Fish_SM : MonoBehaviour
         else if(stomach < hungryRange && fishCurrentState != Fish_States.hungry){
 
             //change sprite transparancy
-            //sprite.gameObject.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
-            sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));
+            ChangeTransparency(false);
 
             //if food on screen aswell, change to hungry state
             if(Controller_Food.instance.GetFoodLength() > 0){
@@ -104,6 +104,26 @@ public class Fish_SM : MonoBehaviour
                 Debug.Log("No current state for fish");
                 break;
         }
+    }
+
+    private void ChangeTransparency(bool setFullAlpha){
+
+        //we have to check if its a skinned messrender, or a simple meshrender
+        foreach(var sprite in sprite_transparency){
+
+            try{
+                //first we try simple messrender
+                if(setFullAlpha){sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
+                else{sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
+            }
+            catch(MissingComponentException e){
+                //else we use skinned mesh
+                if(setFullAlpha){sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
+                else{sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
+            }
+        }
+
+        
     }
 
 
@@ -338,7 +358,7 @@ public class Fish_SM : MonoBehaviour
             if(stomach > hungryRange){
 
                 //return color to fish
-                sprite_transparency.gameObject.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));
+                ChangeTransparency(true);
 
                 //set our state to idle again
                 ChangeState(Fish_States.idle);
