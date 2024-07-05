@@ -15,9 +15,12 @@ public class LargeMBass_SM : Enemy
     private float curr_velocity = 0;
     private float acceleration = 0.3f;
 
+    private float sprite_size = 0.7f;
+
+
 
     
-    [SerializeField] protected GameObject head;
+    [SerializeField] protected GameObject mouth_obj;
 
     void Update()
     {
@@ -60,12 +63,12 @@ public class LargeMBass_SM : Enemy
 
         //fliping
         if(transform.position.x - currFishTarget.position.x < 0){
-            sprite.localScale = new Vector3(-1f, 1f, 1f);
-            head.transform.localScale = new Vector3(-1f, 1f, 1f);
+            sprite.localScale = new Vector3(-sprite_size, sprite_size, sprite_size);
+            mouth_obj.transform.localScale = new Vector3(-1f, 1f, 1f);
         }
         else{
-            sprite.localScale = new Vector3(1f, 1f, 1f);
-            head.transform.localScale = new Vector3(1f, 1f, 1f);    
+            sprite.localScale = new Vector3(sprite_size, sprite_size, sprite_size);
+            mouth_obj.transform.localScale = new Vector3(1f, 1f, 1f);    
         }
     }
 
