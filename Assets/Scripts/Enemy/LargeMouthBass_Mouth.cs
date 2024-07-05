@@ -11,6 +11,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
     private bool canAttack = true;
 
     [SerializeField] LargeMBass_SM bodyScript;
+    [SerializeField] ParticleSystem ps_munch;
 
 
     private void OnTriggerStay2D(Collider2D other) {
@@ -19,6 +20,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
             
             //bite
             other.gameObject.GetComponent<Fish_Stats>().TakeDamage(attackPower);
+            ps_munch.Play();
 
             //reset vel
             bodyScript.ResetVelocity();
