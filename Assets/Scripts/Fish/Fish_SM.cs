@@ -116,7 +116,7 @@ public class Fish_SM : MonoBehaviour
                 if(setFullAlpha){sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
                 else{sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
             }
-            catch(MissingComponentException e){
+            catch(MissingComponentException ){
                 //else we use skinned mesh
                 if(setFullAlpha){sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
                 else{sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}

@@ -1,28 +1,46 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
 
+
+
     [SerializeField] List<GameObject> Panels;
     [SerializeField] int rectTransform_width = 1920;
     [SerializeField] EventOnHover_PlayButton playButton;
+    [SerializeField] UI_Levels ui_Levels;
+
 
     private int curr_screen = 0;
 
+
+
+
     private void Start() {
 
+        //set ui tabs positions
         for (int i = 0; i <= Panels.Count-1; i++){
             Panels[i].transform.localPosition = new Vector3(rectTransform_width*i,0,0); //set their pos
             Panels[i].SetActive(true);
         }
-        
-
     }
+
+    
+
+
+    //
     public void GoToScene(string sceneName){
 
-        SceneManager.LoadScene(sceneName);
+        //if the level is acces able
+        if(ui_Levels.levels_access[0,0]){
+            SceneManager.LoadScene(sceneName);
+        }
+
+        
     }
 
     public void QuitApp(){
