@@ -8,13 +8,13 @@ public static class SaveLoad
     static string path = Application.persistentDataPath + "/Menu.fun";
     
     //call from anywhere
-    public static void SaveLevels(UI_Levels ui_levels){
+    public static void SaveLevels(){
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
 
 
-        UI_Levels_Data data = new UI_Levels_Data(ui_levels);
+        UI_Levels_Data data = new UI_Levels_Data();
 
         formatter.Serialize(stream, data);
         stream.Close();

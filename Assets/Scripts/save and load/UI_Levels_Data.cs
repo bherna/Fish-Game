@@ -10,9 +10,9 @@ public class UI_Levels_Data
     public bool[,] levels;
 
     //constuctor
-    public UI_Levels_Data(UI_Levels ui_Levels)
+    public UI_Levels_Data()
     {
-        levels = ui_Levels.levels_access;
+        levels = LevelsAccess.levels_access;
     }
 
     

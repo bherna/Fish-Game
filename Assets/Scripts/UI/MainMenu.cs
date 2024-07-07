@@ -35,12 +35,7 @@ public class MainMenu : MonoBehaviour
     //
     public void GoToScene(string sceneName){
 
-        //if the level is acces able
-        if(ui_Levels.levels_access[0,0]){
-            SceneManager.LoadScene(sceneName);
-        }
-
-        
+        SceneManager.LoadScene(sceneName);
     }
 
     public void QuitApp(){
