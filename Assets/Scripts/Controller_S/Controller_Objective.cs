@@ -14,6 +14,8 @@ public class Controller_Objective : MonoBehaviour
     //list of objecive prices, in order of purchase
     [SerializeField] List<int> obj_price_list = new List<int>();
 
+    [SerializeField] int world, level = 0;
+
     //current objective index
     int obj_index = 0;
 
@@ -51,6 +53,10 @@ public class Controller_Objective : MonoBehaviour
         //display obj cost
         ui_displayCost.text = obj_price_list[obj_index].ToString();
 
+        //just incase we start the game from this scene,
+        //run levels access to be able to update main menu ui levels
+        LevelsAccess.LoadLevels();
+
         
 
     }
@@ -70,6 +76,11 @@ public class Controller_Objective : MonoBehaviour
 
             //is the final objective bought
             if(obj_index >= final_obj){
+
+                //level complete
+                //new level should be unlocked
+                LevelsAccess.SetLevelAccess(world, level, true);
+                Debug.Log("level "+world.ToString()+"-"+level.ToString() +": "+LevelsAccess.GetLevelAccess(world, level));
                 SceneManager.LoadScene("MainMenu");
             }
             else{

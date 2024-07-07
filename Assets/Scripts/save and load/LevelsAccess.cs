@@ -17,9 +17,15 @@ public static class LevelsAccess
     public static void LoadLevels(){
         try{
 
-            UI_Levels_Data data = SaveLoad.LoadLevels();
+            //make sure we only run this once per game start up
+            if(levels_access == null){
 
-            levels_access = data.levels;
+                UI_Levels_Data data = SaveLoad.LoadLevels();
+
+                levels_access = data.levels;
+            }
+
+            
         }
         catch(NullReferenceException ){
 
@@ -59,4 +65,7 @@ public static class LevelsAccess
     public static void SetLevelAccess(int world, int level, bool accessType){
         levels_access[world, level] = accessType;
     }
+
+
+
 }
