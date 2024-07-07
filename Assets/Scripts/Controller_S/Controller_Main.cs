@@ -59,7 +59,6 @@ public class Controller_Main : MonoBehaviour
         //escape - open menu
         if(Input.GetKeyUp(KeyCode.Escape) && !escMenuOpen){
             
-            Debug.Log("afdad");
             //pause game
             PauseLevel();
             escMenuOpen = true;
