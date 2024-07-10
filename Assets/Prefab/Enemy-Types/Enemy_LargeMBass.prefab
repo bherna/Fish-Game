@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3809900087771002649}
   - component: {fileID: 7394080560007591877}
-  - component: {fileID: 3532589112204402079}
+  - component: {fileID: 6331823163942623706}
   - component: {fileID: 7659717776646066776}
   m_Layer: 10
   m_Name: Enemy_LargeMBass
@@ -146,8 +146,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &3532589112204402079
-BoxCollider2D:
+--- !u!58 &6331823163942623706
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -178,19 +178,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.18, y: 0.12}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -0.21, y: 0.19}
   serializedVersion: 2
-  m_Size: {x: 2.4, y: 1.25}
-  m_EdgeRadius: 0
+  m_Radius: 1.27
 --- !u!114 &7659717776646066776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 2308382883602295263}
-  maxHealth: 50
+  startHealth: 20
   velocity: 0.5
   kbForce: 5
   mouth_obj: {fileID: 4291766956729282969}

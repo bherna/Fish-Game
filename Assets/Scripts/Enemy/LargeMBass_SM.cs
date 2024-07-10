@@ -17,7 +17,7 @@ public class LargeMBass_SM : Enemy
 
     private float sprite_size = 0.7f;
 
-
+    private float bounce_vel = 0.4f;
 
     
     [SerializeField] protected GameObject mouth_obj;
@@ -79,6 +79,7 @@ public class LargeMBass_SM : Enemy
 
     public new void OnPointerClick(PointerEventData eventData) {
 
+        //run original function
         base.OnPointerClick(eventData);
 
         //reset current built up velocity of fish
@@ -86,6 +87,15 @@ public class LargeMBass_SM : Enemy
     }
 
 
-    
+    private void OnTriggerEnter2D(Collider2D other) {
+
+        //if we hit the tank edge
+        if(other.gameObject.CompareTag("Boundry")){
+
+            //set our velocity towards middle of tank
+            Vector2 newVel = new Vector2(-transform.position.x * bounce_vel, -transform.position.y *bounce_vel);
+            rb.velocity = newVel;
+        }
+    }
 
 }

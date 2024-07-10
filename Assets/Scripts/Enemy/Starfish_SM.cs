@@ -42,7 +42,7 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
         }
 
         //damage
-        health -= Controller_Main.instance.Get_GunDamage();
+        health -= Controller_Player.instance.Get_GunDamage();
 
         //die
         if(health <= 0){

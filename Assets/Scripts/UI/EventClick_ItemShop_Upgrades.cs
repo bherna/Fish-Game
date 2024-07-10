@@ -54,7 +54,7 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
                 Controller_Fish.instance.Upgrade_fishMax();
                 break;
             case Upgrades.GunPower:
-                Controller_Main.instance.Upgrade_gunPower();
+                Controller_Player.instance.Upgrade_gunPower();
                 break;
                 
             default:

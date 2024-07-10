@@ -11,6 +11,15 @@ public class Controller_Player : MonoBehaviour
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
 
+
+    //player stats
+    //gun stat
+    private int gunPower = 1;
+
+
+
+
+
     public static Controller_Player instance {get; private set; }
 
     private void Awake() {
@@ -34,5 +43,16 @@ public class Controller_Player : MonoBehaviour
             var mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
             Instantiate(Gun_particle, mousePos, Quaternion.identity);
         }
+    }
+
+
+
+
+    public void Upgrade_gunPower() {
+        gunPower += 5;
+    }
+
+    public int Get_GunDamage(){
+        return gunPower;
     }
 }

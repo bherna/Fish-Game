@@ -8,6 +8,7 @@ TagManager:
   - Money
   - Fish
   - Enemy
+  - Boundry
   layers:
   - Default
   - TransparentFX

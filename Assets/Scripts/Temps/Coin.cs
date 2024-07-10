@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class EventClick_Coin : MonoBehaviour, IPointerDownHandler
+public class Coin : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] int coinValue = 0;
     [SerializeField] float timeTillTrashed = 1.5f;

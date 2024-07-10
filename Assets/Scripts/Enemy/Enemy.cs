@@ -15,8 +15,9 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     
 
     //stats
+    //health should be in # of clicks
     protected int curr_health;
-    [SerializeField] protected int maxHealth = 50; 
+    [SerializeField] protected int startHealth = 10; 
     [SerializeField] protected float velocity = 0f;
     [SerializeField] protected float kbForce = 0f;
     
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        curr_health = maxHealth;
+        curr_health = startHealth;
     }
 
     
@@ -64,7 +65,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         }
 
         //damage
-        curr_health -= Controller_Main.instance.Get_GunDamage();
+        curr_health -= Controller_Player.instance.Get_GunDamage();
 
         //knockback
         var kbVector = new Vector2(
