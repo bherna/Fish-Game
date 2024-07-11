@@ -5,8 +5,8 @@ using UnityEngine;
 public class Fish_Stats : MonoBehaviour
 {
     
-    [SerializeField] int health = 0;
-    [SerializeField] const int maxHealth = 100;
+    private int health = 0;
+    private const int maxHealth = 100;
 
     private void Start() {
         

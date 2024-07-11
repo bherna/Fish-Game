@@ -103,15 +103,7 @@ MonoBehaviour:
   - {fileID: 7710794256098520917}
   - {fileID: 1126894671142511873}
   fishObj_transform: {fileID: 4689040288185090486}
-  idle_velocity: 1
   hungry_velocity: 2.4
-  h_turningSpeed: 1.5
-  v_turningSpeed: 1
-  targetRadius: 0.5
-  newTargetMinLengthRadius: 6
-  stomach: 0
-  burnRate: 5
-  hungryRange: 50
 --- !u!114 &2749740470348012892
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea25ba5002dda645b959391a6b3a422, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  secTillMoney: 2
+  secTillMoney: 5
   fish_Age: {fileID: -5030118377382371271}
   coin_silver: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
   coin_gold: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
@@ -141,7 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   amount_food_ate: 0
-  food_until_next_stage: 3
+  food_until_next_stage: 4
   sprite_render: {fileID: 4689040288185090486}
   fish_size_current: 0.6
   fish_size_scale: 0.1

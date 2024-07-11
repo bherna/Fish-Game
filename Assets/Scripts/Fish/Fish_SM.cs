@@ -22,12 +22,12 @@ public class Fish_SM : MonoBehaviour
 
 
     //used in the update position function
-    [SerializeField] float idle_velocity = 1;
+    private float idle_velocity = 1;
     [SerializeField] float hungry_velocity = 2;
     private float current_Vel = 0; 
 
-    [SerializeField] float h_turningSpeed = 1;
-    [SerializeField] float v_turningSpeed = 1;
+    private float h_turningSpeed = 1.5f;
+    private float v_turningSpeed = 1;
     private float startTime = 0;
     private float z_angle = 0; //previous z angle we had (should start at 0 angle)
     float z_angle_pivotTo = 0; //current z we are pivoting to
@@ -35,14 +35,14 @@ public class Fish_SM : MonoBehaviour
 
 
     private Vector3 idleTarget;
-    [SerializeField] float targetRadius = 3f;
-    [SerializeField] float newTargetMinLengthRadius = 0; //the minimum length away from our fish current position
+    private float targetRadius = 0.5f;
+    private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
 
 
-    [SerializeField] float stomach;
-    [SerializeField] const int startStomach = 70;
-    [SerializeField] float burnRate = 30;
-    [SerializeField] int hungryRange = 50;
+    private float stomach;
+    private const int startStomach = 15;//total seconds before fish dies of hunger
+    private float burnRate = 1;
+    private int hungryRange = startStomach/2;
     private float nextCheckCounter = 0; //seconds untilNextCheck for food target
 
 
@@ -351,7 +351,7 @@ public class Fish_SM : MonoBehaviour
         {
 
             //eat + destroy obj
-            stomach += other.GetComponent<FoodValue>().GetFoodValue();
+            stomach = other.GetComponent<FoodValue>().GetFoodValue();
             Controller_Food.instance.TrashThisFood(other.gameObject);
 
             //did fish get full (enough)
