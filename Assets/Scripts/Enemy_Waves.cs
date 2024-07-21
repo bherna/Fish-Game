@@ -19,7 +19,9 @@ public class Enemy_Waves : MonoBehaviour
     //wave list -> enemy prefab list
     [SerializeField] public EnemyWave[] wave_mat; 
     
-
+    public int GetLength(){
+        return wave_mat.Length;
+    }
     public List<GameObject> Index_GetWave(int waveIndex){
         return wave_mat[waveIndex].wave;
     }

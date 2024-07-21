@@ -1,35 +1,22 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
+using System.Collections;
 
 public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 {
 
     [SerializeField] Transform sprite;
-    [SerializeField] float startSize = 1;
+    private int damageAmount = 20;
+    private float attackSpeed = 0.3f; //per second
+    private bool canAttack = true;
 
-    [SerializeField] float endSize = 3;
+    private int health = 8; // in terms of clicks
 
-    [SerializeField] float rateOfGrowth = 1;
-
-    [SerializeField] int damageAmount = 20;
-
-    private int health = 4;
-
-    private float currSize = 0;
-
-    private void Start() {
-        currSize = startSize;
-    }
 
     // Update is called once per frame
     public void Update()
     {
-        if(currSize < endSize){
 
-            currSize += Time.deltaTime * rateOfGrowth;
-
-            sprite.localScale = new Vector3(currSize, currSize, 1);
-        }
     }
 
 
@@ -64,11 +51,21 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
     private void OnTriggerStay2D(Collider2D other) {
         
-        if(other.gameObject.CompareTag("Fish")){
+        if(canAttack && other.gameObject.CompareTag("Fish")){
             
             other.gameObject.GetComponent<Fish_Stats>().TakeDamage(damageAmount);
 
-
+            //now wait for next bite
+            canAttack = false;
+            IEnumerator co = AttackCooldown();
+            StartCoroutine(co);
         }
+    }
+
+
+    private IEnumerator AttackCooldown() {
+
+        yield return new WaitForSeconds(1/attackSpeed);
+        canAttack = true;
     }
 }

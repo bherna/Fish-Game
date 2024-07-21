@@ -16,20 +16,10 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     //stats
     //health should be in # of clicks
-    protected int curr_health;
-    [SerializeField] protected int startHealth = 10; 
+    [SerializeField] protected int curr_health = 10; 
     [SerializeField] protected float velocity = 0f;
     [SerializeField] protected float kbForce = 0f;
     
-
-    
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        curr_health = startHealth;
-    }
 
     
 

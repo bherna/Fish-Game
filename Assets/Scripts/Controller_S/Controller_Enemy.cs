@@ -31,6 +31,9 @@ public class Controller_Enemy : MonoBehaviour
     //current amount of enemies on screen
     private int enemiesOnScreen = 0;
 
+    //should we loop the enemy waves
+    [SerializeField] bool loop = false;
+
 
     //static variable for fish coin value
     public static Controller_Enemy instance {get; private set; }
@@ -113,28 +116,42 @@ public class Controller_Enemy : MonoBehaviour
         enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
+
+        //get next wave set up
+        NextWaveSetup();
+        
+        
+    }
+
+    //set up for the next wave, if we have a next wave we set our variables
+    //else if we should restart from begining
+    //else no more waves
+    private void NextWaveSetup(){
+
         //set current second to 0
         curr_sec = 0;
 
         //update wave index to next wave
         currWaveIndex += 1;
 
-        //are we now done with spawning waves?
-        try{
-            //try checking if next wave exists
-            enemy_Waves.Index_GetWave(currWaveIndex);
-            //if yes then...
+        //is there a next wave we can spawn?
+        if (currWaveIndex < enemy_Waves.GetLength()){
             //set our new seconds till spawn next wave
             secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
         }
-        catch(IndexOutOfRangeException ex){
-            //else
+        //if not, should we restart?
+        else if(loop) {
+            //go to index 0 and get timer length again
+            currWaveIndex = 0;
+            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+
+        }
+        //else no more waves
+        else{
             //stop spawning
             keepSpawning = false;
-            Debug.Log("End of enemy waves\n" + ex.Message);
+            Debug.Log("End of enemy waves\n");
         }
-        
-        
     }
 
 

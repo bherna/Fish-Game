@@ -26,6 +26,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
     //when button pushed to purchase
     public void OnPurchase(){
 
+
         bool buy = false;
 
         //is object affordable
@@ -34,8 +35,10 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
             switch(fishType){
                 case FishType.Goldfish:
                     //spawn or what ever here
-                    Controller_Fish.instance.SpawnFish();
-                    buy = true;
+                    if(Controller_Fish.instance.SpawnFish()){
+                        buy = true;
+                    }
+                    
                     break;
 
                 case FishType.LargeMBass:
