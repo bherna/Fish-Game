@@ -98,7 +98,7 @@ public class Controller_Enemy : MonoBehaviour
     private IEnumerator SpawnWave(float waitTIme){
 
         //annouce (they are comming)
-        ui_text.text = "Enemies are comming!";
+        ui_text.text = "Enemies are coming!";
         annoucement_ui.SetActive(true);
         
         //wait
