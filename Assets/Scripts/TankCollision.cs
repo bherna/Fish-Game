@@ -14,6 +14,9 @@ public class TankCollision : MonoBehaviour
     //reference to spawn collision box
     [SerializeField] BoxCollider2D spawnRange;
 
+    //reference to boundry tag collision box
+    [SerializeField] BoxCollider2D boundry;
+
     //spawn range
     float spawn_xLower;
     float spawn_xUpper;
@@ -82,5 +85,7 @@ public class TankCollision : MonoBehaviour
     } 
     
 
-    
+    public (float, float) GetBoundryArea(){
+        return (boundry.size.x ,boundry.size.y);
+    }
 }

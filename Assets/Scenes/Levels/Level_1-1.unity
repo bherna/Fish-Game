@@ -845,18 +845,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1850383214576147638, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2007261109647454107, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2369501395656293645, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6257003776929468886, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
       propertyPath: m_Name
       value: Tank

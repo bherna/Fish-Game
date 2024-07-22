@@ -87,7 +87,7 @@ public class LargeMBass_SM : Enemy
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other) {
 
         //if we hit the tank edge
         if(other.gameObject.CompareTag("Boundry")){
