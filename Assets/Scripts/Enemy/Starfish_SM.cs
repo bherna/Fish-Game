@@ -18,6 +18,7 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] Transform sprite;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] ParticleSystem bite_particle;
 
     private Transform target_position; //reference to target fish, we just care for position
     private int damageAmount = 35;  //out of 100 health from fish, fish dies in 3 hits
@@ -30,11 +31,12 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
     private bool spinning = false; // do we have enough wind up built up to attack target fish
     private float vel_threshold = 4; //velocity threshold needed for starfish to burst "_units per s"
+    private float phy_LinearDrag = 1.2f;
 
 
     private float burst_vel = 40;    //burst velocity starfish moves at towards target
     private List<GameObject> fishes_attacked;
-    private float bounce_vel = 0.4f;
+    private float bounce_vel = 0.2f;
     private (float, float, float, float) boundry_d;
 
 
@@ -132,6 +134,9 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
             //is this a new fish our starfish 'collided' with
             if(! Is_In_List(other.gameObject)){
+
+                //animation
+                Instantiate(bite_particle, transform.position, Quaternion.identity);
                 //attack this fish
                 other.gameObject.GetComponent<Fish_Stats>().TakeDamage(damageAmount);
                 //and add to list
@@ -182,7 +187,7 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
                 fishes_attacked = new List<GameObject>();
 
                 //add drag aswell so the starfish slows down
-                rb.drag = 0.5f;
+                rb.drag = phy_LinearDrag;
 
                 //now, we are not spinnig move
                 spinning = false;
