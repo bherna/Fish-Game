@@ -237,30 +237,27 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
 
 
+    //-----------------------------MOUSE DRAGGING------------------------------------------------------------
 
 
     public void OnBeginDrag(PointerEventData data){
-        Debug.Log("grab");
         //change to grabbed state
         ChangeState(Fish_States.grabbed);
         //reset verticle pos
         fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
     }
     public void OnDrag(PointerEventData data){
-        Debug.Log("fadsdasfdsfdfsa");
         //now just follow the mouse position
         transform.position = Controller_Player.instance.mousePos;
 
     }
     public void OnEndDrag(PointerEventData data){
-        Debug.Log("rell");
         //return to idle state
         ChangeState(Fish_States.idle);
     }
 
-    
 
-
+    //-----------------------------------------------------------------------------------------
 
 
 
@@ -391,6 +388,8 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void OnTriggerStay2D(Collider2D other){
 
+        //              FOOD
+        //if fish is hungry and we collided with food
         if(Fish_States.hungry == fishCurrentState && other.gameObject.CompareTag("Food"))
         {
 
@@ -409,10 +408,24 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
                 gameObject.GetComponent<Fish_Age>().Ate();
             }
-            
-
-            
         }
+
+
+
+        //          DRAG - COMBINE
+        //if the fish is being dragged, and we collide with another fish
+        if(Fish_States.grabbed == fishCurrentState && other.gameObject.CompareTag("Fish")){
+
+            //then combine the two
+            //reset variables (health, hunger, ..)?
+            //increase age by one
+            gameObject.GetComponent<Fish_Age>().Fish_Birthday();
+            
+            //also kill the other fish
+            other.gameObject.GetComponent<Fish_SM>().Died();
+
+        }
+
     }
 
     

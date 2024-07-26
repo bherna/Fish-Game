@@ -37,12 +37,12 @@ public class Fish_Age : MonoBehaviour
             amount_food_ate += 1;
 
             if(amount_food_ate >= food_until_next_stage){
-                UpdateFishStage();
+                Fish_Birthday();
             }
         }
     }
 
-    private void UpdateFishStage(){
+    public void Fish_Birthday(){
 
         //if current age is not final stage
         if(current_age_stage < Controller_Fish.instance.GetFishStages().Count-1){
