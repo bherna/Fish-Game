@@ -35,7 +35,7 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
     private float burst_vel = 40;    //burst velocity starfish moves at towards target
     private List<GameObject> fishes_attacked;
     private float bounce_vel = 0.4f;
-    private (float, float) boundry_d;
+    private (float, float, float, float) boundry_d;
 
 
     private void Start() {
@@ -84,15 +84,7 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
         }
 
 
-        //**not attached to previous if, as an else-if, since we want to return on no target
-        if(spinning){
-
-            //while spinnig our movement velocity will drop down to zero, once we touch a tank edge
-
-
-            //once we are done doing spin move, reset fish attacked list
-
-        }
+    //
 
     }
 
@@ -105,6 +97,9 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
         if(Controller_Main.instance.paused){
             return;
         }
+
+        //create gun particle
+        Controller_Player.instance.Run_GunParticle();
 
         //damage
         health -= Controller_Player.instance.Get_GunDamage();
@@ -149,11 +144,9 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
     }
 
 
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other) {
 
         //it doesnot matter if the star fish is currently in spin move or not, just bouce ;
-
-        Debug.Log("boundry hit");
 
         //if we hit the tank edge
         if(other.gameObject.CompareTag("Boundry")){
@@ -162,13 +155,13 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
             var x = rb.velocity.x;
             var y = rb.velocity.y;
 
-            if( boundry_d.Item1/2 + rb.velocity.x > boundry_d.Item1 - sprite.localScale.x || 
-                boundry_d.Item1/2 + rb.velocity.x < sprite.localScale.x)
+            if( transform.position.x + rb.velocity.x < boundry_d.Item1 + sprite.localScale.x ||
+                transform.position.x + rb.velocity.x > boundry_d.Item2 - sprite.localScale.x)
                 {
                     x = -x;
                 }
-            if( boundry_d.Item2 - 2 + rb.velocity.y > boundry_d.Item2 - sprite.localScale.y ||
-                boundry_d.Item2 - 2 + rb.velocity.y < sprite.localScale.y)
+            if( transform.position.y + rb.velocity.y < boundry_d.Item3 + sprite.localScale.y*2 ||
+                transform.position.y + rb.velocity.y > boundry_d.Item4 - sprite.localScale.y*2  )
                 {
                     y = -y;
                 } 
@@ -177,19 +170,25 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
             Vector2 newVel = new Vector2(x * bounce_vel, y *bounce_vel);
             rb.velocity = newVel;
 
-            //reset spin build variables
-            curr_r_vel = 0;
-            curr_sprite_r = 0;
-            sprite.localRotation = Quaternion.Euler(0,0,0);
 
-            //reset fish list, so we can hurt fish again :(
-            fishes_attacked = new List<GameObject>();
+            //only reset vars if we did spin move
+            if(spinning){
+                //reset spin build variables
+                curr_r_vel = 0;
+                curr_sprite_r = 0;
+                sprite.localRotation = Quaternion.Euler(0,0,0);
 
-            //add drag aswell so the starfish slows down
-            rb.drag = 0.5f;
+                //reset fish list, so we can hurt fish again :(
+                fishes_attacked = new List<GameObject>();
 
-            //now, we are not spinnig move
-            spinning = false;
+                //add drag aswell so the starfish slows down
+                rb.drag = 0.5f;
+
+                //now, we are not spinnig move
+                spinning = false;
+            }
+
+            
         }
     }
 

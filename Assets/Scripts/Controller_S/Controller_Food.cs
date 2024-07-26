@@ -16,7 +16,7 @@ public class Controller_Food : MonoBehaviour
     [SerializeField] List<GameObject> foodPellets_list;
 
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
-    [SerializeField] Transform targetZ;
+    [SerializeField] public Transform targetZ;
 
     
 

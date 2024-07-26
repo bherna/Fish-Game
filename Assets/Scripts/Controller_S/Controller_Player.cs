@@ -10,6 +10,7 @@ public class Controller_Player : MonoBehaviour
 
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
+    public Vector3 mousePos;
 
 
     //player stats
@@ -35,16 +36,15 @@ public class Controller_Player : MonoBehaviour
     } 
 
     private void Update() {
+
+        //get mouse pos
+        var screenPos = Input.mousePosition;
+        screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
+        mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
         
-        if(Input.GetMouseButtonDown(0)){
-
-            var screenPos = Input.mousePosition;
-            screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
-            var mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
-            Instantiate(Gun_particle, mousePos, Quaternion.identity);
-        }
+        //move self there
+        transform.position = new Vector2(mousePos.x, mousePos.y);
     }
-
 
 
 
@@ -55,4 +55,15 @@ public class Controller_Player : MonoBehaviour
     public int Get_GunDamage(){
         return gunPower;
     }
+
+
+    public void Run_GunParticle(){
+        Instantiate(Gun_particle, mousePos, Quaternion.identity);
+    }
+
+
+
+
+
+
 }

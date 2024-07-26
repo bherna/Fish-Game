@@ -54,6 +54,9 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        //create gun particle
+        Controller_Player.instance.Run_GunParticle();
+
         //damage
         curr_health -= Controller_Player.instance.Get_GunDamage();
 
@@ -85,7 +88,5 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     }
 
 
-
-    
     
 }

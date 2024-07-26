@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -46,3 +46,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gun_particle: {fileID: 6743040308924230997, guid: 2eb3e9be264292341ae6e5299706f1b5, type: 3}
   targetZ: {fileID: 0}
+  mousePos: {x: 0, y: 0, z: 0}

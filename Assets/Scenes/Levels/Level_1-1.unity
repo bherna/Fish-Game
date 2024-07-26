@@ -771,9 +771,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1142339716914472897, guid: e67a470392b0cd84a861bf0c0301beb0, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6806463760457618325, guid: e67a470392b0cd84a861bf0c0301beb0, type: 3}
       propertyPath: m_Name
       value: BG-Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 6806463760457618325, guid: e67a470392b0cd84a861bf0c0301beb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -848,6 +856,38 @@ PrefabInstance:
     - target: {fileID: 6257003776929468886, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
       propertyPath: m_Name
       value: Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.x
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.newSize.y
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8232030306878201308, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_SpriteTilingProperty.adaptiveTilingThreshold
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9107361689168419475, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
       propertyPath: m_LocalPosition.x

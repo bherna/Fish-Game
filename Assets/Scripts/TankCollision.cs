@@ -28,6 +28,13 @@ public class TankCollision : MonoBehaviour
     float swim_xUpper;
     float swim_yLower;
     float swim_yUpper;
+
+
+    //boundry range
+    float boundry_xLower;
+    float boundry_xUpper;
+    float boundry_yLower;
+    float boundry_yUpper;
        
     private void Awake() {
         
@@ -40,11 +47,12 @@ public class TankCollision : MonoBehaviour
         }
 
 
-        GetSwimDimensions();
-        GetSpawnDimensions();
+        GetSwim_D();
+        GetSpawn_D();
+        GetBoundry_D();
     }
 
-    private void GetSwimDimensions(){
+    private void GetSwim_D(){
 
         var w = swimRange.size.x;
         var h = swimRange.size.y;
@@ -59,7 +67,7 @@ public class TankCollision : MonoBehaviour
 
     }
 
-    private void GetSpawnDimensions(){
+    private void GetSpawn_D(){
 
         var w = spawnRange.size.x;
         var h = spawnRange.size.y;
@@ -74,7 +82,20 @@ public class TankCollision : MonoBehaviour
 
     }
 
+    private void GetBoundry_D(){
 
+        var w = boundry.size.x;
+        var h = boundry.size.y;
+
+        var tank_pos = boundry.offset;
+
+        boundry_xLower = tank_pos.x - w/2;
+        boundry_xUpper = tank_pos.x + w/2;
+
+        boundry_yLower = tank_pos.y - h/2;
+        boundry_yUpper = tank_pos.y + h/2;
+
+    }
 
     public (float, float, float, float) GetTankSwimArea(){
             return (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
@@ -84,8 +105,7 @@ public class TankCollision : MonoBehaviour
         return (spawn_xLower, spawn_xUpper, spawn_yLower, spawn_yUpper);
     } 
     
-
-    public (float, float) GetBoundryArea(){
-        return (boundry.size.x ,boundry.size.y);
+    public (float, float, float, float) GetBoundryArea(){
+        return (boundry_xLower ,boundry_xUpper, boundry_yLower, boundry_yUpper);
     }
 }

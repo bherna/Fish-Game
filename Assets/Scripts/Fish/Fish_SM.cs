@@ -1,19 +1,24 @@
 
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEngine.EventSystems;
 using UnityEngine;
+using Unity.VisualScripting;
 
-public class Fish_SM : MonoBehaviour
+//hungry
+//
+//idle
+//
+//grabbed
+
+//idle, walk around
+//hungry, look out for food
+//grabbed, let the player drag you around
+public enum Fish_States {idle, hungry, grabbed};
+
+public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 
-    //hungry
-    //
-    //idle
-    //
-    //sleepy
-
-    //idle, walk around
-    public enum Fish_States {idle, hungry, sleepy};
+    
 
 
     [SerializeField] Fish_States fishCurrentState;
@@ -26,12 +31,15 @@ public class Fish_SM : MonoBehaviour
     [SerializeField] float hungry_velocity = 2;
     private float current_Vel = 0; 
 
+
+    //sprite movement
     private float h_turningSpeed = 1.5f;
     private float v_turningSpeed = 1;
     private float startTime = 0;
     private float z_angle = 0; //previous z angle we had (should start at 0 angle)
     float z_angle_pivotTo = 0; //current z we are pivoting to
     private float zDepth = 1; //the z transform our fish swims at, to reference at flippings
+    float y_angle = 0;
 
 
     private Vector3 idleTarget;
@@ -61,34 +69,41 @@ public class Fish_SM : MonoBehaviour
 
         current_Vel = idle_velocity;
 
-        zDepth = transform.position.z;
+        zDepth = Controller_Food.instance.targetZ.position.z;
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        //burn stomach
-        stomach -= burnRate * Time.deltaTime;
-
-        //check if fish starved to death
-        if(stomach <= 0){
-            Died();
-        }
-        //if hungry
-        else if(stomach < hungryRange && fishCurrentState != Fish_States.hungry){
-
-            //change sprite transparancy
-            ChangeTransparency(false);
-
-            //if food on screen aswell, change to hungry state
-            if(Controller_Food.instance.GetFoodLength() > 0){
-                //are we hungry and food is on screen
-                ChangeState(Fish_States.hungry);
-            }
+        //if the fish is grabbed, this fish is immune to hunger
+        if(Fish_States.grabbed != fishCurrentState){
             
+            //burn stomach
+            stomach -= burnRate * Time.deltaTime;
+
+                //check if fish starved to death
+            if(stomach <= 0){
+                Died();
+            }
+            //if hungry
+            else if(stomach < hungryRange && fishCurrentState != Fish_States.hungry){
+
+                //change sprite transparancy
+                ChangeTransparency(false);
+
+                //if food on screen aswell, change to hungry state
+                if(Controller_Food.instance.GetFoodLength() > 0){
+                    //are we hungry and food is on screen
+                    ChangeState(Fish_States.hungry);
+                }
+                
+            }
         }
+
         
+
+        
+        //enter state logic
 
         switch(fishCurrentState){
             case Fish_States.idle:
@@ -97,8 +112,8 @@ public class Fish_SM : MonoBehaviour
             case Fish_States.hungry:
                 HungryMode();
                 break;
-            case Fish_States.sleepy:
-                SleepyMode();
+            case Fish_States.grabbed:
+                //do nothing?
                 break;
             default:
                 Debug.Log("No current state for fish");
@@ -137,6 +152,9 @@ public class Fish_SM : MonoBehaviour
         }
         else if(newState == Fish_States.hungry){
             current_Vel = hungry_velocity;
+        }
+        else if(newState == Fish_States.grabbed){
+            current_Vel = 0;
         }
     }
 
@@ -217,11 +235,37 @@ public class Fish_SM : MonoBehaviour
 
     }
 
-    private void SleepyMode(){
-        //look for a spot to sleep in
-        //not in use yet
+
+
+
+
+    public void OnBeginDrag(PointerEventData data){
+        Debug.Log("grab");
+        //change to grabbed state
+        ChangeState(Fish_States.grabbed);
+        //reset verticle pos
+        fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
+    }
+    public void OnDrag(PointerEventData data){
+        Debug.Log("fadsdasfdsfdfsa");
+        //now just follow the mouse position
+        transform.position = Controller_Player.instance.mousePos;
 
     }
+    public void OnEndDrag(PointerEventData data){
+        Debug.Log("rell");
+        //return to idle state
+        ChangeState(Fish_States.idle);
+    }
+
+    
+
+
+
+
+
+
+
 
 
     private void NewRandomIdleTarget_Tank(){
@@ -269,7 +313,7 @@ public class Fish_SM : MonoBehaviour
         //in other words, updating the rotations on the fish, making it look like its actually swimming towards the target position//
         float z_curr_angle = (Time.time - startTime) / v_turningSpeed;
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
-        float y_angle = 0;
+        
         
 
         //fish local facing position (towards target) 
