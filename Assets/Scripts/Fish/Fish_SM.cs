@@ -1,4 +1,4 @@
-
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
@@ -13,7 +13,7 @@ using Unity.VisualScripting;
 //idle, walk around
 //hungry, look out for food
 //grabbed, let the player drag you around
-public enum Fish_States {idle, hungry, grabbed};
+public enum Fish_States {idle, hungry, grabbed, dropped};
 
 public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -28,7 +28,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     //used in the update position function
     private float idle_velocity = 1;
-    [SerializeField] float hungry_velocity = 2;
+    private float hungry_velocity = 2;
     private float current_Vel = 0; 
 
 
@@ -48,9 +48,9 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
 
     private float stomach;
-    private const int startStomach = 15;//total seconds before fish dies of hunger
-    private float burnRate = 1;
-    private int hungryRange = startStomach/2;
+    private const int startStomach = 20;//total seconds before fish dies of hunger
+    private float burnRate = 1; //per second (could be changed for other level types "fever")
+    private int hungryRange = startStomach/2; 
     private float nextCheckCounter = 0; //seconds untilNextCheck for food target
 
 
@@ -253,6 +253,14 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnEndDrag(PointerEventData data){
         //return to idle state
+        ChangeState(Fish_States.dropped);
+        //timer to switch to idel again
+        IEnumerator co = IdleReturn();
+        StartCoroutine(co);
+    }
+    private IEnumerator IdleReturn() {
+
+        yield return new WaitForSeconds(0.1f);
         ChangeState(Fish_States.idle);
     }
 
@@ -413,13 +421,15 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
 
         //          DRAG - COMBINE
-        //if the fish is being dragged, and we collide with another fish
-        if(Fish_States.grabbed == fishCurrentState && other.gameObject.CompareTag("Fish")){
+        //if the fish is being dropped, and we collide with another fish, and fish ages are same
+        if( Fish_States.dropped == fishCurrentState &&
+            other.gameObject.CompareTag("Fish") &&
+            other.gameObject.GetComponent<Fish_Age>().GetAge() == GetComponent<Fish_Age>().GetAge()){
 
             //then combine the two
             //reset variables (health, hunger, ..)?
             //increase age by one
-            gameObject.GetComponent<Fish_Age>().Fish_Birthday();
+            GetComponent<Fish_Age>().Fish_Birthday();
             
             //also kill the other fish
             other.gameObject.GetComponent<Fish_SM>().Died();

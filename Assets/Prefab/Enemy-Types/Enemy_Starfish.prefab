@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 3948798086876093730}
-  curr_health: 4
+  curr_health: 7
   kbForce: 1
   bite_particle: {fileID: 148617094261164697, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
 --- !u!1001 &7493506642186727193
