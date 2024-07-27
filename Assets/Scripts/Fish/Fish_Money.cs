@@ -56,7 +56,9 @@ public class Fish_Money : MonoBehaviour
             currTime = 0;
 
             //drop coin
-            Instantiate(coinType, transform.position, Quaternion.identity);
+            //behind fish
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z+2);
+            Instantiate(coinType, pos, Quaternion.identity);
         }
     }
 
