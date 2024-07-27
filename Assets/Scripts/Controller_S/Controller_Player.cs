@@ -100,7 +100,7 @@ public class Controller_Player : MonoBehaviour
 
 
     public void Upgrade_gunPower() {
-        gunPower += 5;
+        gunPower += 1;
     }
 
     public int Get_GunDamage(){
