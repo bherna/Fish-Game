@@ -12,8 +12,9 @@ public class LargeMBass_SM : Enemy
 
     //there speed is also reset on bite-ing fish
 
-    private float curr_velocity = 0;
-    private float acceleration = 0.3f;
+    private float max_velocity = 4; // max velocity bass can reach
+    private float curr_velocity = 0; //velocity the bass currently has
+    private float acceleration = 0.3f; 
 
     private float sprite_size = 0.7f;
 
@@ -47,15 +48,15 @@ public class LargeMBass_SM : Enemy
 
         else{
             //update the enemy position towards target fish
-            updatePos();
+            UpdatePos();
         }
         
     }
 
-    private new void updatePos(){
+    private void UpdatePos(){
 
         //update curr velocity
-        if(curr_velocity +Time.deltaTime < velocity){ curr_velocity += Time.deltaTime * acceleration; }
+        if(curr_velocity +Time.deltaTime < max_velocity){ curr_velocity += Time.deltaTime * acceleration; }
 
         //head towards target 
         var newVector = (currFishTarget.position - transform.position).normalized;

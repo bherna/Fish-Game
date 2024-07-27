@@ -194,7 +194,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 2308382883602295263}
-  startHealth: 20
+  curr_health: 6
   velocity: 0.5
   kbForce: 5
   mouth_obj: {fileID: 4291766956729282969}

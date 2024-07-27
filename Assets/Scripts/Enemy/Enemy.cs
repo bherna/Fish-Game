@@ -16,29 +16,11 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     //stats
     //health should be in # of clicks
-    [SerializeField] protected int curr_health = 10; 
-    [SerializeField] protected float velocity = 0f;
+    [SerializeField] protected int curr_health = 6; 
     [SerializeField] protected float kbForce = 0f;
     
 
-    
 
-    protected void updatePos(){
-
-        //head towards target 
-        var newVector = (currFishTarget.position - transform.position).normalized;
-        rb.AddForce(newVector * velocity, ForceMode2D.Force);
-
-        //fliping
-        if(transform.position.x - currFishTarget.position.x < 0){
-            sprite.localScale = new Vector3(-1f, 1f, 1f);
-            
-        }
-        else{
-            sprite.localScale = new Vector3(1f, 1f, 1f);
-        }
-
-    }
 
     protected void SetTargetFish(Transform newFishTarget){
 
@@ -47,6 +29,16 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     
     public void OnPointerClick(PointerEventData eventData){
+
+        //make sure we have ammo to use (one gem click)
+        if( ! Controller_Player.instance.Gems_Available(1)){
+            Debug.Log("Not Enough gems to attack.");
+            return; //not enough gems to click
+        }
+        else{
+            //use 1 gem (for now)
+            Controller_Player.instance.Gems_Sub(1);
+        }
 
 
         //if the game is paused, return
@@ -77,7 +69,7 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
 
     //fish died
-    //will be more than one way to die
+    //dont want to flat out destroy object
     protected void Died(){
 
         //remove the enemy from list

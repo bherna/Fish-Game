@@ -10,7 +10,14 @@ public class Controller_Player : MonoBehaviour
 
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
+
+    [SerializeField] GameObject Gems_Parent;
     public Vector3 mousePos;
+
+    //gems == ammo
+    private int curr_gem_count;
+    private const int gem_start = 10; //how many gems we start with
+
 
 
     //player stats
@@ -33,7 +40,16 @@ public class Controller_Player : MonoBehaviour
         else{
             instance = this;
         }
-    } 
+    }
+
+
+    private void Start() {
+
+        //set our gems interal + ui
+        curr_gem_count = gem_start;
+        Gems_Update();
+
+    }
 
     private void Update() {
 
@@ -45,6 +61,41 @@ public class Controller_Player : MonoBehaviour
         //move self there
         transform.position = new Vector2(mousePos.x, mousePos.y);
     }
+
+
+
+    //returns true if the parameter amount passed is less then / equal to gems we have in stock
+    public bool Gems_Available(int amount){
+
+        return amount <= curr_gem_count;
+    }
+
+    public void Gems_Sub(int amount){
+        curr_gem_count -= amount;
+        Gems_Update();
+    }
+
+    public void Gems_Add(int amount){
+        curr_gem_count += amount;
+        Gems_Update();
+    }
+    //used for updating gems on ui
+    private void Gems_Update(){
+
+        //just set all to deactivated first
+        //then activate all gems upto curr_gems
+        //(since we need to think about setting gems at start)
+
+        for(int i = 0; i < gem_start; i++){
+            Gems_Parent.transform.GetChild(i).gameObject.SetActive(false);
+        }
+
+        for(int i = 0; i < curr_gem_count; i++){
+            Gems_Parent.transform.GetChild(i).gameObject.SetActive(true);
+        }
+    }
+
+
 
 
 

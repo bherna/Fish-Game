@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Starfish_SM : MonoBehaviour, IPointerClickHandler
+public class Starfish_SM : Enemy, IPointerClickHandler
 {
 
     //star fish
@@ -16,14 +16,11 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
     //2) gain rotation vel      \ repeat these two until target dies, then start from begining.
     //3) burst towards target   /
 
-    [SerializeField] Transform sprite;
-    [SerializeField] Rigidbody2D rb;
+
     [SerializeField] ParticleSystem bite_particle;
 
     private Transform target_position; //reference to target fish, we just care for position
     private int damageAmount = 35;  //out of 100 health from fish, fish dies in 3 hits
-
-    private int health = 8; // in terms of clicks
 
     private float curr_r_vel = 0; // current rotational velocity of starfish
     private float r_accel = 1; //rotational acceleration per second
@@ -50,6 +47,9 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
 
         //set our boundry collider size from tank
         boundry_d = TankCollision.instance.GetBoundryArea();
+
+        //set drag for player clicks (f)
+        rb.drag = phy_LinearDrag;
     }
 
     // Update is called once per frame
@@ -91,38 +91,6 @@ public class Starfish_SM : MonoBehaviour, IPointerClickHandler
     }
 
 
-
-    public void OnPointerClick(PointerEventData eventData){
-
-
-        //if the game is paused, return
-        if(Controller_Main.instance.paused){
-            return;
-        }
-
-        //create gun particle
-        Controller_Player.instance.Run_GunParticle();
-
-        //damage
-        health -= Controller_Player.instance.Get_GunDamage();
-
-        //die
-        if(health <= 0){
-            Died();
-        }
-        
-    }
-
-    //fish died
-    //will be more than one way to die
-    private void Died(){
-
-        //remove the enemy from list
-        Controller_Enemy.instance.CloserToWaveEnded();
-
-        //die
-        Destroy(gameObject);
-    }
 
     private void OnTriggerStay2D(Collider2D other) {
 
