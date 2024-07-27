@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using Unity.VisualScripting;
+using Microsoft.Unity.VisualStudio.Editor;
 
 //hungry
 //
@@ -38,7 +39,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private float startTime = 0;
     private float z_angle = 0; //previous z angle we had (should start at 0 angle)
     float z_angle_pivotTo = 0; //current z we are pivoting to
-    private float zDepth = 1; //the z transform our fish swims at, to reference at flippings
+    private float zDepth = 0; //the z transform our fish swims at, to reference at flippings
     float y_angle = 0;
 
 
@@ -135,7 +136,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 //else we use skinned mesh
                 if(setFullAlpha){sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
                 else{sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
-            }
+            } 
         }
 
         
@@ -306,7 +307,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private void updatePosition(Vector3 targetTypePosition){
 
         //update physical position towards the target
-        transform.position = Vector3.MoveTowards(
+        transform.position = Vector2.MoveTowards(
             transform.position,
             targetTypePosition,
             current_Vel * Time.deltaTime
@@ -434,6 +435,50 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             //also kill the other fish
             other.gameObject.GetComponent<Fish_SM>().Died();
 
+        }
+
+
+        //           DECIDE - SACRIFIACE
+        if( Fish_States.grabbed == fishCurrentState &&
+            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
+            other.gameObject.CompareTag("GemBox")){
+
+                //if dragging on Gembox
+                //show player how many gems they could get
+                Controller_Player.instance.Gems_Show(5);
+
+            }
+        else if( Fish_States.dropped == fishCurrentState &&
+            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
+            other.gameObject.CompareTag("GemBox")){
+
+                //don't sacrifice if gems are at max
+                if(Controller_Player.instance.Gems_AtMax()){
+                    //return gems to real amount
+                    Controller_Player.instance.Gems_Update();
+                    return;
+                }
+
+                //if fish is dropped in sacrifce area
+                //update gems
+                Controller_Player.instance.Gems_Add(5);
+
+                //kill fish
+                Died();
+
+            }
+
+    }
+
+    private void OnTriggerExit2D(Collider2D other){
+
+        //if this fish leaves gem box area
+        if( Fish_States.grabbed == fishCurrentState &&
+            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
+            other.gameObject.CompareTag("GemBox")){
+
+                //return gems to real amount
+                Controller_Player.instance.Gems_Update();
         }
 
     }
