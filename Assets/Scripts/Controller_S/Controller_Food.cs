@@ -8,17 +8,24 @@ using UnityEngine.UIElements;
 public class Controller_Food : MonoBehaviour
 {
 
-    //spawn food pellets for the tank with mouse R click
-    [SerializeField] int maxFood = 3;
-
+    //----------------------- references ---------------------------
     [SerializeField] GameObject foodPellet_basic;
-
-    [SerializeField] List<GameObject> foodPellets_list;
-
+    
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] public Transform targetZ;
 
+    //audios
+    [SerializeField] AudioClip createSound;
+    [SerializeField] AudioClip destroySound;
+
+
+    // -------------------------------- privates --------------------------------
+    private int maxFood = 3;
+    private List<GameObject> foodPellets_list;  
     
+
+
+
 
 
     //static variable for fish coin value
@@ -71,6 +78,14 @@ public class Controller_Food : MonoBehaviour
         if(foodPellets_list.Count >= maxFood){
             Destroy(foodPellets_list[0]);
             foodPellets_list.RemoveAt(0);
+
+            //play sound to know we destroy'd food
+            //badd sound effect
+            AudioManager.instance.PlaySoundFXClip(destroySound, transform, 1f);
+        }
+        else{
+            //play good sound effect
+            AudioManager.instance.PlaySoundFXClip(createSound, transform, 1f);
         }
 
         //spawn new

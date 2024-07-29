@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce60deb1b1e7b0942953026f2e680fd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFood: 3
   foodPellet_basic: {fileID: 1213281205517056372, guid: 4be66602672a1474ca95950aa1148fd1, type: 3}
-  foodPellets_list: []
+  targetZ: {fileID: 0}
+  createSound: {fileID: 8300000, guid: bbf52b2ec8054d544a3cb0c9d80b1524, type: 3}
+  destroySound: {fileID: 8300000, guid: c114b23d01bf49b46a9ba4d96a88638c, type: 3}

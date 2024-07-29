@@ -132,6 +132,8 @@ MonoBehaviour:
   - {fileID: 1126894671142511873}
   fishObj_transform: {fileID: 4689040288185090486}
   dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
+  sacrifice_success: {fileID: 8300000, guid: 14403d00fe5a1b34d9ec6b8da1b2fe61, type: 3}
+  sacrifice_fail: {fileID: 8300000, guid: 607c0bda62cc94948b9ab5487db3f817, type: 3}
 --- !u!114 &2749740470348012892
 MonoBehaviour:
   m_ObjectHideFlags: 0

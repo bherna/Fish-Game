@@ -26,16 +26,18 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     [SerializeField] List<Transform> sprite_transparency; //fish sprites
     [SerializeField] Transform fishObj_transform;   //whole fish object 
     [SerializeField] AudioClip dieSoundClip;
+    [SerializeField] AudioClip sacrifice_success;
+    [SerializeField] AudioClip sacrifice_fail;
 
 
 
-    //used in the update position function
+    //--------------------------------- used in the update position function ---------------------------------
     private float idle_velocity = 1;
     private float hungry_velocity = 2;
     private float current_Vel = 0; 
 
 
-    //sprite movement
+    // --------------------------------- sprite movement ---------------------------------
     private float h_turningSpeed = 1.5f;
     private float v_turningSpeed = 1;
     private float startTime = 0;
@@ -44,20 +46,28 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     private float zDepth = 0; //the z transform our fish swims at, to reference at flippings
     float y_angle = 0;
 
-
+    // --------------------------------- targetting ---------------------------------
     private Vector3 idleTarget;
     private float targetRadius = 0.5f;
     private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
 
 
+    // --------------------------------- hunger related --------------------------------- 
     private float stomach;
     private const int startStomach = 20;//total seconds before fish dies of hunger
     private float burnRate = 1; //per second (could be changed for other level types "fever")
     private int hungryRange = startStomach/2; 
     private float nextCheckCounter = 0; //seconds untilNextCheck for food target
-
-
     private GameObject foodTarget;
+
+
+    // --------------------------------- audio related---------------------------------
+    private bool play_Fail_SoundAgain = true;
+
+
+
+
+
 
 
     // Start is called before the first frame update
@@ -425,7 +435,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         }
 
 
-
+Debug.Log("tag: "+other.gameObject.tag.ToString());
         //          DRAG - COMBINE
         //if the fish is being dropped, and we collide with another fish, and fish ages are same
         if( Fish_States.dropped == fishCurrentState &&
@@ -444,34 +454,60 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
 
         //           DECIDE - SACRIFIACE
-        if( Fish_States.grabbed == fishCurrentState &&
-            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
-            other.gameObject.CompareTag("GemBox")){
+        //if gembox collision
+        if(other.gameObject.CompareTag("GemBox")){
 
-                //if dragging on Gembox
-                //show player how many gems they could get
-                Controller_Player.instance.Gems_Show(5);
+            //if we are currently grabbed and of age
+            if( Fish_States.grabbed == fishCurrentState &&
+                GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1){
 
-            }
-        else if( Fish_States.dropped == fishCurrentState &&
-            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
-            other.gameObject.CompareTag("GemBox")){
+                    //if dragging on Gembox
+                    //show player how many gems they could get
+                    Controller_Player.instance.Gems_Show(5);
 
-                //don't sacrifice if gems are at max
-                if(Controller_Player.instance.Gems_AtMax()){
-                    //return gems to real amount
-                    Controller_Player.instance.Gems_Update();
-                    return;
                 }
+            //if we are dropped:
+            else if( Fish_States.dropped == fishCurrentState){
+                    //now check if:
 
-                //if fish is dropped in sacrifce area
-                //update gems
-                Controller_Player.instance.Gems_Add(5);
+                    
+                    //dont sacrifice if fish is not at correct age
+                    if( GetComponent<Fish_Age>().GetAge() < Controller_Fish.instance.GetFishStages().Count-1 &&
+                        play_Fail_SoundAgain){
+                        //don't sacrifice sound effect    
+                        AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
+                        play_Fail_SoundAgain = false; 
+                    }
+                    //don't sacrifice if gems are at max
+                    else if(Controller_Player.instance.Gems_AtMax()){
 
-                //kill fish
-                Died(false);
+                        //return gems to real amount
+                        Controller_Player.instance.Gems_Update();
 
-            }
+                        //failed to sacrifice sound
+                        if(play_Fail_SoundAgain){//else we end up spamming this sound
+                            AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
+                            play_Fail_SoundAgain = false; 
+                        }
+                    }
+                    //else: we sacrifice fish
+                    else{
+                        //sacrifice
+                        //if fish is dropped in sacrifce area
+                        //update gems
+                        Controller_Player.instance.Gems_Add(5);
+
+                        //successfull sacrifice sound
+                        AudioManager.instance.PlaySoundFXClip(sacrifice_success, transform, 1f);
+        
+                        //kill fish
+                        Died(false);
+                    }
+                    
+
+                }
+        }
+        
 
     }
 
@@ -479,12 +515,24 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         //if this fish leaves gem box area
         if( Fish_States.grabbed == fishCurrentState &&
-            GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1 &&
             other.gameObject.CompareTag("GemBox")){
 
-                //return gems to real amount
-                Controller_Player.instance.Gems_Update();
+                //we can play failed sound again
+                play_Fail_SoundAgain = true;
+
+                //if we edited gem ui
+                if(GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1){
+
+                    //return gems to real amount
+                    Controller_Player.instance.Gems_Update();
+                }
+
         }
+
+
+        
+
+        
 
     }
 
