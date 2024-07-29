@@ -8,6 +8,9 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] protected Rigidbody2D rb;
     [SerializeField] protected Transform sprite;
+    [SerializeField] protected AudioClip damageSoundClip;
+    [SerializeField] protected AudioClip diedSoundClip;
+
     
 
     //targets
@@ -38,6 +41,8 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
         else{
             //use 1 gem (for now)
             Controller_Player.instance.Gems_Sub(1);
+            //play sound
+            AudioManager.instance.PlaySoundFXClip(damageSoundClip, transform, 1f);
         }
 
 
@@ -74,6 +79,9 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
 
         //remove the enemy from list
         Controller_Enemy.instance.CloserToWaveEnded();
+
+        //play sound
+        AudioManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f);
 
         //die
         Destroy(gameObject);

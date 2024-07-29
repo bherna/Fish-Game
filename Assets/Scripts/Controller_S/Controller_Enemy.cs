@@ -15,6 +15,7 @@ public class Controller_Enemy : MonoBehaviour
     private bool keepSpawning = true;
     private float preAnnouncerTime = 3f;
     private bool currently_in_wave = false; //used in keeping the wave from spawning multiple times (from coroutine being used)
+    private bool startWaves = false;
 
 
     //bot ui
@@ -71,9 +72,17 @@ public class Controller_Enemy : MonoBehaviour
     
     }
 
+    public void StartWaves(){
+        startWaves = true;
+    }
+
 
 
     private void Update() {
+
+        if(!startWaves){
+            return;
+        }
         
         //if the waves are still comming in
         //spawn waves

@@ -25,6 +25,8 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     [SerializeField] Fish_States fishCurrentState;
     [SerializeField] List<Transform> sprite_transparency; //fish sprites
     [SerializeField] Transform fishObj_transform;   //whole fish object 
+    [SerializeField] AudioClip dieSoundClip;
+
 
 
     //used in the update position function
@@ -115,6 +117,9 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 break;
             case Fish_States.grabbed:
                 //do nothing?
+                break;
+            case Fish_States.dropped:
+                //do nothing
                 break;
             default:
                 Debug.Log("No current state for fish");
@@ -433,7 +438,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             GetComponent<Fish_Age>().Fish_Birthday();
             
             //also kill the other fish
-            other.gameObject.GetComponent<Fish_SM>().Died();
+            other.gameObject.GetComponent<Fish_SM>().Died(false);
 
         }
 
@@ -464,7 +469,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 Controller_Player.instance.Gems_Add(5);
 
                 //kill fish
-                Died();
+                Died(false);
 
             }
 
@@ -486,10 +491,14 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     
 
 
-    public void Died(){
+    public void Died(bool playSound = true){
 
         //removes self from the list of current fish known to the fish controller
         Controller_Fish.instance.RemoveFish(gameObject);
+        
+        //play die sound
+        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
+        
 
         Destroy(gameObject);
     }

@@ -8,6 +8,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
     [SerializeField] int coinValue = 0;
     [SerializeField] float timeTillTrashed = 1.5f;
     [SerializeField] Rigidbody2D rb;
+    [SerializeField] AudioClip collectCoinSoundClip;
 
     public void UpdateCoinVal(int newCoinVal){
         coinValue = newCoinVal;
@@ -19,9 +20,15 @@ public class Coin : MonoBehaviour, IPointerDownHandler
             return;
         }
 
+        //add coin
         Wallet.instance.AddMoney(coinValue);
+        //playsound
+        AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f);
+        //destroy
         Destroy(gameObject);
     }
+
+
 
 
     public void OnTrashCoin() {

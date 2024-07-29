@@ -194,8 +194,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 2308382883602295263}
+  damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}
+  diedSoundClip: {fileID: 8300000, guid: 4911eca0f7f8b3c41a5d61e7b92a2b29, type: 3}
   curr_health: 6
-  velocity: 0.5
   kbForce: 5
   mouth_obj: {fileID: 4291766956729282969}
 --- !u!1001 &8405361668250059606

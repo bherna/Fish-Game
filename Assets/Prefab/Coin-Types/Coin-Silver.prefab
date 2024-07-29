@@ -123,6 +123,7 @@ MonoBehaviour:
   coinValue: 15
   timeTillTrashed: 1.5
   rb: {fileID: 9203605760568676009}
+  collectCoinSoundClip: {fileID: 8300000, guid: a12f0bc00831bfb408684e1cc11f08ae, type: 3}
 --- !u!114 &1450112052067580422
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class Controller_Fish : MonoBehaviour
     [SerializeField] GameObject fishObj;
     //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
+    [SerializeField] AudioClip spawnSoundClip;
 
 
 
@@ -56,6 +57,10 @@ public class Controller_Fish : MonoBehaviour
 
     public Boolean SpawnFish(){
 
+        //start enemy waves
+        //since we don't want to start right at game start.
+        Controller_Enemy.instance.StartWaves();
+
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
 
@@ -63,8 +68,13 @@ public class Controller_Fish : MonoBehaviour
             return false;
         }
 
+
+
         //spawn at top of tank
         fish_list.Add(Instantiate(fishObj, new Vector3(0, 4, transform.position.z), Quaternion.identity));
+
+        //play sound
+        AudioManager.instance.PlaySoundFXClip(spawnSoundClip, transform, 1f);
 
         //return success
         return true;    

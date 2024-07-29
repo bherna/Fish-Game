@@ -131,7 +131,7 @@ MonoBehaviour:
   - {fileID: 7710794256098520917}
   - {fileID: 1126894671142511873}
   fishObj_transform: {fileID: 4689040288185090486}
-  hungry_velocity: 2.4
+  dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
 --- !u!114 &2749740470348012892
 MonoBehaviour:
   m_ObjectHideFlags: 0

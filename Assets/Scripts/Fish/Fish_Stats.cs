@@ -21,17 +21,11 @@ public class Fish_Stats : MonoBehaviour
 
         if(health <= 0){
 
-            Died();
+            GetComponent<Fish_SM>().Died();
 
         }
     }
 
-    public void Died(){
-
-        Controller_Fish.instance.RemoveFish(gameObject);
-
-        Destroy(gameObject);
-    }
 
     
 

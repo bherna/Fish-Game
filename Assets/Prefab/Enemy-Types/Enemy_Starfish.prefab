@@ -111,6 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 3948798086876093730}
+  damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}
+  diedSoundClip: {fileID: 8300000, guid: 4911eca0f7f8b3c41a5d61e7b92a2b29, type: 3}
   curr_health: 7
   kbForce: 1
   bite_particle: {fileID: 148617094261164697, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
