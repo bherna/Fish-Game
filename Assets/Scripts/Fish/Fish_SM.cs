@@ -261,6 +261,8 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         ChangeState(Fish_States.grabbed);
         //reset verticle pos
         fishObj_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
+        //allow for sound
+        play_Fail_SoundAgain = true;
     }
     public void OnDrag(PointerEventData data){
         //now just follow the mouse position
@@ -434,8 +436,6 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             }
         }
 
-
-Debug.Log("tag: "+other.gameObject.tag.ToString());
         //          DRAG - COMBINE
         //if the fish is being dropped, and we collide with another fish, and fish ages are same
         if( Fish_States.dropped == fishCurrentState &&
@@ -472,11 +472,13 @@ Debug.Log("tag: "+other.gameObject.tag.ToString());
 
                     
                     //dont sacrifice if fish is not at correct age
-                    if( GetComponent<Fish_Age>().GetAge() < Controller_Fish.instance.GetFishStages().Count-1 &&
-                        play_Fail_SoundAgain){
-                        //don't sacrifice sound effect    
-                        AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
-                        play_Fail_SoundAgain = false; 
+                    if( GetComponent<Fish_Age>().GetAge() < Controller_Fish.instance.GetFishStages().Count-1){
+                        if(play_Fail_SoundAgain){//else young fish can get sacrificed /|\
+                            //don't sacrifice sound effect    
+                            AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
+                            play_Fail_SoundAgain = false;
+                        }
+                         
                     }
                     //don't sacrifice if gems are at max
                     else if(Controller_Player.instance.Gems_AtMax()){
@@ -516,9 +518,6 @@ Debug.Log("tag: "+other.gameObject.tag.ToString());
         //if this fish leaves gem box area
         if( Fish_States.grabbed == fishCurrentState &&
             other.gameObject.CompareTag("GemBox")){
-
-                //we can play failed sound again
-                play_Fail_SoundAgain = true;
 
                 //if we edited gem ui
                 if(GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1){
