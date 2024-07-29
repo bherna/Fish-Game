@@ -874,6 +874,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4992964066520763345, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 59
+      objectReference: {fileID: 0}
     - target: {fileID: 5076158817468943585, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1009,6 +1013,68 @@ PrefabInstance:
     - target: {fileID: 6242421299887676855, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.size
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[0]
+      value: Hello!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[1]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[2]
+      value: "Welcome to my fish tank! \u2026 My name is Arial the witch.  "
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[3]
+      value: "You can\u2019t see me but I am a certified witch. Believe me, I graduated
+        from a so-fish-ticated school called Pike University with a Masters Degree
+        in Fishology. I was at the top of my class with a- \u2026 oh \u2026  sorry
+        \u2026 I\u2019m rambling again \u2026 he"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[4]
+      value: "Whale ... Anyways \u2026  Let me show you my fish tank. This is my
+        pride and joy! "
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[5]
+      value: Starting from the top, we have my fabulous shop where you can trade
+        your coins for fish and upgrades. (buy fish, upgrade wand, buy egg)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[6]
+      value: "Right next to my shop, we have the gems. Each gem has a very powerful
+        spell that can hurt all types of things. The most important one being those
+        annoying shadow fish \u2026 You\u2019ll know who I\u2019m talking about here
+        soon. Their favorite thing to eat are my fishies. "
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[7]
+      value: 'To get more gems you need to sacrifice an adult fish to the gems slots.
+        Adult fish drop gold coins. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[8]
+      value: ...
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[9]
+      value: 'You can also grab a fish to move them around the tank, it comes in
+        handy when dealing with shadow fish ;) '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[10]
+      value: 'Your goal is to complete the egg.  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: lines.Array.data[11]
+      value: 'Alright! Now that I explained everything, go get it gill !! '
       objectReference: {fileID: 0}
     - target: {fileID: 7569186588323293630, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_Pivot.x
