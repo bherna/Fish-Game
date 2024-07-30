@@ -14,6 +14,18 @@ public static class LevelsAccess
     public static void SaveLevels(){
         SaveLoad.SaveLevels(); //don't need to call self else 'this'
     }
+
+    public static void LoadLevels(){
+        //then we are a new game
+        Debug.Log("New Game.");
+
+        //new [all false] 2d arary 
+        levels_access = new bool[2,6];
+
+        //set level 1-1
+        levels_access[0,0] = true;
+    }
+    /*
     public static void LoadLevels(){
         try{
 
@@ -30,6 +42,7 @@ public static class LevelsAccess
         catch(NullReferenceException ){
 
             //then we are a new game
+            Debug.Log("New Game.");
 
             //new [all false] 2d arary 
             levels_access = new bool[2,6];
@@ -39,7 +52,7 @@ public static class LevelsAccess
         }
         
     }
-
+    */
 
     //Updateing level access array (for other scripts to acces really)
     /// <summary>
