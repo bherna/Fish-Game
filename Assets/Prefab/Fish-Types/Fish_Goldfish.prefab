@@ -125,11 +125,6 @@ MonoBehaviour:
   fishCurrentState: 0
   sprite_transparency:
   - {fileID: 9173075911743269991}
-  - {fileID: 2187259583927761754}
-  - {fileID: 7855598603987665939}
-  - {fileID: 4664123763869061185}
-  - {fileID: 7710794256098520917}
-  - {fileID: 1126894671142511873}
   fishObj_transform: {fileID: 4689040288185090486}
   dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
   sacrifice_success: {fileID: 8300000, guid: 14403d00fe5a1b34d9ec6b8da1b2fe61, type: 3}
@@ -236,34 +231,9 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3936c75705cd38041836e9e944a61489, type: 3}
---- !u!4 &1126894671142511873 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9158627566719831476, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &2187259583927761754 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7989604009314898927, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &4664123763869061185 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3458826493437343988, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4689040288185090486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3578288886743427331, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7710794256098520917 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1997431103543740384, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &7855598603987665939 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2143364652030504102, guid: 3936c75705cd38041836e9e944a61489, type: 3}
   m_PrefabInstance: {fileID: 8122931891991308469}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &9173075911743269991 stripped

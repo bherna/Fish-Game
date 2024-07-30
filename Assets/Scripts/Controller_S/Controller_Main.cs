@@ -84,12 +84,13 @@ public class Controller_Main : MonoBehaviour
 
             //check if no money and no fish
             if(
-                (Wallet.instance.current_money) == 0 &&
-                (Controller_Fish.instance.GetFishCount() == 0)){
+                Wallet.instance.current_money == 0 &&
+                Controller_Fish.instance.GetFishCount() == 0
+                ){
                     //end game
                     SceneManager.LoadScene("MainMenu");
                 }
-            print("Didn't lose yet");
+
         }
     }
 

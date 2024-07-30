@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6e6dd734823c824d9e2e02ca9b5023a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxFish: 10
+  maxFish: 20
   fishObj: {fileID: 957995739772778605, guid: 30fae88099b0bdd4f8de7fb11e05cb46, type: 3}
   fish_list: []
   spawnSoundClip: {fileID: 8300000, guid: a1ece0d631a943b44a3c8d169b7200c1, type: 3}

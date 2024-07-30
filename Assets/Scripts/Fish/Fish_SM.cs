@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
-using Unity.VisualScripting;
-using Microsoft.Unity.VisualStudio.Editor;
 
 //hungry
 //
@@ -194,7 +192,6 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void HungryMode(){
         //look for food, until full
-
         //is there food on screen to target
         //if not then we can't chase food, return to idle state
         if(Controller_Food.instance.GetFoodLength() == 0){
@@ -238,7 +235,6 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
             
             //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
         }
-        
         //now
         //follow food
         //head towards target 
