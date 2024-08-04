@@ -74,4 +74,7 @@ public class UI_Dialogue : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+
+    
 }
