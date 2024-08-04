@@ -123,19 +123,9 @@ public class Controller_Food : MonoBehaviour
 
     //upgrades food power
     //also returns true if the array is finished
-    public bool Upgrade_FoodPower(){
-
+    public void Upgrade_FoodPower(){
         //increment array index
         index_foodPelletType++;
-
-        //check if this was the final upgrade
-        if(index_foodPelletType+1 >= foodPellets.Length){
-            return true;
-        }
-        else{
-            //there is atleast one more upgrade 
-            return false;
-        }
     }
 
     

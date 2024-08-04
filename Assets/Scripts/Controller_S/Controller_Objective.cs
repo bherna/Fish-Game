@@ -23,7 +23,7 @@ public class Controller_Objective : MonoBehaviour
     int final_obj = 3;
 
     //button gameobject 
-    [SerializeField] GameObject buttonSprite;
+    [SerializeField] Image ui_sprite;
 
     //display current obj cost on screen
     [SerializeField] TextMeshProUGUI ui_displayCost;
@@ -44,11 +44,11 @@ public class Controller_Objective : MonoBehaviour
         }catch(IndexOutOfRangeException e){
 
             Debug.Log("Error: "+e);
-            Debug.Log("A list for our objectives is missing.");
+            Debug.Log("obj_sprite_list and obj_price_list are not the same length");
         }
         
         //update sprite
-        buttonSprite.GetComponent<Image>().sprite = obj_sprite_list[obj_index];
+        ui_sprite.sprite = obj_sprite_list[obj_index];
 
         //display obj cost
         ui_displayCost.text = obj_price_list[obj_index].ToString();
@@ -87,7 +87,7 @@ public class Controller_Objective : MonoBehaviour
             }
             else{
                 //update sprite
-                buttonSprite.GetComponent<Image>().sprite = obj_sprite_list[obj_index];
+                ui_sprite.sprite = obj_sprite_list[obj_index];
                 //update display obj cost
                 ui_displayCost.text = obj_price_list[obj_index].ToString();
 

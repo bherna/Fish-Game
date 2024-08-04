@@ -6,7 +6,11 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
 {
 
     //list of objecive prices, in order of purchase
-    [SerializeField] int obj_price = 0;
+    [SerializeField] int[] prices;
+    [SerializeField] Sprite[] sprites;
+    [SerializeField] Image ui_sprite;
+    private int index_array = 0;
+
 
     //display current item cost on screen
     [SerializeField] TextMeshProUGUI ui_displayCost;
@@ -23,8 +27,16 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
 
     void Start()
     {
+        //are the lists the same size
+        if(prices.Length != sprites.Length){
+            Debug.Log("Lists are not the same size");
+
+        }
+
         //display obj cost
-        ui_displayCost.text = obj_price.ToString();
+        ui_displayCost.text = prices[index_array].ToString();
+        //sprite
+        ui_sprite.sprite = sprites[index_array];
     }
 
 
@@ -32,10 +44,10 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
     public void OnPurchase(){
 
         //is object affordable
-        if(Wallet.instance.IsAffordable(obj_price)){
+        if(Wallet.instance.IsAffordable(prices[index_array])){
 
             //purchase obj
-            Wallet.instance.SubMoney(obj_price);
+            Wallet.instance.SubMoney(prices[index_array]);
         }
         else{
             
@@ -51,7 +63,16 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
 
             case Upgrades.foodPower:
 
-                if(Controller_Food.instance.Upgrade_FoodPower()){
+                //update sprite + cost
+                index_array++;
+                ui_sprite.sprite = sprites[index_array];
+                ui_displayCost.text = prices[index_array].ToString();
+
+                //upgrade
+                Controller_Food.instance.Upgrade_FoodPower();
+
+                //is this last purchase
+                if(index_array >= prices.Length-1 ){
                     //disable button, since we reached max
                     GetComponent<Button>().interactable = false;
                 }
@@ -64,7 +85,7 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
                 break;
 
             case Upgrades.GunPower:
-            
+
                 Controller_Player.instance.Upgrade_gunPower();
                 break;
                 
