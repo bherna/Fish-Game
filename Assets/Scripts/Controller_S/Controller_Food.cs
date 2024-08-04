@@ -9,7 +9,8 @@ public class Controller_Food : MonoBehaviour
 {
 
     //----------------------- references ---------------------------
-    [SerializeField] GameObject foodPellet_basic;
+    [SerializeField] GameObject[] foodPellets;
+    private int index_foodPelletType = 0;
     
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] public Transform targetZ;
@@ -47,6 +48,7 @@ public class Controller_Food : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //start empy array for food
         foodPellets_list = new List<GameObject>();
     }
 
@@ -89,7 +91,7 @@ public class Controller_Food : MonoBehaviour
         }
 
         //spawn new
-        foodPellets_list.Add(Instantiate(foodPellet_basic, mousePos, Quaternion.identity));
+        foodPellets_list.Add(Instantiate(foodPellets[index_foodPelletType], mousePos, Quaternion.identity));
 
     }
 
@@ -119,8 +121,21 @@ public class Controller_Food : MonoBehaviour
         maxFood += 1;
     }
 
-    public void Upgrade_FoodPower(){
-        //increment index of food list or something
+    //upgrades food power
+    //also returns true if the array is finished
+    public bool Upgrade_FoodPower(){
+
+        //increment array index
+        index_foodPelletType++;
+
+        //check if this was the final upgrade
+        if(index_foodPelletType+1 >= foodPellets.Length){
+            return true;
+        }
+        else{
+            //there is atleast one more upgrade 
+            return false;
+        }
     }
 
     

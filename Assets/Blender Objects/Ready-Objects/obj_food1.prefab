@@ -52,17 +52,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: obj_food1
       objectReference: {fileID: 0}
+    - target: {fileID: 6317578925029434746, guid: 9c5153aa8f36a6a4db8d8ea374a1f919, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a7cdb50cf2cace447aa584b319237f96, type: 2}
     - target: {fileID: 8632055958874330854, guid: 9c5153aa8f36a6a4db8d8ea374a1f919, type: 3}
       propertyPath: m_LocalScale.x
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8632055958874330854, guid: 9c5153aa8f36a6a4db8d8ea374a1f919, type: 3}
       propertyPath: m_LocalScale.y
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8632055958874330854, guid: 9c5153aa8f36a6a4db8d8ea374a1f919, type: 3}
       propertyPath: m_LocalScale.z
-      value: 20
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 8632055958874330854, guid: 9c5153aa8f36a6a4db8d8ea374a1f919, type: 3}
       propertyPath: m_LocalRotation.w

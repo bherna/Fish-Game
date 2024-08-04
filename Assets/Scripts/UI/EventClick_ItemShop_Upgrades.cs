@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class EventClick_ItemShop_Upgrades : MonoBehaviour
 {
@@ -47,13 +48,23 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
             case Upgrades.foodMax:
                 Controller_Food.instance.Upgrade_foodMax();
                 break;
+
             case Upgrades.foodPower:
-                Controller_Food.instance.Upgrade_FoodPower();
+
+                if(Controller_Food.instance.Upgrade_FoodPower()){
+                    //disable button, since we reached max
+                    GetComponent<Button>().interactable = false;
+                }
+
                 break;
+
             case Upgrades.FishTotal:
+
                 Controller_Fish.instance.Upgrade_fishMax();
                 break;
+
             case Upgrades.GunPower:
+            
                 Controller_Player.instance.Upgrade_gunPower();
                 break;
                 
