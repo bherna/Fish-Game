@@ -63,6 +63,9 @@ public class Controller_Food : MonoBehaviour
 
         //spawn pellet
         if(Input.GetMouseButtonDown(1)){
+
+            //delete money if we have money
+            if(Wallet.instance.IsAffordable(5)){Wallet.instance.SubMoney(5);}
             
             //var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //orthagraphic
             var screenPos = Input.mousePosition;

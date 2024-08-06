@@ -294,6 +294,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8602774804505981182}
   - component: {fileID: 3935241704571195714}
+  - component: {fileID: 3241513374048596506}
   m_Layer: 7
   m_Name: GemBox
   m_TagString: GemBox
@@ -301,14 +302,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &8602774804505981182
-Transform:
+--- !u!224 &8602774804505981182
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3075297272825127560}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -316,6 +316,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9107361689168419475}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &3935241704571195714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -348,7 +353,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 4.869088}
+  m_Offset: {x: 0, y: -5.33}
   m_SpriteTilingProperty:
     border: {x: 1.52, y: 1.52, z: 1.52, w: 1.52}
     pivot: {x: 0.5, y: 0.5}
@@ -359,8 +364,16 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 11.26, y: 1.3201156}
+  m_Size: {x: 14.25, y: 1.8}
   m_EdgeRadius: 0
+--- !u!222 &3241513374048596506
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075297272825127560}
+  m_CullTransparentMesh: 1
 --- !u!1 &4611046673486589509
 GameObject:
   m_ObjectHideFlags: 0
