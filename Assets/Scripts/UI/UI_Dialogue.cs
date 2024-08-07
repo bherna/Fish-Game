@@ -4,51 +4,66 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+
+
+[System.Serializable]
+public struct Dialogue_Expect
+{
+    [SerializeField] public string line;  //dialogue string
+    [SerializeField] public Expect_Type expect_Type; //what dialogue string expects, to run
+    
+}
+
+
 public class UI_Dialogue : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI textUI;
-    [SerializeField] string[] lines;
-    
-    [SerializeField] Timer timer;
-    [SerializeField] Mask tab_ui_mask;
+    [SerializeField] Dialogue_Expect[] dialogue_Expect;
+    public Expect_Type curr_expectType {get; private set; } 
 
     private int index;    
     private float textSpeed = 0.05f;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        //disable shop ui
-        tab_ui_mask.enabled = true; //when true it makes it unclickable
 
+    //start method
+    public void StartDialogue(){
+
+        //set string to empty/ index to 0
         textUI.text = string.Empty;
-        StartDialogue();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0)){
-
-            if(textUI.text == lines[index]){
-                NextLine();
-            }
-            else{
-                StopAllCoroutines();
-                textUI.text = lines[index];
-            }
-        }
-    }
-
-    private void StartDialogue(){
         index = 0;
+
+        //set our next index expect type
+        curr_expectType = dialogue_Expect[index+1].expect_Type;
+
+        //start dialogue
         StartCoroutine(TypeLine());
     }
+    
 
+    //This gets used outside of this class
+    //When ever a 'click' is done this command is played
+    //click helps move dialogue to next line / finish current dialogue line
+    //returns nextline bool (true for more lines, false for we are done)
+    //else return true , since we have another click togo
+    public bool Click(){
+
+        if(textUI.text == dialogue_Expect[index].line){
+            return NextLine();
+        }
+        else{
+            StopAllCoroutines();
+            textUI.text = dialogue_Expect[index].line;
+            return true;
+        }
+        
+    }
+
+    
+    //slowly types out the current dialogue string we are index'd at
     private IEnumerator TypeLine(){
         //for each char 1 by 1
-        foreach( char c in lines[index].ToCharArray()){
+        foreach( char c in dialogue_Expect[index].line.ToCharArray()){
 
             textUI.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -56,22 +71,23 @@ public class UI_Dialogue : MonoBehaviour
     }
 
 
-    private void NextLine(){
-        if (index < lines.Length - 1){
+    //used for checking if a next line of dialogue/string exists, then starts that coroutine
+    //if next line exists, return true
+    //else false
+    private bool NextLine(){
+        if (index < dialogue_Expect.Length - 1){
+
+            //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
+            curr_expectType = dialogue_Expect[index+1].expect_Type;
+            //start typing line method and return
             StartCoroutine(TypeLine());
+            return true;
         }
         else{
 
-            //enable timer
-            timer.StartTimer();
-
-            //enable ui shop
-            tab_ui_mask.enabled = false;
-
-            //disable this object
-            gameObject.SetActive(false);
+            return false;
         }
     }
 
