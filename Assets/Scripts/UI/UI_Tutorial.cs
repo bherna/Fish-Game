@@ -10,7 +10,7 @@ using UnityEngine.UI;
 //Types:
 //TextBox:      expects player to click textbox ->
 //Button:       expects player to click button  ->
-//Wait:         makes player wait until next tutorial message -> (event needs to cause this one to push)
+//Wait:         makes player wait until next tutorial message -> (event needs to cause this one to push) 
 //fish_Hungry:  push next tutorial message      ->
 //Fish_Feed:    expects player to feed fish     ->
 public enum Expect_Type {TextBox, Button, Wait, Fish_Hungry, Fish_Feed};
@@ -27,6 +27,7 @@ public class UI_Tutorial : MonoBehaviour
 
   
     public bool tutorial_active = true;
+    
 
 
     //static variable for fish coin value
@@ -74,7 +75,7 @@ public class UI_Tutorial : MonoBehaviour
 
         //did the player click the correct thing to push tutorial
         if(uI_Dialogue.curr_expectType != eventR){
-            Debug.Log("Incorrect click for tutorial");
+            //Debug.Log("Incorrect click for tutorial: uI_Dialogue.curr_expectType");
             return;
         }
 
@@ -85,12 +86,11 @@ public class UI_Tutorial : MonoBehaviour
             //for every new click
             //disable shop
             shop_ui_mask.enabled = true; //re enable in expect type
-            uI_Dialogue.ToggleDialogueBox(true); // re enable in expect type
 
             //get new/current dia expect
             var type = uI_Dialogue.curr_expectType;
 
-            //
+            //Is there anything this up-comming expect_Type event needs help with to be pushed out
             switch(type){
 
                 //get next line's curr_expectType, check if we need buttons active
@@ -101,13 +101,19 @@ public class UI_Tutorial : MonoBehaviour
 
                 case Expect_Type.Wait:
                     //diable dialogue box, since we don't need to show it for now
+                    //(next expect_type might not nessasarily need to be active)
+                    // ex (fish_hungry will not be displayed but fish_feed will)
                     uI_Dialogue.ToggleDialogueBox(false);
+                    //move to next line
+                    TutorialClick(Expect_Type.Wait);
                     break;
 
                 case Expect_Type.Fish_Hungry:
                     break;
 
                 case Expect_Type.Fish_Feed:
+                    //re-enable dialoge box
+                    uI_Dialogue.ToggleDialogueBox(true); 
                     break;
 
                 case Expect_Type.TextBox:

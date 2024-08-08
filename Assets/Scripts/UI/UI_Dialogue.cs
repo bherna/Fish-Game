@@ -98,4 +98,10 @@ public class UI_Dialogue : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(toggle);
         transform.GetChild(1).gameObject.SetActive(toggle);
     }
+
+    //the enum WAIT expect type relies on this method
+    //this method should expect a next index in the array
+    public Expect_Type GetNext_ExpectType(){
+        return dialogue_Expect[index+1].expect_Type;
+    }
 }

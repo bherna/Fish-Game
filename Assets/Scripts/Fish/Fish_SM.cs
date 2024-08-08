@@ -107,6 +107,9 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                     //are we hungry and food is on screen
                     ChangeState(Fish_States.hungry);
                 }
+
+                //also check if this was a tutorial push
+                UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
                 
             }
         }
