@@ -4,9 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-//Expect type is used to tell what we expect the next click to be from player to 
+//Expect type is used to tell what we expect the next click to be from player to ->
 //progress the tutorial steps
-public enum Expect_Type {TextBox, Button};
+//
+//Types:
+//TextBox:      expects player to click textbox ->
+//Button:       expects player to click button  ->
+//Fish_Hungry:  expects player to feed fish     ->
+public enum Expect_Type {TextBox, Button, Fish_Hungry};
 
 
 public class UI_Tutorial : MonoBehaviour
@@ -19,7 +24,7 @@ public class UI_Tutorial : MonoBehaviour
     private UI_Dialogue uI_Dialogue;
 
   
-    
+    public bool tutorial_active = true;
 
 
     //static variable for fish coin value
@@ -47,6 +52,9 @@ public class UI_Tutorial : MonoBehaviour
 
         //start dialogue
         uI_Dialogue.StartDialogue();
+
+        //if we need the mask for shop items off, we would check here
+        //ui_dialogue.curr_expectTYpe == button ....
     }
 
     void Update (){
@@ -71,6 +79,38 @@ public class UI_Tutorial : MonoBehaviour
         //and its true -> we have more lines to go
         if(uI_Dialogue.Click()){
 
+            //for every new click
+            //disable shop
+            shop_ui_mask.enabled = true; //re enable in expect type
+            uI_Dialogue.ToggleDialogueBox(true); // re enable in expect type
+
+            //get new/current dia expect
+            var type = uI_Dialogue.curr_expectType;
+
+            //
+            switch(type){
+
+                //get next line's curr_expectType, check if we need buttons active
+                case Expect_Type.Button:
+                    //ENABLE ui shop (mask being on makes buttons unresponsive)
+                    shop_ui_mask.enabled = false;
+                    break;
+
+                case Expect_Type.Fish_Hungry:
+                    //diable dialogue box, since we don't need to show it for now
+                    uI_Dialogue.ToggleDialogueBox(false);
+                    break;
+
+                case Expect_Type.TextBox:
+                    break;
+                
+                default:
+                    Debug.Log("No expect type set.");
+                    break;
+            }
+            
+            
+
         }
         //else we are finished with tutorial and we can start game.
         else{
@@ -81,11 +121,12 @@ public class UI_Tutorial : MonoBehaviour
             shop_ui_mask.enabled = false;
 
             //disable this object
+            //and set tutorial to false
+            tutorial_active = false; 
             gameObject.SetActive(false);
         }
         
     }
 
-    
     
 }

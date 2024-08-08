@@ -964,7 +964,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6840501928162099645}
   - component: {fileID: 2274529698520192239}
-  - component: {fileID: 2008365800714517281}
+  - component: {fileID: 8627268525362739761}
   - component: {fileID: 6657735743885681065}
   m_Layer: 5
   m_Name: Text - UI
@@ -972,7 +972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &6840501928162099645
 RectTransform:
   m_ObjectHideFlags: 0
@@ -985,6 +985,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4019077028399230105}
   - {fileID: 3138642849952498976}
   m_Father: {fileID: 7569186588323293630}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1001,7 +1002,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1574710458011955288}
   m_CullTransparentMesh: 1
---- !u!114 &2008365800714517281
+--- !u!114 &8627268525362739761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1010,27 +1011,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1574710458011955288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Script: {fileID: 11500000, guid: 3abc1bd52dd7e78479fc39d0862398ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.17864613, g: 0.16553934, b: 0.2264151, a: 0.6039216}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a25b82e0d1e5374e90dd72e2b54c559, type: 3}
-  m_Type: 1
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 3
+  timer: {fileID: 1063367231122157393}
+  shop_ui_mask: {fileID: 5445914971455186086}
+  tutorial_active: 1
 --- !u!114 &6657735743885681065
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,31 +1030,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 4992964066520763345}
-  lines:
-  - Hello!
-  - ...
-  - "Welcome to my fish tank! \u2026 My name is Arial the witch.  "
-  - "You can\u2019t see me but I am a certified witch. Believe me, I graduated from
-    a so-fish-ticated school called Pike University with a Masters Degree in Fishology.
-    I was at the top of my class with a- \u2026 oh \u2026  sorry \u2026 I\u2019m
-    rambling again \u2026 he"
-  - "Whale ... Anyways \u2026  Let me show you my fish tank. This is my pride and
-    joy! "
-  - Starting from the top, we have my fabulous shop where you can trade your coins
-    for fish and upgrades. (buy fish, upgrade wand, buy egg)
-  - "Right next to my shop, we have the gems. Each gem has a very powerful spell
-    that can hurt all types of things. The most important one being those annoying
-    shadow fish \u2026 You\u2019ll know who I\u2019m talking about here soon. Their
-    favorite thing to eat are my fishies. "
-  - 'To get more gems you need to sacrifice an adult fish to the gems slots. Adult
-    fish drop gold coins. '
-  - ...
-  - 'You can also grab a fish to move them around the tank, it comes in handy when
-    dealing with shadow fish ;) '
-  - 'Your goal is to complete the egg.  '
-  - 'Alright! Now that I explained everything, go get it gill !! '
-  timer: {fileID: 1063367231122157393}
-  tab_ui_mask: {fileID: 5445914971455186086}
+  dialogue_Expect:
+  - line: 1 Hi
+    expect_Type: 0
+  - line: 2 Click Button
+    expect_Type: 1
+  - line: 3 Click text box
+    expect_Type: 0
+  - line: 4 last message
+    expect_Type: 0
 --- !u!1 &1720307765002467171
 GameObject:
   m_ObjectHideFlags: 0
@@ -4269,6 +4239,81 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 8
+--- !u!1 &7970456296531527069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4019077028399230105}
+  - component: {fileID: 7044426544673394774}
+  - component: {fileID: 1394277082831605384}
+  m_Layer: 5
+  m_Name: bg
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4019077028399230105
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970456296531527069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6840501928162099645}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7044426544673394774
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970456296531527069}
+  m_CullTransparentMesh: 1
+--- !u!114 &1394277082831605384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970456296531527069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.17864613, g: 0.16553934, b: 0.2264151, a: 0.6039216}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 8a25b82e0d1e5374e90dd72e2b54c559, type: 3}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 3
 --- !u!1 &8304227843835033694
 GameObject:
   m_ObjectHideFlags: 0
@@ -5765,6 +5810,14 @@ PrefabInstance:
     - target: {fileID: 2134655825816546596, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
       propertyPath: m_Name
       value: Button - objective
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972774700473628099, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
+      propertyPath: obj_price_list.Array.data[1]
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 5972774700473628099, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
+      propertyPath: obj_price_list.Array.data[2]
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9065132760062521914, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
       propertyPath: m_Pivot.x

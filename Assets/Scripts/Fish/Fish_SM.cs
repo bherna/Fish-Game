@@ -428,7 +428,11 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 //set our state to idle again
                 ChangeState(Fish_States.idle);
 
+                //eating ages fish
                 gameObject.GetComponent<Fish_Age>().Ate();
+
+                //check if this feeding was for fish to push tutorial
+                UI_Tutorial.instance.Playerclick(Expect_Type.Fish_Hungry);
             }
         }
 

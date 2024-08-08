@@ -34,7 +34,7 @@ public class UI_Dialogue : MonoBehaviour
         index = 0;
 
         //set our next index expect type
-        curr_expectType = dialogue_Expect[index+1].expect_Type;
+        curr_expectType = dialogue_Expect[index].expect_Type;
 
         //start dialogue
         StartCoroutine(TypeLine());
@@ -80,7 +80,7 @@ public class UI_Dialogue : MonoBehaviour
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
-            curr_expectType = dialogue_Expect[index+1].expect_Type;
+            curr_expectType = dialogue_Expect[index].expect_Type;
             //start typing line method and return
             StartCoroutine(TypeLine());
             return true;
@@ -92,5 +92,10 @@ public class UI_Dialogue : MonoBehaviour
     }
 
 
-    
+    //used for disabling or enabling in showing text ui box
+    public void ToggleDialogueBox(bool toggle){
+
+        transform.GetChild(0).gameObject.SetActive(toggle);
+        transform.GetChild(1).gameObject.SetActive(toggle);
+    }
 }
