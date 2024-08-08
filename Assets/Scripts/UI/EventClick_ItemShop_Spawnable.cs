@@ -39,7 +39,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
                     if(Controller_Fish.instance.SpawnFish()){
                         Wallet.instance.SubMoney(obj_price);
                         //also send an event message to the tutorial
-                        UI_Tutorial.instance.Playerclick(Expect_Type.Button);
+                        UI_Tutorial.instance.TutorialClick(Expect_Type.Button);
                     }
                     
                     break;

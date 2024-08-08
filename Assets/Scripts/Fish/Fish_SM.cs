@@ -432,7 +432,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 gameObject.GetComponent<Fish_Age>().Ate();
 
                 //check if this feeding was for fish to push tutorial
-                UI_Tutorial.instance.Playerclick(Expect_Type.Fish_Hungry);
+                UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
             }
         }
 

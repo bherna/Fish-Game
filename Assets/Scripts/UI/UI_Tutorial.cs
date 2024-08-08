@@ -10,8 +10,10 @@ using UnityEngine.UI;
 //Types:
 //TextBox:      expects player to click textbox ->
 //Button:       expects player to click button  ->
-//Fish_Hungry:  expects player to feed fish     ->
-public enum Expect_Type {TextBox, Button, Fish_Hungry};
+//Wait:         makes player wait until next tutorial message -> (event needs to cause this one to push)
+//fish_Hungry:  push next tutorial message      ->
+//Fish_Feed:    expects player to feed fish     ->
+public enum Expect_Type {TextBox, Button, Wait, Fish_Hungry, Fish_Feed};
 
 
 public class UI_Tutorial : MonoBehaviour
@@ -59,15 +61,16 @@ public class UI_Tutorial : MonoBehaviour
 
     void Update (){
 
+        //click in tank to 'click' text box
         if(Input.GetMouseButtonDown(0)){
-            Playerclick(Expect_Type.TextBox);
+            TutorialClick(Expect_Type.TextBox);
         }
     }
 
 
     //Player click method is used to move tutorial forward
     //method expects an eventR expect_type (where this method was called from)(from button or from this class)
-    public void Playerclick(Expect_Type eventR){
+    public void TutorialClick(Expect_Type eventR){
 
         //did the player click the correct thing to push tutorial
         if(uI_Dialogue.curr_expectType != eventR){
@@ -96,9 +99,15 @@ public class UI_Tutorial : MonoBehaviour
                     shop_ui_mask.enabled = false;
                     break;
 
-                case Expect_Type.Fish_Hungry:
+                case Expect_Type.Wait:
                     //diable dialogue box, since we don't need to show it for now
                     uI_Dialogue.ToggleDialogueBox(false);
+                    break;
+
+                case Expect_Type.Fish_Hungry:
+                    break;
+
+                case Expect_Type.Fish_Feed:
                     break;
 
                 case Expect_Type.TextBox:
