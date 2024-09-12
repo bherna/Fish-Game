@@ -10,6 +10,6 @@ public class CoinSpin : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coinSprite.transform.Rotate(Time.deltaTime * speed, 0, 0, Space.Self);
+        coinSprite.transform.Rotate(0, Time.deltaTime * speed,  0, Space.Self);
     }
 }

@@ -513,6 +513,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3218499942675396809, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5174840217320319321, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.0048483964
@@ -553,9 +557,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776824238320343858, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7989386241410265437, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
       propertyPath: m_Name
       value: Lights
+      objectReference: {fileID: 0}
+    - target: {fileID: 8414195064714166792, guid: 22bf074e56540bc4392ac39868a55df6, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -799,19 +811,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: dialogue_Expect.Array.size
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: dialogue_Expect.Array.data[3].line
-      value: 4 feed fish
+      value: 4 Wait
       objectReference: {fileID: 0}
     - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: dialogue_Expect.Array.data[4].line
-      value: 5 last message
+      value: 5 Fish is hungry
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: dialogue_Expect.Array.data[5].line
+      value: 6 Feed fish
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: dialogue_Expect.Array.data[6].line
+      value: -1 last message
       objectReference: {fileID: 0}
     - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: dialogue_Expect.Array.data[3].expect_Type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: dialogue_Expect.Array.data[4].expect_Type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6657735743885681065, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: dialogue_Expect.Array.data[5].expect_Type
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7569186588323293630, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_Pivot.x
