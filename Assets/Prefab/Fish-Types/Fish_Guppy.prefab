@@ -11,10 +11,11 @@ GameObject:
   - component: {fileID: 3570511211699522400}
   - component: {fileID: 3430959631681873767}
   - component: {fileID: 4727634519042051010}
-  - component: {fileID: 7301870579390221737}
-  - component: {fileID: 2749740470348012892}
-  - component: {fileID: -5030118377382371271}
-  - component: {fileID: 1057085207811496155}
+  - component: {fileID: 3963026121647631916}
+  - component: {fileID: 7864615252232299439}
+  - component: {fileID: -5196290186542646016}
+  - component: {fileID: -4281585000485617961}
+  - component: {fileID: -6097468994291337018}
   m_Layer: 6
   m_Name: Fish_Guppy
   m_TagString: Fish
@@ -110,7 +111,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7301870579390221737
+--- !u!114 &3963026121647631916
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,61 +120,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 957995739772778605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80751f9e4bff272489015d711c0fa218, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a5b61f5021b31047b22e83fc06896e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fishCurrentState: 0
+--- !u!114 &7864615252232299439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957995739772778605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6d796d26c9f77240b9140dce869345f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5196290186542646016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957995739772778605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7449296f344ab634f8fc7f18af8d3a64, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-4281585000485617961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957995739772778605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 747ca84f723a7af49af79a36db74d6d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-6097468994291337018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 957995739772778605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71b0a639e5ec2214db1c53650c83c0d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   sprite_transparency:
-  - {fileID: 9173075911743269991}
-  fishObj_transform: {fileID: 4689040288185090486}
+  - {fileID: 4689040288185090486}
   dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
-  sacrifice_success: {fileID: 8300000, guid: 14403d00fe5a1b34d9ec6b8da1b2fe61, type: 3}
-  sacrifice_fail: {fileID: 8300000, guid: 607c0bda62cc94948b9ab5487db3f817, type: 3}
---- !u!114 &2749740470348012892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957995739772778605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ea25ba5002dda645b959391a6b3a422, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  secTillMoney: 5
-  fish_Age: {fileID: -5030118377382371271}
-  coin_silver: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
-  coin_gold: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
---- !u!114 &-5030118377382371271
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957995739772778605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84b23eef2bb967d4a9ba6c5aa493130e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  amount_food_ate: 0
-  food_until_next_stage: 4
-  sprite_render: {fileID: 4689040288185090486}
-  fish_size_current: 0.6
-  fish_size_scale: 0.1
---- !u!114 &1057085207811496155
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 957995739772778605}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ecf78ef175eee849bdd9e97fa88510b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8122931891991308469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -234,10 +234,5 @@ PrefabInstance:
 --- !u!4 &4689040288185090486 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3578288886743427331, guid: 3936c75705cd38041836e9e944a61489, type: 3}
-  m_PrefabInstance: {fileID: 8122931891991308469}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &9173075911743269991 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1150454699098571986, guid: 3936c75705cd38041836e9e944a61489, type: 3}
   m_PrefabInstance: {fileID: 8122931891991308469}
   m_PrefabAsset: {fileID: 0}

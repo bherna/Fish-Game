@@ -15,4 +15,8 @@ public class Guppy_Age : MonoBehaviour
     {
         
     }
+
+    public void GuppyGrow(){
+        
+    }
 }
