@@ -458,89 +458,12 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         }
 
 
-        //           DECIDE - SACRIFIACE
-        //if gembox collision
-        if(other.gameObject.CompareTag("GemBox")){
-
-            //if we are currently grabbed and of age
-            if( Fish_States.grabbed == fishCurrentState &&
-                GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1){
-
-                    //if dragging on Gembox
-                    //show player how many gems they could get
-                    Controller_Player.instance.Gems_Show(5);
-
-                }
-            //if we are dropped:
-            else if( Fish_States.dropped == fishCurrentState){
-                    //now check if:
-
-                    
-                    //dont sacrifice if fish is not at correct age
-                    if( GetComponent<Fish_Age>().GetAge() < Controller_Fish.instance.GetFishStages().Count-1){
-                        if(play_Fail_SoundAgain){//else young fish can get sacrificed /|\
-                            //don't sacrifice sound effect    
-                            AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
-                            play_Fail_SoundAgain = false;
-                        }
-                         
-                    }
-                    //don't sacrifice if gems are at max
-                    else if(Controller_Player.instance.Gems_AtMax()){
-
-                        //return gems to real amount
-                        Controller_Player.instance.Gems_Update();
-
-                        //failed to sacrifice sound
-                        if(play_Fail_SoundAgain){//else we end up spamming this sound
-                            AudioManager.instance.PlaySoundFXClip(sacrifice_fail, transform, 1f);
-                            play_Fail_SoundAgain = false; 
-                        }
-                    }
-                    //else: we sacrifice fish
-                    else{
-                        //sacrifice
-                        //if fish is dropped in sacrifce area
-                        //update gems
-                        Controller_Player.instance.Gems_Add(5);
-
-                        //successfull sacrifice sound
-                        AudioManager.instance.PlaySoundFXClip(sacrifice_success, transform, 1f);
         
-                        //kill fish
-                        Died(false);
-                    }
-                    
-
-                }
-        }
         
 
     }
 
-    private void OnTriggerExit2D(Collider2D other){
-
-        //if this fish leaves gem box area
-        if( Fish_States.grabbed == fishCurrentState &&
-            other.gameObject.CompareTag("GemBox")){
-
-                //if we edited gem ui
-                if(GetComponent<Fish_Age>().GetAge() == Controller_Fish.instance.GetFishStages().Count-1){
-
-                    //return gems to real amount
-                    Controller_Player.instance.Gems_Update();
-                }
-
-        }
-
-
-        
-
-        
-
-    }
-
-    
+   
 
 
     public void Died(bool playSound = true){

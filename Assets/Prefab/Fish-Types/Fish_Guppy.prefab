@@ -178,8 +178,8 @@ MonoBehaviour:
   amount_food_ate: 0
   food_until_next_stage: 3
   sprite_render: {fileID: 4689040288185090486}
-  fish_size_current: 1
-  fish_size_scale: 0.5
+  fish_size_current: 0.6
+  fish_size_scale: 0.1
 --- !u!114 &5852136028366042688
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,8 +16,8 @@ public class Fish_Age : MonoBehaviour
     //bool if we should keep age-ing
     private bool updateAge = true;
 
-    [SerializeField] private float fish_size_current = 1;
-    [SerializeField] private float fish_size_scale = 0.5f;
+    [SerializeField] private float fish_size_current = 0.6f;
+    [SerializeField] private float fish_size_scale = 0.1f;
 
 
 
