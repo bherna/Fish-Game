@@ -123,11 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &31673184 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 602548577269897281, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
-  m_PrefabInstance: {fileID: 1085883341}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &124963510 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7026401551242931772, guid: 3dc72b5e6e9751b41a71f8742b4dba35, type: 3}
@@ -685,6 +680,10 @@ PrefabInstance:
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 124963510}
+    - target: {fileID: 4054806390949159010, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4264416647926818049, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -994,7 +993,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4054806390949159010, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
@@ -1477,7 +1477,7 @@ PrefabInstance:
     - target: {fileID: 5381587780311730912, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
       propertyPath: Gems_Parent
       value: 
-      objectReference: {fileID: 31673184}
+      objectReference: {fileID: 0}
     - target: {fileID: 7873716153022612295, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

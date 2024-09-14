@@ -13,9 +13,14 @@ public class Guppy_Movement : MonoBehaviour
     private Vector3 idleTarget;
     private float targetRadius = 0.5f;
     private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
-
-    
     private GameObject foodTarget;
+
+
+    // --------------------------------- Sprite ---------------------------------
+    [SerializeField] Transform guppy_transform;   //get transform of guppy sprite
+    private float startTime = 0;
+    private float h_turningSpeed = 1.5f;
+    float y_angle = 0;
 
 
     // Start is called before the first frame update
@@ -93,6 +98,9 @@ public class Guppy_Movement : MonoBehaviour
 
     private void NewRandomIdleTarget_Tank(){
 
+        //update our sprite variables
+        NewTargetVariables();
+
         //new target
         var curr_pos = new Vector3 (transform.position.x, transform.position.y, 0);
 
@@ -120,7 +128,56 @@ public class Guppy_Movement : MonoBehaviour
         );
 
         //everything now is sprite visuals
+        float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
+
+        //fish local facing position (towards target) 
+        //sprite (left or right)
+        if(transform.position.x - targetTypePosition.x < 0){
+
+
+            //turn right  (0 degrees to 180 degress)
+            //if we are in the most left most position
+            if(guppy_transform.localRotation.eulerAngles.y == 0){
+                y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
+            }
+            else{
+            //else start at current y
+                y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
+            }
+            
+        }
+        else if (transform.position.x - targetTypePosition.x > 0){
+
+            //return to left (180 degress to 0 degrees)
+            //if we are currently at the right most position
+            if(guppy_transform.localRotation.eulerAngles.y == 180){
+                y_angle = Mathf.SmoothStep(180, 0 , y_curr_angle);
+            }
+            //else start at current y
+            else{
+                y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
+            }
+
+        }
+        else {
+            //else keep curr pos rotation
+            y_angle = guppy_transform.localRotation.eulerAngles.y;
+            //this shouldnt happen
+            //so
+            Debug.Log("Guppy y_angle is not working");
+        }
+
+
+        //apply rotations
+        guppy_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
+
 
     }
 
+
+
+    //whenever a new target is set we reset our sprite variables
+    private void NewTargetVariables(){
+        startTime = Time.time;      //reset our turning time for lerp
+    }
 }

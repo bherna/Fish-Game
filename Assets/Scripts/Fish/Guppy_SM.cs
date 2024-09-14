@@ -23,6 +23,10 @@ public class Guppy_SM : MonoBehaviour
 
     // --------------------------------- other ---------------------------------
     //current state
+    /// <summary>
+    /// Idle overrides Hungry state : if no food is available on screen (state stays as hungry)
+    
+    /// </summary>
     public Guppy_States guppy_current_state {
         get;   // get method
         private set ; // set method
@@ -37,6 +41,8 @@ public class Guppy_SM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        // -------------------------------------------------------- movement related -------------------------------------------------------- // 
         //which state we should enter
         Guppy_States enterState = guppy_current_state;
 

@@ -57,21 +57,17 @@ public class Guppy_Stats : MonoBehaviour
 
     public void FishEated(int foodValue){
 
-        //did fish get full (enough)
-        if(stomach > hungryRange){
+        //return color to fish
+        ChangeTransparency(true);
 
-            //return color to fish
-            ChangeTransparency(true);
+        //set our state to idle again
+        guppy_SM.GuppyIsFull();
 
-            //set our state to idle again
-            guppy_SM.GuppyIsFull();
+        //eating ages guppy
+        fish_Age.Ate();
 
-            //eating ages guppy
-            fish_Age.Ate();
-
-            //check if this feeding was for fish to push tutorial
-            UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
-        }
+        //check if this feeding was for fish to push tutorial
+        UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
     }
 
 

@@ -33,19 +33,6 @@ public class Enemy : MonoBehaviour, IPointerClickHandler
     
     public void OnPointerClick(PointerEventData eventData){
 
-        //make sure we have ammo to use (one gem click)
-        if( ! Controller_Player.instance.Gems_Available(1)){
-            Debug.Log("Not Enough gems to attack.");
-            return; //not enough gems to click
-        }
-        else{
-            //use 1 gem (for now)
-            Controller_Player.instance.Gems_Sub(1);
-            //play sound
-            AudioManager.instance.PlaySoundFXClip(damageSoundClip, transform, 1f);
-        }
-
-
         //if the game is paused, return
         if(Controller_Main.instance.paused){
             return;

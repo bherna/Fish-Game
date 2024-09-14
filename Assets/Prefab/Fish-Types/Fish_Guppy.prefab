@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7449296f344ab634f8fc7f18af8d3a64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guppy_transform: {fileID: 4689040288185090486}
 --- !u!114 &-4281585000485617961
 MonoBehaviour:
   m_ObjectHideFlags: 0

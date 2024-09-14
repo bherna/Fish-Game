@@ -494,4 +494,9 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
 
 
+    private bool dontUseThisFunction(){
+        return play_Fail_SoundAgain;
+    }
+
+
 }
