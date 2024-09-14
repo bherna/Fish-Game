@@ -7,7 +7,7 @@ public class Guppy_Stats : MonoBehaviour
 
     // --------------------------------- gubby script reference --------------------------------- 
     private Guppy_SM guppy_SM;
-    private Guppy_Age guppy_Age;
+    private Fish_Age fish_Age;
 
     [SerializeField] List<Transform> sprite_transparency; //fish sprites
     [SerializeField] AudioClip dieSoundClip;
@@ -23,7 +23,9 @@ public class Guppy_Stats : MonoBehaviour
     void Start()
     {
         guppy_SM = GetComponent<Guppy_SM>();
-        guppy_Age = GetComponent<Guppy_Age>();
+        fish_Age = GetComponent<Fish_Age>();
+
+        stomach = startStomach;
     }
 
     // Update is called once per frame
@@ -46,7 +48,7 @@ public class Guppy_Stats : MonoBehaviour
             ChangeTransparency(false);
 
             //also check if this was a tutorial push
-            UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
+            //UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
             
         }
 
@@ -65,7 +67,7 @@ public class Guppy_Stats : MonoBehaviour
             guppy_SM.GuppyIsFull();
 
             //eating ages guppy
-            guppy_Age.GuppyGrow();
+            fish_Age.Ate();
 
             //check if this feeding was for fish to push tutorial
             UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);

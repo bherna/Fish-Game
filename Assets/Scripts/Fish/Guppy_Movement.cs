@@ -8,7 +8,6 @@ public class Guppy_Movement : MonoBehaviour
     //--------------------------------- used in the update position function ---------------------------------
     private float idle_velocity = 1;
     private float hungry_velocity = 2;
-    private float current_Vel = 0; 
 
     // --------------------------------- targetting ---------------------------------
     private Vector3 idleTarget;
@@ -22,7 +21,7 @@ public class Guppy_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -32,15 +31,15 @@ public class Guppy_Movement : MonoBehaviour
     }
 
 
+    //move around the tank
+    //get a random point on the screen
     public void IdleMode(){
-        //move around the tank
-        //get a random point on the screen
 
         var distance = Vector3.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget);
+            updatePosition(idleTarget, idle_velocity);
         }
 
         //get new point once fish reaches it
@@ -87,7 +86,7 @@ public class Guppy_Movement : MonoBehaviour
         //now
         //follow food
         //head towards target 
-        updatePosition(foodTarget.transform.position);
+        updatePosition(foodTarget.transform.position, hungry_velocity);
 
 
     }
@@ -111,7 +110,7 @@ public class Guppy_Movement : MonoBehaviour
         
     }
 
-    private void updatePosition(Vector3 targetTypePosition){
+    private void updatePosition(Vector3 targetTypePosition, float current_Vel){
 
         //update physical position towards the target
         transform.position = Vector2.MoveTowards(
