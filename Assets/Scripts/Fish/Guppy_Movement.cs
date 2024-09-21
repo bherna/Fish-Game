@@ -59,46 +59,27 @@ public class Guppy_Movement : MonoBehaviour
         //if wer not targeting food (ie:current target food is null) 
         //          : target a food
         if(foodTarget == null){
-
-            //find food to followe 
-            var closestDis = float.PositiveInfinity;
-            var allFoods = Controller_Food.instance.GetAllFood();
-
-            //for all food objs in scene, get the closest
-            var tempTarget = allFoods[0];
-            foreach (GameObject food in allFoods){
-
-                var newDis = (transform.position - food.transform.position).sqrMagnitude;
-
-                if(newDis < closestDis){
-
-                    closestDis = newDis;
-                    tempTarget = food;  
-                }
-            }
-            //if this is our first food target found, set instant
-            //if this new food we found is closer, set that as new target
-            //else nothing
-            if(foodTarget == null){
-                foodTarget = tempTarget;
-            }
-            else if(foodTarget != tempTarget){
-                foodTarget = tempTarget;
-            }
-            
-            //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
+            NewFoodTarget_Tank();
         }
-        //now
-        //follow food
-        //head towards target 
-        updatePosition(foodTarget.transform.position, hungry_velocity);
+
+        //if food target is still null
+        if(foodTarget == null){
+            //run idel mode
+            IdleMode();
+        }
+        else{
+            //else
+            //follow food
+            //head towards target 
+            updatePosition(foodTarget.transform.position, hungry_velocity);
+        }
 
 
     }
 
     private void NewRandomIdleTarget_Tank(){
 
-        //update our sprite variables
+        //since new target
         NewTargetVariables();
 
         //new target
@@ -118,6 +99,34 @@ public class Guppy_Movement : MonoBehaviour
         
     }
 
+    private void NewFoodTarget_Tank(){
+
+        //new target
+        NewTargetVariables();
+
+        //find food to followe 
+        var closestDis = float.PositiveInfinity;
+        var allFoods = Controller_Food.instance.GetAllFood();
+        if(allFoods.Count == 0){return;}
+
+        //for all food objs in scene, get the closest
+        var tempTarget = allFoods[0];
+        foreach (GameObject food in allFoods){
+
+            var newDis = (transform.position - food.transform.position).sqrMagnitude;
+
+            if(newDis < closestDis){
+
+                closestDis = newDis;
+                tempTarget = food;  
+            }
+        }
+        //
+        foodTarget = tempTarget;
+        
+        //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
+    }
+
     private void updatePosition(Vector3 targetTypePosition, float current_Vel){
 
         //update physical position towards the target
@@ -127,7 +136,7 @@ public class Guppy_Movement : MonoBehaviour
             current_Vel * Time.deltaTime
         );
 
-        //everything now is sprite visuals
+        //----------------- everything now is sprite visuals ------------------------------
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
 
         //fish local facing position (towards target) 

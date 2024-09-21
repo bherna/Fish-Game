@@ -19,7 +19,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
         if(canAttack && other.gameObject.CompareTag("Fish")){
             
             //bite
-            Debug.Log(gameObject.ToString() + "Bite");
+            //Debug.Log(gameObject.ToString() + "Bite");
             other.gameObject.GetComponent<Fish_Stats>().TakeDamage(attackPower);
             
             Instantiate(bite_particle, transform.position, Quaternion.identity);

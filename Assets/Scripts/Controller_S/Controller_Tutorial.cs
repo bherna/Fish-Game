@@ -62,7 +62,7 @@ public class Controller_Tutorial : MonoBehaviour
         }
         else{
             Disable_Tutorial();
-            Debug.Log("Tutorial is set to - disabled - this round.");
+            //Debug.Log("Tutorial is set to - disabled - this round.");
         }
 
     }
