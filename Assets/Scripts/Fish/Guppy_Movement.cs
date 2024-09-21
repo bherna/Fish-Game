@@ -18,7 +18,7 @@ public class Guppy_Movement : MonoBehaviour
 
     // --------------------------------- Sprite ---------------------------------
     [SerializeField] Transform guppy_transform;   //get transform of guppy sprite
-    private float startTime = 0;
+    private float startTime;
     private float h_turningSpeed = 1.5f;
     float y_angle = 0;
 
@@ -26,7 +26,8 @@ public class Guppy_Movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        NewRandomIdleTarget_Tank();
+        startTime = Time.time;
     }
 
     // Update is called once per frame
@@ -143,29 +144,14 @@ public class Guppy_Movement : MonoBehaviour
         //sprite (left or right)
         if(transform.position.x - targetTypePosition.x < 0){
 
-
             //turn right  (0 degrees to 180 degress)
-            //if we are in the most left most position
-            if(guppy_transform.localRotation.eulerAngles.y == 0){
-                y_angle = Mathf.SmoothStep(0, 180, y_curr_angle);
-            }
-            else{
-            //else start at current y
-                y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
-            }
+            y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
             
         }
         else if (transform.position.x - targetTypePosition.x > 0){
 
             //return to left (180 degress to 0 degrees)
-            //if we are currently at the right most position
-            if(guppy_transform.localRotation.eulerAngles.y == 180){
-                y_angle = Mathf.SmoothStep(180, 0 , y_curr_angle);
-            }
-            //else start at current y
-            else{
-                y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
-            }
+            y_angle = Mathf.SmoothStep(guppy_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);
 
         }
         else {
@@ -188,5 +174,19 @@ public class Guppy_Movement : MonoBehaviour
     //whenever a new target is set we reset our sprite variables
     private void NewTargetVariables(){
         startTime = Time.time;      //reset our turning time for lerp
+    }
+
+    private void OnDrawGizmosSelected() {
+    
+        //current target for fish
+        Gizmos.color = new Color(1,1,0,0.75f);
+        Gizmos.DrawWireSphere(idleTarget, targetRadius);
+
+        //current target for fish
+        Gizmos.color = new Color(0,1,1,0.75f);
+        Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
+
+
+        
     }
 }
