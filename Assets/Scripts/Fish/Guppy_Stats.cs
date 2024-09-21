@@ -66,6 +66,9 @@ public class Guppy_Stats : MonoBehaviour
         //eating ages guppy
         fish_Age.Ate();
 
+        //update fish stomach to add food value
+        stomach += foodValue;
+
         //check if this feeding was for fish to push tutorial
         Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
     }
