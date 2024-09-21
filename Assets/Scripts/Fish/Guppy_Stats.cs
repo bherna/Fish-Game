@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guppy_Stats : MonoBehaviour
+public class Guppy_Stats : Fish_Stats
 {
 
     // --------------------------------- gubby script reference --------------------------------- 
@@ -10,7 +10,6 @@ public class Guppy_Stats : MonoBehaviour
     private Fish_Age fish_Age;
 
     [SerializeField] List<Transform> sprite_transparency; //fish sprites
-    [SerializeField] AudioClip dieSoundClip;
 
     // --------------------------------- hunger related --------------------------------- 
     private float stomach;
@@ -20,8 +19,9 @@ public class Guppy_Stats : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    new void Start()
     {
+        base.Start();
         guppy_SM = GetComponent<Guppy_SM>();
         fish_Age = GetComponent<Fish_Age>();
 
@@ -96,17 +96,7 @@ public class Guppy_Stats : MonoBehaviour
     }
 
 
-    public void Died(bool playSound = true){
-
-        //removes self from the list of current fish known to the fish controller
-        Controller_Fish.instance.RemoveFish(gameObject);
-        
-        //play die sound
-        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
-        
-
-        Destroy(gameObject);
-    }
+    
 
 
 
