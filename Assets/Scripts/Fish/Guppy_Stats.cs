@@ -48,7 +48,7 @@ public class Guppy_Stats : MonoBehaviour
             ChangeTransparency(false);
 
             //also check if this was a tutorial push
-            //UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
+            Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
             
         }
 
@@ -67,7 +67,7 @@ public class Guppy_Stats : MonoBehaviour
         fish_Age.Ate();
 
         //check if this feeding was for fish to push tutorial
-        UI_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
+        Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
     }
 
 

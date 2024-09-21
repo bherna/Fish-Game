@@ -17,7 +17,6 @@ public struct Dialogue_Expect
 
 public class UI_Dialogue : MonoBehaviour
 {
-
     [SerializeField] TextMeshProUGUI textUI;
     [SerializeField] Dialogue_Expect[] dialogue_Expect;
     public Expect_Type curr_expectType {get; private set; } 
@@ -104,4 +103,5 @@ public class UI_Dialogue : MonoBehaviour
     public Expect_Type GetNext_ExpectType(){
         return dialogue_Expect[index+1].expect_Type;
     }
+
 }

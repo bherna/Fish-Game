@@ -16,14 +16,14 @@ using UnityEngine.UI;
 public enum Expect_Type {TextBox, Button, Wait, Fish_Hungry, Fish_Feed};
 
 
-public class UI_Tutorial : MonoBehaviour
+public class Controller_Tutorial : MonoBehaviour
 {
     [SerializeField] Timer timer;
     [SerializeField] Mask shop_ui_mask;
 
 
 
-    private UI_Dialogue uI_Dialogue;
+    [SerializeField] UI_Dialogue uI_Dialogue;
 
   
     public bool tutorial_active = true;
@@ -31,7 +31,7 @@ public class UI_Tutorial : MonoBehaviour
 
 
     //static variable for fish coin value
-    public static UI_Tutorial instance {get; private set; }
+    public static Controller_Tutorial instance {get; private set; }
     void Awake (){
 
         //delete duplicate of this instance
@@ -48,22 +48,29 @@ public class UI_Tutorial : MonoBehaviour
     
     void Start()
     {
-        uI_Dialogue = GetComponent<UI_Dialogue>();
+        //make sure we aren't disabled
+        if (tutorial_active){
+           
+            //disable shop ui
+            shop_ui_mask.enabled = true; //when true it makes it unclickable
 
-        //disable shop ui
-        shop_ui_mask.enabled = true; //when true it makes it unclickable
+            //start dialogue
+            uI_Dialogue.StartDialogue();
 
-        //start dialogue
-        uI_Dialogue.StartDialogue();
+            //if we need the mask for shop items off, we would check here
+            //ui_dialogue.curr_expectTYpe == button ....
+        }
+        else{
+            Disable_Tutorial();
+            Debug.Log("Tutorial is set to - disabled - this round.");
+        }
 
-        //if we need the mask for shop items off, we would check here
-        //ui_dialogue.curr_expectTYpe == button ....
     }
 
     void Update (){
 
         //click in tank to 'click' text box
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && tutorial_active){
             TutorialClick(Expect_Type.TextBox);
         }
     }
@@ -129,19 +136,21 @@ public class UI_Tutorial : MonoBehaviour
         }
         //else we are finished with tutorial and we can start game.
         else{
-            //enable timer
-            timer.StartTimer();
-
-            //enable ui shop
-            shop_ui_mask.enabled = false;
-
-            //disable this object
-            //and set tutorial to false
-            tutorial_active = false; 
-            gameObject.SetActive(false);
+            Disable_Tutorial();
         }
         
     }
 
-    
+    private void Disable_Tutorial(){
+        //enable timer
+        timer.StartTimer();
+
+        //enable ui shop
+        shop_ui_mask.enabled = false;
+
+        //disable this object
+        //and set tutorial to false
+        tutorial_active = false; 
+        uI_Dialogue.ToggleDialogueBox(false);
+    }
 }
