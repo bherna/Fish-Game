@@ -19,7 +19,7 @@ public  class UI_Levels : MonoBehaviour
     private void Start() {
         
         //load save file  
-        LevelsAccess.LoadLevels();
+        LevelsAccess.LoadLevels_Array();
 
         //update levels on panels
         UI_LevelsUpdateAccess();
@@ -31,7 +31,7 @@ public  class UI_Levels : MonoBehaviour
         for(int i = 0; i < levels_reference.GetLength(0); i++){
             for(int j = 0; j < levels_reference[i].world_level.GetLength(0); j++) {
                 
-                if(LevelsAccess.GetLevelAccess(i, j)){
+                if(LevelsAccess.GetLevel_Access(i, j)){
                     levels_reference[i].world_level[j].GetComponent<Button>().interactable = true;
                 }
                 else{

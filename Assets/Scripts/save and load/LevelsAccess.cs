@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class LevelsAccess
@@ -10,14 +11,39 @@ public static class LevelsAccess
 
 
 
-    //save and load levels for game functions
-    public static void SaveLevels(){
-        SaveLoad.SaveLevels(); //don't need to call self else 'this'
+    //save current levels access for game 
+    public static void SaveLevels_Array(){
+        SaveLoad.SaveGame(); //don't need to call self else 'this'
     }
 
-    /*
-    public static void LoadLevels(){
-        //then we are a new game
+    
+    
+    
+    //pull any saved data loaded within the save path for level access, if non, create new game level access
+    public static void LoadLevels_Array(){
+        
+
+        //make sure we only run this once per game start up
+        if(levels_access == null){
+
+            Levels_Data_Serializable data = SaveLoad.Load_Levels();
+            
+            if(data != null){
+                //then load levels
+                levels_access = data.levels;
+            }
+            else{
+                //then we are a new game
+                NewLevels_Array();
+            }
+            
+        }
+        
+    }
+
+    //creates a new list for level access, making the first level the only one accessable
+    public static void NewLevels_Array(){
+        
         Debug.Log("New Game.");
 
         //new [all false] 2d arary 
@@ -25,34 +51,6 @@ public static class LevelsAccess
 
         //set level 1-1
         levels_access[0,0] = true;
-    }
-    */
-    
-    public static void LoadLevels(){
-        
-
-        //make sure we only run this once per game start up
-        if(levels_access == null){
-
-            UI_Levels_Data data = SaveLoad.LoadLevels();
-            
-            if(data != null){
-                levels_access = data.levels;
-            }
-            else{
-                //then we are a new game
-                Debug.Log("New Game.");
-
-                //new [all false] 2d arary 
-                levels_access = new bool[2,6];
-
-                //set level 1-1
-                levels_access[0,0] = true;
-                }
-            
-        }
-
-        
     }
     
 
@@ -64,7 +62,7 @@ public static class LevelsAccess
     /// <param name="world">sub 1 for correct world, in array</param>
     /// <param name="level">sub 1 for correct level, in array</param>
     /// <returns></returns>
-    public static bool GetLevelAccess(int world, int level) {
+    public static bool GetLevel_Access(int world, int level) {
         return levels_access[world, level];
     }
 
@@ -77,9 +75,11 @@ public static class LevelsAccess
     /// <param name="world"></param>
     /// <param name="level"></param>
     /// <param name="accessType"></param>
-    public static void SetLevelAccess(int world, int level, bool accessType){
+    public static void UnlockLevel_Access(int world, int level, bool accessType){
         levels_access[world, level] = accessType;
     }
+
+
 
 
 

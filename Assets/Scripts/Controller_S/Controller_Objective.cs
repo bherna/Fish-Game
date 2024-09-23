@@ -55,7 +55,7 @@ public class Controller_Objective : MonoBehaviour
 
         //just incase we start the game from this scene,
         //run levels access to be able to update main menu ui levels
-        LevelsAccess.LoadLevels();
+        LevelsAccess.LoadLevels_Array();
 
         
 
@@ -79,9 +79,9 @@ public class Controller_Objective : MonoBehaviour
 
                 //level complete
                 //new level should be unlocked
-                LevelsAccess.SetLevelAccess(world, level, true);
+                LevelsAccess.UnlockLevel_Access(world, level, true);
                 //save game
-                LevelsAccess.SaveLevels();
+                LevelsAccess.SaveLevels_Array();
                 //Debug.Log("level "+world.ToString()+"-"+level.ToString() +": "+LevelsAccess.GetLevelAccess(world, level));
                 SceneManager.LoadScene("MainMenu");
             }
