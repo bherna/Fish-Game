@@ -11,6 +11,9 @@ public class Controller_Pets : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SpawnPets();    //DELETE WHEN DONE/
+
+
         //nmake sure that PetsAccess has current_Pets_slotted not null
         if(PetsAccess.current_pets_slotted == null){return;}
 
@@ -31,4 +34,10 @@ public class Controller_Pets : MonoBehaviour
     }
 
     
+
+    //override spawn pets
+    private void SpawnPets(){
+
+        Instantiate(Resources.Load("Pets/" + "Test_Pet") as GameObject, Vector2.zero, quaternion.identity);
+    }
 }
