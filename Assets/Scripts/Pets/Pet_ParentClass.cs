@@ -148,4 +148,13 @@ public class Pet_ParentClass : MonoBehaviour
 
         
     }
+
+
+
+    //function to call all pets in tank
+    //whether or not they need to do something with this annoucement
+    public void Event_EnemyWaveEnd(){} //do nothing
+
+    //save as above
+    public void Event_EnemyWaveStart(){} //do nothing
 }

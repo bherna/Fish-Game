@@ -114,4 +114,14 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
     }
 
+    //when ever enemy waves are over, we exit protect mode
+    public new void Event_EnemyWaveEnd(){
+
+        //exit protect mode
+        Exit_ProtectMode();
+    }
+
+    public new void Event_EnemyWaveStart(){
+        Enter_ProtectMode();
+    }
 }

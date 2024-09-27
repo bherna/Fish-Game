@@ -94,7 +94,7 @@ public class Controller_Enemy : MonoBehaviour
             //should we spawn wave
             if(curr_sec >= secs_till_next_enemyWave){
 
-                //spawn wave + post wave stats
+                //spawn wave + post wave stats + announce to controller_pets
                 currently_in_wave = true; // turn off the show we spawn command (since we are spawning)
                 IEnumerator coroutine = SpawnWave(preAnnouncerTime);
                 StartCoroutine(coroutine);
@@ -124,6 +124,9 @@ public class Controller_Enemy : MonoBehaviour
         //announce (current enemies count)
         enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
+
+        //announce to controller_pets we just spawned enemies
+        Controller_Pets.instance.Annoucement_EnemyWaveStart();
 
 
         //get next wave set up
@@ -195,7 +198,7 @@ public class Controller_Enemy : MonoBehaviour
             //start counting again
             currently_in_wave = false;
             //tell controller pets that enemy wave is over
-            Controller_Pets.instance.Annoucement_NoMoreEnemies();
+            Controller_Pets.instance.Annoucement_EnemyWaveEnd();
         }
         
     }
