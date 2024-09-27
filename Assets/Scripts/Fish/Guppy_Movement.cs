@@ -8,12 +8,14 @@ public class Guppy_Movement : MonoBehaviour
     //--------------------------------- used in the update position function ---------------------------------
     private float idle_velocity = 1;
     private float hungry_velocity = 2;
+    private float follow_velocity = 1.3f;
 
     // --------------------------------- targetting ---------------------------------
     private Vector3 idleTarget;
     private float targetRadius = 0.5f;
     private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     private GameObject foodTarget;
+    private GameObject petTarget;
 
 
     // --------------------------------- Sprite ---------------------------------
@@ -72,6 +74,12 @@ public class Guppy_Movement : MonoBehaviour
 
 
     }
+
+    //all follow mode does is make this guppy follow the school teacher pet around
+    public void FollowMode(){
+        updatePosition(petTarget.transform.position, follow_velocity);
+    }
+
 
     private void NewRandomIdleTarget_Tank(){
 

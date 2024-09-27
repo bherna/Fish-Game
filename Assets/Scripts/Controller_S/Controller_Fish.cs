@@ -111,4 +111,16 @@ public class Controller_Fish : MonoBehaviour
     public void Upgrade_fishMax(){
         maxFish += 1;
     }
+
+
+    public void SchoolTeacherWhistle_Huddle(){
+        foreach(GameObject fish in fish_list){
+            fish.GetComponent<Guppy_SM>().GuppyToFollow();
+        }
+    }
+    public void SchoolTeacherWhistle_Disperse(){
+        foreach(GameObject fish in fish_list){
+            fish.GetComponent<Guppy_SM>().GuppyToIdle();
+        }
+    }
 }

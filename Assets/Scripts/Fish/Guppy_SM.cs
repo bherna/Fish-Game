@@ -12,7 +12,7 @@ using UnityEngine;
 //idle, walk around
 //hungry, look out for food
 //grabbed, let the player drag you around
-public enum Guppy_States {idle, hungry};
+public enum Guppy_States {idle, hungry, follow};
 
 public class Guppy_SM : MonoBehaviour
 {
@@ -59,16 +59,23 @@ public class Guppy_SM : MonoBehaviour
             case Guppy_States.hungry:
                 guppy_Movement.HungryMode();
                 break;
+            case Guppy_States.follow:
+                guppy_Movement.FollowMode();
+                break;
             default:
                 Debug.Log("No current state for guppy");
                 break;
         }
     }
 
-    public void GuppyIsHungry(){
+    public void GuppyToHungry(){
         guppy_current_state = Guppy_States.hungry;
     }
-    public void GuppyIsFull(){
+    public void GuppyToIdle(){
         guppy_current_state = Guppy_States.idle;
     }
+    public void GuppyToFollow(){
+        guppy_current_state = Guppy_States.follow;
+    }
+
 }

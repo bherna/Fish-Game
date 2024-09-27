@@ -42,7 +42,7 @@ public class Guppy_Stats : Fish_Stats
         else if(stomach < hungryRange && guppy_SM.guppy_current_state != Guppy_States.hungry){
 
             //guppy is now hungry
-            guppy_SM.GuppyIsHungry();
+            guppy_SM.GuppyToHungry();
 
             //change sprite transparancy
             ChangeTransparency(false);

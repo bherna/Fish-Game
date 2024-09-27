@@ -19,7 +19,8 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     // ability :
     //          When ever a new enemy wave starts, 
     //          The school teacher will call all guppies in tank to itself
-    //          and keep them huddled untill the enemies are all gone
+    //          and keep them huddled untill the enemies are all gone 
+    //          but won't be able to keep hungry guppies from straying
 
     //          The school teacher will try to avoid the enemies as much as
     //          possible. 
@@ -86,6 +87,9 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
         //reset curr whistle timer
         curr_whistle_timer = 0;
+
+        //let guppies disperse
+        Controller_Fish.instance.SchoolTeacherWhistle_Disperse();
     }
 
 
@@ -111,7 +115,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
         //guppy whistle sound
         AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
         //guppy function call
-
+        Controller_Fish.instance.SchoolTeacherWhistle_Huddle();
     }
 
     //when ever enemy waves are over, we exit protect mode
