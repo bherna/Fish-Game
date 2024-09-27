@@ -36,7 +36,7 @@ public class Controller_Enemy : MonoBehaviour
     [SerializeField] bool loop = false;
 
 
-    //static variable for fish coin value
+    //singleton this class
     public static Controller_Enemy instance {get; private set; }
     void Awake (){
 
@@ -194,6 +194,8 @@ public class Controller_Enemy : MonoBehaviour
             annoucement_ui.SetActive(false);
             //start counting again
             currently_in_wave = false;
+            //tell controller pets that enemy wave is over
+            Controller_Pets.instance.Annoucement_NoMoreEnemies();
         }
         
     }

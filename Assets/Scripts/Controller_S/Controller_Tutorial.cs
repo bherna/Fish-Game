@@ -30,7 +30,7 @@ public class Controller_Tutorial : MonoBehaviour
     
 
 
-    //static variable for fish coin value
+    //singleton this class
     public static Controller_Tutorial instance {get; private set; }
     void Awake (){
 

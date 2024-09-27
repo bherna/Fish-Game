@@ -27,7 +27,7 @@ public class Controller_Food : MonoBehaviour
 
 
 
-    //static variable for fish coin value
+    //singleton this class
     public static Controller_Food instance {get; private set; }
     void Awake (){
 

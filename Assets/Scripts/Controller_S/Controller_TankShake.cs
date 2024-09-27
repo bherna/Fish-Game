@@ -12,6 +12,7 @@ public class Controller_TankShake : MonoBehaviour
     private Vector3 startPos;
 
     
+    //singleton this class
     public static Controller_TankShake instance {get; private set; }
     private void Awake() {
         //delete duplicate of this instance

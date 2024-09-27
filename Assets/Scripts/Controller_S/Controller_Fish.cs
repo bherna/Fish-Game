@@ -11,14 +11,24 @@ public class Controller_Fish : MonoBehaviour
     //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
     [SerializeField] AudioClip spawnSoundClip;
-
-
-
-
-    //static variable for fish coin value
-    public static Controller_Fish instance {get; private set; }
-
     [SerializeField] List<string> fish_stages;
+
+
+
+    //singleton this class
+    public static Controller_Fish instance {get; private set; }
+    void Awake (){
+
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }
+
 
 
 
@@ -40,19 +50,6 @@ public class Controller_Fish : MonoBehaviour
 
 
     }
-
-    void Awake (){
-
-        //delete duplicate of this instance
-
-        if (instance != null && instance != this){
-            Destroy(this);
-        }
-        else{
-            instance = this;
-        }
-    }
-
 
     public Boolean SpawnFish(GameObject fishObj){
 

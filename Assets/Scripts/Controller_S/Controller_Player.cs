@@ -19,7 +19,7 @@ public class Controller_Player : MonoBehaviour
 
 
 
-
+    //single ton this class
     public static Controller_Player instance {get; private set; }
 
     private void Awake() {

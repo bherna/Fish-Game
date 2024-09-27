@@ -2,23 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
+public enum Pet_States {idle, protect, grabbed, dropped};
+
 public class Pet_ParentClass : MonoBehaviour
 {
 
+    //-----------------------------                 -----------------------------------------//
+    protected Pet_States curr_PetState;
+
+
     //--------------------------------- used in the update position function ---------------------------------
-    private float idle_velocity = 1;
+    protected float idle_velocity = 1;
 
     // --------------------------------- targetting ---------------------------------
-    private Vector3 idleTarget;
-    private float targetRadius = 0.5f;
-    private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
+    protected Vector3 idleTarget;
+    protected float targetRadius = 0.5f;
+    protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
 
 
     // --------------------------------- Sprite ---------------------------------
-    [SerializeField] Transform pet_transform;   //get transform of pet sprite
-    private float startTime;
-    private float h_turningSpeed = 1.5f;
-    float y_angle = 0;
+    [SerializeField] protected Transform pet_transform;   //get transform of pet sprite
+    protected float startTime;
+    protected float h_turningSpeed = 1.5f;
+    protected float y_angle = 0;
 
 
 
@@ -27,10 +35,11 @@ public class Pet_ParentClass : MonoBehaviour
     {
         NewRandomIdleTarget_Tank();
         startTime = Time.time;
+        curr_PetState = Pet_States.idle;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         
     }

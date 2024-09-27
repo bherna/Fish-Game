@@ -14,8 +14,7 @@ public class Controller_Main : MonoBehaviour
 
     private int timeTillNextCheck = 5;
 
-    //reference to self
-    public static Controller_Main instance {get; private set; }
+    
     //is the game currently paused
     public bool paused {get; private set;} = false;
     private bool escMenuOpen = false;
@@ -26,6 +25,10 @@ public class Controller_Main : MonoBehaviour
 
 
 
+
+
+    //singleton this class
+    public static Controller_Main instance {get; private set; }
     private void Awake() {
         
         //delete duplicate of this instance
