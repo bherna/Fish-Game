@@ -75,9 +75,13 @@ public class Guppy_Movement : MonoBehaviour
 
     }
 
+    //pet class function
     //all follow mode does is make this guppy follow the school teacher pet around
     public void FollowMode(){
         updatePosition(petTarget.transform.position, follow_velocity);
+    }
+    public void UpdateFollowObj(GameObject schoolTeacher){
+        petTarget = schoolTeacher;
     }
 
 

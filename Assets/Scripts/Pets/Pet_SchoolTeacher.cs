@@ -58,7 +58,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
     //when the enemy wave starts, this pet will enter protect mode
     private void Enter_ProtectMode(){
-
+        Debug.Log("protect");
         //enter protect mode
         curr_PetState = Pet_States.protect;
 
@@ -115,17 +115,20 @@ public class Pet_SchoolTeacher : Pet_ParentClass
         //guppy whistle sound
         AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
         //guppy function call
-        Controller_Fish.instance.SchoolTeacherWhistle_Huddle();
+        Controller_Fish.instance.SchoolTeacherWhistle_Huddle(gameObject);
     }
 
+    //when ever enemy waves start, we enter protect mode
+    public override void Event_EnemyWaveStart(){ 
+        Debug.Log("child overide event");
+        Enter_ProtectMode();
+    }
     //when ever enemy waves are over, we exit protect mode
-    public new void Event_EnemyWaveEnd(){
+    public override void Event_EnemyWaveEnd(){
 
         //exit protect mode
         Exit_ProtectMode();
     }
 
-    public new void Event_EnemyWaveStart(){
-        Enter_ProtectMode();
-    }
+    
 }

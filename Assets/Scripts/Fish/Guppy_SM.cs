@@ -74,7 +74,8 @@ public class Guppy_SM : MonoBehaviour
     public void GuppyToIdle(){
         guppy_current_state = Guppy_States.idle;
     }
-    public void GuppyToFollow(){
+    public void GuppyToFollow(GameObject schoolTeacher){
+        guppy_Movement.UpdateFollowObj(schoolTeacher);
         guppy_current_state = Guppy_States.follow;
     }
 

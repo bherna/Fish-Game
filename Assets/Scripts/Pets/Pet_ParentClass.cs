@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum Pet_States {idle, protect, grabbed, dropped};
 
-public class Pet_ParentClass : MonoBehaviour
+public abstract class Pet_ParentClass : MonoBehaviour
 {
 
     //-----------------------------                 -----------------------------------------//
@@ -150,11 +150,11 @@ public class Pet_ParentClass : MonoBehaviour
     }
 
 
-
-    //function to call all pets in tank
+    //-------------- abstract functions -----------------------------//
+    //functions to call all pets in tank
     //whether or not they need to do something with this annoucement
-    public void Event_EnemyWaveEnd(){} //do nothing
+    public abstract void Event_EnemyWaveStart(); //do nothing
+    public abstract void Event_EnemyWaveEnd(); //do nothing
 
-    //save as above
-    public void Event_EnemyWaveStart(){} //do nothing
+    
 }

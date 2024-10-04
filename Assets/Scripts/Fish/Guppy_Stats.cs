@@ -61,7 +61,7 @@ public class Guppy_Stats : Fish_Stats
         ChangeTransparency(true);
 
         //set our state to idle again
-        guppy_SM.GuppyIsFull();
+        guppy_SM.GuppyToIdle();
 
         //eating ages guppy
         fish_Age.Ate();

@@ -113,9 +113,9 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-    public void SchoolTeacherWhistle_Huddle(){
+    public void SchoolTeacherWhistle_Huddle(GameObject schoolTeacher){
         foreach(GameObject fish in fish_list){
-            fish.GetComponent<Guppy_SM>().GuppyToFollow();
+            fish.GetComponent<Guppy_SM>().GuppyToFollow(schoolTeacher);
         }
     }
     public void SchoolTeacherWhistle_Disperse(){
