@@ -8,7 +8,7 @@ public class Guppy_Movement : MonoBehaviour
     //--------------------------------- used in the update position function ---------------------------------
     private float idle_velocity = 1;
     private float hungry_velocity = 2;
-    private float follow_velocity = 1.3f;
+    private float follow_velocity = 1.7f;
 
     // --------------------------------- targetting ---------------------------------
     private Vector3 idleTarget;

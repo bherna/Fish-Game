@@ -9,8 +9,10 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     private float curr_whistle_timer = 0; // time keep of current seconds till next guppy call
     private float whistle_cooldn = 3f; // how many seconds long til the next whistle call
     [SerializeField] AudioClip whistle_audio;
-    private float protect_velocity = 1.3f;
-    private Vector3 target_position_farthest;
+    private float protect_velocity = 1.8f;
+    //private Vector3 target_position_farthest;
+
+
     
     
     
@@ -58,7 +60,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
     //when the enemy wave starts, this pet will enter protect mode
     private void Enter_ProtectMode(){
-        Debug.Log("protect");
+ 
         //enter protect mode
         curr_PetState = Pet_States.protect;
 
@@ -94,14 +96,21 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
 
     //new way to find next update position
-    //pet school teacher wants to move away from enemies
+    //pet school teacher wants to move in a circluar path
     private void TargetAwayFromEnemies(){
 
-        //get new target far away from enemies
-        
+        var distance = Vector3.Distance(idleTarget, transform.position);
 
-        //update position
-        updatePosition(target_position_farthest, protect_velocity);
+        if(Mathf.Abs(distance) > targetRadius){
+            
+            updatePosition(idleTarget, protect_velocity);
+        }
+
+        //get new point once fish reaches it
+        else{
+            NewRandomIdleTarget_Tank();
+
+        }
 
     }
 
@@ -120,7 +129,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
     //when ever enemy waves start, we enter protect mode
     public override void Event_EnemyWaveStart(){ 
-        Debug.Log("child overide event");
+
         Enter_ProtectMode();
     }
     //when ever enemy waves are over, we exit protect mode
