@@ -106,13 +106,14 @@ public class Pet_DrCrabs : Pet_ParentClass
 
         var distance = Vector3.Distance(currTarget_Position, transform.position);
 
-        if(Mathf.Abs(distance) > 0.1f){
-            
+        if(Mathf.Abs(distance) > targetRadius){
+            Debug.Log("going to position");
             updatePosition(currTarget_Position, ability_velocity);
         }
 
         //get new point once fish reaches it
         else{
+            Debug.Log("want new...");
             NewCoinTarget();
         }
         
