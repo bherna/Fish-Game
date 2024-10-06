@@ -28,13 +28,13 @@ public class Pet_DrCrabs : Pet_ParentClass
 {
 
     [SerializeField] GameObject burger;
-    private coinStack cointargets;                              //stack list holding all possible food targets
-    private Vector3 currTarget_Position = new Vector3(100, 100);       //dr. crabs current position heading towards (used for collecting coins)
+    [SerializeField] private coinStack cointargets;                              //stack list holding all possible food targets
+    private GameObject currTarget_Position;       //dr. crabs current position heading towards (used for collecting coins)
     private string event_type = "Coin";
 
     private float ability_velocity = 2;
     private int curr_coins_collected = 0;
-    private int coins_till_burger = 6;
+    private int coins_till_burger = 2;
 
 
 
@@ -104,16 +104,11 @@ public class Pet_DrCrabs : Pet_ParentClass
     //once list is empty, enter idle mode again
     private void CoinMode(){
 
-        var distance = Vector3.Distance(currTarget_Position, transform.position);
-
-        if(Mathf.Abs(distance) > targetRadius){
-            Debug.Log("going to position");
-            updatePosition(currTarget_Position, ability_velocity);
+        try{
+            //try to update our position based on game object, if the object is missing, throw exception
+            updatePosition(currTarget_Position.transform.position, ability_velocity); 
         }
-
-        //get new point once fish reaches it
-        else{
-            Debug.Log("want new...");
+        catch(MissingReferenceException){ //new target then
             NewCoinTarget();
         }
         
@@ -128,12 +123,14 @@ public class Pet_DrCrabs : Pet_ParentClass
         curr_PetState = Pet_States.ability;
 
         //update food target object, (compare new food to current food target)
-        if(Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget_Position, transform.position)){
+        if( currTarget_Position == null ||
+            Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget_Position.transform.position, transform.position) 
+            ){
                 
                 //then update food obj as new food target, since smaller distance to cover
                 //and push into our stack for later use
                 NewTargetVariables();
-                currTarget_Position = food_obj.transform.position;
+                currTarget_Position = food_obj;
             } 
 
         //finally push to stack
@@ -163,7 +160,7 @@ public class Pet_DrCrabs : Pet_ParentClass
                 //create burger
                 var new_burger = Instantiate(burger, transform.position, Quaternion.identity); 
                 //when burger created, its throw into the air
-                new_burger.GetComponent<Rigidbody>().AddForce(new Vector3(0,5,0));
+                new_burger.GetComponent<Rigidbody2D>().AddForce(new Vector3(0,5,0));
             }
 
 
@@ -182,6 +179,7 @@ public class Pet_DrCrabs : Pet_ParentClass
         //update stack, get next coin that is closest to dr. crabs
         GameObject[] coin_array = cointargets._coins.ToArray();
         Vector2 smallest_distance = new Vector2(10000000, 1000000); 
+        GameObject smallest_obj = null;
 
         //new stack for non empties
         cointargets = new coinStack();
@@ -196,6 +194,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
                 if(Vector2.Distance(coin.transform.position, transform.position) < Vector2.Distance(smallest_distance, transform.position)){
                     smallest_distance = coin.transform.position;
+                    smallest_obj = coin;
                 }
             }
         }
@@ -207,7 +206,7 @@ public class Pet_DrCrabs : Pet_ParentClass
         }
         else{
             //set new smallest distance to get to
-            currTarget_Position = smallest_distance;
+            currTarget_Position = smallest_obj;
         }
         
 
@@ -217,7 +216,7 @@ public class Pet_DrCrabs : Pet_ParentClass
     private void ToIdle(){
         NewTargetVariables();
         curr_PetState = Pet_States.idle;
-        currTarget_Position = new Vector3(100, 100);
+        currTarget_Position = null;
     }
 
 }
