@@ -65,6 +65,7 @@ public class Controller_Pets : MonoBehaviour
 
         Debug.Log("SPAWNED PETS ILLEGALLY");
         pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));
+        pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_DrCrabs") as GameObject, Vector2.zero, quaternion.identity));
     }
 
 
@@ -72,17 +73,17 @@ public class Controller_Pets : MonoBehaviour
     //function call for controller enemy
     //tells controller pet that enemy waves have ended or started
     //if we have any pets in tank that run ability of that, tell those pets
-    public void Annoucement_EnemyWaveStart(){
+    public void Annoucement_Init(string type, GameObject obj){
         
         foreach(GameObject pet in pet_list){
-            pet.GetComponent<Pet_ParentClass>().Event_EnemyWaveStart();
+            pet.GetComponent<Pet_ParentClass>().Event_Init(type, obj);
         }
     }
 
-    public void Annoucement_EnemyWaveEnd(){
+    public void Annoucement_EndIt(string type){
         
         foreach(GameObject pet in pet_list){
-            pet.GetComponent<Pet_ParentClass>().Event_EnemyWaveEnd();
+            pet.GetComponent<Pet_ParentClass>().Event_EndIt(type);
         }
     }
 

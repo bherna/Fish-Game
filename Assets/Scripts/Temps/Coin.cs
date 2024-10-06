@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class Coin : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] int coinValue = 0;
-    [SerializeField] float timeTillTrashed = 1.5f;
+    [SerializeField] float timeTillTrashed = 3f;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] AudioClip collectCoinSoundClip;
 
@@ -31,10 +31,14 @@ public class Coin : MonoBehaviour, IPointerDownHandler
 
 
 
+    //the coin has touched the bottom of the tank, so start self destruct
     public void OnTrashCoin() {
         
         //lock coin position
         rb.constraints = RigidbodyConstraints2D.FreezePosition;
+
+        //event send to pets
+        Controller_Pets.instance.Annoucement_Init("Coin", gameObject);
 
         //countdown -> destroy
         IEnumerator coroutine = WaitToDes(timeTillTrashed);

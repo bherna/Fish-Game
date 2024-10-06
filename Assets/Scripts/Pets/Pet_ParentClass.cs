@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
 
-public enum Pet_States {idle, protect, grabbed, dropped};
+public enum Pet_States {idle, protect, grabbed, dropped, ability};
 
 public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {
@@ -59,7 +60,7 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     }
 
 
-    protected void NewRandomIdleTarget_Tank(){
+    protected virtual void NewRandomIdleTarget_Tank(){
 
         //since new target
         NewTargetVariables();
@@ -73,8 +74,8 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
         while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
             
             idleTarget = new Vector3(
-                Random.Range(swimDem.Item1, swimDem.Item2),
-                Random.Range(swimDem.Item3, swimDem.Item4), 
+                UnityEngine.Random.Range(swimDem.Item1, swimDem.Item2),
+                UnityEngine.Random.Range(swimDem.Item3, swimDem.Item4), 
                 0
             );
         }
@@ -110,8 +111,8 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     //-------------- abstract functions -----------------------------//
     //functions to call all pets in tank
     //whether or not they need to do something with this annoucement
-    public abstract void Event_EnemyWaveStart(); //do nothing
-    public abstract void Event_EnemyWaveEnd(); //do nothing
+    public abstract void Event_Init(string type, GameObject obj); //do nothing
+    public abstract void Event_EndIt(string type); //do nothing
 
     
 }

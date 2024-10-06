@@ -1,6 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
+/// <summary>
+/*
+
+    Desc: Every school of fish has to have at least one teacher.
+    Ability: When ever a new enemy wave starts, they call all fish over to them away from enemies
+    Rarity: quest
+
+*/
+/// </summary>
 
 public class Pet_SchoolTeacher : Pet_ParentClass
 {
@@ -14,7 +26,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
 
     
-    
+    private string event_type = "EnemyWave";
     
 
     //School Teacher pet
@@ -51,7 +63,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
                 break;
 
             default:
-                Debug.Log("School teacher pet is not in a current state");
+                Debug.Log(gameObject.ToString()+" pet is not in a current state");
                 break;
         }
 
@@ -97,6 +109,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
     //new way to find next update position
     //pet school teacher wants to move in a circluar path
+    // ------------------------------------------------RIGHT NOW IM NOT DOING THAT, JUST DO IDEL MOVEMENT SINCE TO MUCH WORK
     private void TargetAwayFromEnemies(){
 
         var distance = Vector3.Distance(idleTarget, transform.position);
@@ -128,13 +141,15 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     }
 
     //when ever enemy waves start, we enter protect mode
-    public override void Event_EnemyWaveStart(){ 
+    public override void Event_Init(string type, GameObject obj){ 
 
+        if(type != event_type){return;}
         Enter_ProtectMode();
     }
     //when ever enemy waves are over, we exit protect mode
-    public override void Event_EnemyWaveEnd(){
+    public override void Event_EndIt(string type){
 
+        if(type != event_type){return;}
         //exit protect mode
         Exit_ProtectMode();
     }
