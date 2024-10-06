@@ -20,7 +20,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
             
             //bite
             //Debug.Log(gameObject.ToString() + "Bite");
-            other.gameObject.GetComponent<Fish_Stats>().TakeDamage(attackPower);
+            other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
             
             Instantiate(bite_particle, transform.position, Quaternion.identity);
 

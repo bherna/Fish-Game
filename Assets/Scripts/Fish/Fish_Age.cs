@@ -63,7 +63,4 @@ public class Fish_Age : MonoBehaviour
     }
 
 
-    public int GetAge(){
-        return current_age_stage;
-    }
 }

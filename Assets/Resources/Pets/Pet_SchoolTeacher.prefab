@@ -129,5 +129,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 341b2109e405fbc45bd472c5081f9f7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pet_transform: {fileID: 8348657321776621280}
+  sprite_transform: {fileID: 8348657321776621280}
   whistle_audio: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}

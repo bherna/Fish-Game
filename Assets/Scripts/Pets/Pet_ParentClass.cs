@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum Pet_States {idle, protect, grabbed, dropped};
 
-public abstract class Pet_ParentClass : Fish_ParentClass
+public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {
 
     //-----------------------------                 -----------------------------------------//

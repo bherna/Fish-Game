@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IPointerClickHandler
+public class Enemy : Fish_ParentClass_Movement, IPointerClickHandler
 {
 
 

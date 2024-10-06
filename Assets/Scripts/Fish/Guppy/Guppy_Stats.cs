@@ -2,30 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guppy_Stats : Fish_Stats
+public class Guppy_Stats : MonoBehaviour
 {
 
-    // --------------------------------- gubby script reference --------------------------------- 
+    // --------------------------------- gubby script reference --------------------------------//
     private Guppy_SM guppy_SM;
-    private Fish_Age fish_Age;
 
-    [SerializeField] List<Transform> sprite_transparency; //fish sprites
+    [SerializeField] List<Transform> sprite_transparency; //use only for sprite transperancy
+    [SerializeField] Transform sprite_transform;        //use only for changing the entire size of guppy
 
-    // --------------------------------- hunger related --------------------------------- 
+    // --------------------------------- hunger related ----------------------------------------//
     private float stomach;
     private const int startStomach = 20;//total seconds before fish dies of hunger
     private float burnRate = 1; //per second (could be changed for other level types "fever")
     private int hungryRange = startStomach/2; 
 
+    // --------------------------------- age related -------------------------------------------//  
+    public int current_age_stage {get; private set; } = 0;
+    private float amount_food_ate = 0;
+    private int food_until_next_stage = 3;
+    private float current_size = 0.5f; //also our guppy start size
+    private float size_growth_speed = 0.1f;
+    private bool updateAge = true;
+
+    // --------------------------------- health/combat related -------------------------------------------//
+    [SerializeField] AudioClip dieSoundClip;
+    private int health;
+    private const int maxHealth = 100;
+
 
     // Start is called before the first frame update
-    new void Start()
+    private void Start()
     {
-        base.Start();
         guppy_SM = GetComponent<Guppy_SM>();
-        fish_Age = GetComponent<Fish_Age>();
 
         stomach = startStomach;
+        ChangeGuppySize(); //to currently held size
+
+        health = maxHealth;
     }
 
     // Update is called once per frame
@@ -54,17 +68,17 @@ public class Guppy_Stats : Fish_Stats
 
     }
 
-
+    //used outside this script
     public void FishEated(int foodValue){
 
         //return color to fish
-        ChangeTransparency(true);
+        ChangeTransparency(true); 
 
         //set our state to idle again
         guppy_SM.GuppyToIdle();
 
         //eating ages guppy
-        fish_Age.Ate();
+        Ate();
 
         //update fish stomach to add food value
         stomach += foodValue;
@@ -78,7 +92,7 @@ public class Guppy_Stats : Fish_Stats
     private void ChangeTransparency(bool setFullAlpha){
 
         //we have to check if its a skinned messrender, or a simple meshrender
-        foreach(var sprite in sprite_transparency){
+        foreach(Transform sprite in sprite_transparency){
 
             try{
                 //first we try simple messrender
@@ -95,9 +109,64 @@ public class Guppy_Stats : Fish_Stats
         
     }
 
+    private void ChangeGuppySize(){
 
-    
+        sprite_transform.transform.localScale = new Vector3(current_size, current_size, current_size);
+    }
 
 
+    private void Ate(){
+        if(updateAge){
 
+            //update age of fish
+            amount_food_ate += 1;
+
+            if(amount_food_ate >= food_until_next_stage){
+                Fish_Birthday();
+            }
+        }
+    }
+
+    private void Fish_Birthday(){
+
+        //if current age is not final stage
+        if(current_age_stage < Controller_Fish.instance.GetFishStages().Count-1){
+            
+            //update 
+            current_age_stage += 1;
+            current_size += size_growth_speed;
+            ChangeGuppySize();
+
+            //reset
+            amount_food_ate = 0;
+            
+        }
+        else{
+            //we are done aging
+            updateAge = false;
+        }
+    }
+
+    public void TakeDamage(int damage){
+
+        health -= damage;
+
+        if(health <= 0){
+
+            Died();
+
+        }
+    }
+
+    public void Died(bool playSound = true){
+
+        //removes self from the list of current fish known to the fish controller
+        Controller_Fish.instance.RemoveFish(gameObject);
+        
+        //play die sound
+        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
+        
+
+        Destroy(gameObject);
+    }
 }

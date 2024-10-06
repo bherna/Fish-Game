@@ -15,9 +15,6 @@ public class LargeMBass_SM : Enemy
     private float max_velocity = 4; // max velocity bass can reach
     private float curr_velocity = 0; //velocity the bass currently has
     private float acceleration = 0.3f; 
-
-    private float sprite_size = 0.7f;
-
     private float bounce_vel = 0.4f;
 
     
@@ -58,19 +55,8 @@ public class LargeMBass_SM : Enemy
         //update curr velocity
         if(curr_velocity +Time.deltaTime < max_velocity){ curr_velocity += Time.deltaTime * acceleration; }
 
-        //head towards target 
-        var newVector = (currFishTarget.position - transform.position).normalized;
-        rb.AddForce(newVector * curr_velocity, ForceMode2D.Force);
+        updatePosition(currFishTarget.position, curr_velocity);
 
-        //fliping
-        if(transform.position.x - currFishTarget.position.x < 0){
-            sprite.localScale = new Vector3(-sprite_size, sprite_size, sprite_size);
-            mouth_obj.transform.localScale = new Vector3(-1f, 1f, 1f);
-        }
-        else{
-            sprite.localScale = new Vector3(sprite_size, sprite_size, sprite_size);
-            mouth_obj.transform.localScale = new Vector3(1f, 1f, 1f);    
-        }
     }
 
     public void ResetVelocity(){

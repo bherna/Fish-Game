@@ -192,6 +192,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32e19f20f46231b4dbcc5d0aea26c86f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite_transform: {fileID: 2308382883602295263}
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 2308382883602295263}
   damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}

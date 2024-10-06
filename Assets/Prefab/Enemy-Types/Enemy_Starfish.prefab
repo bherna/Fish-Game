@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b638847a933952143bb74aede9138bf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite_transform: {fileID: 3948798086876093730}
   rb: {fileID: 7394080560007591877}
   sprite: {fileID: 3948798086876093730}
   damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Fish_ParentClass : MonoBehaviour
+public class Fish_ParentClass_Movement : MonoBehaviour
 {
 
     // --------------------------------- Sprite ---------------------------------

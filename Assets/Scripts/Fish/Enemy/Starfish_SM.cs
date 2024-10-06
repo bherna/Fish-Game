@@ -106,7 +106,7 @@ public class Starfish_SM : Enemy, IPointerClickHandler
                 //animation
                 Instantiate(bite_particle, transform.position, Quaternion.identity);
                 //attack this fish
-                other.gameObject.GetComponent<Fish_Stats>().TakeDamage(damageAmount);
+                other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(damageAmount);
                 //and add to list
                 fishes_attacked.Add(other.gameObject);
 
