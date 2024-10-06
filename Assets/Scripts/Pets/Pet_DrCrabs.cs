@@ -28,14 +28,14 @@ public class Pet_DrCrabs : Pet_ParentClass
 {
 
     [SerializeField] GameObject burger;
-    [SerializeField] private coinStack cointargets;                              //stack list holding all possible food targets
+    [SerializeField] protected coinStack cointargets;                              //stack list holding all possible food targets
     private GameObject currTarget_Position;       //dr. crabs current position heading towards (used for collecting coins)
     private string event_type = "Coin";
 
     private float ability_velocity = 2;
     private int curr_coins_collected = 0;
     private int coins_till_burger = 2;
-
+    public float throwStrength = 100;
 
 
 
@@ -160,7 +160,7 @@ public class Pet_DrCrabs : Pet_ParentClass
                 //create burger
                 var new_burger = Instantiate(burger, transform.position, Quaternion.identity); 
                 //when burger created, its throw into the air
-                new_burger.GetComponent<Rigidbody2D>().AddForce(new Vector3(0,5,0));
+                new_burger.GetComponent<Rigidbody2D>().AddForce(new Vector3(0,throwStrength,0));
             }
 
 
