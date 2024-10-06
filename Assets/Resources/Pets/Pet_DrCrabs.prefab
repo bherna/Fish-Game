@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064460903410114369}
   - component: {fileID: 4521724227618168571}
+  - component: {fileID: -6021936408146649464}
   m_Layer: 0
   m_Name: Pet_DrCrabs
   m_TagString: Untagged
@@ -47,6 +48,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 5771216494224108167}
   burger: {fileID: 4501066918850827086, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
+--- !u!61 &-6021936408146649464
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096880642496818371}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.3, y: 0.9}
+  m_EdgeRadius: 0
 --- !u!1 &3964279581620062665
 GameObject:
   m_ObjectHideFlags: 0

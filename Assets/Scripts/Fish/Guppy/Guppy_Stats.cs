@@ -19,7 +19,7 @@ public class Guppy_Stats : MonoBehaviour
 
     // --------------------------------- age related -------------------------------------------//  
     public int current_age_stage {get; private set; } = 0;
-    private float amount_food_ate = 0;
+    public float amount_food_ate = 0;
     private int food_until_next_stage = 3;
     private float current_size = 0.5f; //also our guppy start size
     private float size_growth_speed = 0.1f;

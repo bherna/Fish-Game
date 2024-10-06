@@ -1,5 +1,7 @@
+
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -11,12 +13,23 @@ using UnityEngine.PlayerLoop;
 //    Rarity: Level Questing
 //
 /// </summary>
+/// 
+[System.Serializable]
+public class coinStack{
+    [SerializeField] public List<GameObject> _coins;
+
+    public coinStack(){
+        _coins = new List<GameObject>();
+    }
+}
+
+
 public class Pet_DrCrabs : Pet_ParentClass
 {
 
     [SerializeField] GameObject burger;
-    private Stack<GameObject> cointargets; //stack list holding all possible food targets
-    private Vector3 currTarget_Position;       //dr. crabs current position heading towards (used for collecting coins)
+    private coinStack cointargets;                              //stack list holding all possible food targets
+    private Vector3 currTarget_Position = new Vector3(100, 100);       //dr. crabs current position heading towards (used for collecting coins)
     private string event_type = "Coin";
 
     private float ability_velocity = 2;
@@ -27,11 +40,14 @@ public class Pet_DrCrabs : Pet_ParentClass
 
 
 
+
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
-        cointargets = new Stack<GameObject>();
+
+        cointargets = new coinStack();
+        
     }
 
     // Update is called once per frame
@@ -77,7 +93,7 @@ public class Pet_DrCrabs : Pet_ParentClass
             idleTarget = new Vector3(
                 Random.Range(swimDem.Item1, swimDem.Item2),
                 -4, 
-                2
+                0
             );
         }
     }
@@ -88,7 +104,17 @@ public class Pet_DrCrabs : Pet_ParentClass
     //once list is empty, enter idle mode again
     private void CoinMode(){
 
-        updatePosition(currTarget_Position, ability_velocity);
+        var distance = Vector3.Distance(currTarget_Position, transform.position);
+
+        if(Mathf.Abs(distance) > 0.1f){
+            
+            updatePosition(currTarget_Position, ability_velocity);
+        }
+
+        //get new point once fish reaches it
+        else{
+            NewCoinTarget();
+        }
         
     }
 
@@ -100,29 +126,17 @@ public class Pet_DrCrabs : Pet_ParentClass
         //we should enter coin mode
         curr_PetState = Pet_States.ability;
 
-        //update food target object, 
-        if(cointargets == null){
-            
-            //since new target
-            NewTargetVariables();
-            //set our current target position as food obj
-            currTarget_Position = food_obj.transform.position;
-        }
-        else{ 
-            if(Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget_Position, transform.position)){
+        //update food target object, (compare new food to current food target)
+        if(Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget_Position, transform.position)){
                 
                 //then update food obj as new food target, since smaller distance to cover
                 //and push into our stack for later use
                 NewTargetVariables();
                 currTarget_Position = food_obj.transform.position;
             } 
-            else{
-                //do nothing
-            }
-        }
 
-        //and push to stack
-        cointargets.Push(food_obj);
+        //finally push to stack
+        cointargets._coins.Add(food_obj);
 
     } 
     //
@@ -134,7 +148,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
         //              FOOD
         //if dr. crabs collides with a food
-        if(other.gameObject.CompareTag("Coin"))
+        if(other.gameObject.CompareTag("Money"))
         {
             //eat + destroy obj
             curr_coins_collected += 1;
@@ -165,11 +179,11 @@ public class Pet_DrCrabs : Pet_ParentClass
         NewTargetVariables();
 
         //update stack, get next coin that is closest to dr. crabs
-        GameObject[] coin_array = cointargets.ToArray();
+        GameObject[] coin_array = cointargets._coins.ToArray();
         Vector2 smallest_distance = new Vector2(10000000, 1000000); 
 
         //new stack for non empties
-        cointargets = new Stack<GameObject>();
+        cointargets = new coinStack();
 
         //while getting next element, make sure target still exists, and add to stack
         //then if not smaller distance than current coin, ignore
@@ -177,7 +191,7 @@ public class Pet_DrCrabs : Pet_ParentClass
         foreach(GameObject coin in coin_array){
             
             if(coin != null){
-                cointargets.Push(coin);
+                cointargets._coins.Add(coin);
 
                 if(Vector2.Distance(coin.transform.position, transform.position) < Vector2.Distance(smallest_distance, transform.position)){
                     smallest_distance = coin.transform.position;
@@ -187,8 +201,8 @@ public class Pet_DrCrabs : Pet_ParentClass
 
         //if our cointargets list is empty after this null checking
         //enter idle mode again
-        if(cointargets.Count < 1){
-            curr_PetState = Pet_States.idle;
+        if(cointargets._coins.Count < 1){
+            ToIdle();
         }
         else{
             //set new smallest distance to get to
@@ -196,6 +210,13 @@ public class Pet_DrCrabs : Pet_ParentClass
         }
         
 
+    }
+
+    //returning to idle variables
+    private void ToIdle(){
+        NewTargetVariables();
+        curr_PetState = Pet_States.idle;
+        currTarget_Position = new Vector3(100, 100);
     }
 
 }
