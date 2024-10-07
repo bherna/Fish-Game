@@ -48,6 +48,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 5771216494224108167}
   burger: {fileID: 2729657837944973757, guid: af5d1c6814aa68c41acc963ff867aff5, type: 3}
+  cointargets:
+    _coins: []
+  throwStrength: 100
 --- !u!61 &-6021936408146649464
 BoxCollider2D:
   m_ObjectHideFlags: 0

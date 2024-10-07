@@ -21,10 +21,26 @@ public class Guppy_Collision : MonoBehaviour
         {
 
             //eat + destroy obj
-            var foodValue = other.GetComponent<FoodValue>().GetFoodValue();
-            Controller_Food.instance.TrashThisFood(other.gameObject);
+            var foodscript = other.GetComponent<FoodValue>();
+            switch(foodscript.foodType){
 
-            guppy_Stats.FishEated(foodValue);
+                case FoodTypes.feed:
+                    var foodValue = foodscript.GetFoodValue();
+                    Controller_Food.instance.TrashThisFood(other.gameObject);
+                    guppy_Stats.FishEated(foodValue);
+                    break;
+
+                case FoodTypes.burger:
+                    //dont need to get food value
+                    //don't need to trash, since aint part of controller
+                    guppy_Stats.FishBurgered();
+                    break;
+
+                default:
+                    Debug.Log("No food type selected");
+                    break;
+            }
+            
         }
     }
 }

@@ -87,6 +87,25 @@ public class Guppy_Stats : MonoBehaviour
         Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
     }
 
+    //the fish ate a burger, 
+    public void FishBurgered(){
+
+        //return color to fish
+        ChangeTransparency(true); 
+
+        //set our state to idle again
+        guppy_SM.GuppyToIdle();
+
+        //-------burger specific ------
+        //we skipp to next stage
+        amount_food_ate = 0;
+        Fish_Birthday(); //early birthday 
+
+        //update fish stomach to start stomach value
+        stomach = startStomach;
+
+    }
+
 
 
     private void ChangeTransparency(bool setFullAlpha){
