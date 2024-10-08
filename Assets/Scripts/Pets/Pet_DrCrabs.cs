@@ -34,7 +34,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
     private float ability_velocity = 2;
     private int curr_coins_collected = 0;
-    private int coins_till_burger = 2;
+    private int coins_till_burger = 6;
     public float throwStrength = 100;
 
 
@@ -216,9 +216,13 @@ public class Pet_DrCrabs : Pet_ParentClass
 
     //returning to idle variables
     private void ToIdle(){
-        NewTargetVariables();
+
         curr_PetState = Pet_States.idle;
-        currTarget_Position = null;
+        currTarget_Position = null;     //rest to null, else pointer issue
+
+        //every time we return to idle, we should keep track of how many times we try to return, 
+        //so it doesn't look like dr. crabs is just stuck trying to reach the edge of the tank over and over again.
+        NewRandomIdleTarget_Tank();
     }
 
 }
