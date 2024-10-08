@@ -99,7 +99,7 @@ public class Guppy_Stats : MonoBehaviour
         //-------burger specific ------
         //we skipp to next stage
         amount_food_ate = 0;
-        Fish_Birthday(); //early birthday 
+        Fish_Birthday(); //early birthday , if we are at max, birthday should just return false
 
         //update fish stomach to start stomach value
         stomach = startStomach;

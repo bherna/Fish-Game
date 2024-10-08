@@ -31,8 +31,8 @@ public class Guppy_Collision : MonoBehaviour
                     break;
 
                 case FoodTypes.burger:
-                    //dont need to get food value
-                    //don't need to trash, since aint part of controller
+                    //dont need to get food value, since its just a birthday
+                    Controller_Food.instance.TrashThisFood(other.gameObject);
                     guppy_Stats.FishBurgered();
                     break;
 

@@ -154,13 +154,15 @@ public class Pet_DrCrabs : Pet_ParentClass
 
 
             //check if we got enough coins
-            if(curr_coins_collected >= coins_till_burger){
+            if(curr_coins_collected >= coins_till_burger){  // --------------------------- burger created -------------------- //
                 //reset collection
                 curr_coins_collected = 0; 
                 //create burger
                 var new_burger = Instantiate(burger, transform.position, Quaternion.identity); 
                 //when burger created, its throw into the air
                 new_burger.GetComponent<Rigidbody2D>().AddForce(new Vector3(0,throwStrength,0));
+                //add burger to food list, so fish can see it
+                Controller_Food.instance.SpawnFood_Gameobject(new_burger);
             }
 
 
