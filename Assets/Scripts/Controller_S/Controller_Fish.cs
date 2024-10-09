@@ -6,7 +6,7 @@ public class Controller_Fish : MonoBehaviour
 {
 
     //max fish to have in the tank at a given time
-    [SerializeField] int maxFish = 3;
+    [SerializeField] int maxFish = 50;
 
     //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
@@ -51,7 +51,7 @@ public class Controller_Fish : MonoBehaviour
 
     }
 
-    public Boolean SpawnFish(GameObject fishObj){
+    public bool SpawnFish(GameObject fishObj, Vector3 vec_pos){
 
         //start enemy waves
         //since we don't want to start right at game start.
@@ -66,13 +66,17 @@ public class Controller_Fish : MonoBehaviour
         }
 
         //spawn at top of tank
-        fish_list.Add(Instantiate(fishObj, new Vector3(0, 4, transform.position.z), Quaternion.identity));
+        fish_list.Add(Instantiate(fishObj, vec_pos, Quaternion.identity));
 
         //play sound
         AudioManager.instance.PlaySoundFXClip(spawnSoundClip, transform, 1f);
 
         //return success
         return true;    
+    }
+
+    public void Vector_SpawnGuppy(Vector3 vec, GameObject fishObj){
+        
     }
 
     public void RemoveFish(GameObject fish){

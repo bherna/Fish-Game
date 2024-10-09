@@ -38,7 +38,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
                     //spawn or what ever here
                     //
                     //if we can spawn a fish: pay price
-                    if(Controller_Fish.instance.SpawnFish(fishObj)){
+                    if(Controller_Fish.instance.SpawnFish(fishObj, new Vector3(0, 4, transform.position.z))){
                         Wallet.instance.SubMoney(obj_price);
 
                         //also send an event message to the tutorial
