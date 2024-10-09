@@ -6,13 +6,13 @@ using UnityEngine;
 
 
 public enum Pet_States {idle, protect, grabbed, dropped, ability};
+public enum Event_Type {enemyWave, coin}
 
 public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {
 
     //-----------------------------                 -----------------------------------------//
     protected Pet_States curr_PetState;
-
 
     //--------------------------------- used in the update position function ---------------------------------
     protected float idle_velocity = 1;
@@ -111,8 +111,8 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     //-------------- abstract functions -----------------------------//
     //functions to call all pets in tank
     //whether or not they need to do something with this annoucement
-    public abstract void Event_Init(string type, GameObject obj); //do nothing
-    public abstract void Event_EndIt(string type); //do nothing
+    public abstract void Event_Init(Event_Type type, GameObject obj); //do nothing
+    public abstract void Event_EndIt(Event_Type type); //do nothing
 
     
 }

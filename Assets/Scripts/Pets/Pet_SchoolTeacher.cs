@@ -26,7 +26,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
 
     
-    private string event_type = "EnemyWave";
+    private Event_Type event_type = Event_Type.enemyWave;
     
 
     //School Teacher pet
@@ -141,13 +141,13 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     }
 
     //when ever enemy waves start, we enter protect mode
-    public override void Event_Init(string type, GameObject obj){ 
+    public override void Event_Init(Event_Type type, GameObject obj){ 
 
         if(type != event_type){return;}
         Enter_ProtectMode();
     }
     //when ever enemy waves are over, we exit protect mode
-    public override void Event_EndIt(string type){
+    public override void Event_EndIt(Event_Type type){
 
         if(type != event_type){return;}
         //exit protect mode

@@ -1,9 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 /// <summary>
 /// 
@@ -30,7 +28,7 @@ public class Pet_DrCrabs : Pet_ParentClass
     [SerializeField] GameObject burger;
     [SerializeField] protected coinStack cointargets;                              //stack list holding all possible food targets
     private GameObject currTarget_Position;       //dr. crabs current position heading towards (used for collecting coins)
-    private string event_type = "Coin";
+    private Event_Type event_type = Event_Type.coin;
 
     private float ability_velocity = 2;
     private int curr_coins_collected = 0;
@@ -116,7 +114,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
 
     //when ever we get a message for coins, enter coin mode and append food to list targets
-    public override void Event_Init(string type, GameObject food_obj){
+    public override void Event_Init(Event_Type type, GameObject food_obj){
 
         if(type != event_type){return;}
         //we should enter coin mode
@@ -138,7 +136,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
     } 
     //
-    public override void Event_EndIt(string type){} //do nothing
+    public override void Event_EndIt(Event_Type type){} //do nothing
 
 
 

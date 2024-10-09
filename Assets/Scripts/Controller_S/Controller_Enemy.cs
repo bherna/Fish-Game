@@ -126,7 +126,7 @@ public class Controller_Enemy : MonoBehaviour
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
         //announce to controller_pets we just spawned enemies
-        Controller_Pets.instance.Annoucement_Init("EnemyWave", gameObject);
+        Controller_Pets.instance.Annoucement_Init(Event_Type.enemyWave, gameObject);
 
 
         //get next wave set up
@@ -198,7 +198,7 @@ public class Controller_Enemy : MonoBehaviour
             //start counting again
             currently_in_wave = false;
             //tell controller pets that enemy wave is over
-            Controller_Pets.instance.Annoucement_EndIt("EnemyWave");
+            Controller_Pets.instance.Annoucement_EndIt(Event_Type.enemyWave);
         }
         
     }

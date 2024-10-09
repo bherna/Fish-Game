@@ -38,7 +38,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         rb.constraints = RigidbodyConstraints2D.FreezePosition;
 
         //event send to pets
-        Controller_Pets.instance.Annoucement_Init("Coin", gameObject);
+        Controller_Pets.instance.Annoucement_Init(Event_Type.coin, gameObject);
 
         //countdown -> destroy
         IEnumerator coroutine = WaitToDes(timeTillTrashed);

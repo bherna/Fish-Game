@@ -73,14 +73,14 @@ public class Controller_Pets : MonoBehaviour
     //function call for controller enemy
     //tells controller pet that enemy waves have ended or started
     //if we have any pets in tank that run ability of that, tell those pets
-    public void Annoucement_Init(string type, GameObject obj){
+    public void Annoucement_Init(Event_Type type, GameObject obj){
         
         foreach(GameObject pet in pet_list){
             pet.GetComponent<Pet_ParentClass>().Event_Init(type, obj);
         }
     }
 
-    public void Annoucement_EndIt(string type){
+    public void Annoucement_EndIt(Event_Type type){
         
         foreach(GameObject pet in pet_list){
             pet.GetComponent<Pet_ParentClass>().Event_EndIt(type);
