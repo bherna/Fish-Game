@@ -12,6 +12,10 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float y_angle = 0;
 
 
+    // --------------------------------- Targeting ---------------------------------
+    protected Vector3 idleTarget;
+    protected float targetRadius = 0.5f;
+    protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     
     
     protected void updatePosition(Vector3 targetTypePosition, float current_Vel){
@@ -53,5 +57,21 @@ public class Fish_ParentClass_Movement : MonoBehaviour
         sprite_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
 
 
+    }
+
+
+
+    protected void OnDrawGizmosSelected() {
+    
+        //current target for fish
+        Gizmos.color = new Color(1,1,0,0.75f);
+        Gizmos.DrawWireSphere(idleTarget, targetRadius);
+
+        //current target for fish
+        Gizmos.color = new Color(0,1,1,0.75f);
+        Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
+
+
+        
     }
 }

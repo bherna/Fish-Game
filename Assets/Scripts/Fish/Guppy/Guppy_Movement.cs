@@ -11,9 +11,6 @@ public class Guppy_Movement : Fish_ParentClass_Movement
     private float follow_velocity = 1.7f;
 
     // --------------------------------- targetting ---------------------------------
-    private Vector3 idleTarget;
-    private float targetRadius = 0.5f;
-    private float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     private GameObject foodTarget;
     private GameObject petTarget;
 
@@ -135,17 +132,5 @@ public class Guppy_Movement : Fish_ParentClass_Movement
         startTime = Time.time;      //reset our turning time for lerp
     }
 
-    private void OnDrawGizmosSelected() {
     
-        //current target for fish
-        Gizmos.color = new Color(1,1,0,0.75f);
-        Gizmos.DrawWireSphere(idleTarget, targetRadius);
-
-        //current target for fish
-        Gizmos.color = new Color(0,1,1,0.75f);
-        Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
-
-
-        
-    }
 }

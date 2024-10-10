@@ -17,10 +17,6 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     //--------------------------------- used in the update position function ---------------------------------
     protected float idle_velocity = 1;
 
-    // --------------------------------- targetting ---------------------------------
-    protected Vector3 idleTarget;
-    protected float targetRadius = 0.5f;
-    protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
 
 
     
@@ -91,20 +87,6 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     //whenever a new target is set we reset our sprite variables
     protected void NewTargetVariables(){
         startTime = Time.time;      //reset our turning time for lerp
-    }
-
-    protected void OnDrawGizmosSelected() {
-    
-        //current target for fish
-        Gizmos.color = new Color(1,1,0,0.75f);
-        Gizmos.DrawWireSphere(idleTarget, targetRadius);
-
-        //current target for fish
-        Gizmos.color = new Color(0,1,1,0.75f);
-        Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
-
-
-        
     }
 
 

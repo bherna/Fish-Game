@@ -7,7 +7,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
 
     //bite-ing fish vars
     private int attackPower = 20; 
-    private float attackSpeed = 0.7f; //per second
+    private float attackSpeed = 0.7f; // _ hits per second
     private bool canAttack = true;
 
     [SerializeField] LargeMBass_SM bodyScript;

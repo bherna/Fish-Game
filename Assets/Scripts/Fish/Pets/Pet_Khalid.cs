@@ -72,6 +72,7 @@ public class Pet_Khalid : Pet_ParentClass
         curr_health -= damage;
 
         if(curr_health <= 0){
+            Debug.Log("Khalid died");
             curr_PetState = Pet_States.ability;
 
             //reset our seconds, 
@@ -91,6 +92,7 @@ public class Pet_Khalid : Pet_ParentClass
         //send message
         curr_seconds += Time.deltaTime;
         if(curr_seconds >= secondsTillCall){
+            Debug.Log("called..");
             Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(transform); //call
             curr_seconds = 0; //reset
         }
@@ -117,7 +119,9 @@ public class Pet_Khalid : Pet_ParentClass
         //animation related
         //we we didn't start the polyp anitaion, we done it once here
         else if(!inPolyp){
+            inPolyp = true;
             //udate animtaion
+
         }
         //else we are close enough
         //start polyp mode
