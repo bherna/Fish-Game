@@ -31,6 +31,7 @@ public class Pet_Khalid : Pet_ParentClass
 
     private float curr_seconds = 0; //used in both protect mode and polyp mode, reset as needed
     private const float secondsInPolyp = 10;
+    private const float secondsTillCall = 2;
     private Vector2 bot_of_tank = new Vector2(0, 4.5f);
     private Event_Type event_type = Event_Type.enemyWave;
     private bool inPolyp = false;
@@ -76,7 +77,8 @@ public class Pet_Khalid : Pet_ParentClass
             //reset our seconds, 
             curr_seconds = 0;
 
-            //become untargetable------------------------------------------------------------------------------------------------------------------
+            //change enemy target away from us
+            Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(Controller_Fish.instance.GetRandomFish());
 
         }
     }
@@ -85,6 +87,17 @@ public class Pet_Khalid : Pet_ParentClass
     //make them target us
     //
     private void ProtectMode(){
+
+        //send message
+        curr_seconds += Time.deltaTime;
+        if(curr_seconds >= secondsTillCall){
+            Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(transform); //call
+            curr_seconds = 0; //reset
+        }
+
+        //movement
+        //after that, we just move normally around the tank, i guess
+        IdleMode();
 
     }
 
@@ -141,7 +154,7 @@ public class Pet_Khalid : Pet_ParentClass
         
         //
         curr_PetState = Pet_States.protect;
-        curr_seconds = 0; //reset this in case
+        curr_seconds = 1.5f; //call right away
 
         //animation updated
     }

@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LargeMBass_SM : Enemy
+public class LargeMBass_SM : Enemy_ParentClass
 {
 
     //Large Mouth Bass _ State Machine

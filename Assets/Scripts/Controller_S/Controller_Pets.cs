@@ -67,6 +67,7 @@ public class Controller_Pets : MonoBehaviour
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_DrCrabs") as GameObject, Vector2.zero, quaternion.identity));
         pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_MaryFertile") as GameObject, Vector2.zero, quaternion.identity));
+        pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Khalid") as GameObject, Vector2.zero, quaternion.identity));
     }
 
 

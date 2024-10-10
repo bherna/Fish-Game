@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
+using System.Collections.Generic;
 
 public class Controller_Enemy : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class Controller_Enemy : MonoBehaviour
 
     //current amount of enemies on screen
     private int enemiesOnScreen = 0;
+    private List<GameObject> enemies;
 
     //should we loop the enemy waves
     [SerializeField] bool loop = false;
@@ -114,11 +116,12 @@ public class Controller_Enemy : MonoBehaviour
         yield return new WaitForSeconds(waitTIme);
 
         //for each enemy in our current wave
+        enemies = new List<GameObject>();
         enemy_Waves.Index_GetWave(currWaveIndex).ForEach(delegate(GameObject enemy)
         {
             //spawn enemy
             var randSpot = RandomTankSpawnSpot();
-            var temp = Instantiate(enemy, randSpot, Quaternion.identity); 
+            enemies.Add(Instantiate(enemy, randSpot, Quaternion.identity)); 
         });
 
         //announce (current enemies count)
@@ -201,5 +204,10 @@ public class Controller_Enemy : MonoBehaviour
             Controller_Pets.instance.Annoucement_EndIt(Event_Type.enemyWave);
         }
         
+    }
+
+
+    public GameObject GetEnemyAtIndex(int index){
+        return enemies[index];
     }
 }

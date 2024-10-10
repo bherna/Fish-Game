@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class Starfish_SM : Enemy, IPointerClickHandler
+public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 {
 
     //star fish

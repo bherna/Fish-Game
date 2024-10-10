@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class Enemy : Fish_ParentClass_Movement, IPointerClickHandler
+public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
 
 
@@ -25,7 +25,7 @@ public class Enemy : Fish_ParentClass_Movement, IPointerClickHandler
 
 
 
-    protected void SetTargetFish(Transform newFishTarget){
+    public void SetTargetFish(Transform newFishTarget){
 
         currFishTarget = newFishTarget;
     }
