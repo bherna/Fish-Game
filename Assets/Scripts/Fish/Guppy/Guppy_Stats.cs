@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Guppy_Stats : MonoBehaviour
+public class Guppy_Stats : FishStats_ParentClass
 {
 
     // --------------------------------- gubby script reference --------------------------------//
@@ -25,21 +25,19 @@ public class Guppy_Stats : MonoBehaviour
     private float size_growth_speed = 0.15f;
     private bool updateAge = true;
 
-    // --------------------------------- health/combat related -------------------------------------------//
-    [SerializeField] AudioClip dieSoundClip;
-    private int health;
-    private const int maxHealth = 100;
+    
 
 
     // Start is called before the first frame update
-    private void Start()
+    private new void Start()
     {
+        base.Start();
         guppy_SM = GetComponent<Guppy_SM>();
 
         stomach = startStomach;
         ChangeGuppySize(); //to currently held size
 
-        health = maxHealth;
+        
     }
 
     // Update is called once per frame
@@ -166,7 +164,8 @@ public class Guppy_Stats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage){
+
+    public override void TakeDamage(int damage){
 
         health -= damage;
 
@@ -177,7 +176,7 @@ public class Guppy_Stats : MonoBehaviour
         }
     }
 
-    public void Died(bool playSound = true){
+    public override void Died(bool playSound = true){
 
         //removes self from the list of current fish known to the fish controller
         Controller_Fish.instance.RemoveFish(gameObject);

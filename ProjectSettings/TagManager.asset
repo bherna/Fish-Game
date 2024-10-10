@@ -10,7 +10,7 @@ TagManager:
   - Enemy
   - Boundry
   - GemBox
-  - Burger
+  - Pet
   layers:
   - Default
   - TransparentFX

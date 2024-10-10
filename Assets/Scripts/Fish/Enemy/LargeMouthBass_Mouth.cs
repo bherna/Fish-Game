@@ -16,11 +16,11 @@ public class LargeMouthBass_Mouth : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         
-        if(canAttack && other.gameObject.CompareTag("Fish")){
+        if(canAttack && other.gameObject.CompareTag("Fish") || other.gameObject.CompareTag("Pet")){
             
             //bite
             //Debug.Log(gameObject.ToString() + "Bite");
-            other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
+            other.gameObject.GetComponent<FishStats_ParentClass>().TakeDamage(attackPower);
             
             Instantiate(bite_particle, transform.position, Quaternion.identity);
 
