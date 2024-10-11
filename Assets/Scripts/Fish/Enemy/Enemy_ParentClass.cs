@@ -6,11 +6,9 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
 
 
-    [SerializeField] protected Rigidbody2D rb;
-    [SerializeField] protected Transform sprite;
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
-
+    protected Rigidbody2D rb;
     
 
     //targets
@@ -22,7 +20,9 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     [SerializeField] protected int curr_health = 6; 
     [SerializeField] protected float kbForce = 0f;
     
-
+    protected void Start() {
+        rb = GetComponent<Rigidbody2D>();
+    }
 
 
     public void SetTargetFish(Transform newFishTarget){

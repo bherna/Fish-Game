@@ -37,7 +37,8 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
     private (float, float, float, float) boundry_d;
 
 
-    private void Start() {
+    private new void Start() {
+        base.Start();
         
         //set target fish
         target_position = Controller_Fish.instance.GetRandomFish();
@@ -62,7 +63,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //build wind up, and update sprite rotation
             curr_r_vel += r_accel * Time.deltaTime;
             curr_sprite_r = curr_sprite_r + curr_r_vel;
-            sprite.localRotation = Quaternion.Euler(0,0, curr_sprite_r);
+            sprite_transform.localRotation = Quaternion.Euler(0,0, curr_sprite_r);
 
             //did we reach rotational velocity threshold 
             //set our attack bool to true, to not build anymore wind up
@@ -128,13 +129,13 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             var x = rb.velocity.x;
             var y = rb.velocity.y;
 
-            if( transform.position.x + rb.velocity.x < boundry_d.Item1 + sprite.localScale.x ||
-                transform.position.x + rb.velocity.x > boundry_d.Item2 - sprite.localScale.x)
+            if( transform.position.x + rb.velocity.x < boundry_d.Item1 + sprite_transform.localScale.x ||
+                transform.position.x + rb.velocity.x > boundry_d.Item2 - sprite_transform.localScale.x)
                 {
                     x = -x;
                 }
-            if( transform.position.y + rb.velocity.y < boundry_d.Item3 + sprite.localScale.y*2 ||
-                transform.position.y + rb.velocity.y > boundry_d.Item4 - sprite.localScale.y*2  )
+            if( transform.position.y + rb.velocity.y < boundry_d.Item3 + sprite_transform.localScale.y*2 ||
+                transform.position.y + rb.velocity.y > boundry_d.Item4 - sprite_transform.localScale.y*2  )
                 {
                     y = -y;
                 } 
@@ -149,7 +150,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
                 //reset spin build variables
                 curr_r_vel = 0;
                 curr_sprite_r = 0;
-                sprite.localRotation = Quaternion.Euler(0,0,0);
+                sprite_transform.localRotation = Quaternion.Euler(0,0,0);
 
                 //reset fish list, so we can hurt fish again :(
                 fishes_attacked = new List<GameObject>();

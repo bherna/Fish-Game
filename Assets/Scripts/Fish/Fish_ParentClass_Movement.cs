@@ -16,16 +16,24 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected Vector3 idleTarget;
     protected float targetRadius = 0.5f;
     protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
+    [SerializeField] protected BoxCollider2D attach_pos;    //fill this if we have an attachment, example: this will be the mouth transform
+                                                            //make sure the transform position of the attachment is 0,0,0 
     
     
     protected void updatePosition(Vector3 targetTypePosition, float current_Vel){
 
-        //update physical position towards the target
-        transform.position = Vector2.MoveTowards(
-            transform.position,
-            targetTypePosition,
-            current_Vel * Time.deltaTime
-        );
+        try{
+            //try with a given transform_pos, 
+            //update physical position towards the target
+            transform.position = Vector2.MoveTowards( transform.position, new Vector2(targetTypePosition.x - attach_pos.offset.x, targetTypePosition.y - attach_pos.offset.y)  , current_Vel * Time.deltaTime );
+
+        }catch(UnassignedReferenceException){
+
+            //else do the same but without target_pos
+            //update physical position towards the target
+            transform.position = Vector2.MoveTowards( transform.position, targetTypePosition, current_Vel * Time.deltaTime );
+        }
+        
 
         //----------------- everything now is sprite visuals ------------------------------
         float y_curr_angle = (Time.time - startTime) / h_turningSpeed;
@@ -64,13 +72,16 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected void OnDrawGizmosSelected() {
     
         //current target for fish
-        Gizmos.color = new Color(1,1,0,0.75f);
+        Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(idleTarget, targetRadius);
 
-        //current target for fish
-        Gizmos.color = new Color(0,1,1,0.75f);
+        //current range untill new target
+        Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
 
+        //current fish origin, for transform.position
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(attach_pos.offset, 1f);
 
         
     }

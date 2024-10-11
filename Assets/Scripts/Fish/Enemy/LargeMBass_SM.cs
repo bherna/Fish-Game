@@ -17,8 +17,6 @@ public class LargeMBass_SM : Enemy_ParentClass
     private float acceleration = 0.3f; 
     private float bounce_vel = 0.4f;
 
-    
-    [SerializeField] protected GameObject mouth_obj;
 
     void Update()
     {
@@ -85,4 +83,16 @@ public class LargeMBass_SM : Enemy_ParentClass
         }
     }
 
+
+    protected new void OnDrawGizmosSelected() {
+    
+        base.OnDrawGizmosSelected();
+
+        //current range untill new target
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
+
+
+        
+    }
 }
