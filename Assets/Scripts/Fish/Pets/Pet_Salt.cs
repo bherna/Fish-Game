@@ -22,23 +22,25 @@ public class Pet_Salt : Pet_ParentClass
 
 
     [SerializeField] GameObject salt_ref;
-    [SerializeField] float throwStr = 10;
-
+    private float throwStr = 70;
     private int salt_chargeCount = 0;
-    private const int salt_maxCharges = 1; //we build up one in the update method technically, actual value => +1
     private float sec_tillCharge = 0;
-    private const float sec_forCharge = 3; 
+    private const float sec_forCharge = 6; 
     private Event_Type event_type = Event_Type.food;
-
     private List<GameObject> guppyList; //incase if multiple guppies call hunger
     private bool facingTarget = false;
     private Vector3 faceingVec;
+
+
+
+
 
     private new void Start(){
 
         base.Start();
 
         guppyList = new List<GameObject>();
+        faceingVec = Vector3.zero;
     }
 
 
@@ -50,7 +52,7 @@ public class Pet_Salt : Pet_ParentClass
         base.Update();
 
         sec_tillCharge += Time.deltaTime;
-        if(sec_tillCharge >= sec_forCharge  && salt_chargeCount < salt_maxCharges){
+        if(sec_tillCharge >= sec_forCharge  && salt_chargeCount <= 0){
             salt_chargeCount += 1;
         }
 
@@ -78,14 +80,16 @@ public class Pet_Salt : Pet_ParentClass
     //return to idle
     private void AbilityMode(){
 
-        if(guppyList != null){
+        if(guppyList.Count > 0){
 
             //start facing guppy
             if(!facingTarget){
 
                 //first get a position that faces guppy
-                GetGuppyDirection();
-
+                if(faceingVec == Vector3.zero){
+                    GetGuppyDirection();
+                }
+                
                 //start turning LERP
                 if(updatePosition(faceingVec, idle_velocity)){
                     //once facing
@@ -101,6 +105,7 @@ public class Pet_Salt : Pet_ParentClass
                 //remove from list
                 //and reset target
                 facingTarget = false;
+                faceingVec = Vector3.zero;
                 guppyList.RemoveAt(0);
             }
             
@@ -117,8 +122,14 @@ public class Pet_Salt : Pet_ParentClass
     private void ThrowFood(){
 
         //throw food
+        //first we create the instance
+        //then we add to food controller
         var food = Instantiate(salt_ref, transform.position, quaternion.identity);
-        Vector2 dir = (transform.position - guppyList[0].transform.position).normalized;
+        Controller_Food.instance.AddFood_Gameobject(food, false);
+
+        //get direction
+        //throw
+        Vector2 dir = (guppyList[0].transform.position - transform.position).normalized;
         food.GetComponent<Rigidbody2D>().AddForce(dir * throwStr);
 
         //remove charge
@@ -127,7 +138,7 @@ public class Pet_Salt : Pet_ParentClass
 
     private void GetGuppyDirection(){
 
-        faceingVec = Vector2.MoveTowards(transform.position, guppyList.ElementAt(0).transform.position, 0.5f);
+        faceingVec = Vector2.MoveTowards(transform.position, guppyList[0].transform.position, 0.5f);
     }
 
     //-------------- abstract functions -----------------------------//

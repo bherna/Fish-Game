@@ -69,7 +69,7 @@ public class Controller_Food : MonoBehaviour
             var screenPos = Input.mousePosition;
             screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
             var mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
-            SpawnFood_Pellet(mousePos);
+            SpawnFood_Pellet(mousePos, true);
         }
     }
 
@@ -77,11 +77,14 @@ public class Controller_Food : MonoBehaviour
 
 
     //used for spawning player placed food pellet
-    private void SpawnFood_Pellet(Vector3 mousePos){
+    private void SpawnFood_Pellet(Vector3 mousePos, bool removeOld){
         
-        //check if at max food,
-        //delete oldest
-        FoodList_MakeSpace();
+        if(removeOld){
+            //check if at max food,
+            //delete oldest
+            FoodList_MakeSpace();
+        }
+        
 
         //spawn new
         foodPellets_list.Add(Instantiate(foodPellets[index_foodPelletType], mousePos, Quaternion.identity));
@@ -92,11 +95,13 @@ public class Controller_Food : MonoBehaviour
 
     //used for spawning non conventional food pellet (like pet created foods ex: burger)
     //this new food pellet should be created before hand, all we do here is make space in tank and add to foodlist
-    public void SpawnFood_Gameobject(GameObject food_obj){
+    public void AddFood_Gameobject(GameObject food_obj, bool removeOld){
 
-        //checkk if at max food,
-        //delete oldest
-        FoodList_MakeSpace();
+        if(removeOld){
+            //check if at max food,
+            //delete oldest
+            FoodList_MakeSpace();
+        }
 
         //add given gameobject to list
         foodPellets_list.Add(food_obj);

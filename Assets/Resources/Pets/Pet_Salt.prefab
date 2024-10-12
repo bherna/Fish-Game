@@ -131,5 +131,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 6357049897937032448}
   attach_pos: {fileID: 0}
-  salt_ref: {fileID: 1213281205517056372, guid: 4f65c7b276c344b4d91691daec4e48ca, type: 3}
-  throwStr: 10
+  salt_ref: {fileID: 1213281205517056372, guid: 7f5e3533171f5054e895d5741ca3c5be, type: 3}
