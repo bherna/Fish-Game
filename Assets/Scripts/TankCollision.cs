@@ -108,4 +108,22 @@ public class TankCollision : MonoBehaviour
     public (float, float, float, float) GetBoundryArea(){
         return (boundry_xLower ,boundry_xUpper, boundry_yLower, boundry_yUpper);
     }
+
+
+
+
+    protected void OnDrawGizmosSelected() {
+   
+        //swim range
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireCube(swimRange.offset, swimRange.size);
+
+        //spawn range
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(spawnRange.offset, spawnRange.size);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(boundry.offset, boundry.size);
+
+    }
 }
