@@ -54,8 +54,11 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
     }
 
     // Update is called once per frame
-    public void Update()
+    public new void Update()
     {
+        base.Update();
+
+        
         //if we have a fish to attack, start wind up
         //and should we continue wind up
         if(target_position != null && !spinning){

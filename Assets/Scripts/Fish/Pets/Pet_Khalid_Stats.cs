@@ -16,9 +16,6 @@ public class Pet_Khalid_Stats : FishStats_ParentClass
         
         //change enemy target away from us
         Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(Controller_Fish.instance.GetRandomFish());
-
-        //removes self from the list of current fish known to the fish controller
-        Controller_Fish.instance.RemoveFish(gameObject);
         
         //play 'die' sound, transisioning to polyp mode
         if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}

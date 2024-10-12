@@ -6,7 +6,6 @@ public class Guppy_Movement : Fish_ParentClass_Movement
 {
 
     //--------------------------------- used in the update position function ---------------------------------
-    private float idle_velocity = 1;
     private float hungry_velocity = 2;
     private float follow_velocity = 1.7f;
 
@@ -75,27 +74,6 @@ public class Guppy_Movement : Fish_ParentClass_Movement
     }
 
 
-    private void NewRandomIdleTarget_Tank(){
-
-        //since new target
-        NewTargetVariables();
-
-        //new target
-        var curr_pos = new Vector3 (transform.position.x, transform.position.y, 0);
-
-        //tanke dememsions
-        var swimDem = TankCollision.instance.GetTankSwimArea();
-
-        while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
-            
-            idleTarget = new Vector3(
-                Random.Range(swimDem.Item1, swimDem.Item2),
-                Random.Range(swimDem.Item3, swimDem.Item4), 
-                0
-            );
-        }
-        
-    }
 
     private void NewFoodTarget_Tank(){
 
@@ -125,12 +103,6 @@ public class Guppy_Movement : Fish_ParentClass_Movement
         //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
     }
 
-
-
-    //whenever a new target is set we reset our sprite variables
-    private void NewTargetVariables(){
-        startTime = Time.time;      //reset our turning time for lerp
-    }
 
     
 }

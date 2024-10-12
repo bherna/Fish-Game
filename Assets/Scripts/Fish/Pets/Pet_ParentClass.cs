@@ -14,11 +14,6 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     //-----------------------------                 -----------------------------------------//
     protected Pet_States curr_PetState;
 
-    //--------------------------------- used in the update position function ---------------------------------
-    protected float idle_velocity = 1;
-
-
-
     
 
 
@@ -29,12 +24,6 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
         NewRandomIdleTarget_Tank();
         startTime = Time.time;
         curr_PetState = Pet_States.idle;
-    }
-
-    // Update is called once per frame
-    protected void Update()
-    {
-        
     }
 
     //move around the tank
@@ -56,38 +45,8 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     }
 
 
-    protected virtual void NewRandomIdleTarget_Tank(){
-
-        //since new target
-        NewTargetVariables();
-
-        //new target
-        var curr_pos = new Vector3 (transform.position.x, transform.position.y, 0);
-
-        //tanke dememsions
-        var swimDem = TankCollision.instance.GetTankSwimArea();
-
-        while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
-            
-            idleTarget = new Vector3(
-                UnityEngine.Random.Range(swimDem.Item1, swimDem.Item2),
-                UnityEngine.Random.Range(swimDem.Item3, swimDem.Item4), 
-                0
-            );
-        }
-        
-    }
-
-
-
     
 
-
-
-    //whenever a new target is set we reset our sprite variables
-    protected void NewTargetVariables(){
-        startTime = Time.time;      //reset our turning time for lerp
-    }
 
 
     //-------------- abstract functions -----------------------------//

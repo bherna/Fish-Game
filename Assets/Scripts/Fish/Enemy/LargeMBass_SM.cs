@@ -19,34 +19,42 @@ public class LargeMBass_SM : Enemy_ParentClass
     private float bounce_vel = 0.4f;
 
 
-    void Update()
+    private new void Update()
     {
-        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
-        if(Controller_Main.instance.paused){
-            return;
-        }
+        base.Update();
 
+        
+        switch(curr_EnemyState){
+
+            case Enemy_States.idle:
+                IdleMode();
+                break;
+            case Enemy_States.attack:
+                AttackMode();
+                break;
+            default:
+                Debug.Log(gameObject+" does not have a state to run.");
+                break;
+        }
+    }
+
+    private void AttackMode(){
         //if no fish currently pointing to
         if(currFishTarget == null){
             
             //if so get a new fish to follow
             SetTargetFish(Controller_Fish.instance.GetRandomFish());
 
-            //if we can't find a fish, just return
+            //if we can't find a fish, run idle mode
             if(currFishTarget == null){
-
-                //wait a few seconds before checking again ?
-                return;
-                
+                curr_EnemyState = Enemy_States.idle;
             }
             
         }
-
         else{
             //update the enemy position towards target fish
             UpdatePos();
         }
-        
     }
 
     private void UpdatePos(){

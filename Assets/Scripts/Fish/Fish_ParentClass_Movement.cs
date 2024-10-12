@@ -18,6 +18,7 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     [SerializeField] protected BoxCollider2D attach_pos;    //fill this if we have an attachment, example: this will be the mouth transform
                                                             //make sure the transform position of the attachment is 0,0,0 
+    protected float idle_velocity = 1;
     
     
     protected void updatePosition(Vector3 targetTypePosition, float current_Vel){
@@ -67,7 +68,42 @@ public class Fish_ParentClass_Movement : MonoBehaviour
 
     }
 
+    protected virtual void Update() {
 
+        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
+        if(Controller_Main.instance.paused){
+            return;
+        }
+    }
+
+
+
+    protected virtual void NewRandomIdleTarget_Tank(){
+
+        //since new target
+        NewTargetVariables();
+
+        //new target
+        var curr_pos = new Vector3 (transform.position.x, transform.position.y, 0);
+
+        //tanke dememsions
+        var swimDem = TankCollision.instance.GetTankSwimArea();
+
+        while(Mathf.Abs(Vector2.Distance(idleTarget, curr_pos)) < newTargetMinLengthRadius){
+            
+            idleTarget = new Vector3(
+                Random.Range(swimDem.Item1, swimDem.Item2),
+                Random.Range(swimDem.Item3, swimDem.Item4), 
+                0
+            );
+        }
+        
+    }
+
+    //whenever a new target is set we reset our sprite variables
+    protected virtual void NewTargetVariables(){
+        startTime = Time.time;      //reset our turning time for lerp
+    }
 
     protected void OnDrawGizmosSelected() {
     

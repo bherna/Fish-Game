@@ -117,6 +117,9 @@ public class Pet_Khalid : Pet_ParentClass
 
             //we are reborn
             GetComponent<Pet_Khalid_Stats>().ResetHealth();
+            //get a new idle target (for fluidity)
+            NewRandomIdleTarget_Tank();
+
             //return to helping or not
             if(Controller_Enemy.instance.currently_in_wave){
                 curr_PetState = Pet_States.protect;

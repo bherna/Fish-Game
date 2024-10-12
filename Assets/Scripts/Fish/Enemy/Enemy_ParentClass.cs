@@ -3,6 +3,8 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
 
+public enum Enemy_States {idle, attack};
+
 public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
 
@@ -10,10 +12,17 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
     protected Rigidbody2D rb;
+    protected Enemy_States curr_EnemyState = Enemy_States.idle;
     
 
     //targets
     protected Transform currFishTarget;
+
+    //retargeting variables, used in idle mode
+    protected float currSeconds_ReTarget = 0;
+    protected float secondsTill_ReTarget = 3;
+
+    
     
 
     //stats
@@ -23,8 +32,17 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     
     protected void Start() {
         
+        //references
         rb = GetComponent<Rigidbody2D>();
         SetTargetFish(Controller_Fish.instance.GetRandomFish());
+
+        //idle 
+        NewRandomIdleTarget_Tank();
+        startTime = Time.time;
+        curr_EnemyState = Enemy_States.attack;
+
+        //increase size of retargeting rage
+        targetRadius = 1;
     }
 
 
@@ -60,6 +78,33 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
             Died();
         }
         
+    }
+
+    //move around the tank
+    //get a random point on the screen
+    protected void IdleMode(){
+
+        //retargeting 
+        currSeconds_ReTarget += Time.deltaTime;
+        if(currSeconds_ReTarget >= secondsTill_ReTarget){
+            currSeconds_ReTarget = 0;
+            curr_EnemyState = Enemy_States.attack;
+            return;
+        }
+
+        //else we keep idle mode
+
+        var distance = Vector3.Distance(idleTarget, transform.position);
+
+        if(Mathf.Abs(distance) > targetRadius){
+            
+            updatePosition(idleTarget, idle_velocity);
+        }
+
+        //get new point once fish reaches it
+        else{
+            NewRandomIdleTarget_Tank();
+        }
     }
 
 
