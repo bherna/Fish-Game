@@ -93,6 +93,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8013163824268462595}
+  - component: {fileID: 2615781661765424567}
   m_Layer: 0
   m_Name: Pet_Salt
   m_TagString: Untagged
@@ -116,3 +117,19 @@ Transform:
   - {fileID: 6357049897937032448}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2615781661765424567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5265518036556359461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90665b25657c43d439a4e4db9c54cda7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite_transform: {fileID: 6357049897937032448}
+  attach_pos: {fileID: 0}
+  salt_ref: {fileID: 1213281205517056372, guid: 4f65c7b276c344b4d91691daec4e48ca, type: 3}
+  throwStr: 10

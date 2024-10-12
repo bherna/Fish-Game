@@ -21,7 +21,8 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float idle_velocity = 1;
     
     
-    protected void updatePosition(Vector3 target_pos, float current_Vel){
+    //returns true when position is achieved
+    protected bool updatePosition(Vector3 target_pos, float current_Vel){
 
         try{
             //try with a given transform_pos, 
@@ -55,17 +56,17 @@ public class Fish_ParentClass_Movement : MonoBehaviour
         }
         else {
             //else keep curr pos rotation
-            y_angle = sprite_transform.localRotation.eulerAngles.y;
-            //this shouldnt happen
-            //so
-            Debug.Log(gameObject.ToString() + " y_angle is not working");
+            //y_angle = sprite_transform.localRotation.eulerAngles.y;
+            //if we have no reason to turn
+            //then we are in final position
+            return true;
         }
 
 
         //apply rotations
         sprite_transform.localRotation = Quaternion.Euler(0, y_angle, 0); 
 
-
+        return false;
     }
 
     protected virtual void Update() {

@@ -6,7 +6,7 @@ using UnityEngine;
 
 
 public enum Pet_States {idle, protect, grabbed, dropped, ability};
-public enum Event_Type {enemyWave, coin}
+public enum Event_Type {enemyWave, coin, food}
 
 public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {

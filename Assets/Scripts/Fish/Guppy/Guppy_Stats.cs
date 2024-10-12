@@ -56,6 +56,9 @@ public class Guppy_Stats : FishStats_ParentClass
             //guppy is now hungry
             guppy_SM.GuppyToHungry();
 
+            //announce to all pets that we are hungry
+            Controller_Pets.instance.Annoucement_Init(Event_Type.food, gameObject);
+
             //change sprite transparancy
             ChangeTransparency(false);
 
