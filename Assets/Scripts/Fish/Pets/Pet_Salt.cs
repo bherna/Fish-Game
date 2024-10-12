@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,7 @@ public class Pet_Salt : Pet_ParentClass
     private float throwStr = 70;
     private int salt_chargeCount = 0;
     private float sec_tillCharge = 0;
-    private const float sec_forCharge = 6; 
+    private const float sec_forCharge = 4; 
     private Event_Type event_type = Event_Type.food;
     private List<GameObject> guppyList; //incase if multiple guppies call hunger
     private bool facingTarget = false;
@@ -51,10 +52,15 @@ public class Pet_Salt : Pet_ParentClass
     {
         base.Update();
 
-        sec_tillCharge += Time.deltaTime;
-        if(sec_tillCharge >= sec_forCharge  && salt_chargeCount <= 0){
-            salt_chargeCount += 1;
+        //if we have a charge, dont bother with this
+        if(salt_chargeCount <= 0){
+                sec_tillCharge += Time.deltaTime;
+            if(sec_tillCharge >= sec_forCharge ){
+                salt_chargeCount += 1;
+                sec_tillCharge = 0;
+            }
         }
+    
 
         switch(curr_PetState){
 
@@ -80,7 +86,18 @@ public class Pet_Salt : Pet_ParentClass
     //return to idle
     private void AbilityMode(){
 
-        if(guppyList.Count > 0){
+        //also make sure we have a charge to eat
+        if(salt_chargeCount <= 0){
+            //if no charge, then run idle
+            IdleMode();
+        }
+        else if(guppyList.Count > 0){
+
+            //check incase our guppy died and isnt removed from list
+            if(guppyList[0] == null){
+                guppyList.RemoveAt(0);
+                return;
+            }
 
             //start facing guppy
             if(!facingTarget){
