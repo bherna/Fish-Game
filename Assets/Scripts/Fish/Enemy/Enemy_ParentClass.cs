@@ -93,8 +93,13 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         }
 
         //else we keep idle mode
-
-        var distance = Vector3.Distance(idleTarget, transform.position);
+        float distance;
+        if(attach_pos != null){
+            distance = Vector3.Distance(idleTarget, attach_pos.offset);
+        }
+        else{
+            distance = Vector3.Distance(idleTarget, transform.position);
+        }
 
         if(Mathf.Abs(distance) > targetRadius){
             
