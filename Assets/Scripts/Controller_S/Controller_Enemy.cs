@@ -15,7 +15,7 @@ public class Controller_Enemy : MonoBehaviour
     private float curr_sec = 0f;
     private bool keepSpawning = true;
     private float preAnnouncerTime = 3f;
-    private bool currently_in_wave = false; //used in keeping the wave from spawning multiple times (from coroutine being used)
+    public bool currently_in_wave {get; private set;} = false; //used in keeping the wave from spawning multiple times (from coroutine being used)
     private bool startWaves = false;
 
 
@@ -210,4 +210,5 @@ public class Controller_Enemy : MonoBehaviour
     public GameObject GetEnemyAtIndex(int index){
         return enemies[index];
     }
+
 }

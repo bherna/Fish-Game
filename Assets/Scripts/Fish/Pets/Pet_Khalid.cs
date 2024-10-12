@@ -21,28 +21,16 @@ using UnityEngine;
 public class Pet_Khalid : Pet_ParentClass
 {
 
-
-    // --------------------- stats ------------------------- //
-    private int curr_health = 0;
-    private const int max_health = 20; 
-
-
     //
 
     private float curr_seconds = 0; //used in both protect mode and polyp mode, reset as needed
     private const float secondsInPolyp = 10;
     private const float secondsTillCall = 2;
-    private Vector2 bot_of_tank = new Vector2(0, 4.5f);
+    private Vector2 bot_of_tank = new Vector2(0, -4.5f);
     private Event_Type event_type = Event_Type.enemyWave;
     private bool inPolyp = false;
+    private float ability_velocity = 2;
 
-    // Start is called before the first frame update
-    private new void Start()
-    {
-        base.Start();
-
-        curr_health = max_health;
-    }
 
     // Update is called once per frame
     private new void Update()
@@ -68,20 +56,14 @@ public class Pet_Khalid : Pet_ParentClass
     }
 
 
-    public void TakeDamage(int damage){
-        curr_health -= damage;
+    public void DiedStats(){
+        
+        //transision to ability mode
+        curr_PetState = Pet_States.ability;
 
-        if(curr_health <= 0){
-            Debug.Log("Khalid died");
-            curr_PetState = Pet_States.ability;
+        //reset our seconds, 
+        curr_seconds = 0;
 
-            //reset our seconds, 
-            curr_seconds = 0;
-
-            //change enemy target away from us
-            Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(Controller_Fish.instance.GetRandomFish());
-
-        }
     }
 
     //in protect mode, periodically send a message to the first enemy in the controller_enemy list
@@ -113,7 +95,7 @@ public class Pet_Khalid : Pet_ParentClass
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget, idle_velocity);
+            updatePosition(bot_of_tank, ability_velocity);
             return;
         }
         //animation related
@@ -134,8 +116,14 @@ public class Pet_Khalid : Pet_ParentClass
         if(curr_seconds >= secondsInPolyp){
 
             //we are reborn
-            curr_health = max_health;
-            curr_PetState = Pet_States.idle; //bug ?,    rightnow we can only die once per wave, since we can't re-enter protect mode from middle of wave
+            GetComponent<Pet_Khalid_Stats>().ResetHealth();
+            //return to helping or not
+            if(Controller_Enemy.instance.currently_in_wave){
+                curr_PetState = Pet_States.protect;
+            } 
+            else{
+                curr_PetState = Pet_States.idle;
+            }
 
             //update animation
 

@@ -103,7 +103,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
         curr_whistle_timer = 0;
 
         //let guppies disperse
-        Controller_Fish.instance.SchoolTeacherWhistle_Disperse();
+        Controller_Fish.instance.PetEvent_Disperse();
     }
 
 
@@ -137,7 +137,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
         //guppy whistle sound
         AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
         //guppy function call
-        Controller_Fish.instance.SchoolTeacherWhistle_Huddle(gameObject);
+        Controller_Fish.instance.PetEvent_Huddle(gameObject);
     }
 
     //when ever enemy waves start, we enter protect mode

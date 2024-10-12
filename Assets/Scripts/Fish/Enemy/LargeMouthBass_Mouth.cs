@@ -6,7 +6,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
 {
 
     //bite-ing fish vars
-    private int attackPower = 20; 
+    private int attackPower = 3; //attack power is in terms of bites (attack power = _ bites worth of damage) 
     private float attackSpeed = 0.7f; // _ hits per second
     private bool canAttack = true;
 
