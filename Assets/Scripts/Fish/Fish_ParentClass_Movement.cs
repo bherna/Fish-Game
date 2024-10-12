@@ -21,18 +21,18 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float idle_velocity = 1;
     
     
-    protected void updatePosition(Vector3 targetTypePosition, float current_Vel){
+    protected void updatePosition(Vector3 target_pos, float current_Vel){
 
         try{
             //try with a given transform_pos, 
             //update physical position towards the target
-            transform.position = Vector2.MoveTowards( transform.position, new Vector2(targetTypePosition.x - attach_pos.offset.x, targetTypePosition.y - attach_pos.offset.y)  , current_Vel * Time.deltaTime );
+            transform.position = Vector2.MoveTowards( transform.position, new Vector2(target_pos.x - attach_pos.offset.x, target_pos.y - attach_pos.offset.y)  , current_Vel * Time.deltaTime );
 
         }catch(UnassignedReferenceException){
 
             //else do the same but without target_pos
             //update physical position towards the target
-            transform.position = Vector2.MoveTowards( transform.position, targetTypePosition, current_Vel * Time.deltaTime );
+            transform.position = Vector2.MoveTowards( transform.position, target_pos, current_Vel * Time.deltaTime );
         }
         
 
@@ -41,13 +41,13 @@ public class Fish_ParentClass_Movement : MonoBehaviour
 
         //fish local facing position (towards target) 
         //sprite (left or right)
-        if(transform.position.x - targetTypePosition.x < 0){
+        if(transform.position.x - target_pos.x < 0){
 
             //turn right  (0 degrees to 180 degress)
             y_angle = Mathf.SmoothStep(sprite_transform.localRotation.eulerAngles.y, 180, y_curr_angle);
             
         }
-        else if (transform.position.x - targetTypePosition.x > 0){
+        else if (transform.position.x - target_pos.x > 0){
 
             //return to left (180 degress to 0 degrees)
             y_angle = Mathf.SmoothStep(sprite_transform.localRotation.eulerAngles.y, 0 , y_curr_angle);

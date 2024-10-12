@@ -27,6 +27,7 @@ public class LargeMBass_SM : Enemy_ParentClass
         switch(curr_EnemyState){
 
             case Enemy_States.idle:
+                if(idleTarget == null){NewRandomIdleTarget_Tank();}//randomly doesn't set
                 IdleMode();
                 break;
             case Enemy_States.attack:

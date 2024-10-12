@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TankCollision : MonoBehaviour
@@ -16,6 +14,9 @@ public class TankCollision : MonoBehaviour
 
     //reference to boundry tag collision box
     [SerializeField] BoxCollider2D boundry;
+
+    //trash can dimension for gizmo only
+    [SerializeField] BoxCollider2D trash;
 
     //spawn range
     float spawn_xLower;
@@ -122,8 +123,12 @@ public class TankCollision : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawWireCube(spawnRange.offset, spawnRange.size);
 
+        //boundry
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(boundry.offset, boundry.size);
+
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireCube(trash.offset, trash.size);
 
     }
 }

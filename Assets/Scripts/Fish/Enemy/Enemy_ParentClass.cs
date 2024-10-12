@@ -41,8 +41,8 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         startTime = Time.time;
         curr_EnemyState = Enemy_States.attack;
 
-        //increase size of retargeting rage
-        targetRadius = 1;
+        targetRadius = 0.8f;
+
     }
 
 
@@ -95,7 +95,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         //else we keep idle mode
         float distance;
         if(attach_pos != null){
-            distance = Vector3.Distance(idleTarget, attach_pos.offset);
+            distance = Vector3.Distance(new Vector3(idleTarget.x - attach_pos.offset.x, idleTarget.y - attach_pos.offset.y, 0), transform.position);
         }
         else{
             distance = Vector3.Distance(idleTarget, transform.position);
