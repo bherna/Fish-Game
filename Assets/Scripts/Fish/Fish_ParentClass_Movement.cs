@@ -71,17 +71,21 @@ public class Fish_ParentClass_Movement : MonoBehaviour
 
     protected void OnDrawGizmosSelected() {
     
-        //current target for fish
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(idleTarget, targetRadius);
+        //if idle is null, dont show it
+        if(idleTarget == null || idleTarget == new Vector3(0,0,0)){
+            //dont show
+        }
+        else{
+            //current target for fish
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(idleTarget, targetRadius);
+        }
+        
 
         //current range untill new target
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, newTargetMinLengthRadius);
 
-        //current fish origin, for transform.position
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(attach_pos.offset, 1f);
 
         
     }

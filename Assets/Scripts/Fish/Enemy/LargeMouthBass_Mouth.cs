@@ -16,7 +16,7 @@ public class LargeMouthBass_Mouth : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D other) {
         
-        if(canAttack && other.gameObject.CompareTag("Fish") || other.gameObject.CompareTag("Pet")){
+        if(canAttack && (other.gameObject.CompareTag("Fish") || other.gameObject.CompareTag("Pet"))){
             
             //bite
             //Debug.Log(gameObject.ToString() + "Bite");

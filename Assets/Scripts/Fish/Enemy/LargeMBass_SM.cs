@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -84,15 +85,5 @@ public class LargeMBass_SM : Enemy_ParentClass
     }
 
 
-    protected new void OnDrawGizmosSelected() {
     
-        base.OnDrawGizmosSelected();
-
-        //current range untill new target
-        Gizmos.color = Color.white;
-        Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
-
-
-        
-    }
 }

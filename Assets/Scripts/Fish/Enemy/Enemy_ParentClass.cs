@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using System;
 
 public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
@@ -21,7 +22,9 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     [SerializeField] protected float kbForce = 0f;
     
     protected void Start() {
+        
         rb = GetComponent<Rigidbody2D>();
+        SetTargetFish(Controller_Fish.instance.GetRandomFish());
     }
 
 
@@ -75,5 +78,18 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     }
 
 
+    protected new void OnDrawGizmosSelected() {
     
+        base.OnDrawGizmosSelected();
+
+        if(currFishTarget == null || currFishTarget.transform.position  == new Vector3(0,0,0)){
+            //dont show
+        }
+        else{
+            //current range untill new target
+            Gizmos.color = Color.white;
+            Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
+        }
+        
+    }
 }
