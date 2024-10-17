@@ -12,7 +12,6 @@ public class MainMenu : MonoBehaviour
     [SerializeField] List<GameObject> Panels;
     [SerializeField] int rectTransform_width = 1920;
     [SerializeField] EventOnHover_PlayButton playButton;
-    [SerializeField] UI_Levels ui_Levels;
 
 
     private int curr_screen = 0;
