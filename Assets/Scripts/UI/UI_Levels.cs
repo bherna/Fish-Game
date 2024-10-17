@@ -3,17 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public struct Levels2d
-{
-    //list that holds one world's set of levels
-    [SerializeField] public GameObject[] world_level;
-}
 
 public  class UI_Levels : MonoBehaviour 
 {
     //this class only holds references to all levels on the main menu scene
-    [SerializeField] public Levels2d[] levels_reference;
+    [SerializeField] public GameObject[] content_world_ref;
 
 
     private void Start() {
@@ -28,14 +22,14 @@ public  class UI_Levels : MonoBehaviour
     
     private void UI_LevelsUpdateAccess(){
 
-        for(int i = 0; i < levels_reference.GetLength(0); i++){
-            for(int j = 0; j < levels_reference[i].world_level.GetLength(0); j++) {
+        for(int i = 0; i < content_world_ref.GetLength(0); i++){
+            for(int j = 0; j < content_world_ref[i].transform.childCount; j++) {
                 
                 if(LevelsAccess.GetLevel_Access(i, j)){
-                    levels_reference[i].world_level[j].GetComponent<Button>().interactable = true;
+                    content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = true;
                 }
                 else{
-                    levels_reference[i].world_level[j].GetComponent<Button>().interactable = false;
+                    content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = false;
                 }
             }
         }
@@ -43,7 +37,6 @@ public  class UI_Levels : MonoBehaviour
 
 
 
-    
 
 
 
