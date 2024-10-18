@@ -9,6 +9,8 @@ public class MainMenu : MonoBehaviour
 
     [SerializeField] int rectTransform_width = 1920;
     [SerializeField] EventOnHover_PlayButton playButton;
+    [SerializeField] GameObject temp;
+    [SerializeField] RectTransform panel;
 
 
     private int curr_screen = 0;
@@ -34,7 +36,7 @@ public class MainMenu : MonoBehaviour
         currSceneSet = sceneName;
 
         //go to pets (should be last scene)
-        GoToLastPanel();
+        GoToPetsPanel();
     }
 
     //Go to scene currSceneSet
@@ -74,7 +76,7 @@ public class MainMenu : MonoBehaviour
     }
 
     //last scene is the pet panel
-    private void GoToLastPanel(){
+    private void GoToPetsPanel(){
 
         //number of transistions until last scene
         int lastScene = transform.childCount - (curr_screen+1);
@@ -82,6 +84,13 @@ public class MainMenu : MonoBehaviour
         for (int i = 0; i <= transform.childCount-1; i++){
             transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width * lastScene,0,0);
         }
+
+
+        //make pets move to there correct spots
+        var screenPos = panel.transform.position;
+        screenPos.z = Vector3.Dot(Camera.main.transform.forward, - Camera.main.transform.position);
+        temp.transform.position  = Camera.main.ScreenToWorldPoint(screenPos); 
+        
 
     }
 

@@ -1546,6 +1546,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rectTransform_width: 1920
   playButton: {fileID: 2130457429}
+  temp: {fileID: 0}
+  panel: {fileID: 3397261657232857715}
 --- !u!114 &1401154125
 MonoBehaviour:
   m_ObjectHideFlags: 0
