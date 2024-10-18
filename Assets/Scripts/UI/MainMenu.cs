@@ -7,35 +7,43 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
 
-
-
-    [SerializeField] List<GameObject> Panels;
     [SerializeField] int rectTransform_width = 1920;
     [SerializeField] EventOnHover_PlayButton playButton;
 
 
     private int curr_screen = 0;
 
+    private string currSceneSet;
 
 
 
     private void Start() {
 
         //set ui tabs positions
-        for (int i = 0; i <= Panels.Count-1; i++){
-            Panels[i].transform.localPosition = new Vector3(rectTransform_width*i,0,0); //set their pos
-            Panels[i].SetActive(true);
+        for (int i = 0; i <= transform.childCount-1; i++){
+            transform.GetChild(i).gameObject.transform.localPosition = new Vector3(rectTransform_width*i,0,0); //set their pos
+            transform.GetChild(i).gameObject.SetActive(true);
         }
     }
 
     
 
+    //set scene currSceneSet
+    //this lets us move from level select to pet select
+    public void GoToPets(string sceneName){
+        currSceneSet = sceneName;
 
-    //
-    public void GoToScene(string sceneName){
-
-        SceneManager.LoadScene(sceneName);
+        //go to pets (should be last scene)
+        GoToLastPanel();
     }
+
+    //Go to scene currSceneSet
+    public void PlayLevel(){
+
+        SceneManager.LoadScene(currSceneSet);
+    }
+
+
 
     public void QuitApp(){
         Application.Quit();
@@ -44,9 +52,8 @@ public class MainMenu : MonoBehaviour
 
     public void Next_UIScreen(){
 
-        foreach(GameObject panel in Panels){
-
-            panel.transform.localPosition -= new Vector3(rectTransform_width,0,0);
+        for (int i = 0; i <= transform.childCount-1; i++){
+            transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width,0,0);
         }
 
         curr_screen += 1;
@@ -54,18 +61,35 @@ public class MainMenu : MonoBehaviour
 
     public void Previous_UIScreen(){
 
-        foreach(GameObject panel in Panels){
-
-            panel.transform.localPosition += new Vector3(rectTransform_width,0,0);
+        for (int i = 0; i <= transform.childCount-1; i++){
+            transform.GetChild(i).gameObject.transform.localPosition += new Vector3(rectTransform_width,0,0);
         }
 
         curr_screen -= 1;
 
+        //logic to reset the play button to turn of the lights in the fish tank
         if(curr_screen == 0){
             playButton.OnPointerReturnToTitleScreen();
         }
     }
 
+    //last scene is the pet panel
+    public void GoToLastPanel(){
 
-    
+        //number of transistions until last scene
+        int lastScene = transform.childCount - (curr_screen+1);
+
+        for (int i = 0; i <= transform.childCount-1; i++){
+            transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width * lastScene,0,0);
+        }
+
+    }
+
+    //if player want to leave pet selection -> return to level selection, return to world panel they were last on
+    public void ReturnToLevelSelection(){
+
+        for (int i = 0; i <= transform.childCount-1; i++){
+            transform.GetChild(i).gameObject.transform.localPosition = new Vector3(rectTransform_width * curr_screen,0,0);
+        }
+    }
 }

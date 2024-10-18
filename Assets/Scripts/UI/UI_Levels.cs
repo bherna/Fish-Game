@@ -17,6 +17,8 @@ public  class UI_Levels : MonoBehaviour
 
         //update levels on panels
         UI_LevelsUpdateAccess();
+
+
     }
 
     
@@ -27,6 +29,9 @@ public  class UI_Levels : MonoBehaviour
                 
                 if(LevelsAccess.GetLevel_Access(i, j)){
                     content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = true;
+
+                    //show current saved record
+
                 }
                 else{
                     content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = false;
