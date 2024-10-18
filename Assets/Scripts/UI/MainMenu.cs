@@ -74,7 +74,7 @@ public class MainMenu : MonoBehaviour
     }
 
     //last scene is the pet panel
-    public void GoToLastPanel(){
+    private void GoToLastPanel(){
 
         //number of transistions until last scene
         int lastScene = transform.childCount - (curr_screen+1);
