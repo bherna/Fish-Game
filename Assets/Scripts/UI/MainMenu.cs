@@ -152,9 +152,11 @@ public class MainMenu : MonoBehaviour
         GameObject pet;
         try{
             //spawn pet
-            pet = Instantiate(Resources.Load(fileLoc + nameof(petName)) as GameObject, Vector2.zero, Quaternion.identity);
+            Debug.Log("pet name:  "+petName.ToString());
+            pet = Instantiate(Resources.Load(fileLoc + petName.ToString()) as GameObject, Vector2.zero, Quaternion.identity);
         }
         catch(Exception){
+            
             //if pet does not exist,
             return;
         }

@@ -21,7 +21,8 @@ public class Pets_InMainMenu : Pet_ParentClass
     // Update is called once per frame
     private new void Update()
     {
-        base.Update();
+        //we dont need to pause this pet in game, since there is no pause menu
+        //no base.update then
 
 
         switch(curr_PetState){
