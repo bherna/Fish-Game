@@ -28,6 +28,8 @@ public  class UI_Levels : MonoBehaviour
             for(int j = 0; j < content_world_ref[i].transform.childCount; j++) {
                 
                 if(LevelsAccess.GetLevel_Access(i, j)){
+
+                    //playable level
                     content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = true;
 
                     //show current saved record

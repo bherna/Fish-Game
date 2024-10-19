@@ -12,7 +12,7 @@ public static class LevelsAccess
 
 
     //save current levels access for game 
-    public static void SaveLevels_Array(){
+    public static void SaveLevels(){
         SaveLoad.SaveGame(); //don't need to call self else 'this'
     }
 
@@ -51,6 +51,7 @@ public static class LevelsAccess
 
         //set level 1-1
         levels_access[0,0] = true;
+
     }
     
 

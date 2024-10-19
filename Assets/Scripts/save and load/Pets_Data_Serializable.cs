@@ -12,7 +12,7 @@ using UnityEngine;
 public class Pets_Data_Serializable
 {
     //pets save load stuff:
-    public Dictionary<string, bool> pets; //dictionary holding all pets accesability
+    public Dictionary<PetNames, bool> pets; //dictionary holding all pets accesability
     public string[] curr_pets; //current pets being used by player
 
     //constuctor

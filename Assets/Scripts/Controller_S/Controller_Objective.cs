@@ -81,7 +81,7 @@ public class Controller_Objective : MonoBehaviour
                 //new level should be unlocked
                 LevelsAccess.UnlockLevel_Access(world, level, true);
                 //save game
-                LevelsAccess.SaveLevels_Array();
+                LevelsAccess.SaveLevels();
                 //Debug.Log("level "+world.ToString()+"-"+level.ToString() +": "+LevelsAccess.GetLevelAccess(world, level));
                 SceneManager.LoadScene("MainMenu");
             }
