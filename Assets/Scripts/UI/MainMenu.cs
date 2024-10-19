@@ -12,22 +12,24 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject grid_pets; //we need the recttransform from each button/panel child
     private List<GameObject> pet_list;
 
-    private string[] selectedPets; //up to 3 pets to hold (string name)
-
-
-    private int curr_screen = 0;
-
-    private string currSceneSet;
+    private PetNames[] selectedPets; //up to 3 pets to hold (string name)
+    private string sceneLevelSet; //level name
+    private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
 
 
     private void Start() {
         
-        //set ui tabs positions
-        for (int i = 0; i < transform.childCount; i++){
+        //set ui tabs positions (minus the last one)
+        for (int i = 0; i < transform.childCount-1; i++){
             transform.GetChild(i).gameObject.transform.localPosition = new Vector3(rectTransform_width*i,0,0); //set their pos
             transform.GetChild(i).gameObject.SetActive(true);
         }
+
+        //set last panel (pets)
+        //set it to false, since we dont want to see it
+        //also avoid moving it since our pet coords are saved from this (0,0) position
+        transform.GetChild(transform.childCount-1).gameObject.SetActive(false);
 
         // pets stuff
         PetsAccess.LoadPets();                          //load saved pets file
@@ -40,10 +42,11 @@ public class MainMenu : MonoBehaviour
     public void PlayLevel(){
 
         //save selected pets
+        PetsAccess.SetSelectedPets(selectedPets);
         SaveLoad.Save_Pets();
 
         //start level last
-        SceneManager.LoadScene(currSceneSet);
+        SceneManager.LoadScene(sceneLevelSet);
     }
 
 
@@ -55,7 +58,7 @@ public class MainMenu : MonoBehaviour
 
     public void Next_UIScreen(){
 
-        for (int i = 0; i < transform.childCount; i++){
+        for (int i = 0; i < transform.childCount-1; i++){
             transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width,0,0);
         }
 
@@ -64,7 +67,7 @@ public class MainMenu : MonoBehaviour
 
     public void Previous_UIScreen(){
 
-        for (int i = 0; i < transform.childCount; i++){
+        for (int i = 0; i < transform.childCount-1; i++){
             transform.GetChild(i).gameObject.transform.localPosition += new Vector3(rectTransform_width,0,0);
         }
 
@@ -82,15 +85,14 @@ public class MainMenu : MonoBehaviour
     public void GoToPetsPanel(string sceneLevelName){
         
         //save current level name, so we go to that level after selecting pets
-        currSceneSet = sceneLevelName;
+        sceneLevelSet = sceneLevelName;
 
         //---move to last panell---//
-        //number of transistions until last scene
-        int lastScene = transform.childCount - (curr_screen+1);
-
-        for (int i = 0; i < transform.childCount; i++){
-            transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width * lastScene,0,0);
-        }
+        //disbale current level panel
+        //eneable pet panel
+        transform.GetChild(curr_screen).gameObject.SetActive(false);
+        transform.GetChild(transform.childCount-1).gameObject.SetActive(true);
+        
 
         //---have pets move to corresponding ui button location---//
         foreach(GameObject pet in pet_list){
@@ -106,22 +108,20 @@ public class MainMenu : MonoBehaviour
     public void ReturnToLevelSelection(){
 
         //return to last level panel player was on before
-        for (int i = 0; i < transform.childCount; i++){
-            transform.GetChild(i).gameObject.transform.localPosition = new Vector3(rectTransform_width * curr_screen,0,0);
-        }
-
-        //save pets selections for next time
-        SaveLoad.Save_Pets();
+        //enable level panel
+        //disable pet panel
+        transform.GetChild(curr_screen).gameObject.SetActive(true);
+        transform.GetChild(transform.childCount-1).gameObject.SetActive(false);
 
         //let pets return to idle
         foreach(GameObject pet in pet_list){
             pet.GetComponent<Pets_InMainMenu>().ToIdle();
         }
 
+        //update selected pets
+        PetsAccess.SetSelectedPets(selectedPets);
+
     }
-
-
-
 
 
 

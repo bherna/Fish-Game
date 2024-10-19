@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 360511734030061005}
   - component: {fileID: 4098865657598235688}
   m_Layer: 0
-  m_Name: Salt
+  m_Name: SchoolTeacher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.993973, g: 1, b: 0, a: 1}
+  m_Color: {r: 0.58438057, g: 0.23375754, b: 0.9716981, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

@@ -11,7 +11,7 @@ public static class PetsAccess
     //pets access Dictionary
     //each pet is an index in the array
     public static Dictionary<PetNames, bool> petAccess; //entire dictionary list of all pets in game, and their accessability
-    public static string[] current_pets_slotted; //pets the player wants to use next tank
+    public static PetNames[] current_pets_slotted; //pets the player wants to use next tank
 
 
     //save current pet access for game
@@ -73,5 +73,10 @@ public static class PetsAccess
 
     public static void UnlockPet_Access(PetNames petName){
         petAccess[petName] = true;
+    }
+
+
+    public static void SetSelectedPets(PetNames[] selectedPets){
+        current_pets_slotted = selectedPets;
     }
 }

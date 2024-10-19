@@ -16,6 +16,9 @@ public class Pets_InMainMenu : Pet_ParentClass
 
     private new void Start(){
         base.Start();
+
+        //start in a random spot in tank
+        transform.position = idleTarget;
     }
 
     // Update is called once per frame

@@ -44,7 +44,7 @@ public class Controller_Pets : MonoBehaviour
         var spawnArea = TankCollision.instance.GetTankSpawnArea();
 
         //spawn pets into tank
-        foreach (string pet in PetsAccess.current_pets_slotted){
+        foreach (PetNames pet in PetsAccess.current_pets_slotted){
 
             var spawnPoint = new Vector3(
                 Random.Range(spawnArea.Item1, spawnArea.Item2),
@@ -53,7 +53,7 @@ public class Controller_Pets : MonoBehaviour
             );
 
             //spawn new pet on screen and add to list
-            pet_list.Add(Instantiate(Resources.Load("Pets/" + pet) as GameObject, spawnPoint, quaternion.identity));
+            pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_"+pet.ToString()) as GameObject, spawnPoint, quaternion.identity));
         }
     }
 
