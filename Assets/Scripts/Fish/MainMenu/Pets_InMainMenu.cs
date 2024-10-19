@@ -53,7 +53,7 @@ public class Pets_InMainMenu : Pet_ParentClass
             updatePosition(coordPos, ability_vel);
         }
 
-        else if(facingCorrectly){
+        else if(!facingCorrectly){
             
             facingCorrectly = true;
             Vector2 right = new Vector2(transform.position.x+0.01f, transform.position.y);
