@@ -158,18 +158,14 @@ public class MainMenu : MonoBehaviour
             
             //if pet does not exist,
             //spawn a hidden pet instead
-            pet = Instantiate(Resources.Load(fileLoc + "Hidden") as GameObject, Vector2.zero, Quaternion.identity);
+            pet = Instantiate(Resources.Load(fileLoc + "Missing") as GameObject, Vector2.zero, Quaternion.identity);
         }
         
 
         //save pet coords
-        Debug.Log(grid_pets.transform.GetChild(i).gameObject.ToString());
         var screenPos = grid_pets.transform.GetChild(i).transform.position;                             //get button on ui pos
-        //Debug.Log(petName.ToString()+ "screen pos :" +screenPos.ToString());
         screenPos.z = Vector3.Dot(Camera.main.transform.forward, - Camera.main.transform.position);     //convert z to FOV position 
         Vector3 pos = Camera.main.ScreenToWorldPoint(screenPos);                                        //convert to world pos
-        //Debug.Log(petName.ToString()+ "new screen pos :" +screenPos.ToString());
-        //Debug.Log(petName.ToString()+" pos: "+pos.ToString());
         pet.GetComponent<Pets_InMainMenu>().SetCoords(pos);
 
         //add to list and increment
