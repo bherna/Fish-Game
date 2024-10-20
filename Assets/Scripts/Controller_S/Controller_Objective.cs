@@ -15,6 +15,7 @@ public class Controller_Objective : MonoBehaviour
     [SerializeField] List<int> obj_price_list = new List<int>();
 
     [SerializeField] int world, level = 0;
+    [SerializeField] PetNames petname = PetNames.Missing;
 
     //current objective index
     int obj_index = 0;
@@ -78,11 +79,13 @@ public class Controller_Objective : MonoBehaviour
             if(obj_index >= final_obj){
 
                 //level complete
-                //new level should be unlocked
+                //new level should be unlocked and new pet?
                 LevelsAccess.UnlockLevel_Access(world, level, true);
+                PetsAccess.UnlockPet_Access(petname);
+
                 //save game
                 LevelsAccess.SaveLevels();
-                //Debug.Log("level "+world.ToString()+"-"+level.ToString() +": "+LevelsAccess.GetLevelAccess(world, level));
+                PetsAccess.SavePets();
                 SceneManager.LoadScene("MainMenu");
             }
             else{

@@ -8,6 +8,11 @@ public class Pet_ToggleButton : MonoBehaviour
     public PetNames petName;
     public bool selected = false; //are we currently selected
 
+    public void Init(PetNames petname, bool selected){
+        this.petName = petname;
+        this.selected = selected;
+        SetToggle(selected);
+    }
 
     //on click button
     //check if we are true or false

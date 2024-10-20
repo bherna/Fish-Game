@@ -15,7 +15,7 @@ public static class PetsAccess
 
 
     //save current pet access for game
-    public static void SavePets_Dictionary(){
+    public static void SavePets(){
         SaveLoad.Save_Pets();
     }
 
@@ -74,7 +74,11 @@ public static class PetsAccess
         return petAccess[petName];
     }
 
+    //unlock a new pet for player,
+    //if new pet (petname) is titled  missing, then we just return
+    //          - useful to avoid unlocking new pet
     public static void UnlockPet_Access(PetNames petName){
+        if(petName == PetNames.Missing){return;}
         petAccess[petName] = true;
     }
 

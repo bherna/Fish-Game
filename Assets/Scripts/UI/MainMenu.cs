@@ -172,31 +172,14 @@ public class MainMenu : MonoBehaviour
             //spawn pet
             pet = Instantiate(Resources.Load(fileLoc + petName.ToString()) as GameObject, Vector2.zero, Quaternion.identity);
 
+            //Pet_Toggle Button set up
+            //update pet name and selection
             //update access on button
-            //check dictionary
-            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().selected = accessable;
-            //update pet name
-            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().petName = petName;
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().Init(petName,IfSelected(petName));
 
-            //update pet button to be interactable and or highlighted(selected)
+            //update pet button to be interactable
             //if we have acces to this pet, set to interactable
-            if(PetsAccess.petAccess[petName]){
-
-                //interactive
-                grid_pets.transform.GetChild(i).GetComponent<Button>().interactable = true;
-
-                //highlight(selected) logic
-                if(IfSelected(petName)){
-                grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().SetToggle(true);
-                }
-                else{
-                    grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().SetToggle(false);
-                }
-            }
-            else{
-                //not interactive
-                grid_pets.transform.GetChild(i).GetComponent<Button>().interactable = false;
-            }
+            grid_pets.transform.GetChild(i).GetComponent<Button>().interactable = accessable;
             
         }
         catch(Exception){
@@ -208,9 +191,8 @@ public class MainMenu : MonoBehaviour
             //update access on button
             //should just bee false
             //set our pet name to missing aswell
-            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().selected = false;
-            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().petName = PetNames.Missing;
-
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().Init(PetNames.Missing, false);
+            
             //not interactive
             grid_pets.transform.GetChild(i).GetComponent<Button>().interactable = false;
         }
