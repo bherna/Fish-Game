@@ -34,13 +34,11 @@ public class Controller_Pets : MonoBehaviour
         //create empty pet list
         pet_list = new List<GameObject>();
 
-        //--------------------------------------------DELETE THIS LATER
-        SpawnPets();
-
         //nmake sure that PetsAccess has current_Pets_slotted not null
+        //else don't spawn any pets
         if(PetsAccess.current_pets_slotted == null){return;}
 
-        //random position setup
+        //random position setup (get tank dimensions)
         var spawnArea = TankCollision.instance.GetTankSpawnArea();
 
         //spawn pets into tank
@@ -61,7 +59,7 @@ public class Controller_Pets : MonoBehaviour
 
     //override spawn pets
     //USED FOR TESTING ONLY
-    private void SpawnPets(){
+    private void Test_SpawnPets(){
 
         Debug.Log("SPAWNED PETS ILLEGALLY");
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));

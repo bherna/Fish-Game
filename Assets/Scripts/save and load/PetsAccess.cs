@@ -79,7 +79,7 @@ public static class PetsAccess
     }
 
 
-    public static void SetSelectedPets(List<PetNames> selectedPets){
+    public static void UpdateSetSelectedPets(List<PetNames> selectedPets){
         current_pets_slotted = selectedPets;
     }
 }

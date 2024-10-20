@@ -54,7 +54,7 @@ public class MainMenu : MonoBehaviour
     public void PlayLevel(){
 
         //save selected pets
-        PetsAccess.SetSelectedPets(selectedPets);
+        PetsAccess.UpdateSetSelectedPets(selectedPets);
         SaveLoad.Save_Pets();
 
         //start level last
@@ -131,7 +131,7 @@ public class MainMenu : MonoBehaviour
         }
 
         //update selected pets
-        PetsAccess.SetSelectedPets(selectedPets);
+        PetsAccess.UpdateSetSelectedPets(selectedPets);
 
     }
 
