@@ -51,7 +51,9 @@ public class Controller_Pets : MonoBehaviour
             );
 
             //spawn new pet on screen and add to list
-            pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_"+pet.ToString()) as GameObject, spawnPoint, quaternion.identity));
+            if(pet != PetNames.Missing){
+                pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_"+pet.ToString()) as GameObject, spawnPoint, quaternion.identity));
+            }
         }
     }
 
