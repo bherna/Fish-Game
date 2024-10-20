@@ -48,7 +48,7 @@ public class Pets_InMainMenu : Pet_ParentClass
 
         var distance = Vector3.Distance(coordPos, transform.position);
 
-        if(Mathf.Abs(distance) > targetRadius){
+        if(Mathf.Abs(distance) > 0){
             
             updatePosition(coordPos, ability_vel);
         }
