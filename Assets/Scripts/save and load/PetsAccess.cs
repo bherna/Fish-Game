@@ -4,14 +4,14 @@ using UnityEngine;
 
 
 
-public enum PetNames {SchoolTeacher, DrCrabs, WhiteKnight, TinyOctopus, Athos, Porthos, Aramis, Khalid, MaryFertile, Salt}
+public enum PetNames {SchoolTeacher, DrCrabs, WhiteKnight, TinyOctopus, Athos, Porthos, Aramis, Khalid, MaryFertile, Salt, Missing}
 
 public static class PetsAccess 
 {
     //pets access Dictionary
     //each pet is an index in the array
     public static Dictionary<PetNames, bool> petAccess; //entire dictionary list of all pets in game, and their accessability
-    public static PetNames[] current_pets_slotted; //pets the player wants to use next tank
+    public static List<PetNames> current_pets_slotted; //pets the player wants to use next tank
 
 
     //save current pet access for game
@@ -36,7 +36,7 @@ public static class PetsAccess
             }
             else{
                 //then we are a new game pets dictionary
-                NewPets_Dict();
+                NewSave();
             }
             
         }
@@ -44,9 +44,9 @@ public static class PetsAccess
 
 
     //create a new dictionary for pet access
-    private static void NewPets_Dict(){
+    private static void NewSave(){
 
-        Debug.Log("New Pets Dictionary.");
+        Debug.Log("New Pets Dictionary + collection");
 
         petAccess = new Dictionary<PetNames, bool>{
             {PetNames.SchoolTeacher, false},
@@ -62,6 +62,9 @@ public static class PetsAccess
 
         };
 
+
+        current_pets_slotted = new List<PetNames>();
+
     }
 
 
@@ -76,7 +79,7 @@ public static class PetsAccess
     }
 
 
-    public static void SetSelectedPets(PetNames[] selectedPets){
+    public static void SetSelectedPets(List<PetNames> selectedPets){
         current_pets_slotted = selectedPets;
     }
 }

@@ -12,11 +12,23 @@ public class MainMenu : MonoBehaviour
     [SerializeField] GameObject grid_pets; //we need the recttransform from each button/panel child
     private List<GameObject> pet_list;
 
-    private PetNames[] selectedPets; //up to 3 pets to hold (string name)
+    private List<PetNames> selectedPets; //up to 3 pets to hold (string name)
     private string sceneLevelSet; //level name
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
 
+    public static MainMenu instance {get; private set; }
+    void Awake (){
+
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }
 
     private void Start() {
         
@@ -137,32 +149,54 @@ public class MainMenu : MonoBehaviour
         //for each pet saved in main menu pets sub folder  -> spawn into tank
         //instance
         int i = 0;
-        foreach(PetNames petName in PetsAccess.petAccess.Keys){
+        //the pets spawn order is determined by the pets access dictionary holding them (this could cause a bug in the future)
+        foreach(var tup in PetsAccess.petAccess){
             
             //spawn pet, but in function, to avoid missing ones
-            SpawnAPet(fileLoc, petName, i);
+            SpawnAPet(fileLoc, i, tup.Key, tup.Value);
             i++;
         }
                
     }
 
 
-    private void SpawnAPet(string fileLoc, PetNames petName, int i){
+    private void SpawnAPet(string fileLoc, int i, PetNames petName, bool accessable){
 
         GameObject pet;
         try{
             //spawn pet
             pet = Instantiate(Resources.Load(fileLoc + petName.ToString()) as GameObject, Vector2.zero, Quaternion.identity);
+
+            //update access on button
+            //check dictionary
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().selected = accessable;
+            //update pet name
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().petName = petName;
+
+            //update the panel script to highlight or not, the button
+            if(IfSelected(petName)){
+                grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().SetToggle(true);
+            }
+            else{
+                grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().SetToggle(false);
+            }
         }
         catch(Exception){
             
             //if pet does not exist,
             //spawn a hidden pet instead
             pet = Instantiate(Resources.Load(fileLoc + "Missing") as GameObject, Vector2.zero, Quaternion.identity);
+
+            //update access on button
+            //should just bee false
+            //set our pet name to missing aswell
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().selected = false;
+            grid_pets.transform.GetChild(i).GetComponent<Pet_ToggleButton>().petName = PetNames.Missing;
         }
         
 
         //save pet coords
+        //fyi Keep the grid-pets (grind_pets) gameobject grid layout group component disabled, else we can't accesss the actual transform.pos
         var screenPos = grid_pets.transform.GetChild(i).transform.position;                             //get button on ui pos
         screenPos.z = Vector3.Dot(Camera.main.transform.forward, - Camera.main.transform.position);     //convert z to FOV position 
         Vector3 pos = Camera.main.ScreenToWorldPoint(screenPos);                                        //convert to world pos
@@ -170,5 +204,50 @@ public class MainMenu : MonoBehaviour
 
         //add to list and increment
         pet_list.Add(pet);
+        
+    }
+
+
+    //function only allows upto 3 selected pets
+    public bool Select_Add(PetNames pet){
+
+        //make sure we are not over adding pets
+        //max pets should be 3 (for now) 
+        if(selectedPets.Count < 3){
+            //add
+            selectedPets.Add(pet);
+            return true;
+        }
+        else{
+            Debug.Log("More than 3 pets in collection");
+            return false;
+        }
+
+        
+
+    }
+
+    //removes pet from collection
+    public bool Select_Sub(PetNames pet){
+
+        //make sure pet is in list
+        if(!selectedPets.Remove(pet)){
+            Debug.Log("Pet was not part of collection");
+            return false;
+        }
+        return true;
+    }
+
+    //return true if the pet name passed is in our petnames array
+    private bool IfSelected(PetNames pet){
+
+        foreach(PetNames petNames in selectedPets){
+            if(petNames == pet){
+                return true;
+            }
+        }
+        
+        //else
+        return false;
     }
 }

@@ -13,7 +13,7 @@ public class Pets_Data_Serializable
 {
     //pets save load stuff:
     public Dictionary<PetNames, bool> pets; //dictionary holding all pets accesability
-    public PetNames[] curr_pets; //current pets being used by player
+    public List<PetNames> curr_pets; //current pets being used by player
 
     //constuctor
     public Pets_Data_Serializable()
