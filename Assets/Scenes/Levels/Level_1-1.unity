@@ -191,6 +191,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72e650b3544e3fd44ae4d7d25261d5ed, type: 3}
+--- !u!1001 &202539507
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 168914425035016689, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4642237497669396718, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
+      propertyPath: m_Name
+      value: Pet_MaryFertile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 663df12a7dd4beb438a801871f73e31f, type: 3}
 --- !u!1001 &396755768
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1627,3 +1684,4 @@ SceneRoots:
   - {fileID: 2352863415607415457}
   - {fileID: 3754293049755716199}
   - {fileID: 7467189889312707245}
+  - {fileID: 202539507}

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -18,13 +19,22 @@ using UnityEngine;
 public class Pet_MaryFertile : Pet_ParentClass
 {
 
-    private Event_Type event_type = Event_Type.enemyWave;
-    private float curr_secToGuppy = 0;
-    private float secondsTillGuppy = 5f; //_ seconds
-    private bool inEnemyWave = false;
-    
-    [SerializeField] private GameObject guppy_ref; 
+    [SerializeField] GameObject guppy_ref; 
+    [SerializeField] Animator animator;
+    [SerializeField] SkinnedMeshRenderer eye_meshRender;
 
+    private Event_Type event_type = Event_Type.enemyWave;
+    private Material[] eyes;
+
+    private float curr_secBefore = 0;
+    private float max_secBefore = 7f; //_ seconds
+    private float curr_secAfter = 0;
+    private float max_secAfter = 5f; //_ seconds
+
+    private bool keepCountingBefore = true;
+    private bool keepCountingAfter = true;
+    
+    private bool inEnemyWave = false;
 
 
 
@@ -32,6 +42,9 @@ public class Pet_MaryFertile : Pet_ParentClass
     private new void Start()
     {
         base.Start();
+
+        //set eyes list
+        eyes = eye_meshRender.materials;
     }
 
     // Update is called once per frame
@@ -41,22 +54,54 @@ public class Pet_MaryFertile : Pet_ParentClass
 
         IdleMode(); //movement
         
-        //--------- enemy wave related stuff ------------ (returns at this point)
 
+        //keep adding untill mary becomes pregnant
+        if(keepCountingBefore)
+        {
+            curr_secBefore += Time.deltaTime;
 
-        curr_secToGuppy += Time.deltaTime;
+            if(curr_secBefore >= max_secBefore){
+                //stop counting
+                keepCountingBefore = false;
+                //mary is now pregnant
+                animator.SetBool("isPreg", true);
+                eye_meshRender.material = eyes[1]; //1 == closed eye 'blink'
 
-        if (inEnemyWave){return;}
-
-        if(curr_secToGuppy >= secondsTillGuppy){
-            //BABY TIMEEEEEEEEEEEEE
-            Controller_Fish.instance.SpawnFish(guppy_ref, transform.position);
-            //reset
-            curr_secToGuppy = 0;
+            }
+            return;
         }
 
 
+        //same thing but now mary is pregnant
+        if(keepCountingAfter)
+        {
+            curr_secAfter += Time.deltaTime;
 
+            if(curr_secAfter >= max_secAfter){
+                //stop counting
+                keepCountingAfter = false;
+            }
+            return;
+        }
+
+
+        //if we are in enemy wave, return, since we don't want to spawn yet
+        if (inEnemyWave){return;} 
+        
+        //if we are down here, 
+        //  - we are ready to spawn guppy
+        //  - we are not in enemy wave
+
+        //BABY TIMEEEEEEEEEEEEE
+        Controller_Fish.instance.SpawnFish(guppy_ref, transform.position);
+        animator.SetBool("isPreg", false);
+        eye_meshRender.material = eyes[0]; //0 == open eye 
+        //reset
+        curr_secBefore = 0;
+        curr_secAfter = 0;
+        keepCountingBefore = true;
+        keepCountingAfter = true;
+        
         
     }
 
