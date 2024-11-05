@@ -32,11 +32,11 @@ public class Controller_Pets : MonoBehaviour
     void Start()
     {
 
-        //dont use on release versions...
-        Test_SpawnPets();//delete this --------------------------
-
         //create empty pet list
         pet_list = new List<GameObject>();
+
+        //dont use on release versions...
+        Test_SpawnPets();//delete this --------------------------
 
         //nmake sure that PetsAccess has current_Pets_slotted not null
         //else don't spawn any pets
