@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -27,6 +28,8 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     [SerializeField] Animator animator;
     
     private Event_Type event_type = Event_Type.enemyWave;
+
+    private float audioDelay = 114f; //frames
     
 
     //School Teacher pet
@@ -136,9 +139,15 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
         animator.SetTrigger("StartWhistle");
         //guppy whistle sound
-        AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
+        StartCoroutine(PlayAudioWhistle());
         //guppy function call
         Controller_Fish.instance.PetEvent_Huddle(gameObject);
+    }
+
+    private IEnumerator PlayAudioWhistle() {
+
+        yield return new WaitForSeconds(audioDelay*Time.deltaTime);
+        AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
     }
 
     //when ever enemy waves start, we enter protect mode

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 6789678411240772159}
   attach_pos: {fileID: 0}
-  whistle_audio: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}
+  whistle_audio: {fileID: 8300000, guid: 80c5fd58179e3f64eb7481f0861f886a, type: 3}
   animator: {fileID: 5416061027430347962}
 --- !u!1001 &9171606421453924244
 PrefabInstance:
