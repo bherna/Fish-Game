@@ -75,6 +75,14 @@ public class Guppy_SM : MonoBehaviour
         guppy_current_state = Guppy_States.idle;
     }
     public void GuppyToFollow(GameObject schoolTeacher){
+        StartCoroutine(guppytofollow(schoolTeacher));
+    }
+
+    private IEnumerator guppytofollow(GameObject schoolTeacher){
+    
+        float randTime = Random.Range(0f,1.7f);
+        yield return new WaitForSeconds(randTime);
+
         guppy_Movement.UpdateFollowObj(schoolTeacher);
         guppy_current_state = Guppy_States.follow;
     }
