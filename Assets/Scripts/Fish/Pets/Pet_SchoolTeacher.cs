@@ -24,7 +24,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     private float protect_velocity = 1.8f;
     //private Vector3 target_position_farthest;
 
-
+    [SerializeField] Animator animator;
     
     private Event_Type event_type = Event_Type.enemyWave;
     
@@ -134,6 +134,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     //      every few seconds the school teacher will sound its whisle to call any stray guppies to it
     private void CallGuppies(){
 
+        animator.SetTrigger("StartWhistle");
         //guppy whistle sound
         AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
         //guppy function call
