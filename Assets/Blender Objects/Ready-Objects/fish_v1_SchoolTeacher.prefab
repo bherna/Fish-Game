@@ -64,6 +64,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: fish_v1_SchoolTeacher
       objectReference: {fileID: 0}
+    - target: {fileID: 6677322510034477745, guid: 36da035abcf11d74484c04ac9d195938, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6677322510034477745, guid: 36da035abcf11d74484c04ac9d195938, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3ebc7084a9ab59b479722d3df825bd43, type: 2}
+    - target: {fileID: 6677322510034477745, guid: 36da035abcf11d74484c04ac9d195938, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 29b8db73e86b79d4cad4015fb5ea7ad8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 
@@ -19,16 +17,20 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 {
 
     /// ----------------------------- protect mode -------------------------------///
-    private float curr_whistle_timer = 0; // time keep of current seconds till next guppy call
-    private float whistle_cooldn = 3f; // how many seconds long til the next whistle call
     [SerializeField] AudioClip whistle_audio;
-    private float protect_velocity = 1.8f;
-    //private Vector3 target_position_farthest;
-
+    [SerializeField] SkinnedMeshRenderer face_meshRender;
     [SerializeField] Animator animator;
-    
+
+
     private Event_Type event_type = Event_Type.enemyWave;
 
+    private float curr_whistle_timer = 0; // time keep of current seconds till next guppy call
+    private float protect_velocity = 1.8f;
+    
+
+    
+    private Material[] faces;
+    private float whistle_cooldn = 3f; // how many seconds long til the next whistle call
     private float audioDelay = 114f; //frames
     
 
@@ -46,6 +48,12 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     private new void Start() {
         base.Start(); //still start init variables from parent class
 
+
+        //set faces materials and set the first to active only (else both show)
+        faces = face_meshRender.materials;
+        Material[] first = new Material[1];
+        Array.Copy(faces, first, 1);
+        face_meshRender.materials = first;
 
     }
 
@@ -90,7 +98,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
         if(curr_whistle_timer >= whistle_cooldn){
             curr_whistle_timer = 0; // reset timer
-            CallGuppies();
+            StartCoroutine(CallGuppies());
         }
 
         //other stuff
@@ -135,19 +143,20 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     //call all guppies to this pet
     //all this should do, is make guppies change target type to this pet transform
     //      every few seconds the school teacher will sound its whisle to call any stray guppies to it
-    private void CallGuppies(){
+    private IEnumerator CallGuppies(){
 
+        //start guppy animation
         animator.SetTrigger("StartWhistle");
-        //guppy whistle sound
-        StartCoroutine(PlayAudioWhistle());
-        //guppy function call
-        Controller_Fish.instance.PetEvent_Huddle(gameObject);
-    }
 
-    private IEnumerator PlayAudioWhistle() {
-
-        yield return new WaitForSeconds(audioDelay*Time.deltaTime);
+        //guppy whistle sound 
+        yield return new WaitForSeconds(audioDelay*Time.deltaTime);//wait for delay
         AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f);
+        face_meshRender.material = faces[1]; //1 == closed eye 'blink'
+
+        //time that it takes guppys to react to the sound # frames
+        yield return new WaitForSeconds(whistle_audio.length);
+        face_meshRender.material = faces[0]; //0 == open eyes
+        
     }
 
     //when ever enemy waves start, we enter protect mode

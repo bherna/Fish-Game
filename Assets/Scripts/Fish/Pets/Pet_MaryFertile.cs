@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
 
 
@@ -45,6 +43,9 @@ public class Pet_MaryFertile : Pet_ParentClass
 
         //set eyes list
         eyes = eye_meshRender.materials;
+        Material[] first = new Material[1];
+        Array.Copy(eyes, first, 1);
+        eye_meshRender.materials = first;
     }
 
     // Update is called once per frame

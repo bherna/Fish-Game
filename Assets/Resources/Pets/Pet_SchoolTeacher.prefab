@@ -48,6 +48,7 @@ MonoBehaviour:
   sprite_transform: {fileID: 6789678411240772159}
   attach_pos: {fileID: 0}
   whistle_audio: {fileID: 8300000, guid: 80c5fd58179e3f64eb7481f0861f886a, type: 3}
+  face_meshRender: {fileID: 367584905595148133}
   animator: {fileID: 5416061027430347962}
 --- !u!1001 &9171606421453924244
 PrefabInstance:
@@ -106,6 +107,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
+--- !u!137 &367584905595148133 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8814102972619862257, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
+  m_PrefabInstance: {fileID: 9171606421453924244}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &5416061027430347962 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3774475797572703022, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
