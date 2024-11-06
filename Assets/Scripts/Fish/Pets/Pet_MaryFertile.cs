@@ -17,17 +17,18 @@ using UnityEngine;
 public class Pet_MaryFertile : Pet_ParentClass
 {
 
-    [SerializeField] GameObject guppy_ref; 
-    [SerializeField] Animator animator;
-    [SerializeField] SkinnedMeshRenderer eye_meshRender;
+    [SerializeField] GameObject guppy_prefab; //for spawning 
+    [SerializeField] Animator animator; 
+    [SerializeField] SkinnedMeshRenderer eye_meshRender; 
+    [SerializeField] ParticleSystem ps_sweating;
 
     private Event_Type event_type = Event_Type.enemyWave;
-    private Material[] eyes;
+    private Material[] eyes; //for updating eye sprites
 
     private float curr_secBefore = 0;
-    private float max_secBefore = 7f; //_ seconds
+    private float max_secBefore = 7f; //#_ seconds before pregnat
     private float curr_secAfter = 0;
-    private float max_secAfter = 5f; //_ seconds
+    private float max_secAfter = 5f; //#_ seconds pregnat
 
     private bool keepCountingBefore = true;
     private bool keepCountingAfter = true;
@@ -46,6 +47,11 @@ public class Pet_MaryFertile : Pet_ParentClass
         Material[] first = new Material[1];
         Array.Copy(eyes, first, 1);
         eye_meshRender.materials = first;
+
+        //update particle system length
+        ps_sweating.Stop();
+        var temp_main = ps_sweating.main;
+        temp_main.duration = max_secAfter; //gues this is a pointer to ps_sweating duration
     }
 
     // Update is called once per frame
@@ -67,6 +73,7 @@ public class Pet_MaryFertile : Pet_ParentClass
                 //mary is now pregnant
                 animator.SetBool("isPreg", true);
                 eye_meshRender.material = eyes[1]; //1 == closed eye 'blink'
+                ps_sweating.Play(); //play sweating particles
 
             }
             return;
@@ -94,9 +101,10 @@ public class Pet_MaryFertile : Pet_ParentClass
         //  - we are not in enemy wave
 
         //BABY TIMEEEEEEEEEEEEE
-        Controller_Fish.instance.SpawnFish(guppy_ref, transform.position);
+        Controller_Fish.instance.SpawnFish(guppy_prefab, transform.position);
         animator.SetBool("isPreg", false);
         eye_meshRender.material = eyes[0]; //0 == open eye 
+        ps_sweating.Stop(); //stop sweating
         //reset
         curr_secBefore = 0;
         curr_secAfter = 0;
