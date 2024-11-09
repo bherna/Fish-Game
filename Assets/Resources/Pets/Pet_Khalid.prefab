@@ -49,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 1904139838437350874}
   attach_pos: {fileID: 0}
+  animator: {fileID: 8412107027708131842}
 --- !u!61 &-2788933663756071337
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -167,5 +168,10 @@ PrefabInstance:
 --- !u!4 &1904139838437350874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6088012554889951502, guid: fc39359083b435743b35c121748de299, type: 3}
+  m_PrefabInstance: {fileID: 5625042326858441940}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &8412107027708131842 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4228287362699042518, guid: fc39359083b435743b35c121748de299, type: 3}
   m_PrefabInstance: {fileID: 5625042326858441940}
   m_PrefabAsset: {fileID: 0}

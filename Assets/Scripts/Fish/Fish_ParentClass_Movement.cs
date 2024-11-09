@@ -16,22 +16,18 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected Vector3 idleTarget;
     protected float targetRadius = 0.5f;
     protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
-    [SerializeField] protected BoxCollider2D attach_pos;    //fill this if we have an attachment, example: this will be the mouth transform
-                                                            //make sure the transform position of the attachment is 0,0,0 
     protected float idle_velocity = 1;
     
     
     //returns true when position is achieved
-    protected bool updatePosition(Vector3 target_pos, float current_Vel){
+    protected bool updatePosition(Vector3 target_pos, float current_Vel, bool use3=false){
 
-        try{
-            //try with a given transform_pos, 
+        //vector 3 vs vector2
+        if(use3){
             //update physical position towards the target
-            transform.position = Vector2.MoveTowards( transform.position, new Vector2(target_pos.x - attach_pos.offset.x, target_pos.y - attach_pos.offset.y)  , current_Vel * Time.deltaTime );
-
-        }catch(UnassignedReferenceException){
-
-            //else do the same but without target_pos
+            transform.position = Vector3.MoveTowards( transform.position, target_pos, current_Vel * Time.deltaTime );
+        }
+        else{
             //update physical position towards the target
             transform.position = Vector2.MoveTowards( transform.position, target_pos, current_Vel * Time.deltaTime );
         }

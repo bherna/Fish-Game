@@ -8,7 +8,7 @@ public enum Enemy_States {idle, attack};
 public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
 
-
+    [SerializeField] protected BoxCollider2D attach_pos;
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
     protected Rigidbody2D rb;

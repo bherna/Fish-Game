@@ -21,15 +21,30 @@ using UnityEngine;
 public class Pet_Khalid : Pet_ParentClass
 {
 
+    [SerializeField] Animator animator;
+
     //
 
     private float curr_seconds = 0; //used in both protect mode and polyp mode, reset as needed
     private const float secondsInPolyp = 10;
     private const float secondsTillCall = 2;
-    private Vector2 bot_of_tank = new Vector2(0, -4.5f);
+    private Vector3 bot_of_tank = new Vector3(0, -4.5f, 3.5f);
     private Event_Type event_type = Event_Type.enemyWave;
     private bool inPolyp = false;
     private float ability_velocity = 2;
+
+
+    private new void Start(){
+        base.Start();
+
+        //since game is in 30 frames a second (there are 60 frames in polp animation) so 2/timelength instead of 1/timelength
+        animator.SetFloat("polypSpeed", 2/secondsInPolyp);
+        
+    }
+
+
+
+
 
 
     // Update is called once per frame
@@ -61,6 +76,9 @@ public class Pet_Khalid : Pet_ParentClass
         //transision to ability mode
         curr_PetState = Pet_States.ability;
 
+        //trigger animation
+        animator.SetTrigger("died");
+
         //reset our seconds, 
         curr_seconds = 0;
 
@@ -74,7 +92,6 @@ public class Pet_Khalid : Pet_ParentClass
         //send message
         curr_seconds += Time.deltaTime;
         if(curr_seconds >= secondsTillCall){
-            Debug.Log("called..");
             Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(transform); //call
             curr_seconds = 0; //reset
         }
@@ -95,7 +112,7 @@ public class Pet_Khalid : Pet_ParentClass
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(bot_of_tank, ability_velocity);
+            updatePosition(bot_of_tank, ability_velocity, true);
             return;
         }
         //animation related
@@ -103,7 +120,7 @@ public class Pet_Khalid : Pet_ParentClass
         else if(!inPolyp){
             inPolyp = true;
             //udate animtaion
-
+            animator.SetTrigger("enterPolyp");
         }
         //else we are close enough
         //start polyp mode
@@ -128,10 +145,9 @@ public class Pet_Khalid : Pet_ParentClass
                 curr_PetState = Pet_States.idle;
             }
 
-            //update animation
-
-            //reset curr seconds
+            //reset curr seconds and bool
             curr_seconds = 0;
+            inPolyp = false;
         }
 
     }
@@ -163,5 +179,14 @@ public class Pet_Khalid : Pet_ParentClass
         curr_PetState = Pet_States.idle;
         
         //animation updated
+    }
+
+
+    private new void OnDrawGizmosSelected(){
+        base.OnDrawGizmosSelected();
+
+        //current range untill new target
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(bot_of_tank, targetRadius);
     }
 }
