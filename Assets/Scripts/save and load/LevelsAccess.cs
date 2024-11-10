@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public static class LevelsAccess
@@ -49,7 +45,7 @@ public static class LevelsAccess
         //new [all false] 2d arary 
         levels_access = new bool[2,6];
 
-        //set level 1-1
+        //set tank 0 (tutorial) to true only
         levels_access[0,0] = true;
 
     }
@@ -57,27 +53,28 @@ public static class LevelsAccess
 
     //Updateing level access array (for other scripts to acces really)
     /// <summary>
-    /// Gets current world - level access. 
-    /// For each parameter: world 1 starts at 0, and level 1 starts at 0. 
+    /// Gets current tank - level access. 
+    /// For each parameter: tank 1 starts at 0, and level 1 starts at 0. 
     /// </summary>
-    /// <param name="world">sub 1 for correct world, in array</param>
+    /// <param name="tank">sub 1 for correct tank, in array</param>
     /// <param name="level">sub 1 for correct level, in array</param>
     /// <returns></returns>
-    public static bool GetLevel_Access(int world, int level) {
-        return levels_access[world, level];
+    public static bool GetLevel_Access(int tank, int level) {
+        return levels_access[tank, level];
     }
 
 
     /// <summary>
-    /// Set a current world - level access 
-    /// World 1 starts at 0, and level 1 starts at 0.
+    /// Set a current tank - level access 
+    /// tank 1 starts at index 1 
+    /// (tank 0 is tutorial tank)
     /// Accesstype: true to play level, false to not be able to play level yet.
     /// </summary>
-    /// <param name="world"></param>
+    /// <param name="tank"></param>
     /// <param name="level"></param>
     /// <param name="accessType"></param>
-    public static void UnlockLevel_Access(int world, int level, bool accessType){
-        levels_access[world, level] = accessType;
+    public static void UnlockLevel_Access(int tank, int level, bool accessType){
+        levels_access[tank, level] = accessType;
     }
 
 

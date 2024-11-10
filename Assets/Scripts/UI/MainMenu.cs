@@ -1,20 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-
-    [SerializeField] int rectTransform_width = 1920;
-    [SerializeField] EventOnHover_PlayButton playButton;
-    [SerializeField] GameObject grid_pets; //we need the recttransform from each button/panel child
-    private List<GameObject> pet_list;
-
+    [SerializeField] GameObject slidePanelsParentObj;         //gameobject reference for all ui level panels + main menu
+    [SerializeField] EventOnHover_PlayButton playButton; //used in turning the tank lights on
+    [SerializeField] GameObject grid_pets;      //all pet ui interactables (for selction)
+                                                //we need the recttransform from each button/panel child
+    private List<GameObject> pet_list;          //all pets in tank
     private List<PetNames> selectedPets; //up to 3 pets to hold (string name)
-    private string sceneLevelSet; //level name
+
+    private string sceneLevelSet; //current tank level selected (name)
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
 
@@ -32,11 +31,12 @@ public class MainMenu : MonoBehaviour
     }
 
     private void Start() {
+
         
-        //set ui tabs positions (minus the last one)
-        for (int i = 0; i < transform.childCount-1; i++){
-            transform.GetChild(i).gameObject.transform.localPosition = new Vector3(rectTransform_width*i,0,0); //set their pos
-            transform.GetChild(i).gameObject.SetActive(true);
+        //set ui tabs positions 
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition = new Vector3(Screen.width*i,0,0); //set their pos
+            slidePanelsParentObj.transform.GetChild(i).gameObject.SetActive(true);
         }
 
         //set last panel (pets)
@@ -71,8 +71,8 @@ public class MainMenu : MonoBehaviour
 
     public void Next_UIScreen(){
 
-        for (int i = 0; i < transform.childCount-1; i++){
-            transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(rectTransform_width,0,0);
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(Screen.width,0,0);
         }
 
         curr_screen += 1;
@@ -80,8 +80,8 @@ public class MainMenu : MonoBehaviour
 
     public void Previous_UIScreen(){
 
-        for (int i = 0; i < transform.childCount-1; i++){
-            transform.GetChild(i).gameObject.transform.localPosition += new Vector3(rectTransform_width,0,0);
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition += new Vector3(Screen.width,0,0);
         }
 
         curr_screen -= 1;
@@ -103,7 +103,7 @@ public class MainMenu : MonoBehaviour
         //---move to last panell---//
         //disbale current level panel
         //eneable pet panel
-        transform.GetChild(curr_screen).gameObject.SetActive(false);
+        slidePanelsParentObj.transform.GetChild(curr_screen).gameObject.SetActive(false);
         transform.GetChild(transform.childCount-1).gameObject.SetActive(true);
         
 
@@ -123,7 +123,7 @@ public class MainMenu : MonoBehaviour
         //return to last level panel player was on before
         //enable level panel
         //disable pet panel
-        transform.GetChild(curr_screen).gameObject.SetActive(true);
+        slidePanelsParentObj.transform.GetChild(curr_screen).gameObject.SetActive(true);
         transform.GetChild(transform.childCount-1).gameObject.SetActive(false);
 
         //let pets return to idle
