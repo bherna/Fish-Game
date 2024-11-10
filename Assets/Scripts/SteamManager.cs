@@ -32,7 +32,6 @@ public class SteamManager : MonoBehaviour
 
     private void test() {
 
-        int value = 0;
         
         var playername = SteamClient.Name;
         var playersteamid = SteamClient.SteamId;
@@ -40,21 +39,22 @@ public class SteamManager : MonoBehaviour
         Debug.Log("player name: "+playername.ToString());
         Debug.Log("steam id: "+playersteamid.ToString());
 
-        //SteamScreenshots.TriggerScreenshot();
+        /*
+        int value = 0;
+        SteamScreenshots.TriggerScreenshot();
 
         Steamworks.SteamUserStats.SetStat( "deaths", value );
 
-        /*
         foreach ( var item in Steamworks.SteamInventory.Items )
         {
             Debug.Log( $"{item.Def.Name} x {item.Quantity}" );
         }
-        */
 
         foreach ( var player in SteamFriends.GetFriends() )
         {
             Debug.Log( $"{player.Name}" );
         }
+        */
     }
 
 
