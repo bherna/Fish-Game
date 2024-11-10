@@ -1,15 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Steamworks;
 using UnityEngine;
 
 public class SteamManager : MonoBehaviour
 {
+
     private void Awake(){
         try
         {
-            Steamworks.SteamClient.Init( 252490 );
+            SteamClient.Init( 3099090 );
         }
-        catch ( System.Exception e )
+        catch (Exception)
         {
             // Something went wrong - it's one of these:
             //
@@ -22,19 +25,49 @@ public class SteamManager : MonoBehaviour
 
         //ensure steam manager cannot be destroyed in changing scenes
         DontDestroyOnLoad(this.gameObject);
+
+
+        test();
+    }
+
+    private void test() {
+
+        int value = 0;
+        
+        var playername = SteamClient.Name;
+        var playersteamid = SteamClient.SteamId;
+
+        Debug.Log("player name: "+playername.ToString());
+        Debug.Log("steam id: "+playersteamid.ToString());
+
+        //SteamScreenshots.TriggerScreenshot();
+
+        Steamworks.SteamUserStats.SetStat( "deaths", value );
+
+        /*
+        foreach ( var item in Steamworks.SteamInventory.Items )
+        {
+            Debug.Log( $"{item.Def.Name} x {item.Quantity}" );
+        }
+        */
+
+        foreach ( var player in SteamFriends.GetFriends() )
+        {
+            Debug.Log( $"{player.Name}" );
+        }
     }
 
 
     private void OnDisable() {
         
         //won't actually shutdown the editor when leaving playmode
-        Steamworks.SteamClient.Shutdown();
+        SteamClient.Shutdown();
     }
 
     private void Update(){
 
         //keep connection callbacks with steam
         //This allows Steam to think and run any callbacks that are waiting.
-        Steamworks.SteamClient.RunCallbacks();
+        SteamClient.RunCallbacks();
     }
 }
