@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 8873787495573094951}
   - component: {fileID: 7659717776646066776}
   m_Layer: 10
-  m_Name: Enemy_LargeMBass
+  m_Name: Enemy_LMBass
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

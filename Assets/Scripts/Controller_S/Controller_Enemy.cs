@@ -9,8 +9,6 @@ public class Controller_Enemy : MonoBehaviour
 {
    
 
-
-
     //spawning
     private float curr_sec = 0f;
     private bool keepSpawning = true;
@@ -19,14 +17,15 @@ public class Controller_Enemy : MonoBehaviour
     private bool startWaves = false;
 
 
-    //bot ui
+    //annoucement ui
     [SerializeField] GameObject annoucement_ui;
     [SerializeField] TextMeshProUGUI ui_text;
 
-
+    //should we loop the enemy waves
+    [SerializeField] bool loop = false;
 
     //Enemy_wave script variables to hold (current wave to hold)
-    [SerializeField] private Enemy_Waves enemy_Waves;
+    private Tank_EnemyWaves enemyWaves; 
     private int secs_till_next_enemyWave = 0; 
     private int currWaveIndex = 0;
 
@@ -34,8 +33,6 @@ public class Controller_Enemy : MonoBehaviour
     private int enemiesOnScreen = 0;
     private List<GameObject> enemies;
 
-    //should we loop the enemy waves
-    [SerializeField] bool loop = false;
 
 
     //singleton this class
@@ -51,6 +48,19 @@ public class Controller_Enemy : MonoBehaviour
             instance = this;
         }
     }
+
+
+    public static string LoadResourceTextfile(string path)
+    {
+
+        string filePath = "Enemies/TankWaves/" + path.Replace(".json", "");
+
+        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
+
+        return targetFile.text;
+    }
+
+
     
 
     private void Start() {
@@ -58,10 +68,14 @@ public class Controller_Enemy : MonoBehaviour
         //disable annoumcent (just in case)
         annoucement_ui.SetActive(false);
 
+        //read in enemy wave json file
+        Tank_EnemyWaves temp = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile("level_1-1"));
+        enemyWaves = new Tank_EnemyWaves(temp);
+
         //update wave matrix
         //also make sure we have a matrix to work with
         try{
-            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
 
         }catch(IndexOutOfRangeException e){
             Debug.LogError(e);
@@ -69,9 +83,6 @@ public class Controller_Enemy : MonoBehaviour
             keepSpawning = false;
         }
         
-        
-
-    
     }
 
     public void StartWaves(){
@@ -117,15 +128,15 @@ public class Controller_Enemy : MonoBehaviour
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
-        enemy_Waves.Index_GetWave(currWaveIndex).ForEach(delegate(GameObject enemy)
+        enemyWaves.GetWave(currWaveIndex).ForEach(delegate(string enemyName)
         {
             //spawn enemy
             var randSpot = RandomTankSpawnSpot();
-            enemies.Add(Instantiate(enemy, randSpot, Quaternion.identity)); 
+            enemies.Add(Instantiate(Resources.Load("Enemies/EnemyPrefabs/" + "Enemy_"+enemyName.ToString()) as GameObject, randSpot, Quaternion.identity)); 
         });
 
         //announce (current enemies count)
-        enemiesOnScreen = enemy_Waves.Index_GetWave(currWaveIndex).Count;
+        enemiesOnScreen = enemyWaves.GetWave(currWaveIndex).Count;
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
         //announce to controller_pets we just spawned enemies
@@ -150,15 +161,15 @@ public class Controller_Enemy : MonoBehaviour
         currWaveIndex += 1;
 
         //is there a next wave we can spawn?
-        if (currWaveIndex < enemy_Waves.GetLength()){
+        if (currWaveIndex < enemyWaves.TotalWavesCount()){
             //set our new seconds till spawn next wave
-            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
         }
         //if not, should we restart?
         else if(loop) {
             //go to index 0 and get timer length again
             currWaveIndex = 0;
-            secs_till_next_enemyWave = enemy_Waves.Index_GetTimeTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
 
         }
         //else no more waves

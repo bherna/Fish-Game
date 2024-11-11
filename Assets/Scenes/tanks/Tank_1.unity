@@ -352,6 +352,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 997405375}
     - target: {fileID: 8627190064862608216, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
+      propertyPath: enemy_Waves
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627190064862608216, guid: 44a7f1a3a0594f24f83193a720624eba, type: 3}
       propertyPath: annoucement_ui
       value: 
       objectReference: {fileID: 797196008}

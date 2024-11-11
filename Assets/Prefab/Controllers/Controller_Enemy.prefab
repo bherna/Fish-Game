@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 915994468477097385}
   - component: {fileID: 8627190064862608216}
-  - component: {fileID: 3594053965177567738}
   m_Layer: 0
   m_Name: Controller_Enemy
   m_TagString: Untagged
@@ -45,22 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74907342747315b41bd8a7b601bf97fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller_Fish: {fileID: 0}
   annoucement_ui: {fileID: 0}
-  enemy_Waves: {fileID: 3594053965177567738}
---- !u!114 &3594053965177567738
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1146932152703856607}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d07bbee1b4aacd449d369e822b4778f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  wave_mat: []
-  enemy1: {fileID: 5292263530791328344, guid: 8477c93fdaf75b841a9005afc443fa45, type: 3}
-  enemy2: {fileID: 5292263530791328344, guid: 28f17bae6938f8741815e929952ea62e, type: 3}
-  enemy3: {fileID: 5292263530791328344, guid: 0914d4eaf7f777d4586440e43221dfb8, type: 3}
+  ui_text: {fileID: 0}
+  enemy_Waves: {fileID: 0}
+  loop: 0
