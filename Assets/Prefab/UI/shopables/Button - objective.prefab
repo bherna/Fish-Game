@@ -26,7 +26,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2134655825816546596}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -122,11 +122,12 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 4f871be2186a3254985708f7947bb9d2, type: 3}
   - {fileID: 21300000, guid: d530242d2d612824d8e8c9fb548f0a71, type: 3}
   - {fileID: 21300000, guid: 8e357809a2b246441a2dd526ff8f39c5, type: 3}
-  obj_price_list: 900100004006000060090000
+  obj_price_list: 9001000020030000e8030000
   world: 0
   level: 1
   ui_sprite: {fileID: 3283640750484035945}
   ui_displayCost: {fileID: 8047137770039740973}
+  postGamePanel: {fileID: 0}
 --- !u!1 &3004891127747404411
 GameObject:
   m_ObjectHideFlags: 0

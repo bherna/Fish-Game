@@ -54,7 +54,12 @@ public class Controller_Enemy : MonoBehaviour
 
     public static string LoadResourceTextfile()
     {
-        string filePath = "Levels/" + GameVariables.GetLevel();
+        //first check if our get level is null
+        if(GameVariables.GetLevel_AsString() == ""){
+            Debug.Log("Our json reference is missing . . .");
+        }
+        
+        string filePath = "Levels/" + GameVariables.GetLevel_AsString();
 
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 

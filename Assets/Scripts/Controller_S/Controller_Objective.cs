@@ -24,8 +24,6 @@ public class Controller_Objective : MonoBehaviour
     //list of objecive prices, in order of purchase
     [SerializeField] List<int> obj_price_list = new List<int>();
 
-    [SerializeField] int world, level = 0;
-
     //button gameobject 
     [SerializeField] Image ui_sprite;
 
@@ -45,7 +43,13 @@ public class Controller_Objective : MonoBehaviour
 
     private string LoadResourceTextfile()
     {
-        string filePath = "Levels/" + GameVariables.GetLevel();
+
+        //first check if our get level is null
+        if(GameVariables.GetLevel_AsString() == ""){
+            Debug.Log("Our json reference is missing . . .");
+        }
+
+        string filePath = "Levels/" + GameVariables.GetLevel_AsString();
 
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
@@ -108,7 +112,10 @@ public class Controller_Objective : MonoBehaviour
 
                 //level complete
                 //new level should be unlocked and new pet?
-                LevelsAccess.UnlockLevel_Access(world, level, true);
+                int[] worldLevel = GameVariables.GetLevel_AsArray();
+                Debug.Log("Level: "+worldLevel[0].ToString()+", "+worldLevel[1].ToString()+" Unlocked");
+                LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1], true);
+
                 PetsAccess.UnlockPet_Access(petToUnlock);
 
                 //save game
