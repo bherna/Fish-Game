@@ -78,8 +78,10 @@ public static class PetsAccess
     //if new pet (petname) is titled  missing, then we just return
     //          - useful to avoid unlocking new pet
     public static void UnlockPet_Access(PetNames petName){
-        if(petName == PetNames.Missing){return;}
-        petAccess[petName] = true;
+        
+        if(petAccess.ContainsKey(petName))
+            {petAccess[petName] = true;}
+        
     }
 
 

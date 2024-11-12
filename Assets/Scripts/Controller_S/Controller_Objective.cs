@@ -6,15 +6,6 @@ using UnityEngine.UI;
 using TMPro;
 
 
-//used in parsing the json file for following variables:
-//pet to unlock
-[System.Serializable]
-public class PetName_string{
-    public string petNameString;
-}
-
-
-
 public class Controller_Objective : MonoBehaviour
 {
 
@@ -37,14 +28,9 @@ public class Controller_Objective : MonoBehaviour
 
     //final objective index
     int final_obj = 3;
-    private PetNames petToUnlock;
 
 
     private void Start() {
-
-        //get pet to unlock string name from json file and convert to PetName enum type, 
-        PetName_string petString = JsonUtility.FromJson<PetName_string>(GameVariables.LoadResourceTextfile());
-        Enum.TryParse(petString.petNameString, out petToUnlock);
 
         try{
 
@@ -100,13 +86,17 @@ public class Controller_Objective : MonoBehaviour
                 Debug.Log("Level: "+worldLevel[0].ToString()+", "+worldLevel[1].ToString()+" Unlocked");
                 LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1], true);
 
-                PetsAccess.UnlockPet_Access(petToUnlock);
+                //new pet
+                var pet = GameVariables.GetPetUnlock();
+                Debug.Log("Pet unlocked: "+pet);
+                PetsAccess.UnlockPet_Access(pet);
 
                 //save game
                 LevelsAccess.SaveLevels();
                 PetsAccess.SavePets();
 
                 //show stats
+                //postgamepanel should let the player exit to main menu
                 postGamePanel.SetActive(true);
                 
             }

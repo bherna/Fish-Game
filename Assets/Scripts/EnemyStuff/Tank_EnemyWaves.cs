@@ -9,7 +9,14 @@ public class Tank_EnemyWaves
     //wave matrix to hold every wave with respective enemies
     //main list -> wave list
     //wave list -> enemy prefab list
-    public Single_EnemyWave[] waves; 
+    public Single_EnemyWave[] waves;
+
+    public bool loop;
+
+    public Tank_EnemyWaves(Single_EnemyWave[] waves, bool loop){
+        this.waves = waves;
+        this.loop = loop;
+    } 
     
     //how many enemy waves does this tank have
     public int TotalWavesCount(){

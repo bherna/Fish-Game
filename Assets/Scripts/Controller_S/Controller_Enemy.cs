@@ -23,11 +23,10 @@ public class Controller_Enemy : MonoBehaviour
     [SerializeField] GameObject annoucement_ui;
     [SerializeField] TextMeshProUGUI ui_text;
 
-    //should we loop the enemy waves
-    [SerializeField] bool loop = false;
 
     //Enemy_wave script variables to hold (current wave to hold)
-    private Tank_EnemyWaves enemyWaves; 
+    private Tank_EnemyWaves tank_EnemyWaves
+    ; 
     private int secs_till_next_enemyWave = 0; 
     private int currWaveIndex = 0;
 
@@ -58,12 +57,12 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(GameVariables.LoadResourceTextfile());
+        tank_EnemyWaves = GameVariables.GetTank_EnemyWaves();
 
-        //update wave matrix
-        //also make sure we have a matrix to work with
+        //update our seconds until enemy wave starts
+        //if we have an empty enemy waves array, then we dont spawn
         try{
-            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = tank_EnemyWaves.SecsTillSpawn(currWaveIndex);
 
         }catch(IndexOutOfRangeException e){
             Debug.LogError(e);
@@ -116,7 +115,7 @@ public class Controller_Enemy : MonoBehaviour
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
-        foreach(string enemyName in enemyWaves.GetWave(currWaveIndex))
+        foreach(string enemyName in tank_EnemyWaves.GetWave(currWaveIndex))
         {
             //spawn enemy
             var randSpot = RandomTankSpawnSpot();
@@ -124,7 +123,7 @@ public class Controller_Enemy : MonoBehaviour
         }
 
         //announce (current enemies count)
-        enemiesOnScreen = enemyWaves.GetWave(currWaveIndex).Length;
+        enemiesOnScreen = tank_EnemyWaves.GetWave(currWaveIndex).Length;
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
         //announce to controller_pets we just spawned enemies
@@ -149,15 +148,15 @@ public class Controller_Enemy : MonoBehaviour
         currWaveIndex += 1;
 
         //is there a next wave we can spawn?
-        if (currWaveIndex < enemyWaves.TotalWavesCount()){
+        if (currWaveIndex < tank_EnemyWaves.TotalWavesCount()){
             //set our new seconds till spawn next wave
-            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = tank_EnemyWaves.SecsTillSpawn(currWaveIndex);
         }
         //if not, should we restart?
-        else if(loop) {
+        else if(tank_EnemyWaves.loop) {
             //go to index 0 and get timer length again
             currWaveIndex = 0;
-            secs_till_next_enemyWave = enemyWaves.SecsTillSpawn(currWaveIndex);
+            secs_till_next_enemyWave = tank_EnemyWaves.SecsTillSpawn(currWaveIndex);
 
         }
         //else no more waves

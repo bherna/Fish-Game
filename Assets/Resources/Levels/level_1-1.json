@@ -18,6 +18,8 @@
 
     ],
 
+    "loop": true,
+
     "petNameString": "SchoolTeacher"
 
 }
