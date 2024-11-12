@@ -32,6 +32,8 @@ public class Controller_Objective : MonoBehaviour
     //display current obj cost on screen
     [SerializeField] TextMeshProUGUI ui_displayCost;
 
+    [SerializeField] GameObject postGamePanel;
+
     //current objective index
     int obj_index = 0;
 
@@ -112,7 +114,10 @@ public class Controller_Objective : MonoBehaviour
                 //save game
                 LevelsAccess.SaveLevels();
                 PetsAccess.SavePets();
-                SceneManager.LoadScene("MainMenu");
+
+                //show stats
+                postGamePanel.SetActive(true);
+                
             }
             else{
                 //update sprite
@@ -131,4 +136,8 @@ public class Controller_Objective : MonoBehaviour
 
 
 
+    public void GoToMainMenu(){
+
+        SceneManager.LoadScene("MainMenu");
+    }
 }
