@@ -4,6 +4,8 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using TMPro;
 using System.Collections.Generic;
+using System.IO;
+using Unity.VisualScripting;
 
 public class Controller_Enemy : MonoBehaviour
 {
@@ -50,10 +52,9 @@ public class Controller_Enemy : MonoBehaviour
     }
 
 
-    public static string LoadResourceTextfile(string path)
+    public static string LoadResourceTextfile(string levelName)
     {
-
-        string filePath = "Enemies/TankWaves/" + path.Replace(".json", "");
+        string filePath = "Enemies/TankWaves/" + levelName;
 
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
@@ -69,8 +70,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        Tank_EnemyWaves temp = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile("level_1-1"));
-        enemyWaves = new Tank_EnemyWaves(temp);
+        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile("level_1-1"));
 
         //update wave matrix
         //also make sure we have a matrix to work with
@@ -128,15 +128,15 @@ public class Controller_Enemy : MonoBehaviour
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
-        enemyWaves.GetWave(currWaveIndex).ForEach(delegate(string enemyName)
+        foreach(string enemyName in enemyWaves.GetWave(currWaveIndex))
         {
             //spawn enemy
             var randSpot = RandomTankSpawnSpot();
             enemies.Add(Instantiate(Resources.Load("Enemies/EnemyPrefabs/" + "Enemy_"+enemyName.ToString()) as GameObject, randSpot, Quaternion.identity)); 
-        });
+        }
 
         //announce (current enemies count)
-        enemiesOnScreen = enemyWaves.GetWave(currWaveIndex).Count;
+        enemiesOnScreen = enemyWaves.GetWave(currWaveIndex).Length;
         ui_text.text = "Enemies are here: " + enemiesOnScreen.ToString();
 
         //announce to controller_pets we just spawned enemies
