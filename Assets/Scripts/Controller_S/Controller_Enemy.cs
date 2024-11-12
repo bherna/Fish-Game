@@ -70,7 +70,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile("level_1-1"));
+        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile(GameVariables.GetLevel()));
 
         //update wave matrix
         //also make sure we have a matrix to work with

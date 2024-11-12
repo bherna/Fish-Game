@@ -13,7 +13,7 @@ public class MainMenu : MonoBehaviour
     private List<GameObject> pet_list;          //all pets in tank
     private List<PetNames> selectedPets; //up to 3 pets to hold (string name)
 
-    private string sceneLevelSet; //current tank level selected (name)
+    private string tankSceneName; //current tank level selected (name)
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
 
@@ -59,7 +59,7 @@ public class MainMenu : MonoBehaviour
         SaveLoad.Save_Pets();
 
         //start level last
-        SceneManager.LoadScene(sceneLevelSet);
+        SceneManager.LoadScene(tankSceneName);
     }
 
 
@@ -95,10 +95,12 @@ public class MainMenu : MonoBehaviour
 
     //set scene currSceneSet
     //this lets us move from level select to pet select
-    public void GoToPetsPanel(string sceneLevelName){
+    public void GoToPetsPanel(string tankScene, string level){
         
-        //save current level name, so we go to that level after selecting pets
-        sceneLevelSet = sceneLevelName;
+        //save current tank scene name, so we go to that level after selecting pets
+        tankSceneName = tankScene;
+        //update the level name aswell, used in the controller enemy script for choosing what json enemywaves file
+        GameVariables.UpdateLevel(level); 
 
         //---move to last panell---//
         //disbale current level panel

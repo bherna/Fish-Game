@@ -11,7 +11,6 @@ public class Pet_Khalid_Stats : FishStats_ParentClass
     }
     public override void Died(bool playSound = true){
 
-        Debug.Log("Khalid died");
         GetComponent<Pet_Khalid>().DiedStats();
         
         //change enemy target away from us

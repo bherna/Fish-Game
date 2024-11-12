@@ -2008,10 +2008,6 @@ PrefabInstance:
       value: Panel_1-1
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 5
       objectReference: {fileID: 0}
