@@ -82,13 +82,11 @@ public class Controller_Objective : MonoBehaviour
 
                 //level complete
                 //new level should be unlocked and new pet?
-                int[] worldLevel = GameVariables.GetLevel_AsArray();
-                Debug.Log("Level: "+worldLevel[0].ToString()+", "+worldLevel[1].ToString()+" Unlocked");
-                LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1], true);
+                int[] worldLevel = GameVariables.GetlevelUnlock();
+                LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
 
                 //new pet
                 var pet = GameVariables.GetPetUnlock();
-                Debug.Log("Pet unlocked: "+pet);
                 PetsAccess.UnlockPet_Access(pet);
 
                 //save game

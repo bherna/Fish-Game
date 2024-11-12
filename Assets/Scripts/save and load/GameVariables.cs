@@ -17,6 +17,8 @@ public class WholeJsonScript{
     public bool loop;
     //what pet that will be unlocked
     public string petNameString;
+    //name of next level to unlock (should be the json file name ie: level_#1-#2) -> int[#1, #2]
+    public int[] levelUnlock;
 }
 
 
@@ -35,31 +37,6 @@ public static class GameVariables
         //update our whole json script class to hold reference to json file
         wholeJsonScript = JsonUtility.FromJson<WholeJsonScript>(LoadResourceTextfile());
     }
-
-    public static int[] GetLevel_AsArray(){
-
-        //first check if this was a test level
-        //if yes, return array of level_0-0 (which should not exist)
-        if(curr_level == "level_test"){
-            int[] notReal = new int[]{ 0, 0};
-            return notReal;
-        }
-
-        //regex to parse level_#-#
-        //we want these two # values
-        //first # is the tank
-        //sec # is the level
-        string pattern = "[0-9]+";
-        Regex rg = new Regex(pattern);
-        MatchCollection nums = rg.Matches(curr_level);
-
-        int[] result = new int[]{
-            int.Parse(nums[0].Value), int.Parse(nums[1].Value)
-        };
-
-        return result;
-    }
-
 
     private static string LoadResourceTextfile()
     {
@@ -85,6 +62,11 @@ public static class GameVariables
         Enum.TryParse(wholeJsonScript.petNameString, out PetNames petToUnlock);
 
         return petToUnlock;
+    }
+
+    public static int[] GetlevelUnlock(){
+
+        return wholeJsonScript.levelUnlock;
     }
 
 

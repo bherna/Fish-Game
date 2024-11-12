@@ -43,10 +43,10 @@ public static class LevelsAccess
         Debug.Log("New Game.");
 
         //new [all false] 2d arary 
-        levels_access = new bool[2,6];
+        levels_access = new bool[3,6];
 
         //set tank 0 (tutorial) to true only
-        levels_access[0,0] = true;
+        levels_access[1,1] = true;
 
     }
     
@@ -73,8 +73,8 @@ public static class LevelsAccess
     /// <param name="tank"></param>
     /// <param name="level"></param>
     /// <param name="accessType"></param>
-    public static void UnlockLevel_Access(int tank, int level, bool accessType){
-        levels_access[tank, level] = accessType;
+    public static void UnlockLevel_Access(int tank, int level){
+        levels_access[tank, level] = true;
     }
 
 

@@ -20,6 +20,8 @@
 
     "loop": true,
 
-    "petNameString": "SchoolTeacher"
+    "petNameString": "SchoolTeacher",
+
+    "levelUnlock": [1, 2]
 
 }

@@ -24,8 +24,8 @@ public  class UI_Levels : MonoBehaviour
     
     private void UI_LevelsUpdateAccess(){
 
-        for(int i = 0; i < content_world_ref.GetLength(0); i++){
-            for(int j = 0; j < content_world_ref[i].transform.childCount; j++) {
+        for(int i = 1; i < content_world_ref.GetLength(0); i++){
+            for(int j = 1; j < content_world_ref[i].transform.childCount; j++) {
                 
                 if(LevelsAccess.GetLevel_Access(i, j)){
 
