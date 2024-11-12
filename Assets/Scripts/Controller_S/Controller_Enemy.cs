@@ -52,9 +52,9 @@ public class Controller_Enemy : MonoBehaviour
     }
 
 
-    public static string LoadResourceTextfile(string levelName)
+    public static string LoadResourceTextfile()
     {
-        string filePath = "Enemies/TankWaves/" + levelName;
+        string filePath = "Levels/" + GameVariables.GetLevel();
 
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
@@ -70,7 +70,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile(GameVariables.GetLevel()));
+        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile());
 
         //update wave matrix
         //also make sure we have a matrix to work with

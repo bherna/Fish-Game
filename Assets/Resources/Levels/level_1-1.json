@@ -16,6 +16,8 @@
             "enemies": ["LMBass", "Starfish", "Catfish"]
         }
 
-    ]
+    ],
+
+    "petNameString": "SchoolTeacher"
 
 }
