@@ -40,26 +40,10 @@ public class Controller_Objective : MonoBehaviour
     private PetNames petToUnlock;
 
 
-
-    private string LoadResourceTextfile()
-    {
-
-        //first check if our get level is null
-        if(GameVariables.GetLevel_AsString() == ""){
-            Debug.Log("Our json reference is missing . . .");
-        }
-
-        string filePath = "Levels/" + GameVariables.GetLevel_AsString();
-
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
-
-        return targetFile.text;
-    }
-
     private void Start() {
 
         //get pet to unlock string name from json file and convert to PetName enum type, 
-        PetName_string petString = JsonUtility.FromJson<PetName_string>(LoadResourceTextfile());
+        PetName_string petString = JsonUtility.FromJson<PetName_string>(GameVariables.LoadResourceTextfile());
         Enum.TryParse(petString.petNameString, out petToUnlock);
 
         try{

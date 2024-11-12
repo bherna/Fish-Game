@@ -4,14 +4,11 @@ using UnityEngine;
 
 public static class GameVariables 
 {
-    private static string curr_level;
+    private static string curr_level = "";
+    private static Tank_EnemyWaves tank_EnemyWaves;
 
     public static void UpdateLevel(string newLevel){
         curr_level = newLevel;
-    }
-
-    public static string GetLevel_AsString(){
-        return curr_level;
     }
 
     public static int[] GetLevel_AsArray(){
@@ -30,4 +27,24 @@ public static class GameVariables
 
         return result;
     }
+
+
+    public static string LoadResourceTextfile()
+    {
+
+        //first check if our get level is null
+        if(curr_level == ""){
+            Debug.Log("Our json reference is missing . . .");
+            Debug.Log("Now using level_test.json as reference");
+            curr_level = "level_test";
+        }
+
+        string filePath = "Levels/" + curr_level;
+
+        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
+
+        return targetFile.text;
+    }
+
+
 }

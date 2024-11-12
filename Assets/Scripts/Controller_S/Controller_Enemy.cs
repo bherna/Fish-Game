@@ -50,23 +50,6 @@ public class Controller_Enemy : MonoBehaviour
             instance = this;
         }
     }
-
-
-    public static string LoadResourceTextfile()
-    {
-        //first check if our get level is null
-        if(GameVariables.GetLevel_AsString() == ""){
-            Debug.Log("Our json reference is missing . . .");
-        }
-        
-        string filePath = "Levels/" + GameVariables.GetLevel_AsString();
-
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
-
-        return targetFile.text;
-    }
-
-
     
 
     private void Start() {
@@ -75,7 +58,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(LoadResourceTextfile());
+        enemyWaves = JsonUtility.FromJson<Tank_EnemyWaves>(GameVariables.LoadResourceTextfile());
 
         //update wave matrix
         //also make sure we have a matrix to work with
