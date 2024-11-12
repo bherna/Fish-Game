@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public  class UI_Levels : MonoBehaviour 
 {
     //this class only holds references to all levels on the main menu scene
-    [SerializeField] public GameObject[] content_world_ref;
+    [SerializeField] public GameObject[] content_Tanks;
 
 
     private void Start() {
@@ -24,22 +25,35 @@ public  class UI_Levels : MonoBehaviour
     
     private void UI_LevelsUpdateAccess(){
 
-        for(int i = 1; i < content_world_ref.GetLength(0); i++){
-            for(int j = 1; j < content_world_ref[i].transform.childCount; j++) {
-                
-                if(LevelsAccess.GetLevel_Access(i, j)){
+        int tankWorld = 1; //we start at 1, so increment this last
+        int level = 1;      //same thing as above
+
+        //for each tank/world in our game
+        //we for each here to avoid skipping index 0 (since tankworld starts at 1)
+        foreach(GameObject tank_ in content_Tanks)
+        {
+            //for each of the levels associated to that tank/world
+            //for each here to avoid skipping index 0
+            foreach(Transform levelChild in tank_.transform) 
+            {
+                if(LevelsAccess.GetLevel_Access(tankWorld, level)){
 
                     //playable level
-                    content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = true;
+                    levelChild.GetChild(0).gameObject.GetComponent<Button>().interactable = true;
 
                     //show current saved record
 
                 }
                 else{
-                    content_world_ref[i].transform.GetChild(j).GetChild(0).gameObject.GetComponent<Button>().interactable = false;
+                    levelChild.GetChild(0).gameObject.GetComponent<Button>().interactable = false;
                 }
+
+                level++;
             }
+
+            tankWorld++;
         }
+
     }
 
 

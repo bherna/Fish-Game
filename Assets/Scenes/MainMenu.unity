@@ -2059,7 +2059,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 006a6fc8a86a5634cab5ed9af7e95b4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  content_world_ref:
+  content_Tanks:
   - {fileID: 1002253629}
 --- !u!1 &1504737927
 GameObject:
@@ -2882,7 +2882,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1692960869
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4039,38 +4039,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1194514263}
     m_Modifications:
-    - target: {fileID: 87204793473569881, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-5
-      objectReference: {fileID: 0}
-    - target: {fileID: 87204793473569881, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 750982759347409232, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-6
-      objectReference: {fileID: 0}
-    - target: {fileID: 750982759347409232, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537247149201463146, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537247149201463146, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154124}
-    - target: {fileID: 1537247149201463146, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPetsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 1537247149201463146, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-6
-      objectReference: {fileID: 0}
     - target: {fileID: 1644049940913576618, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
@@ -4123,22 +4091,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2165299826232578659, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2165299826232578659, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154124}
-    - target: {fileID: 2165299826232578659, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPetsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 2165299826232578659, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-5
-      objectReference: {fileID: 0}
     - target: {fileID: 2244782114749608952, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4166,10 +4118,6 @@ PrefabInstance:
     - target: {fileID: 2858177921252202723, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_Name
       value: Level W_1 - Container
-      objectReference: {fileID: 0}
-    - target: {fileID: 2858177921252202723, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2988904405713158963, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_AnchorMax.y
@@ -4279,74 +4227,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5437360966531859881, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5437360966531859881, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5602467330884430781, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5602467330884430781, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698391491596745244, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5698391491596745244, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5777450002603424806, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154119}
-    - target: {fileID: 5777450002603424806, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 5777450002603424806, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5946606035218345351, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5946606035218345351, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154124}
-    - target: {fileID: 5946606035218345351, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPetsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 5946606035218345351, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6074232237556892563, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6074232237556892563, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154124}
-    - target: {fileID: 6074232237556892563, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPetsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 6074232237556892563, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-2
-      objectReference: {fileID: 0}
     - target: {fileID: 6154067465414124040, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -4394,35 +4274,11 @@ PrefabInstance:
     - target: {fileID: 6790994317614802689, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066618138609120088, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066618138609120088, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1401154124}
-    - target: {fileID: 7066618138609120088, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: GoToPetsPanel
-      objectReference: {fileID: 0}
-    - target: {fileID: 7066618138609120088, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: level_1-3
       objectReference: {fileID: 0}
     - target: {fileID: 7797771194810476379, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1401154124}
-    - target: {fileID: 9018681685060498786, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: level
-      value: level_1-3
-      objectReference: {fileID: 0}
-    - target: {fileID: 9018681685060498786, guid: 3cbf712b5c553234694e5dde96edfec6, type: 3}
-      propertyPath: tankScene
-      value: Tank_1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

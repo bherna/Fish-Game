@@ -146,7 +146,7 @@ GameObject:
   - component: {fileID: 419148143883054033}
   - component: {fileID: 3466914197070252596}
   m_Layer: 5
-  m_Name: Content_W1
+  m_Name: Content_Tank1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: World 1
+  m_text: Tank 1
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b22cfcf085e6a794fa85ad343bf95500, type: 2}
   m_sharedMaterial: {fileID: -8030815694552963203, guid: b22cfcf085e6a794fa85ad343bf95500, type: 2}
@@ -1313,7 +1313,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1338,6 +1338,14 @@ PrefabInstance:
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
       objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1487,7 +1495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1512,6 +1520,14 @@ PrefabInstance:
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
       objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1661,7 +1677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1686,6 +1702,14 @@ PrefabInstance:
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
       objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1835,7 +1859,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -1860,6 +1884,14 @@ PrefabInstance:
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
       objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -2031,6 +2063,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
+      objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
@@ -2187,7 +2227,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -2212,6 +2252,14 @@ PrefabInstance:
     - target: {fileID: 3295352403128498958, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: level
+      value: level_1-4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3639490660682104116, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
+      propertyPath: tankScene
+      value: Tank_1
       objectReference: {fileID: 0}
     - target: {fileID: 3952976651710654759, guid: 85919443d79f96a4f99b7a4b5a7463cc, type: 3}
       propertyPath: m_AnchoredPosition.x

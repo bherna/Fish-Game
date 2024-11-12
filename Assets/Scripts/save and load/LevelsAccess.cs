@@ -43,7 +43,7 @@ public static class LevelsAccess
         Debug.Log("New Game.");
 
         //new [all false] 2d arary 
-        levels_access = new bool[3,6];
+        levels_access = new bool[3,7];//final index doesn't exist for us, since we start at 1
 
         //set tank 0 (tutorial) to true only
         levels_access[1,1] = true;
