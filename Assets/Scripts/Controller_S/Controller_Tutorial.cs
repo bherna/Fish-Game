@@ -18,7 +18,6 @@ public enum Expect_Type {TextBox, Button, Wait, Fish_Hungry, Fish_Feed};
 
 public class Controller_Tutorial : MonoBehaviour
 {
-    [SerializeField] Timer timer;
     [SerializeField] Mask shop_ui_mask;
 
 
@@ -143,7 +142,7 @@ public class Controller_Tutorial : MonoBehaviour
 
     private void Disable_Tutorial(){
         //enable timer
-        timer.StartTimer();
+        Controller_Timer.instance.StartTimer();
 
         //enable ui shop
         shop_ui_mask.enabled = false;

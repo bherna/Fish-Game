@@ -91,6 +91,7 @@ public class Controller_Main : MonoBehaviour
                 Controller_Fish.instance.GetFishCount() == 0
                 ){
                     //end game
+                    Debug.Log("Game thinks you suck...");
                     SceneManager.LoadScene("MainMenu");
                 }
 

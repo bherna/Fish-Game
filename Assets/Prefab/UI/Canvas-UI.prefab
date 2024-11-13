@@ -335,8 +335,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7797389800826403504}
-        m_TargetAssemblyTypeName: EscMenu, Assembly-CSharp
+      - m_Target: {fileID: 155639205364934229}
+        m_TargetAssemblyTypeName: PostGame, Assembly-CSharp
         m_MethodName: GoToMainMenu
         m_Mode: 1
         m_Arguments:
@@ -492,7 +492,6 @@ GameObject:
   - component: {fileID: 6100221644961403892}
   - component: {fileID: 929141303065226123}
   - component: {fileID: 3881217581423534831}
-  - component: {fileID: 1063367231122157393}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -616,22 +615,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1063367231122157393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1207923294507974720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40d71a3acc3ed2340aab18a35bd572ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TimerCount: 0
-  TimerOn: 0
-  currentTime: 0
-  timer_text: {fileID: 3881217581423534831}
 --- !u!1 &1404518744360648038
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +809,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3abc1bd52dd7e78479fc39d0862398ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: {fileID: 1063367231122157393}
   shop_ui_mask: {fileID: 5445914971455186086}
   uI_Dialogue: {fileID: 7559102280704970492}
   tutorial_active: 0
@@ -3408,6 +3390,7 @@ GameObject:
   - component: {fileID: 344229192025569926}
   - component: {fileID: 4023319971188528050}
   - component: {fileID: 4075897197234759189}
+  - component: {fileID: 6342753415792757589}
   m_Layer: 0
   m_Name: Timer - UI
   m_TagString: Untagged
@@ -3435,7 +3418,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 223.9, y: 80}
+  m_SizeDelta: {x: 450, y: 80}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &4023319971188528050
 CanvasRenderer:
@@ -3458,6 +3441,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &6342753415792757589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5621661991595375104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40d71a3acc3ed2340aab18a35bd572ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timer_text: {fileID: 3881217581423534831}
 --- !u!1 &5817438199584341748
 GameObject:
   m_ObjectHideFlags: 0
@@ -4490,14 +4486,14 @@ GameObject:
   m_Component:
   - component: {fileID: 4075153516661937661}
   - component: {fileID: 9140287040099332323}
-  - component: {fileID: 7797389800826403504}
+  - component: {fileID: 155639205364934229}
   m_Layer: 5
   m_Name: Post Game - UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4075153516661937661
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4526,7 +4522,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7663504891464668097}
   m_CullTransparentMesh: 1
---- !u!114 &7797389800826403504
+--- !u!114 &155639205364934229
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4535,9 +4531,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 7663504891464668097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ebcf42331cc95cc4c9c01acff130ef70, type: 3}
+  m_Script: {fileID: 11500000, guid: d1e719390cd7e854c9b45a2577906220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showStats: {fileID: 3581015579213153126}
 --- !u!1 &7970456296531527069
 GameObject:
   m_ObjectHideFlags: 0
@@ -6164,10 +6161,6 @@ PrefabInstance:
       propertyPath: postGamePanel
       value: 
       objectReference: {fileID: 7663504891464668097}
-    - target: {fileID: 5972774700473628099, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
-      propertyPath: ui_currEggSprite
-      value: 
-      objectReference: {fileID: 1209095641060916741}
     - target: {fileID: 9065132760062521914, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6253,17 +6246,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
---- !u!114 &1209095641060916741 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3283640750484035945, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
-  m_PrefabInstance: {fileID: 4419799013703919468}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &4655479560039159126 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9065132760062521914, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}

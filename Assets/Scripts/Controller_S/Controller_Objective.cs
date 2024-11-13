@@ -63,6 +63,9 @@ public class Controller_Objective : MonoBehaviour
             //is the final objective bought
             if(obj_index >= final_obj){
 
+                //deactivate button
+                GetComponent<Button>().interactable = false;
+
                 //*** level complete ***
 
                 //new level should be unlocked and new pet?
@@ -79,6 +82,7 @@ public class Controller_Objective : MonoBehaviour
 
                 //show stats
                 //postgamepanel should let the player exit to main menu
+                Controller_Timer.instance.StopTimer();
                 postGamePanel.SetActive(true);
                 
             }

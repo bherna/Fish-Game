@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6619dea7efb79b148af2a5222da14e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ui_currEggSprite: {fileID: 0}
+  ui_currEggSprite: {fileID: 3283640750484035945}
   ui_displayCost: {fileID: 8047137770039740973}
   postGamePanel: {fileID: 0}
 --- !u!1 &3004891127747404411
