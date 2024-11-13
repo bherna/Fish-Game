@@ -21,7 +21,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         }
 
         //add coin
-        Wallet.instance.AddMoney(coinValue);
+        Controller_Wallet.instance.AddMoney(coinValue);
         //playsound
         AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f);
         //destroy

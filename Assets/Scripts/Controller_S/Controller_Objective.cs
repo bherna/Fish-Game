@@ -69,10 +69,10 @@ public class Controller_Objective : MonoBehaviour
 
         //if enough money
         //buy
-        if(Wallet.instance.IsAffordable(obj_price_list[obj_index])){
+        if(Controller_Wallet.instance.IsAffordable(obj_price_list[obj_index])){
 
             //update money
-            Wallet.instance.SubMoney(obj_price_list[obj_index]);
+            Controller_Wallet.instance.SubMoney(obj_price_list[obj_index]);
 
             //update index
             obj_index += 1;

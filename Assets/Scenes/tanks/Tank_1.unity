@@ -363,7 +363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7121637293001197693, guid: 38b4225f4965ba84d966169f9b246f77, type: 3}
       propertyPath: m_Name
-      value: Wallet
+      value: Controller_Wallet
       objectReference: {fileID: 0}
     - target: {fileID: 7243830954886293375, guid: 38b4225f4965ba84d966169f9b246f77, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1577,7 +1577,7 @@ SceneRoots:
   - {fileID: 186850954}
   - {fileID: 1487184790}
   - {fileID: 8593342741332984249}
+  - {fileID: 7467189889312707245}
   - {fileID: 6096922542618056594}
   - {fileID: 2352863415607415457}
   - {fileID: 3754293049755716199}
-  - {fileID: 7467189889312707245}

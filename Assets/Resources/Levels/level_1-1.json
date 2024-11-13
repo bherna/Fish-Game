@@ -22,6 +22,8 @@
 
     "petNameString": "SchoolTeacher",
 
-    "levelUnlock": [1, 2]
+    "levelUnlock": [1, 2],
+
+    "startMoney": 400
 
 }

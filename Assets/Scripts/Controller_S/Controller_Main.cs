@@ -44,7 +44,7 @@ public class Controller_Main : MonoBehaviour
 
     private void Start() {
         
-        Wallet.instance.AddMoney(startMoney);
+        Controller_Wallet.instance.AddMoney(startMoney);
 
         //check game state, if the player lost
         coroutine = CheckGameState(timeTillNextCheck);
@@ -87,7 +87,7 @@ public class Controller_Main : MonoBehaviour
 
             //check if no money and no fish
             if(
-                Wallet.instance.current_money == 0 &&
+                !Controller_Wallet.instance.IsAffordable(1) &&
                 Controller_Fish.instance.GetFishCount() == 0
                 ){
                     //end game

@@ -63,7 +63,7 @@ public class Controller_Food : MonoBehaviour
         if(Input.GetMouseButtonDown(1)){
 
             //delete money if we have money
-            if(Wallet.instance.IsAffordable(5)){Wallet.instance.SubMoney(5);}
+            if(Controller_Wallet.instance.IsAffordable(5)){Controller_Wallet.instance.SubMoney(5);}
             
             //var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //orthagraphic
             var screenPos = Input.mousePosition;

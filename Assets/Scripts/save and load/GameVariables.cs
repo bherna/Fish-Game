@@ -19,6 +19,8 @@ public class WholeJsonScript{
     public string petNameString;
     //name of next level to unlock (should be the json file name ie: level_#1-#2) -> int[#1, #2]
     public int[] levelUnlock;
+
+    public int startMoney;
 }
 
 
@@ -67,6 +69,10 @@ public static class GameVariables
     public static int[] GetlevelUnlock(){
 
         return wholeJsonScript.levelUnlock;
+    }
+
+    public static int GetStartMoney(){
+        return wholeJsonScript.startMoney;
     }
 
 

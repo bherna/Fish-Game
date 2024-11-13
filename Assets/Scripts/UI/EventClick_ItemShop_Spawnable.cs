@@ -29,7 +29,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
     public void OnPurchase(){
 
         //is object affordable
-        if(Wallet.instance.IsAffordable(obj_price)){
+        if(Controller_Wallet.instance.IsAffordable(obj_price)){
 
             switch(fishType){
 
@@ -39,7 +39,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
                     //
                     //if we can spawn a fish: pay price
                     if(Controller_Fish.instance.SpawnFish(fishObj, new Vector3(0, 4, transform.position.z))){
-                        Wallet.instance.SubMoney(obj_price);
+                        Controller_Wallet.instance.SubMoney(obj_price);
 
                         //also send an event message to the tutorial
                         Controller_Tutorial.instance.TutorialClick(Expect_Type.Button);

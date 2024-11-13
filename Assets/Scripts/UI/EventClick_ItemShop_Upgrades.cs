@@ -44,10 +44,10 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
     public void OnPurchase(){
 
         //is object affordable
-        if(Wallet.instance.IsAffordable(prices[index_array])){
+        if(Controller_Wallet.instance.IsAffordable(prices[index_array])){
 
             //purchase obj
-            Wallet.instance.SubMoney(prices[index_array]);
+            Controller_Wallet.instance.SubMoney(prices[index_array]);
         }
         else{
             

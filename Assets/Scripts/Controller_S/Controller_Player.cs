@@ -47,6 +47,7 @@ public class Controller_Player : MonoBehaviour
         mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
         
         //move self there
+        //used for collitions
         transform.position = new Vector2(mousePos.x, mousePos.y);
     }
 

@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Wallet : MonoBehaviour
+public class Controller_Wallet : MonoBehaviour
 {
 
     //current money
-    public int current_money {get; private set; } = 0;
+    private int current_money;
 
     //post current money
     [SerializeField] TextMeshProUGUI ui_text;
 
+
+
+
+
     //reference to self
-    public static Wallet instance {get; private set; }
+    public static Controller_Wallet instance {get; private set; }
 
     private void Awake() {
         
@@ -27,9 +28,18 @@ public class Wallet : MonoBehaviour
             instance = this;
         }
 
-
-        UpdateMoney();
     }   
+
+
+
+
+
+    private void Start() {
+
+        current_money = GameVariables.GetStartMoney();
+        
+        UpdateMoney();
+    }
 
     
     public void AddMoney(int money){
