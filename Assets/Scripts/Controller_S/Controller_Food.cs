@@ -55,7 +55,7 @@ public class Controller_Food : MonoBehaviour
     {
 
         //is the game currently paused
-        if(Controller_Main.instance.paused){
+        if(Controller_EscMenu.instance.paused){
             return;
         }
 

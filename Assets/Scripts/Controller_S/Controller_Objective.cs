@@ -30,6 +30,25 @@ public class Controller_Objective : MonoBehaviour
     private int final_obj = 3;
 
 
+
+    //singleton this class
+    public static Controller_Objective instance {get; private set; }
+    private void Awake() {
+        
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }  
+
+
+
+
+
     private void Start() {
 
         //update our variables
@@ -80,10 +99,7 @@ public class Controller_Objective : MonoBehaviour
                 LevelsAccess.SaveLevels();
                 PetsAccess.SavePets();
 
-                //show stats
-                //postgamepanel should let the player exit to main menu
-                Controller_Timer.instance.StopTimer();
-                postGamePanel.SetActive(true);
+                GameDone();
                 
             }
             else{
@@ -101,6 +117,14 @@ public class Controller_Objective : MonoBehaviour
         
     }
 
+    //run this when game is over
+    public void GameDone(){
+
+        //show stats
+        //postgamepanel should let the player exit to main menu
+        Controller_Timer.instance.StopTimer();
+        postGamePanel.SetActive(true);
+    }
 
 
     private void SetEggSprites(){

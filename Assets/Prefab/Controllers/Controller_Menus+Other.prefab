@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5330726949241477007}
   - component: {fileID: 1348935343219398421}
   m_Layer: 0
-  m_Name: Controller_Main
+  m_Name: Controller_Menus+Other
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5298423349727551779}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0708326, y: -0.304405, z: -0.04277965}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -45,7 +45,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51e6ae0ad3ecd4143a710c03ffb154a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMoney: 100
   ui_tab: {fileID: 0}
   ui_esc: {fileID: 0}
 --- !u!114 &1348935343219398421

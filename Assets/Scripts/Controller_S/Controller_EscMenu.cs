@@ -1,20 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Controller_Main : MonoBehaviour
+public class Controller_EscMenu : MonoBehaviour
 {
 
-    //start money for current level
-    [SerializeField] int startMoney;
-
-    private IEnumerator coroutine;
-
-    private int timeTillNextCheck = 5;
-
-    
     //is the game currently paused
     public bool paused {get; private set;} = false;
     private bool escMenuOpen = false;
@@ -28,7 +17,7 @@ public class Controller_Main : MonoBehaviour
 
 
     //singleton this class
-    public static Controller_Main instance {get; private set; }
+    public static Controller_EscMenu instance {get; private set; }
     private void Awake() {
         
         //delete duplicate of this instance
@@ -42,15 +31,6 @@ public class Controller_Main : MonoBehaviour
     }   
 
 
-    private void Start() {
-        
-        Controller_Wallet.instance.AddMoney(startMoney);
-
-        //check game state, if the player lost
-        coroutine = CheckGameState(timeTillNextCheck);
-        StartCoroutine(coroutine);
-
-    }
 
 
     private void Update() {
@@ -60,46 +40,22 @@ public class Controller_Main : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.Escape) && !escMenuOpen){
             
             //pause game
+            //open escape menu
             PauseLevel();
             escMenuOpen = true;
 
-            //open escape menu
 
         }
         else if(Input.GetKeyUp(KeyCode.Escape) && escMenuOpen) {
 
             //unpause game
+            //close escape menu
             UnPauseLevel();
             escMenuOpen = false;
 
-            //close escape menu
 
         }
     }
-
-    
-    //checks to see if the player lost 
-    IEnumerator CheckGameState(int time){
-
-        while(true){
-            
-            yield return new WaitForSeconds(time);
-
-            //check if no money and no fish
-            if(
-                !Controller_Wallet.instance.IsAffordable(1) &&
-                Controller_Fish.instance.GetFishCount() == 0
-                ){
-                    //end game
-                    Debug.Log("Game thinks you suck...");
-                    SceneManager.LoadScene("MainMenu");
-                }
-
-        }
-    }
-
-
-
 
     public void PauseLevel(){
 

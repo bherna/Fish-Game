@@ -68,7 +68,7 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected virtual void Update() {
 
         //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
-        if(Controller_Main.instance.paused){
+        if(Controller_EscMenu.instance.paused){
             return;
         }
     }

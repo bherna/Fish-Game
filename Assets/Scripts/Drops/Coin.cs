@@ -16,7 +16,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
 
     public void OnPointerDown(PointerEventData eventData){
 
-        if(Controller_Main.instance.paused){
+        if(Controller_EscMenu.instance.paused){
             return;
         }
 

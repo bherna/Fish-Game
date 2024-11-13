@@ -37,7 +37,8 @@ public class Controller_Wallet : MonoBehaviour
     private void Start() {
 
         current_money = GameVariables.GetStartMoney();
-        
+        Debug.Log("Gamvar: "+GameVariables.GetStartMoney());
+        Debug.Log("Our start money: "+current_money);
         UpdateMoney();
     }
 

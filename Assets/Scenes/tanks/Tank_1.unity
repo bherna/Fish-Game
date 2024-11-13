@@ -434,7 +434,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5298423349727551779, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: m_Name
-      value: Controller_Main
+      value: Controller_Menus+Other
       objectReference: {fileID: 0}
     - target: {fileID: 5330726949241477007, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: ui_esc
@@ -444,21 +444,17 @@ PrefabInstance:
       propertyPath: ui_tab
       value: 
       objectReference: {fileID: 851217080}
-    - target: {fileID: 5330726949241477007, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
-      propertyPath: startMoney
-      value: 4000
-      objectReference: {fileID: 0}
     - target: {fileID: 5927637273539859389, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.0708326
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927637273539859389, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.304405
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927637273539859389, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.04277965
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5927637273539859389, guid: 5fcd14b8f153a444eb40220dff8314cb, type: 3}
       propertyPath: m_LocalRotation.w

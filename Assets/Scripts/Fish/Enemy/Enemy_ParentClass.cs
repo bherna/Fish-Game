@@ -55,7 +55,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData){
 
         //if the game is paused, return
-        if(Controller_Main.instance.paused){
+        if(Controller_EscMenu.instance.paused){
             return;
         }
 
