@@ -6164,6 +6164,10 @@ PrefabInstance:
       propertyPath: postGamePanel
       value: 
       objectReference: {fileID: 7663504891464668097}
+    - target: {fileID: 5972774700473628099, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
+      propertyPath: ui_currEggSprite
+      value: 
+      objectReference: {fileID: 1209095641060916741}
     - target: {fileID: 9065132760062521914, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6249,6 +6253,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
+--- !u!114 &1209095641060916741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3283640750484035945, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}
+  m_PrefabInstance: {fileID: 4419799013703919468}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4655479560039159126 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9065132760062521914, guid: 081b8fbd2e422834db8168ff131852b1, type: 3}

@@ -21,6 +21,8 @@ public class WholeJsonScript{
     public int[] levelUnlock;
 
     public int startMoney;
+
+    public int[] eggPiecesPrices;
 }
 
 
@@ -65,6 +67,10 @@ public static class GameVariables
 
         return petToUnlock;
     }
+    
+    public static string GetPetUnlock_AsString(){
+        return wholeJsonScript.petNameString;
+    }
 
     public static int[] GetlevelUnlock(){
 
@@ -73,6 +79,10 @@ public static class GameVariables
 
     public static int GetStartMoney(){
         return wholeJsonScript.startMoney;
+    }
+
+    public static int[] GetEggPiecesPrices(){
+        return wholeJsonScript.eggPiecesPrices;
     }
 
 

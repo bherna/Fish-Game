@@ -118,14 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6619dea7efb79b148af2a5222da14e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obj_sprite_list:
-  - {fileID: 21300000, guid: 4f871be2186a3254985708f7947bb9d2, type: 3}
-  - {fileID: 21300000, guid: d530242d2d612824d8e8c9fb548f0a71, type: 3}
-  - {fileID: 21300000, guid: 8e357809a2b246441a2dd526ff8f39c5, type: 3}
-  obj_price_list: 9001000020030000e8030000
-  world: 0
-  level: 1
-  ui_sprite: {fileID: 3283640750484035945}
+  ui_currEggSprite: {fileID: 0}
   ui_displayCost: {fileID: 8047137770039740973}
   postGamePanel: {fileID: 0}
 --- !u!1 &3004891127747404411
@@ -140,7 +133,7 @@ GameObject:
   - component: {fileID: 6536222616339517669}
   - component: {fileID: 8047137770039740973}
   m_Layer: 5
-  m_Name: Obj_cost_display
+  m_Name: eggPiece - Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -612,7 +605,7 @@ GameObject:
   - component: {fileID: 9145623207587679081}
   - component: {fileID: 3283640750484035945}
   m_Layer: 5
-  m_Name: Obj_sprite
+  m_Name: eggPiece - Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -9,50 +9,38 @@ using TMPro;
 public class Controller_Objective : MonoBehaviour
 {
 
-    //List of objective sprites, in order of purchase
-    [SerializeField] List<Sprite> obj_sprite_list = new List<Sprite>();
+    //ui image showing what egg sprite
+    [SerializeField] Image ui_currEggSprite;
 
-    //list of objecive prices, in order of purchase
-    [SerializeField] List<int> obj_price_list = new List<int>();
-
-    //button gameobject 
-    [SerializeField] Image ui_sprite;
-
-    //display current obj cost on screen
+    //display current egg piece cost on screen
     [SerializeField] TextMeshProUGUI ui_displayCost;
 
+    //once we beat this level (buy all three pieces) make this panel active
     [SerializeField] GameObject postGamePanel;
 
+    //egg pieces sprite and prices associated
+    private Sprite[] eggSprites;
+    private int[] eggPrices;
+
     //current objective index
-    int obj_index = 0;
+    private int obj_index = 0;
 
     //final objective index
-    int final_obj = 3;
+    //there will always be 3 pieces to buy
+    private int final_obj = 3;
 
 
     private void Start() {
 
-        try{
-
-            //update the final objective index
-            final_obj = obj_sprite_list.Count;
-
-            //check if our sprite and price list are equal in lenght
-            if(final_obj != obj_price_list.Count){
-                Debug.Log("sprite list and price list is not the same.");
-            }
-
-        }catch(IndexOutOfRangeException e){
-
-            Debug.Log("Error: "+e);
-            Debug.Log("obj_sprite_list and obj_price_list are not the same length");
-        }
+        //update our variables
+        eggPrices = GameVariables.GetEggPiecesPrices();
+        SetEggSprites();
         
         //update sprite
-        ui_sprite.sprite = obj_sprite_list[obj_index];
+        ui_currEggSprite.sprite = eggSprites[obj_index];
 
         //display obj cost
-        ui_displayCost.text = obj_price_list[obj_index].ToString();
+        ui_displayCost.text = eggPrices[obj_index].ToString();
 
     
     }
@@ -64,10 +52,10 @@ public class Controller_Objective : MonoBehaviour
 
         //if enough money
         //buy
-        if(Controller_Wallet.instance.IsAffordable(obj_price_list[obj_index])){
+        if(Controller_Wallet.instance.IsAffordable(eggPrices[obj_index])){
 
             //update money
-            Controller_Wallet.instance.SubMoney(obj_price_list[obj_index]);
+            Controller_Wallet.instance.SubMoney(eggPrices[obj_index]);
 
             //update index
             obj_index += 1;
@@ -96,9 +84,9 @@ public class Controller_Objective : MonoBehaviour
             }
             else{
                 //update sprite
-                ui_sprite.sprite = obj_sprite_list[obj_index];
+                ui_currEggSprite.sprite = eggSprites[obj_index];
                 //update display obj cost
-                ui_displayCost.text = obj_price_list[obj_index].ToString();
+                ui_displayCost.text = eggPrices[obj_index].ToString();
 
             }
         }
@@ -107,6 +95,22 @@ public class Controller_Objective : MonoBehaviour
             //Debug.Log("Not enough money");
         }
         
+    }
+
+
+
+    private void SetEggSprites(){
+
+        string path = string.Format("EggsSprites/{0}/{0}_", GameVariables.GetPetUnlock_AsString());
+        Debug.Log(path);
+
+        Sprite[] newSprites = new Sprite[]{
+            Resources.Load<Sprite>(path+"1"),
+            Resources.Load<Sprite>(path+"2"),
+            Resources.Load<Sprite>(path+"3")
+        };
+
+        eggSprites = newSprites;
     }
 
 }

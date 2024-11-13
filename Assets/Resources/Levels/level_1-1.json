@@ -24,6 +24,8 @@
 
     "levelUnlock": [1, 2],
 
-    "startMoney": 400
+    "startMoney": 600,
+
+    "eggPiecesPrices": [100, 200, 300]
 
 }
