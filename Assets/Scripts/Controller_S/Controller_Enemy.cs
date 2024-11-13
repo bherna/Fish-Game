@@ -119,7 +119,7 @@ public class Controller_Enemy : MonoBehaviour
         {
             //spawn enemy
             var randSpot = RandomTankSpawnSpot();
-            enemies.Add(Instantiate(Resources.Load("Enemies/EnemyPrefabs/" + "Enemy_"+enemyName.ToString()) as GameObject, randSpot, Quaternion.identity)); 
+            enemies.Add(Instantiate(Resources.Load("Enemies/" + "Enemy_"+enemyName.ToString()) as GameObject, randSpot, Quaternion.identity)); 
         }
 
         //announce (current enemies count)

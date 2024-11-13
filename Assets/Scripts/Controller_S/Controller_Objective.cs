@@ -54,12 +54,7 @@ public class Controller_Objective : MonoBehaviour
         //display obj cost
         ui_displayCost.text = obj_price_list[obj_index].ToString();
 
-        //just incase we start the game from this scene,
-        //run levels access to be able to update main menu ui levels
-        LevelsAccess.LoadLevels_Array();
-
-        
-
+    
     }
 
     
@@ -80,7 +75,8 @@ public class Controller_Objective : MonoBehaviour
             //is the final objective bought
             if(obj_index >= final_obj){
 
-                //level complete
+                //*** level complete ***
+
                 //new level should be unlocked and new pet?
                 int[] worldLevel = GameVariables.GetlevelUnlock();
                 LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
@@ -108,15 +104,9 @@ public class Controller_Objective : MonoBehaviour
         }
 
         else{
-            Debug.Log("Not enough money");
+            //Debug.Log("Not enough money");
         }
         
     }
 
-
-
-    public void GoToMainMenu(){
-
-        SceneManager.LoadScene("MainMenu");
-    }
 }
