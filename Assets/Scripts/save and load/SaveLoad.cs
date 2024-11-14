@@ -16,7 +16,7 @@ public static class SaveLoad
     }
 
 
-    public static void Save_Levels(){
+    private static void Save_Levels(){
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path_levels, FileMode.Create);
@@ -29,7 +29,7 @@ public static class SaveLoad
 
     }
 
-    public static void Save_Pets(){
+    private static void Save_Pets(){
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path_pets, FileMode.Create);

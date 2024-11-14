@@ -17,6 +17,7 @@ public class MainMenu : MonoBehaviour
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
 
+    //singleton this
     public static MainMenu instance {get; private set; }
     void Awake (){
 
@@ -56,13 +57,34 @@ public class MainMenu : MonoBehaviour
 
         //save selected pets
         PetsAccess.UpdateSetSelectedPets(selectedPets);
-        SaveLoad.Save_Pets();
 
         //start level last
         SceneManager.LoadScene(tankSceneName);
     }
 
 
+    public void NewGame(){
+
+        //reset our save files
+        LevelsAccess.NewGame();
+        PetsAccess.NewGame();
+
+        //reset our level selection 
+        UI_Levels.instance.UI_LevelsUpdateAccess();
+
+        //reset our pets in main menu
+        foreach(GameObject pet in pet_list){
+            Destroy(pet);
+        }
+        selectedPets = PetsAccess.current_pets_slotted; //update slots again
+        SpawnPets();                                    //spawn pets again
+        
+    }
+
+    //save game button reference
+    public void SaveGame(){
+        SaveLoad.SaveGame();
+    }
 
     public void QuitApp(){
         Application.Quit();

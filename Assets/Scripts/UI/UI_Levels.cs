@@ -1,14 +1,28 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 
-public  class UI_Levels : MonoBehaviour 
+public class UI_Levels : MonoBehaviour 
 {
     //this class only holds references to all levels on the main menu scene
     [SerializeField] public GameObject[] content_Tanks;
+
+
+    //singleton this
+    public static UI_Levels instance {get; private set; }
+    void Awake (){
+
+        //delete duplicate of this instance
+
+        if (instance != null && instance != this){
+            Destroy(this);
+        }
+        else{
+            instance = this;
+        }
+    }
+
+
 
 
     private void Start() {
@@ -23,7 +37,7 @@ public  class UI_Levels : MonoBehaviour
     }
 
     
-    private void UI_LevelsUpdateAccess(){
+    public void UI_LevelsUpdateAccess(){
 
         int tankWorld = 1; //we start at 1, so increment this last
         int level = 1;      //same thing as above

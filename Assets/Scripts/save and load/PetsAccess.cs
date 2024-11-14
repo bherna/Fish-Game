@@ -13,13 +13,6 @@ public static class PetsAccess
     public static Dictionary<PetNames, bool> petAccess; //entire dictionary list of all pets in game, and their accessability
     public static List<PetNames> current_pets_slotted; //pets the player wants to use next tank
 
-
-    //save current pet access for game
-    public static void SavePets(){
-        SaveLoad.Save_Pets();
-    }
-
-
     //this should be the default method to be used in any loading
     //pull any saved data loaded within the save path for pet access, if non, create new game pet access
     public static void LoadPets(){
@@ -36,7 +29,7 @@ public static class PetsAccess
             }
             else{
                 //then we are a new game pets dictionary
-                NewSave();
+                NewGame();
             }
             
         }
@@ -44,9 +37,9 @@ public static class PetsAccess
 
 
     //create a new dictionary for pet access
-    private static void NewSave(){
+    public static void NewGame(){
 
-        Debug.Log("New Pets Dictionary + collection");
+        //Debug.Log("New Pets Dictionary + collection");
 
         petAccess = new Dictionary<PetNames, bool>{
             {PetNames.SchoolTeacher, false},

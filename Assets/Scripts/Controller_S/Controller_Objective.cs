@@ -96,8 +96,7 @@ public class Controller_Objective : MonoBehaviour
                 PetsAccess.UnlockPet_Access(pet);
 
                 //save game
-                LevelsAccess.SaveLevels();
-                PetsAccess.SavePets();
+                SaveLoad.SaveGame();
 
                 GameDone();
                 

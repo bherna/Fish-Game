@@ -5,15 +5,6 @@ public static class LevelsAccess
     //holds all the boolean values for each level from levels reference
     public static bool[,] levels_access;
 
-
-
-    //save current levels access for game 
-    public static void SaveLevels(){
-        SaveLoad.SaveGame(); //don't need to call self else 'this'
-    }
-
-    
-    
     
     //pull any saved data loaded within the save path for level access, if non, create new game level access
     public static void LoadLevels_Array(){
@@ -30,7 +21,7 @@ public static class LevelsAccess
             }
             else{
                 //then we are a new game
-                NewLevels_Array();
+                NewGame();
             }
             
         }
@@ -38,9 +29,9 @@ public static class LevelsAccess
     }
 
     //creates a new list for level access, making the first level the only one accessable
-    public static void NewLevels_Array(){
+    public static void NewGame(){
         
-        Debug.Log("New Game.");
+        //Debug.Log("New Game.");
 
         //new [all false] 2d arary 
         levels_access = new bool[3,7];//final index doesn't exist for us, since we start at 1
