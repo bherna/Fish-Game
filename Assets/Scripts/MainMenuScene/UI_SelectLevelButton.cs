@@ -13,7 +13,7 @@ public class UI_SelectLevelButton : MonoBehaviour
     void OnEnable()
     {
         //Register Button Events
-        GetComponent<Button>().onClick.AddListener(() => MainMenu.instance.GoToPetsPanel(tankScene, level));
+        GetComponent<Button>().onClick.AddListener(() => Controller_MainMenu.instance.GoToPetsPanel(tankScene, level));
     }
 
     void OnDisable()

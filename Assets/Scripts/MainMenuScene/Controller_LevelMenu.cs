@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-public class UI_Levels : MonoBehaviour 
+public class Controller_LevelMenu : MonoBehaviour 
 {
     //this class only holds references to all levels on the main menu scene
     [SerializeField] public GameObject[] content_Tanks;
 
 
     //singleton this
-    public static UI_Levels instance {get; private set; }
+    public static Controller_LevelMenu instance {get; private set; }
     void Awake (){
 
         //delete duplicate of this instance

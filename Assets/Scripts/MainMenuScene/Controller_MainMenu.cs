@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class MainMenu : MonoBehaviour
+public class Controller_MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject slidePanelsParentObj;         //gameobject reference for all ui level panels + main menu
     [SerializeField] EventOnHover_PlayButton playButton; //used in turning the tank lights on
@@ -18,7 +18,7 @@ public class MainMenu : MonoBehaviour
 
 
     //singleton this
-    public static MainMenu instance {get; private set; }
+    public static Controller_MainMenu instance {get; private set; }
     void Awake (){
 
         //delete duplicate of this instance
@@ -70,7 +70,7 @@ public class MainMenu : MonoBehaviour
         PetsAccess.NewGame();
 
         //reset our level selection 
-        UI_Levels.instance.UI_LevelsUpdateAccess();
+        Controller_LevelMenu.instance.UI_LevelsUpdateAccess();
 
         //reset our pets in main menu
         foreach(GameObject pet in pet_list){

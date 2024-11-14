@@ -25,14 +25,14 @@ public class Pet_ToggleButton : MonoBehaviour
         //pass our temp selected into add or sub, the return bool should update button or not
         //update out button accordingly
         if(tempSelected){
-            if(MainMenu.instance.Select_Add(petName)){
+            if(Controller_MainMenu.instance.Select_Add(petName)){
                 //update color
                 selected = tempSelected;
                 SetToggle(selected);
             }
         }
         else{
-            if(MainMenu.instance.Select_Sub(petName)){
+            if(Controller_MainMenu.instance.Select_Sub(petName)){
                 //update color
                 selected = tempSelected;
                 SetToggle(selected);
