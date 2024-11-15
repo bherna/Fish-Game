@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 8117179177184847187}
   m_Layer: 6
   m_Name: Fish_Guppy
-  m_TagString: Fish
+  m_TagString: Guppy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -136,7 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite_transform: {fileID: 2539228165053564403}
-  attach_pos: {fileID: 0}
 --- !u!114 &-4281585000485617961
 MonoBehaviour:
   m_ObjectHideFlags: 0

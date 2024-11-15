@@ -150,16 +150,4 @@ public class LargeMBass_SM : Enemy_ParentClass
     }
 
 
-    private void OnTriggerEnter2D(Collider2D other) {
-
-        //if we hit the tank edge
-        if(other.gameObject.CompareTag("Boundry")){
-
-            //set our velocity towards middle of tank
-            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * kbForce;
-            rb.AddForce(kb, ForceMode2D.Impulse);
-            
-        }
-    }
-
 }

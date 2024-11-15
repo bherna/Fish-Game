@@ -76,6 +76,25 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         
     }
 
+    private void OnTriggerStay2D(Collider2D other) {
+        
+        //if we hit the tank edge
+        if(other.gameObject.CompareTag("Boundry")){
+
+            //set our velocity towards middle of tank
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * kbForce;
+            rb.AddForce(kb, ForceMode2D.Impulse);
+            
+        }
+    }
+
+
+    protected void OnTriggerEnter2D(Collider2D other) {
+
+        
+    }
+
+
     //overrideing our original updatePosition
     public bool UpdatePosition(Vector3 target_pos, float current_Vel){
 
