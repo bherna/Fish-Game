@@ -105,7 +105,7 @@ public class Pet_Salt : Pet_ParentClass
                 }
                 
                 //start turning LERP
-                if(updatePosition(faceingVec, idle_velocity)){
+                if(UpdatePosition(faceingVec, idle_velocity)){
                     //once facing
                     facingTarget = true;
                 }

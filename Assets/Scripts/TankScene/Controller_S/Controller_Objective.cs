@@ -129,7 +129,7 @@ public class Controller_Objective : MonoBehaviour
     private void SetEggSprites(){
 
         string path = string.Format("EggsSprites/{0}/{0}_", GameVariables.GetPetUnlock_AsString());
-        Debug.Log(path);
+        //Debug.Log(path);
 
         Sprite[] newSprites = new Sprite[]{
             Resources.Load<Sprite>(path+"1"),

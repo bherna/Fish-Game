@@ -104,7 +104,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
         try{
             //try to update our position based on game object, if the object is missing, throw exception
-            updatePosition(currTarget_Position.transform.position, ability_velocity); 
+            UpdatePosition(currTarget_Position.transform.position, ability_velocity); 
         }
         catch(MissingReferenceException){ //new target then
             NewCoinTarget();

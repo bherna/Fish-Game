@@ -50,14 +50,14 @@ public class Pets_InMainMenu : Pet_ParentClass
 
         if(Mathf.Abs(distance) > 0){
             
-            updatePosition(coordPos, ability_vel);
+            UpdatePosition(coordPos, ability_vel);
         }
 
         else if(!facingCorrectly){
             
             facingCorrectly = true;
             Vector2 right = new Vector2(transform.position.x+0.01f, transform.position.y);
-            updatePosition(right, idle_velocity);
+            UpdatePosition(right, idle_velocity);
         }
 
     }

@@ -19,12 +19,12 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float idle_velocity = 1;
     
     protected void Start(){
-        
+
         startTime = Time.time;
     }
     
     //returns true when position is achieved
-    protected bool updatePosition(Vector3 target_pos, float current_Vel, bool use3=false){
+    protected bool UpdatePosition(Vector3 target_pos, float current_Vel, bool use3=false){
 
         //vector 3 vs vector2
         if(use3){

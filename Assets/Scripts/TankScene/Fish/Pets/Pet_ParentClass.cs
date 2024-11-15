@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -19,10 +16,11 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 
 
     // Start is called before the first frame update
-    protected void Start()
+    protected new void Start()
     {
+        base.Start();
+
         NewRandomIdleTarget_Tank();
-        startTime = Time.time;
         curr_PetState = Pet_States.idle;
     }
 
@@ -34,7 +32,7 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget, idle_velocity);
+            UpdatePosition(idleTarget, idle_velocity);
         }
 
         //get new point once fish reaches it

@@ -112,7 +112,7 @@ public class Pet_Khalid : Pet_ParentClass
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(bot_of_tank, ability_velocity, true);
+            UpdatePosition(bot_of_tank, ability_velocity, true);
             return;
         }
         //animation related

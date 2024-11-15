@@ -15,10 +15,11 @@ public class Guppy_Movement : Fish_ParentClass_Movement
 
 
     // Start is called before the first frame update
-    void Start()
+    protected new void Start()
     {
+        base.Start();
+
         NewRandomIdleTarget_Tank();
-        startTime = Time.time;
     }
 
 
@@ -31,7 +32,7 @@ public class Guppy_Movement : Fish_ParentClass_Movement
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget, idle_velocity);
+            UpdatePosition(idleTarget, idle_velocity);
         }
 
         //get new point once fish reaches it
@@ -58,7 +59,7 @@ public class Guppy_Movement : Fish_ParentClass_Movement
             //else
             //follow food
             //head towards target 
-            updatePosition(foodTarget.transform.position, hungry_velocity);
+            UpdatePosition(foodTarget.transform.position, hungry_velocity);
         }
 
 
@@ -67,7 +68,7 @@ public class Guppy_Movement : Fish_ParentClass_Movement
     //pet class function
     //all follow mode does is make this guppy follow the school teacher pet around
     public void FollowMode(){
-        updatePosition(petTarget.transform.position, follow_velocity);
+        UpdatePosition(petTarget.transform.position, follow_velocity);
     }
     public void UpdateFollowObj(GameObject schoolTeacher){
         petTarget = schoolTeacher;

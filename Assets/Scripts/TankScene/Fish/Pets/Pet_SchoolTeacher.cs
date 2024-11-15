@@ -127,7 +127,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget, protect_velocity);
+            UpdatePosition(idleTarget, protect_velocity);
         }
 
         //get new point once fish reaches it

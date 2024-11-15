@@ -14,6 +14,7 @@ public class _Mouth : MonoBehaviour
 {
 
     [SerializeField] ParticleSystem bite_particle;
+    [SerializeField] GameObject _mainBody; //where the State machine script
 
     private int attackPower;
 
@@ -32,9 +33,9 @@ public class _Mouth : MonoBehaviour
             
             //make particle
             Instantiate(bite_particle, transform.position, Quaternion.identity);
- 
-            //now send message
-
+            
+            //disable
+            gameObject.SetActive(false);
 
         }
     }

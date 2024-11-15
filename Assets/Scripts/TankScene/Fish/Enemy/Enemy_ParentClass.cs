@@ -7,28 +7,23 @@ public enum Enemy_States {idle, attack};
 
 public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
-
-    [SerializeField] protected BoxCollider2D attach_pos;
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
     protected Rigidbody2D rb;
-    protected Enemy_States curr_EnemyState = Enemy_States.idle;
+    protected Enemy_States curr_EnemyState;
     
 
     //targets
     protected Transform currFishTarget;
 
-    //retargeting variables, used in idle mode
-    protected float currSeconds_ReTarget = 0;
-    protected float secondsTill_ReTarget = 3;
-
     
-    
-
     //stats
     //health should be in # of clicks
-    [SerializeField] protected int curr_health = 6; 
-    [SerializeField] protected float kbForce = 0f;
+    private int curr_health = 6; 
+    private float kbForce = 5f;
+
+
+
     
     protected new void Start() {
         
@@ -43,22 +38,6 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
         //start in attack mode if possible
         curr_EnemyState = Enemy_States.attack;
-
-    }
-
-    protected new void Update(){
-        
-        base.Update();
-
-        //retargeting 
-        //check if we should switch to attack mode
-        currSeconds_ReTarget += Time.deltaTime;
-        if(currSeconds_ReTarget >= secondsTill_ReTarget){
-            currSeconds_ReTarget = 0;
-            curr_EnemyState = Enemy_States.attack;
-            return;
-        }
-
 
     }
 
@@ -97,21 +76,24 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         
     }
 
+    public bool UpdatePosition(Vector3 target_pos, float current_Vel){
+
+        var dir = Vector3.MoveTowards( transform.position, target_pos, current_Vel * Time.deltaTime );
+
+        rb.AddForce(dir, ForceMode2D.Force);
+
+        return true;
+    }
+
     //move around the tank
     //get a random point on the screen
     protected void IdleMode(){
 
-        float distance;
-        if(attach_pos != null){
-            distance = Vector3.Distance(new Vector3(idleTarget.x - attach_pos.offset.x, idleTarget.y - attach_pos.offset.y, 0), transform.position);
-        }
-        else{
-            distance = Vector3.Distance(idleTarget, transform.position);
-        }
+        float distance = Vector3.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            updatePosition(idleTarget, idle_velocity);
+            UpdatePosition(idleTarget, idle_velocity);
         }
 
         //get new point once fish reaches it
@@ -140,14 +122,20 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     
         base.OnDrawGizmosSelected();
 
-        if(currFishTarget == null || currFishTarget.transform.position  == new Vector3(0,0,0)){
-            //dont show
-        }
-        else{
-            //current range untill new target
-            Gizmos.color = Color.white;
-            Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
+        switch(curr_EnemyState){
+            case Enemy_States.idle:
+                //curr idle target
+                Gizmos.color = Color.white;
+                Gizmos.DrawWireSphere(idleTarget, 0.5f);
+                break;
+            case Enemy_States.attack:
+                //current fish target
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
+                break;
         }
         
     }
+
+
 }
