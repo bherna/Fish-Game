@@ -28,7 +28,7 @@ public class WholeJsonScript{
 
 public static class GameVariables 
 {
-    private static string curr_level = "level_test";
+    public static string curr_level {get; private set;}= "level_test";
   
     private static WholeJsonScript wholeJsonScript;
 

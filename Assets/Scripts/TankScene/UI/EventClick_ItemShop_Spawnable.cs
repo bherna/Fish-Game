@@ -42,7 +42,7 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
                         Controller_Wallet.instance.SubMoney(obj_price);
 
                         //also send an event message to the tutorial
-                        Controller_Tutorial.instance.TutorialClick(Expect_Type.Button);
+                        Controller_Tutorial.instance.TutorialClick(ExpectType.Button);
                     }
                     
                     break;

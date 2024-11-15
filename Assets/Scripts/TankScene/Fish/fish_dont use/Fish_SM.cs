@@ -109,7 +109,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 }
 
                 //also check if this was a tutorial push
-                Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
+                Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Hungry);
                 
             }
         }
@@ -435,7 +435,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 gameObject.GetComponent<Fish_Age>().Ate();
 
                 //check if this feeding was for fish to push tutorial
-                Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
+                Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Feed);
             }
         }
 

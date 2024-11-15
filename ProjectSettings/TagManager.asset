@@ -6,11 +6,10 @@ TagManager:
   tags:
   - Food
   - Money
-  - Fish
   - Enemy
   - Boundry
-  - GemBox
   - Pet
+  - Guppy
   layers:
   - Default
   - TransparentFX

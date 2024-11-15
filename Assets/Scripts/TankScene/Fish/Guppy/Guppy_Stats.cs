@@ -63,7 +63,7 @@ public class Guppy_Stats : FishStats_ParentClass
             ChangeTransparency(false);
 
             //also check if this was a tutorial push
-            Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Hungry);
+            Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Hungry);
             
         }
 
@@ -85,7 +85,7 @@ public class Guppy_Stats : FishStats_ParentClass
         stomach += foodValue;
 
         //check if this feeding was for fish to push tutorial
-        Controller_Tutorial.instance.TutorialClick(Expect_Type.Fish_Feed);
+        Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Feed);
     }
 
     //the fish ate a burger, 
