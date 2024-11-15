@@ -18,10 +18,28 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     protected float idle_velocity = 1;
     
+
+
+
+    
     protected void Start(){
 
         startTime = Time.time;
     }
+
+
+    protected virtual void Update() {
+
+        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
+        if(Controller_EscMenu.instance.paused){
+            return;
+        }
+    }
+
+
+
+
+
     
     //returns true when position is achieved
     protected bool UpdatePosition(Vector3 target_pos, float current_Vel, bool use3=false){
@@ -69,13 +87,6 @@ public class Fish_ParentClass_Movement : MonoBehaviour
         return false;
     }
 
-    protected virtual void Update() {
-
-        //is game paused, (need to pause fish, since they repeatedly get free force when unpaused
-        if(Controller_EscMenu.instance.paused){
-            return;
-        }
-    }
 
 
 

@@ -76,9 +76,10 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         
     }
 
+    //overrideing our original updatePosition
     public bool UpdatePosition(Vector3 target_pos, float current_Vel){
 
-        var dir = Vector3.MoveTowards( transform.position, target_pos, current_Vel * Time.deltaTime );
+        var dir = Vector3.MoveTowards(target_pos, transform.position, current_Vel * Time.deltaTime);
 
         rb.AddForce(dir, ForceMode2D.Force);
 
@@ -119,8 +120,6 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
 
     protected new void OnDrawGizmosSelected() {
-    
-        base.OnDrawGizmosSelected();
 
         switch(curr_EnemyState){
             case Enemy_States.idle:
@@ -129,6 +128,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
                 Gizmos.DrawWireSphere(idleTarget, 0.5f);
                 break;
             case Enemy_States.attack:
+                if(currFishTarget == null){return;}
                 //current fish target
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);

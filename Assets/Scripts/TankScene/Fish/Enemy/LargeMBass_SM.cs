@@ -136,8 +136,9 @@ public class LargeMBass_SM : Enemy_ParentClass
         if(other.gameObject.CompareTag("Boundry")){
 
             //set our velocity towards middle of tank
-            Vector2 newVel = new Vector2(-transform.position.x * bounce_vel, -transform.position.y *bounce_vel);
-            rb.velocity = newVel;
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * bounce_vel;
+            rb.AddForce(kb, ForceMode2D.Impulse);
+            
         }
     }
 
