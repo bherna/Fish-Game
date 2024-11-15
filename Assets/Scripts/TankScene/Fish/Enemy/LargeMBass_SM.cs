@@ -24,10 +24,9 @@ public class LargeMBass_SM : Enemy_ParentClass
     [SerializeField] ParticleSystem bite_particle;
 
     //movement related
-    private const float max_velocity = 4; // max velocity bass can reach
+    public const float max_velocity = 30; // max velocity bass can reach
     private float curr_velocity = 0; //velocity the bass currently has
-    private const float acceleration = 0.3f; //how fast lm-bass builds up speed
-    private const float bounce_vel = 0.4f;  //kb force 
+    private const float acceleration = 2.3f; //how fast lm-bass builds up speed
 
 
     //attack related
@@ -41,6 +40,9 @@ public class LargeMBass_SM : Enemy_ParentClass
     private new void Update()
     {
         base.Update();
+        
+        // - update curr velocity
+        curr_velocity = Math.Min(curr_velocity + Time.deltaTime * acceleration, max_velocity);
 
         switch(curr_EnemyState){
 
@@ -69,6 +71,26 @@ public class LargeMBass_SM : Enemy_ParentClass
         }
     }
 
+
+    //move around the tank
+    //get a random point on the screen
+    protected void IdleMode(){
+
+        float distance = Vector3.Distance(idleTarget, transform.position);
+
+        if(Mathf.Abs(distance) > targetRadius){
+            
+            UpdatePosition(idleTarget, curr_velocity);
+        }
+
+        //get new point once fish reaches it
+        else{
+            NewRandomIdleTarget_Tank();
+        }
+    }
+
+
+
     private void AttackMode(){
 
         //if no fish currently pointing to
@@ -87,8 +109,6 @@ public class LargeMBass_SM : Enemy_ParentClass
         
         //then continue
 
-        // - update curr velocity
-        curr_velocity = Math.Min(curr_velocity + Time.deltaTime * acceleration, max_velocity);
         // - update pos
         UpdatePosition(currFishTarget.transform.position, curr_velocity);
 
@@ -136,7 +156,7 @@ public class LargeMBass_SM : Enemy_ParentClass
         if(other.gameObject.CompareTag("Boundry")){
 
             //set our velocity towards middle of tank
-            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * bounce_vel;
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * kbForce;
             rb.AddForce(kb, ForceMode2D.Impulse);
             
         }

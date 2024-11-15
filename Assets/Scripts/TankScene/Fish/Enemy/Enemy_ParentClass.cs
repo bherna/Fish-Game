@@ -19,8 +19,8 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     
     //stats
     //health should be in # of clicks
-    private int curr_health = 6; 
-    private float kbForce = 5f;
+    protected int curr_health = 6; 
+    protected const float kbForce = 0.7f;
 
 
 
@@ -79,28 +79,11 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     //overrideing our original updatePosition
     public bool UpdatePosition(Vector3 target_pos, float current_Vel){
 
-        var dir = Vector3.MoveTowards(target_pos, transform.position, current_Vel * Time.deltaTime);
+        var dir = (target_pos - transform.position).normalized;
 
-        rb.AddForce(dir, ForceMode2D.Force);
+        rb.AddForce(dir * current_Vel * Time.deltaTime, ForceMode2D.Force);
 
         return true;
-    }
-
-    //move around the tank
-    //get a random point on the screen
-    protected void IdleMode(){
-
-        float distance = Vector3.Distance(idleTarget, transform.position);
-
-        if(Mathf.Abs(distance) > targetRadius){
-            
-            UpdatePosition(idleTarget, idle_velocity);
-        }
-
-        //get new point once fish reaches it
-        else{
-            NewRandomIdleTarget_Tank();
-        }
     }
 
 
