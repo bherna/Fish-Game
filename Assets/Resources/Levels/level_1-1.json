@@ -2,7 +2,7 @@
     "waves": 
     [
         {
-            "secTillWaveSpawn": 6,
+            "secTillWaveSpawn": 1,
             "enemies": ["LMBass", "Starfish", "Catfish"]
         },
 

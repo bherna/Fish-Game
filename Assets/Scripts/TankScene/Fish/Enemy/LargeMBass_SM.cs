@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -11,13 +9,29 @@ public class LargeMBass_SM : Enemy_ParentClass
     //Its purpose is to kill what ever fish it sets its gaze upon
     //its trait is that it ramps up it's speed over time, untill the player clicks on it, restarting its speed
 
-    //there speed is also reset on bite-ing fish
+    //references
+    [SerializeField] _Mouth _mouth;
 
+    //movement related
     private float max_velocity = 4; // max velocity bass can reach
     private float curr_velocity = 0; //velocity the bass currently has
-    private float acceleration = 0.3f; 
-    private float bounce_vel = 0.4f;
+    private float acceleration = 0.3f; //how fast lm-bass builds up speed
+    private float bounce_vel = 0.4f;  //kb force 
 
+
+    //attack related
+    private float attack_range = 1f; //how far out the mouth of lm-bass can go from body base
+    private float attackSpeed = 0.7f; // _ hits per second
+    private int attackPower = 3; //attack power is in terms of bites (attack power = _ bites worth of damage) 
+
+
+    private new void Start(){
+
+        base.Start();
+
+        _mouth.SetAttackPow(attackPower);
+    }
+        
 
     private new void Update()
     {
@@ -27,7 +41,6 @@ public class LargeMBass_SM : Enemy_ParentClass
         switch(curr_EnemyState){
 
             case Enemy_States.idle:
-                if(idleTarget == null){NewRandomIdleTarget_Tank();}//randomly doesn't set
                 IdleMode();
                 break;
             case Enemy_States.attack:
@@ -58,6 +71,8 @@ public class LargeMBass_SM : Enemy_ParentClass
         }
     }
 
+
+
     private void UpdatePos(){
 
         //update curr velocity
@@ -65,20 +80,19 @@ public class LargeMBass_SM : Enemy_ParentClass
 
         updatePosition(currFishTarget.position, curr_velocity);
 
+        return 5;  // need to redo this whole function to use force instead of update physical postion since this messes with kb
+
     }
 
-    public void ResetVelocity(){
-        curr_velocity = 0;
-    }
 
-
+    //when player clicks on bass we run this
     public new void OnPointerClick(PointerEventData eventData) {
 
         //run original function
         base.OnPointerClick(eventData);
 
-        //reset current built up velocity of fish
-        ResetVelocity();
+        //reset 
+        curr_velocity = 0;
     }
 
 

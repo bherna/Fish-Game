@@ -30,18 +30,35 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     [SerializeField] protected int curr_health = 6; 
     [SerializeField] protected float kbForce = 0f;
     
-    protected void Start() {
+    protected new void Start() {
         
         //references
         rb = GetComponent<Rigidbody2D>();
+
+        //idle target set
+        NewRandomIdleTarget_Tank();
+        
+        //attack mode target set
         SetTargetFish(Controller_Fish.instance.GetRandomFish());
 
-        //idle 
-        NewRandomIdleTarget_Tank();
-        startTime = Time.time;
+        //start in attack mode if possible
         curr_EnemyState = Enemy_States.attack;
 
-        targetRadius = 0.8f;
+    }
+
+    protected new void Update(){
+        
+        base.Update();
+
+        //retargeting 
+        //check if we should switch to attack mode
+        currSeconds_ReTarget += Time.deltaTime;
+        if(currSeconds_ReTarget >= secondsTill_ReTarget){
+            currSeconds_ReTarget = 0;
+            curr_EnemyState = Enemy_States.attack;
+            return;
+        }
+
 
     }
 
@@ -84,15 +101,6 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     //get a random point on the screen
     protected void IdleMode(){
 
-        //retargeting 
-        currSeconds_ReTarget += Time.deltaTime;
-        if(currSeconds_ReTarget >= secondsTill_ReTarget){
-            currSeconds_ReTarget = 0;
-            curr_EnemyState = Enemy_States.attack;
-            return;
-        }
-
-        //else we keep idle mode
         float distance;
         if(attach_pos != null){
             distance = Vector3.Distance(new Vector3(idleTarget.x - attach_pos.offset.x, idleTarget.y - attach_pos.offset.y, 0), transform.position);

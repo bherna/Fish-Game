@@ -18,6 +18,10 @@ public class Fish_ParentClass_Movement : MonoBehaviour
     protected float newTargetMinLengthRadius = 6; //the minimum length away from our fish current position
     protected float idle_velocity = 1;
     
+    protected void Start(){
+        
+        startTime = Time.time;
+    }
     
     //returns true when position is achieved
     protected bool updatePosition(Vector3 target_pos, float current_Vel, bool use3=false){
