@@ -118,6 +118,9 @@ public class LargeMBass_SM : Enemy_ParentClass
 
             //bite
             Bite();
+            //return to idle-ish
+            curr_EnemyState = Enemy_States.idle;
+
         }
         
     }
@@ -129,7 +132,7 @@ public class LargeMBass_SM : Enemy_ParentClass
     //then have body move after the head, like catch up
     private void Bite(){
 
-        Debug.Log(gameObject.ToString() + "Bite");
+        //Debug.Log(gameObject.ToString() + "Bite");
         //get this gameobject's stats script and deal damage
         currFishTarget.GetComponent<FishStats_ParentClass>().TakeDamage(attackPower);
         

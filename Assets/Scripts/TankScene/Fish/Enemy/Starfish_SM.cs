@@ -51,7 +51,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         //if we have a fish to attack, start wind up
         //and should we continue wind up
         if(currFishTarget != null && !spinning){
-            Debug.Log("building up rot");
 
             //build wind up, and update sprite rotation
             curr_r_vel += r_accel * Time.deltaTime;
@@ -62,7 +61,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //set our attack bool to true, to not build anymore wind up
             if(curr_r_vel > vel_threshold)
                 {
-                    Debug.Log("attack_");
                     spinning = true;
                     
                     //spin move
