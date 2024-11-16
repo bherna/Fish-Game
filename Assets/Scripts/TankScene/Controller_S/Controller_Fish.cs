@@ -53,9 +53,6 @@ public class Controller_Fish : MonoBehaviour
 
     public bool SpawnFish(GameObject fishObj, Vector3 vec_pos){
 
-        //start enemy waves
-        //since we don't want to start right at game start.
-        Controller_Enemy.instance.StartWaves();
         //Debug.Log("Fish Spawned");
 
         //spawn new fish if max is not reached

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 
 
@@ -10,7 +11,7 @@ using UnityEngine.UI;
 public struct Single_Dialogue
 {
     public string line;  //dialogue string
-    public ExpectType expectType; //what dialogue string expects, to run
+    public string expectType; //what dialogue string expects, to run
     
 }
 
@@ -44,7 +45,7 @@ public class UI_Dialogue : MonoBehaviour
         index = 0;
 
         //set our next index expect type
-        curr_expectType = script[index].expectType;
+        SetExpectType(index);
 
         //start dialogue
         StartCoroutine(TypeLine());
@@ -61,6 +62,16 @@ public class UI_Dialogue : MonoBehaviour
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
         return targetFile.text;
+    }
+
+
+    //used for setting our expect type, since our json file
+    //can only hold strings and not enum types
+    //we have to convert it into one.
+    private void SetExpectType(int index){
+
+        Enum.TryParse(script[index].expectType, out ExpectType newtype);
+        curr_expectType = newtype;
     }
     
 
@@ -103,7 +114,7 @@ public class UI_Dialogue : MonoBehaviour
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
-            curr_expectType = script[index].expectType;
+            SetExpectType(index);
             //start typing line method and return
             StartCoroutine(TypeLine());
             return true;
@@ -125,7 +136,10 @@ public class UI_Dialogue : MonoBehaviour
     //the enum WAIT expect type relies on this method
     //this method should expect a next index in the array
     public ExpectType GetNext_ExpectType(){
-        return script[index+1].expectType;
+
+        Enum.TryParse(script[index+1].expectType, out ExpectType next_);
+        
+        return next_;
     }
 
 }

@@ -141,12 +141,19 @@ public class Controller_Tutorial : MonoBehaviour
     }
 
     private void Disable_Tutorial(){
+
         //enable timer
         Controller_Timer.instance.StartTimer();
 
         //enable ui shop
         shop_ui_mask.enabled = false;
 
+        //start enemy waves
+        //since we don't want to start right at game start.
+        Controller_Enemy.instance.StartWaves();
+
+
+        //----- last ----- //
         //disable this object
         //and set tutorial to false
         tutorial_active = false; 
