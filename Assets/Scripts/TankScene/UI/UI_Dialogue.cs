@@ -4,21 +4,13 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using System.IO;
 
-
-
-[System.Serializable]
-public struct Single_Dialogue
-{
-    public string line;  //dialogue string
-    public string expectType; //what dialogue string expects, to run
-    
-}
 
 
 [System.Serializable]
 public class WholeDialogue{
-    public Single_Dialogue[] script; //same as json file
+    public string[] script; //same as json file
 }
 
 
@@ -26,68 +18,73 @@ public class UI_Dialogue : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textUI;
 
-    private Single_Dialogue[] script;
-    public ExpectType curr_expectType {get; private set; } 
+    private string[] script;
 
-    private int index;    
+    private int index = 0;   //Keeps track of current string[] we are displaying
     private float textSpeed = 0.05f;
 
 
     
 
     //start method
-    public void StartDialogue(){
+    //this is used in the controller_tutorial script
+    //return true if we have a tutorial to run
+    //else return false to skip running tutorial 
+    public bool StartDialogue(){
 
-        script = JsonUtility.FromJson<WholeDialogue>(LoadResourceTextfile()).script;
-
+        //reset values
         //set string to empty/ index to 0
         textUI.text = string.Empty;
-        index = 0;
 
-        //set our next index expect type
-        SetExpectType(index);
-
-        //start dialogue
-        StartCoroutine(TypeLine());
-    }
-
-    //read in the json file for this level
-    private static string LoadResourceTextfile()
-    {
-
-        var curr_level = GameVariables.curr_level;
-        //string filePath = "Tutorial/Tank_" + curr_level.Substring(curr_level.Length - 3);
-        string filePath = "Tutorial/Tank_TutorialTemplate";
-
-        TextAsset targetFile = Resources.Load<TextAsset>(filePath);
-
-        return targetFile.text;
+        return GetJsonScriptNumber("1");
+        
     }
 
 
-    //used for setting our expect type, since our json file
-    //can only hold strings and not enum types
-    //we have to convert it into one.
-    private void SetExpectType(int index){
+    //Used in opening the next json file that holds our next script for tutorial
+    //if the json file exsists, then we have a script to run, return true
+    //else return false
+    //we also update our script in here, so we don't have to return it
 
-        Enum.TryParse(script[index].expectType, out ExpectType newtype);
-        curr_expectType = newtype;
+    //For each tutorial, there should be a list of json files
+    //The naming convention should be 'Tank_{0}-{1}'
+    //{0} == the tank world we are using, 
+    //{1} == this is the script index, we start at 1 and increment from there
+    public bool GetJsonScriptNumber(string scriptNum){
+
+        //Import in the json file that this tank_world-leve will use
+        string filePath = "Tutorial/Tank_" + GameVariables.GetTankWorld()+"-"+scriptNum;
+
+        //get the json file we want to read
+        string targetFile = Resources.Load<TextAsset>(filePath).text;
+        script = JsonUtility.FromJson<WholeDialogue>(targetFile).script;
+
+        //does this file (tank_world-level.json) exsist
+        if(targetFile != null){
+            //if yes, then we have a tutorial to run
+            //start dialogue
+            StartCoroutine(TypeLine());
+            return true;
+        }
+        else{
+            return false;
+        }
     }
     
 
-    //This gets used outside of this class
+    //This gets used in the controller_tutorial class
     //When ever a 'click' is done this command is played
     //click helps move dialogue to next line / finish current dialogue line
     //returns nextline bool (true for more lines, false for we are done)
     //else return true , since we have another click togo
     public bool Click(){
 
-        if(textUI.text == script[index].line){
+        if(textUI.text == script[index]){
             return NextLine();
         }
         else{
             StopAllCoroutines();
-            textUI.text = script[index].line;
+            textUI.text = script[index];
             return true;
         }
         
@@ -97,7 +94,7 @@ public class UI_Dialogue : MonoBehaviour
     //slowly types out the current dialogue string we are index'd at
     private IEnumerator TypeLine(){
         //for each char 1 by 1
-        foreach( char c in script[index].line.ToCharArray()){
+        foreach( char c in script[index].ToCharArray()){
 
             textUI.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -114,7 +111,13 @@ public class UI_Dialogue : MonoBehaviour
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
-            SetExpectType(index);
+
+            //if this string line starts with a "/", then we skip it, 
+            //this will mean a comment in our json file, for readabilty
+            if(script[0].ToCharArray()[0] == '/'){
+                return NextLine();
+            }
+  
             //start typing line method and return
             StartCoroutine(TypeLine());
             return true;
@@ -133,13 +136,5 @@ public class UI_Dialogue : MonoBehaviour
         transform.GetChild(1).gameObject.SetActive(toggle);
     }
 
-    //the enum WAIT expect type relies on this method
-    //this method should expect a next index in the array
-    public ExpectType GetNext_ExpectType(){
-
-        Enum.TryParse(script[index+1].expectType, out ExpectType next_);
-        
-        return next_;
-    }
 
 }

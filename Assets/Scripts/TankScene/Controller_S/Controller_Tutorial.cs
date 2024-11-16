@@ -4,28 +4,19 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-//Expect type is used to tell what we expect the next click to be from player to ->
-//progress the tutorial steps
-//
-//Types:
-//TextBox:      expects player to click textbox ->
-//button_:       expects player to click button  -> (button_1 is the first shopable item)
-//Wait:         makes player wait until next tutorial message -> (event needs to cause this one to push) 
-//fish_Hungry:  push next tutorial message      ->
-//Fish_Feed:    expects player to feed fish     ->
-public enum ExpectType {Click, Button_1, Button_2, Button_3, Button_4, Wait, Fish_Hungry, Fish_Feed};
-
 
 public class Controller_Tutorial : MonoBehaviour
 {
+    //
     [SerializeField] Mask shop_ui_mask;
-
-
-
-    [SerializeField] UI_Dialogue uI_Dialogue;
-
-  
+    private UI_Dialogue ui_Dialogue;
     public bool tutorial_active = true;
+
+
+    //tutorial vars
+    private int index = 0; //which section of tutorial we are at
+    private bool waiting = false; //used in waiting for external event
+    private bool[] triggers; //list of all our trigger, once they are true, they should start next tutorial section
     
 
 
@@ -48,97 +39,140 @@ public class Controller_Tutorial : MonoBehaviour
     void Start()
     {
         //make sure we aren't disabled
+        //THIS SHOULD ALWAYS BE TRUE (false if we are testing things)
         if (tutorial_active){
+
+            //get reference to ui_dialogue
+            ui_Dialogue = transform.GetChild(0).GetComponent<UI_Dialogue>();
            
             //disable shop ui
-            shop_ui_mask.enabled = true; //when true it makes it unclickable
+            shop_ui_mask.enabled = false; //when true it makes it unclickable
 
             //start dialogue
-            uI_Dialogue.StartDialogue();
-
-            //if we need the mask for shop items off, we would check here
-            //ui_dialogue.curr_expectTYpe == button ....
+            //if this returns true (this means we have a tutorial scrip to use)
+            if(ui_Dialogue.StartDialogue()){
+                Debug.Log("we got tutorial");
+                triggers = new bool[4];
+                return;
+            }
+            //else we disable tutorial
         }
-        else{
-            Disable_Tutorial();
-            //Debug.Log("Tutorial is set to - disabled - this round.");
-        }
 
+        Disable_Tutorial();
     }
 
     void Update (){
 
-        //click in tank to 'click' text box
+        //if we have our tutorial stil active 
+        //keep expecting mouse clicks
         if(Input.GetMouseButtonDown(0) && tutorial_active){
-            TutorialClick(ExpectType.Click);
+            TutorialClick();
         }
     }
 
 
     //Player click method is used to move tutorial forward
-    //method expects an eventR expect_type (where this method was called from)(from button or from this class)
-    public void TutorialClick(ExpectType eventR){
-        Debug.Log(string.Format("Curr Expet: {0}\nOur Expect: {1}",uI_Dialogue.curr_expectType, eventR));
+    //in each section of tutorial, the player will learn something then wait for some external event to play
+    //then next section will play
+    public void TutorialClick(){
+        Debug.Log("adfs");
+        switch(index){
+            case 1:
+                //first section of the tutorial:
+                //welcome player
+                //player will learn how to buy first guppy
+                //then wait for guppy to get hungry
+                if(!waiting){
+                    //then we have more words to read through
+                    //check if this next click ends the script
+                    KeepReading();
+                }
+                else{
+                    //we are done reading and we now wait for our trigger
+                    //what external event are we waiting for
+                    Waiting();
+                }
+                break;
 
-        //did the player click the correct thing to push tutorial
-        if(uI_Dialogue.curr_expectType != eventR){
-            //Debug.Log("Incorrect click for tutorial: uI_Dialogue.curr_expectType");
-            return;
-        }
 
-        //if player clicks
-        //and its true -> we have more lines to go
-        if(uI_Dialogue.Click()){
 
-            //for every new click
-            //disable shop
-            shop_ui_mask.enabled = true; //re enable in expect type
+            case 2:
+                //second section, 
+                //now that our fish is hungry, player learns how to feed guppy
+                //player feeds guppy
+                //wait
+                if(!waiting){
+                    //then we have more words to read through
+                    //check if this next click ends the script
+                    KeepReading();
+                }
+                else{
+                    //if this trigger goes off
+                    if(Waiting()){
+                        //third script is for enemy waves so
+                        //start enemy waves
+                        Controller_Enemy.instance.StartWaves();
+                    }
+                    
+                }
+                break;
+    
 
-            //get new/current dia expect
-            var type = uI_Dialogue.curr_expectType;
+            case 3:
+                //third section
+                //player encounters first enemy wave
+                //player learns how to get rid of enemies
+                if(!waiting){
+                    //then we have more words to read through
+                    //check if this next click ends the script
+                    KeepReading();
+                }
+                else{
+                    //we are done reading and we now wait for our trigger
+                    //what external event are we waiting for
+                    Waiting();
+                }
+                break;
 
-            //Is there anything this up-comming expect_Type event needs help with to be pushed out
-            switch(type){
 
-                //get next line's curr_expectType, check if we need buttons active
-                case ExpectType.Button_1:
-                    //ENABLE ui shop (mask being on makes buttons unresponsive)
-                    shop_ui_mask.enabled = false;
-                    break;
-
-                case ExpectType.Wait:
-                    //diable dialogue box, since we don't need to show it for now
-                    //(next expect_type might not nessasarily need to be active)
-                    // ex (fish_hungry will not be displayed but fish_feed will)
-                    uI_Dialogue.ToggleDialogueBox(false);
-                    //move to next line
-                    TutorialClick(ExpectType.Wait);
-                    break;
-
-                case ExpectType.Fish_Hungry:
-                    break;
-
-                case ExpectType.Fish_Feed:
-                    //re-enable dialoge box
-                    uI_Dialogue.ToggleDialogueBox(true); 
-                    break;
-
-                case ExpectType.Click:
-                    break;
-                
-                default:
-                    Debug.Log("No expect type set.");
-                    break;
-            }
-            
-            
-
-        }
-        //else we are finished with tutorial and we can start game.
-        else{
-            Disable_Tutorial();
+            default:
+                Debug.Log(string.Format("end of tutorial"));
+                Disable_Tutorial();
+                break;
         }
         
+        
+        
+    }
+
+
+    //first half of each tutorial section
+    //if we have more strings to print to player, then we run the next
+    //else we start waiting
+    private void KeepReading(){
+
+        if(!ui_Dialogue.Click()){
+            //now we wait for event
+            waiting = true;
+            //also disable the dialouge ui
+            ui_Dialogue.ToggleDialogueBox(false);
+        }
+        
+    }
+    //second half of each tutorial section
+    //This is the waiting half
+    //this function return true once the trigger goes off
+    private bool Waiting(){
+
+        if(triggers[index]){
+            //event was triggered
+            //so we get next script
+            index++;
+            waiting = false;
+            ui_Dialogue.GetJsonScriptNumber(index.ToString());
+            return true;
+        }
+        return false;
     }
 
     private void Disable_Tutorial(){
@@ -158,6 +192,40 @@ public class Controller_Tutorial : MonoBehaviour
         //disable this object
         //and set tutorial to false
         tutorial_active = false; 
-        uI_Dialogue.ToggleDialogueBox(false);
+        ui_Dialogue.ToggleDialogueBox(false);
     }
+
+
+
+    // ----- types of ways events can trigger ------
+
+
+    // button trigger, these are triggered from the shop buttons
+    //each button is assinged an index 
+    //index # == to the obj index in the shop_container list
+    public void ShopButtonClick(int index){
+        if(!tutorial_active){return;}
+
+        //first index holds the guppy button, so
+        if(index == 1){
+            triggers[index] = true;
+        }
+    }
+
+
+    // enemywave trigger, when ever a new enemy wave starts, this is executed
+    public void EnemyWaveStarting(){
+        if(!tutorial_active){return;}
+        if(index != 3){return;}
+        triggers[index] = true;
+    }
+
+
+    //whenever a fish eats food, this is executed
+    public void FishHungry(){
+        if(!tutorial_active){return;}
+        if(index != 2){return;}
+        triggers[index] = true;
+    }
+    
 }

@@ -109,6 +109,9 @@ public class Controller_Enemy : MonoBehaviour
         //annouce (they are comming)
         ui_text.text = "Enemies are coming!";
         annoucement_ui.SetActive(true);
+
+        //announce to controlle tutorial
+        Controller_Tutorial.instance.EnemyWaveStarting();
         
         //wait
         yield return new WaitForSeconds(waitTIme);

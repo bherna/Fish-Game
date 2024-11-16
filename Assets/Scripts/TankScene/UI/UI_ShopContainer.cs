@@ -8,6 +8,9 @@ using UnityEngine.UI;
 //all this script should do is add a listener to each of the child objects
 // - if the child obj has a button component then add listener
 // - else skip, but still increment index
+
+//it also enables and disables buttons interactive
+//for tutorial use
 public class UI_ShopContainer : MonoBehaviour
 {
     //list to hold each index of each button, else we end up using the same button_index
@@ -41,11 +44,7 @@ public class UI_ShopContainer : MonoBehaviour
     //the index determines what button expect type this is
     private void ListenForClick(int index){
 
-        //first parse for enum 
-        string buttonString = "Button_"+index.ToString();
-        Enum.TryParse(buttonString, out ExpectType buttonIndex);
-        
         //return
-        Controller_Tutorial.instance.TutorialClick(buttonIndex);
+        Controller_Tutorial.instance.ShopButtonClick(index);
     }
 }

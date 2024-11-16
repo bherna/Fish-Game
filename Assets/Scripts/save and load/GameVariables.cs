@@ -28,7 +28,7 @@ public class WholeJsonScript{
 
 public static class GameVariables 
 {
-    public static string curr_level {get; private set;}= "level_test";
+    public static string curr_level {get; private set;}= "level_test"; //this json file exsists
   
     private static WholeJsonScript wholeJsonScript;
 
@@ -50,6 +50,15 @@ public static class GameVariables
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
         return targetFile.text;
+    }
+
+    //return what tank we are
+    public static string GetTankWorld(){
+        return Regex.Match(curr_level, @"\d+").Value;
+    }
+    //get the level we are
+    public static string GetLevel(){
+        return Regex.Match(curr_level, @"\d+", RegexOptions.RightToLeft).Value;
     }
 
 

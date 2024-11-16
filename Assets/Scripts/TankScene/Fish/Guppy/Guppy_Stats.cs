@@ -59,11 +59,11 @@ public class Guppy_Stats : FishStats_ParentClass
             //announce to all pets that we are hungry
             Controller_Pets.instance.Annoucement_Init(Event_Type.food, gameObject);
 
+            //annouce to the tutorial aswell
+            Controller_Tutorial.instance.FishHungry();
+
             //change sprite transparancy
             ChangeTransparency(false);
-
-            //also check if this was a tutorial push
-            Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Hungry);
             
         }
 
@@ -83,9 +83,6 @@ public class Guppy_Stats : FishStats_ParentClass
 
         //update fish stomach to add food value
         stomach += foodValue;
-
-        //check if this feeding was for fish to push tutorial
-        Controller_Tutorial.instance.TutorialClick(ExpectType.Fish_Feed);
     }
 
     //the fish ate a burger, 
