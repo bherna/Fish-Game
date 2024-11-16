@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class EventClick_ItemShop_Spawnable : MonoBehaviour
 {
@@ -24,6 +25,18 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
         ui_displayCost.text = obj_price.ToString();
     }
 
+    void OnEnable()
+    {
+        //Register Button Events
+        GetComponent<Button>().onClick.AddListener(() => OnPurchase());
+    }
+
+    void OnDisable()
+    {
+        //Un-Register Button Events
+        GetComponent<Button>().onClick.RemoveAllListeners();
+    }
+
 
     //when button pushed to purchase
     public void OnPurchase(){
@@ -40,9 +53,6 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
                     //if we can spawn a fish: pay price
                     if(Controller_Fish.instance.SpawnFish(fishObj, new Vector3(0, 4, transform.position.z))){
                         Controller_Wallet.instance.SubMoney(obj_price);
-
-                        //also send an event message to the tutorial
-                        Controller_Tutorial.instance.TutorialClick(ExpectType.Button);
                     }
                     
                     break;

@@ -52,19 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textUI: {fileID: 5389826218631758471}
-  dialogue_Expect:
-  - line: Hi - click text box
-    expect_Type: 0
-  - line: click buy fish button
-    expect_Type: 1
-  - line: wait
-    expect_Type: 2
-  - line: event called _ fish hungry
-    expect_Type: 3
-  - line: fish is now hungry, feed fish
-    expect_Type: 4
-  - line: last message - click textbox
-    expect_Type: 0
 --- !u!222 &6564690158988453076
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -957,6 +944,7 @@ GameObject:
   - component: {fileID: 7609680129093401310}
   - component: {fileID: 8597616765525457196}
   - component: {fileID: 5978037155673079931}
+  - component: {fileID: 4160522562880611178}
   m_Layer: 5
   m_Name: Shop - Container
   m_TagString: Untagged
@@ -1021,6 +1009,18 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &4160522562880611178
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1802359769661143107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f46cd50f63dbe4083aa8a2bd77cfa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1972277481578111120
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,11 +9,11 @@ using UnityEngine.UI;
 //
 //Types:
 //TextBox:      expects player to click textbox ->
-//Button:       expects player to click button  ->
+//button_:       expects player to click button  -> (button_1 is the first shopable item)
 //Wait:         makes player wait until next tutorial message -> (event needs to cause this one to push) 
 //fish_Hungry:  push next tutorial message      ->
 //Fish_Feed:    expects player to feed fish     ->
-public enum ExpectType {TextBox, Button, Wait, Fish_Hungry, Fish_Feed};
+public enum ExpectType {Click, Button_1, Button_2, Button_3, Button_4, Wait, Fish_Hungry, Fish_Feed};
 
 
 public class Controller_Tutorial : MonoBehaviour
@@ -70,7 +70,7 @@ public class Controller_Tutorial : MonoBehaviour
 
         //click in tank to 'click' text box
         if(Input.GetMouseButtonDown(0) && tutorial_active){
-            TutorialClick(ExpectType.TextBox);
+            TutorialClick(ExpectType.Click);
         }
     }
 
@@ -78,6 +78,7 @@ public class Controller_Tutorial : MonoBehaviour
     //Player click method is used to move tutorial forward
     //method expects an eventR expect_type (where this method was called from)(from button or from this class)
     public void TutorialClick(ExpectType eventR){
+        Debug.Log(string.Format("Curr Expet: {0}\nOur Expect: {1}",uI_Dialogue.curr_expectType, eventR));
 
         //did the player click the correct thing to push tutorial
         if(uI_Dialogue.curr_expectType != eventR){
@@ -100,7 +101,7 @@ public class Controller_Tutorial : MonoBehaviour
             switch(type){
 
                 //get next line's curr_expectType, check if we need buttons active
-                case ExpectType.Button:
+                case ExpectType.Button_1:
                     //ENABLE ui shop (mask being on makes buttons unresponsive)
                     shop_ui_mask.enabled = false;
                     break;
@@ -122,7 +123,7 @@ public class Controller_Tutorial : MonoBehaviour
                     uI_Dialogue.ToggleDialogueBox(true); 
                     break;
 
-                case ExpectType.TextBox:
+                case ExpectType.Click:
                     break;
                 
                 default:

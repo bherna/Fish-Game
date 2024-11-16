@@ -9,7 +9,7 @@
         
         {
             "line": "In the shop area, click guppy to buy.",
-            "expectType": "Button"
+            "expectType": "Button_1"
         },
 
         {
