@@ -79,9 +79,11 @@ public class UI_Dialogue : MonoBehaviour
     //else return true , since we have another click togo
     public bool Click(){
 
+        //when our entire dialogue is in the text box, we can move on to next dialogue
         if(textUI.text == script[index]){
             return NextLine();
         }
+        //our dialogue still hasn't finished printing, so insta finish it
         else{
             StopAllCoroutines();
             textUI.text = script[index];
@@ -106,20 +108,22 @@ public class UI_Dialogue : MonoBehaviour
     //if next line exists, return true
     //else false
     private bool NextLine(){
-        if (index < script.Length - 1){
-
+        //do we have next line
+        if (index+1 < script.Length){
+            
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
-
-            
-  
+            Debug.Log("Next line to print: "+script[index]);
             //start typing line method and return
             StartCoroutine(TypeLine());
             return true;
         }
         else{
-
+            //no more lines
+            //reset values now
+            index = 0;
+            textUI.text = string.Empty;
             return false;
         }
     }

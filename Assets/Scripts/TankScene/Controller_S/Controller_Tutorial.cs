@@ -52,7 +52,7 @@ public class Controller_Tutorial : MonoBehaviour
             //start dialogue
             //if this returns true (this means we have a tutorial scrip to use)
             if(ui_Dialogue.StartDialogue()){
-                Debug.Log("we got tutorial");
+                
                 triggers = new bool[4];
                 return;
             }
@@ -67,7 +67,7 @@ public class Controller_Tutorial : MonoBehaviour
         //if we have our tutorial stil active 
         //keep expecting mouse clicks
         if(Input.GetMouseButtonDown(0) && tutorial_active){
-            TutorialClick();
+            TutorialState();
         }
     }
 
@@ -75,14 +75,20 @@ public class Controller_Tutorial : MonoBehaviour
     //Player click method is used to move tutorial forward
     //in each section of tutorial, the player will learn something then wait for some external event to play
     //then next section will play
-    public void TutorialClick(){
-        Debug.Log("clicked");
+    public void TutorialState(){
+        
         switch(index){
-            case 1:
+            case 1 or 3:
                 //first section of the tutorial:
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
+
+                //third section, 
+                //now that our fish is hungry, player learns how to feed guppy
+                //player feeds guppy
+                //wait
+
                 if(!waiting){
                     //then we have more words to read through
                     //check if this next click ends the script
@@ -98,12 +104,12 @@ public class Controller_Tutorial : MonoBehaviour
 
 
             case 2:
-                //second section, 
-                //now that our fish is hungry, player learns how to feed guppy
-                //player feeds guppy
-                //wait
+                //second section
+                //now we have a guppy
+                //make player wait for fish to get hungry
+
                 if(!waiting){
-                    Debug.Log("In index case 2");
+                    
                     //then we have more words to read through
                     //check if this next click ends the script
                     KeepReading();
@@ -120,7 +126,7 @@ public class Controller_Tutorial : MonoBehaviour
                 break;
     
 
-            case 3:
+            case 4:
                 //third section
                 //player encounters first enemy wave
                 //player learns how to get rid of enemies
@@ -152,9 +158,9 @@ public class Controller_Tutorial : MonoBehaviour
     //if we have more strings to print to player, then we run the next
     //else we start waiting
     private void KeepReading(){
-        Debug.Log(string.Format("Inside keep reading #{0}", index));
+        
         if(!ui_Dialogue.Click()){
-            Debug.Log("no more cliks");
+            
             //now we wait for event
             waiting = true;
             //also disable the dialouge ui
@@ -168,7 +174,7 @@ public class Controller_Tutorial : MonoBehaviour
     private bool WaitingForTrigger(){
 
         if(triggers[index]){
-            Debug.Log(string.Format("Trigger #{0} went off", index));
+            
             //event was triggered
             //so we get next script
             index++;
@@ -207,26 +213,32 @@ public class Controller_Tutorial : MonoBehaviour
 
 
 
-    // ----- types of ways events can trigger ------
-
+    
+    // -------------------------  ------------------------------------
     //this function is set into each of the triggers
-    //i = what index we are supposed to be in, 
-    //it our i doesn't match our index, then we dont have the correct trigger
+    //i = what index we are supposed to be in, (this is pretty much the json file # we are using, its also our case #)
+    //if our i doesn't match our index, then we dont have the correct trigger
     private void TriggerTemplate(int i){
-        if(index == i){
+        //if we are in the correct INDEX, and we are WAITING for the trigger to go off
+        if(index == i && waiting){
             //if we have a match then we should set trigger to true
             triggers[index] = true;
-            //then do a click, since we can't expect player to click for us again
-            TutorialClick();
+            //then run the tutorial function to continue
+            TutorialState();
         }
     }
+
+
+
+
+    //below are types of ways events can trigger (external)
+    //------------------------- ---------------------- ----------------------------- -------------------
 
     // button trigger, these are triggered from the shop buttons
     //each button is assinged an index 
     //index # == to the obj index in the shop_container list
     public void ShopButtonClick(int buttonIndex){
         if(!tutorial_active){return;}
-        Debug.Log(string.Format("Button I: {0}\nindex: {1}", buttonIndex, index));
         //first index holds the guppy button, so
         if(buttonIndex == 1){
             TriggerTemplate(1);

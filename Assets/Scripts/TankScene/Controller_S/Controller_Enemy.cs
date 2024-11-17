@@ -94,17 +94,23 @@ public class Controller_Enemy : MonoBehaviour
             //should we spawn wave
             if(curr_sec >= secs_till_next_enemyWave){
 
-                //spawn wave + post wave stats + announce to controller_pets
+                //spawn wave 
                 currently_in_wave = true; // turn off the show we spawn command (since we are spawning)
-                IEnumerator coroutine = SpawnWave(preAnnouncerTime);
-                StartCoroutine(coroutine);
+                StartCoroutine(SpawnWave());
                 
             }
         }
     }
 
 
-    private IEnumerator SpawnWave(float waitTIme){
+    //two parts to this function
+    //first part: we announce to player that enemies are going to spawn soon
+    //              after a few seconds
+    //second part: update annoucment to say how many enemies spawned this time
+    //              spawn all enemies
+    //              tell controller_pets that we started a wave, 
+    //              then we start getting ready for next wave
+    private IEnumerator SpawnWave(){
 
         //annouce (they are comming)
         ui_text.text = "Enemies are coming!";
@@ -114,7 +120,7 @@ public class Controller_Enemy : MonoBehaviour
         Controller_Tutorial.instance.EnemyWaveStarting();
         
         //wait
-        yield return new WaitForSeconds(waitTIme);
+        yield return new WaitForSeconds(preAnnouncerTime);
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
