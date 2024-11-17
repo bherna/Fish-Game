@@ -78,27 +78,34 @@ public class Controller_Tutorial : MonoBehaviour
     public void TutorialState(){
         
         switch(index){
-            case 1 or 3:
+            case 1 or 2 or 3 or 5 or 6 or 7:
                 // section 1:
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
 
+                // 2 section
+                //now we have a guppy
+                //make player wait for fish to get hungry
+
                 // section 3, 
                 //now that our fish is hungry, player learns how to feed guppy
-                //player feeds guppy
-                //wait
+                //wait for player to feed guppy
 
-                // section 4
+                // section 5
                 //player encounters first enemy wave
-                //player learns how to get rid of enemies
+                //player lkills all the enemies
 
                 //section 5
                 //player finishes the enemy wave
                 //player now waits for guppy to become teen + dropp first coin
 
                 //section 6
-                //now that coin dropped
+                //now that enemies are dead
+                //wait for guppy to grow and drop a coin
+
+                //section 7
+                //now that guppy is teen and coin dropped
                 //wait for player to collect coin
                 if(!waiting){
                     //then we have more words to read through
@@ -114,10 +121,10 @@ public class Controller_Tutorial : MonoBehaviour
 
 
 
-            case 2:
-                // 2 section
-                //now we have a guppy
-                //make player wait for fish to get hungry
+            case 4:
+                //section 4
+                //player feeds guppy
+                //wait for enemy wave to start
 
                 if(!waiting){
                     
@@ -137,8 +144,8 @@ public class Controller_Tutorial : MonoBehaviour
                 break;
     
 
-            case 7:
-                // 7th section
+            case 8:
+                // 8th section
                 //player collects coin
                 //nothing else so we close the tutorial
                 if(!waiting){
@@ -250,33 +257,38 @@ public class Controller_Tutorial : MonoBehaviour
         }
     }
 
-    //whenever a fish eats food, this is executed
-    public void FishHungry(){
+    //whenever a guppy gets hungry, this is executed
+    public void GuppyHungry(){
         if(!tutorial_active){return;}
         TriggerTemplate(2);
     }
-    
 
+    //when ever player feeds guppy
+    public void GuppyAte(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(3);
+    }
+    
     // enemywave trigger, when ever a new enemy wave starts, this is executed
     public void EnemyWaveStarting(){
         if(!tutorial_active){return;}
-        TriggerTemplate(3);
+        TriggerTemplate(4);
     }
 
     //once the last enemy is killed this function plays
     public void EnemyWaveOver(){
         if(!tutorial_active){return;}
-        TriggerTemplate(4);
+        TriggerTemplate(5);
     }
 
     public void GuppyDropCoin(){
         if(!tutorial_active){return;}
-        TriggerTemplate(5);
+        TriggerTemplate(6);
     }
 
     public void CollectCoin(){
         if(!tutorial_active){return;}
-        TriggerTemplate(6);
+        TriggerTemplate(7);
     }
 
     

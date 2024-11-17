@@ -1,12 +1,15 @@
 {
     "script":
     [
-        "/now that the enemy wave is over.",
 
-        "Good job defending against that enemy wave.",
+        "/enemy wave is about to start (annoucement part).",
 
-        "Now lets grow your guppy",
+        "Oh Oh. ",
 
-        "/wait for guppy to grow into a teen and drops first coin."
+        "Be ready! An enemy wave is about to start.",
+            
+        "Left click on enemies to lazer them to death.",
+        
+        "/wait until player kills the last enemy "
     ]
 }

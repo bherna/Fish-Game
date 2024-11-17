@@ -1,14 +1,14 @@
 {
     "script":
     [
-        "/now that player collected coin.",
+        "/now that guppy is a teen and dropped first coin.",
 
-        "These coins are our life line.",
+        "Lookie here :D",
 
-        "If we run out of coin/money, we lose.",
+        "Its a coin!",
 
-        "Avoid losing!",
-
-        "/ALRIGHT THIS IS IT NO MORE TUTORIAL!"
+        "Click on the coin to collect it!",
+        
+        "/Wait for player to collect coin." 
     ]
 }

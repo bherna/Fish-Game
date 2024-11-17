@@ -53,24 +53,24 @@ public class Guppy_Stats : FishStats_ParentClass
         //if guppy became hungry
         else if(stomach < hungryRange && guppy_SM.guppy_current_state != Guppy_States.hungry){
 
-            //guppy is now hungry
-            guppy_SM.GuppyToHungry();
-
-            //announce to all pets that we are hungry
-            Controller_Pets.instance.Annoucement_Init(Event_Type.food, gameObject);
-
-            //annouce to the tutorial aswell
-            Controller_Tutorial.instance.FishHungry();
-
-            //change sprite transparancy
-            ChangeTransparency(false);
-            
+            GuppyHungry();
         }
+    }
 
+    protected void GuppyHungry(){
+
+        //guppy is now hungry
+        guppy_SM.GuppyToHungry();
+
+        //announce to all pets that we are hungry
+        Controller_Pets.instance.Annoucement_Init(Event_Type.food, gameObject);
+
+        //change sprite transparancy
+        ChangeTransparency(false);
     }
 
     //used outside this script
-    public void FishEated(int foodValue){
+    public void GuppyEated(int foodValue){
 
         //return color to fish
         ChangeTransparency(true); 
@@ -86,7 +86,7 @@ public class Guppy_Stats : FishStats_ParentClass
     }
 
     //the fish ate a burger, 
-    public void FishBurgered(){
+    public void GuppyBurgered(){
 
         //return color to fish
         ChangeTransparency(true); 

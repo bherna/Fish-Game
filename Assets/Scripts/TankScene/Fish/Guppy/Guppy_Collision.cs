@@ -27,13 +27,13 @@ public class Guppy_Collision : MonoBehaviour
                 case FoodTypes.feed:
                     var foodValue = foodscript.GetFoodValue();
                     Controller_Food.instance.TrashThisFood(other.gameObject);
-                    guppy_Stats.FishEated(foodValue);
+                    guppy_Stats.GuppyEated(foodValue);
                     break;
 
                 case FoodTypes.burger:
                     //dont need to get food value, since its just a birthday
                     Controller_Food.instance.TrashThisFood(other.gameObject);
-                    guppy_Stats.FishBurgered();
+                    guppy_Stats.GuppyBurgered();
                     break;
 
                 default:

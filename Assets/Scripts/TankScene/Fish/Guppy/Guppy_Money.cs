@@ -5,10 +5,10 @@ using UnityEngine;
 public class Guppy_Money : MonoBehaviour
 {
     //how often a fish drops money (in seconds)
-    private float secTillMoney = 4f;
+    protected float secTillMoney = 4f;
 
     //current time (in delta time)
-    private float currTime;
+    protected float currTime;
 
     [SerializeField] Guppy_Stats guppy_Stats;
 
@@ -50,7 +50,7 @@ public class Guppy_Money : MonoBehaviour
 
    
 
-    private void DropMoney(GameObject coinType){
+    protected void DropMoney(GameObject coinType){
 
         
         if(currTime >= secTillMoney){

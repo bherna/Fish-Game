@@ -5,10 +5,10 @@ using UnityEngine.EventSystems;
 
 public class Coin : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] int coinValue = 0;
+    [SerializeField] protected int coinValue = 0;
     [SerializeField] float timeTillTrashed = 3f;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] AudioClip collectCoinSoundClip;
+    [SerializeField] protected AudioClip collectCoinSoundClip;
 
     public void UpdateCoinVal(int newCoinVal){
         coinValue = newCoinVal;

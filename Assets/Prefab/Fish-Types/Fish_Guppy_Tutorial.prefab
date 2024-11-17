@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 7864615252232299439}
   - component: {fileID: -5196290186542646016}
   - component: {fileID: -4281585000485617961}
-  - component: {fileID: -6097468994291337018}
-  - component: {fileID: 8117179177184847187}
+  - component: {fileID: 6636998373870812825}
+  - component: {fileID: 7941478267289678308}
   m_Layer: 6
   m_Name: Fish_Guppy_Tutorial
   m_TagString: Guppy
@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747ca84f723a7af49af79a36db74d6d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-6097468994291337018
+--- !u!114 &6636998373870812825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,7 +157,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 957995739772778605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 71b0a639e5ec2214db1c53650c83c0d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 2230678087264634ea8c75536da10f3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
@@ -170,7 +170,7 @@ MonoBehaviour:
   - {fileID: 7893824331456782660}
   sprite_transform: {fileID: 2539228165053564403}
   amount_food_ate: 0
---- !u!114 &8117179177184847187
+--- !u!114 &7941478267289678308
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,11 +179,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 957995739772778605}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81bd6c18a774805498d64217f9570cf2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1b85ffeef0965e74dae7c2cbe24c0581, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guppy_Stats: {fileID: -6097468994291337018}
-  coin_silver: {fileID: 8605215774676198758, guid: e77149187edd53041ac74c0d765afc7f, type: 3}
+  guppy_Stats: {fileID: 6636998373870812825}
+  coin_silver: {fileID: 8605215774676198758, guid: 5dbd607d5a378114697e44d7b9f8cc21, type: 3}
   coin_gold: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
 --- !u!1001 &1339121980451761392
 PrefabInstance:
