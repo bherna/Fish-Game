@@ -10,7 +10,7 @@ public abstract class FishStats_ParentClass : MonoBehaviour
     protected int maxHealth = 7;    // health is in terms of number of bites (health = _ # of bites before we die)
                                             //for enemy (number of clicks till death) (health = _# of clicks before we die)
     
-    protected void Start(){
+    protected virtual void Start(){
         health = maxHealth;
     }
 

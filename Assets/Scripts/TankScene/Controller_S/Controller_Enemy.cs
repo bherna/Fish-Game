@@ -119,8 +119,12 @@ public class Controller_Enemy : MonoBehaviour
         //announce to controlle tutorial
         Controller_Tutorial.instance.EnemyWaveStarting();
         
-        //wait
-        yield return new WaitForSeconds(preAnnouncerTime);
+        //wait atleast once,
+        //keep waiting if player is in tutorial and is currently reading the dialogue
+        do{
+            yield return new WaitForSeconds(preAnnouncerTime);
+        }
+        while(!Controller_Tutorial.instance.waiting);
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();

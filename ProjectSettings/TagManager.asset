@@ -10,6 +10,7 @@ TagManager:
   - Boundry
   - Pet
   - Guppy
+  - Tutorial
   layers:
   - Default
   - TransparentFX

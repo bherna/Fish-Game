@@ -72,9 +72,6 @@ public class Controller_Fish : MonoBehaviour
         return true;    
     }
 
-    public void Vector_SpawnGuppy(Vector3 vec, GameObject fishObj){
-        
-    }
 
     public void RemoveFish(GameObject fish){
 
@@ -114,6 +111,7 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
+    //----------------------  pet related -------------------------------------
     public void PetEvent_Huddle(GameObject pet){
         foreach(GameObject fish in fish_list){
             fish.GetComponent<Guppy_SM>().GuppyToFollow(pet);
@@ -124,4 +122,16 @@ public class Controller_Fish : MonoBehaviour
             fish.GetComponent<Guppy_SM>().GuppyToIdle();
         }
     }
+
+
+
+    ////---------------------- tutorial ------------------------------------------
+    public void TutorialEvent_GuppysNowCanEat(){
+        foreach(GameObject fish in fish_list){
+            if(fish.tag == "Tutorial"){
+                fish.GetComponent<Guppy_Stats_Tutorial>().GuppyCanEatNow();
+            }
+        }
+    }
+    
 }

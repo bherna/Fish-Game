@@ -16,7 +16,7 @@ public class Controller_Tutorial : MonoBehaviour
     //tutorial vars
     private int index = 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
-    private bool waiting = false; //used in waiting for external event
+    public bool waiting {get; private set;}= false; //used in waiting for external event
     private bool[] triggers; //list of all our trigger, once they are true, they should start next tutorial section
     
 
@@ -78,15 +78,11 @@ public class Controller_Tutorial : MonoBehaviour
     public void TutorialState(){
         
         switch(index){
-            case 1 or 2 or 3 or 5 or 6 or 7:
+            case 1 or 3 or 5 or 6 or 7:
                 // section 1:
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
-
-                // 2 section
-                //now we have a guppy
-                //make player wait for fish to get hungry
 
                 // section 3, 
                 //now that our fish is hungry, player learns how to feed guppy
@@ -120,6 +116,24 @@ public class Controller_Tutorial : MonoBehaviour
                 break;
 
 
+            case 2:
+                // 2 section
+                //now we have a guppy
+                //make player wait for fish to get hungry (make guppy able to get hungry)
+                if(!waiting){
+                    
+                    //then we have more words to read through
+                    //check if this next click ends the script
+                    if(!KeepReading()){
+                        //let guppy get hungry
+                        Controller_Fish.instance.TutorialEvent_GuppysNowCanEat();
+                    }
+                }
+                else{
+                    //wait for enemy wave to start
+                    WaitingForTrigger();
+                }
+                break;
 
             case 4:
                 //section 4

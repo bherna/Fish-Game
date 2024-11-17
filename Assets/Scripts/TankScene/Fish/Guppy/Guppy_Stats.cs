@@ -14,7 +14,7 @@ public class Guppy_Stats : FishStats_ParentClass
     // --------------------------------- hunger related ----------------------------------------//
     private float stomach;
     private const int startStomach = 20;//total seconds before fish dies of hunger
-    private float burnRate = 1; //per second (could be changed for other level types "fever")
+    protected float burnRate = 1; //per second (could be changed for other level types "fever")
     private int hungryRange = startStomach/2; 
 
     // --------------------------------- age related -------------------------------------------//  
@@ -29,7 +29,7 @@ public class Guppy_Stats : FishStats_ParentClass
 
 
     // Start is called before the first frame update
-    private new void Start()
+    protected override void Start()
     {
         base.Start();
         guppy_SM = GetComponent<Guppy_SM>();

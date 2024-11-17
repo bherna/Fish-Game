@@ -6,7 +6,14 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
 {
 
     // we just override hungry and ate functoins to send that info to tutorial
+    protected override void Start() {
+        
+        base.Start();
 
+        //set burnRate to 0
+        //this makes it so guppy can't get hungry until player triggers guppy to be allowd to get hungry
+        burnRate = 0;
+    }
 
     protected override void GuppyHungry(){
 
@@ -24,6 +31,11 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
         
         //send message to tutorial
         Controller_Tutorial.instance.GuppyAte();
+    }
+
+
+    public void GuppyCanEatNow(){
+        burnRate = 1;
     }
 
 }

@@ -1,7 +1,9 @@
 {
     "script":
     [
-        "Hello, Welcome to the game. (This is just a bare bones tutorial. I'll eventually update this.)",
+        "Hello, Welcome to the game.",
+
+        "(This is just a bare bones tutorial. I'll eventually update this.)",
         
         "In the shop, click the guppy item to buy 1 guppy for your tank.",
            
