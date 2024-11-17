@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class Controller_Tutorial : MonoBehaviour
 {
-    //
-    [SerializeField] Mask shop_ui_mask;
     private UI_Dialogue ui_Dialogue;
     public bool tutorial_active = true;
 
@@ -45,9 +43,6 @@ public class Controller_Tutorial : MonoBehaviour
 
             //get reference to ui_dialogue
             ui_Dialogue = transform.GetChild(0).GetComponent<UI_Dialogue>();
-           
-            //disable shop ui
-            shop_ui_mask.enabled = false; //when true it makes it unclickable
 
             //start dialogue
             //if this returns true (this means we have a tutorial scrip to use)
@@ -242,9 +237,6 @@ public class Controller_Tutorial : MonoBehaviour
 
         //enable timer
         Controller_Timer.instance.StartTimer();
-
-        //enable ui shop
-        shop_ui_mask.enabled = false;
 
 
         //----- last ----- //

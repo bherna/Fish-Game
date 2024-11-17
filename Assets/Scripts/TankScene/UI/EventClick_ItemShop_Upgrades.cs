@@ -40,6 +40,21 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
     }
 
 
+    void OnEnable()
+    {
+        //Register Button Events
+        GetComponent<Button>().onClick.AddListener(() => OnPurchase());
+    }
+
+    void OnDisable()
+    {
+        //Un-Register Button Events
+        GetComponent<Button>().onClick.RemoveAllListeners();
+    }
+
+    
+
+
     //when button pushed to purchase
     public void OnPurchase(){
 

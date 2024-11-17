@@ -95,7 +95,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             ResetAttack();
         }
 
-        Debug.Log(string.Format("spinning: {0}", spinning));
         //if we are not currently doing our spin move, then return
         //did we collide with fish
         if(spinning && (other.gameObject.CompareTag("Guppy") || other.gameObject.CompareTag("Tutorial"))){

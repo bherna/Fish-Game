@@ -2,18 +2,42 @@
     "waves": 
     [
         {
-            "secTillWaveSpawn": 6,
-            "enemies": ["LMBass", "Starfish", "Catfish"]
+            "secTillWaveSpawn": 12,
+            "enemies": ["LMBass"]
         },
 
         {
-            "secTillWaveSpawn": 3,
-            "enemies": ["LMBass", "Starfish", "Catfish"]
+            "secTillWaveSpawn": 20,
+            "enemies": ["Starfish"]
         },
 
         {
-            "secTillWaveSpawn": 7,
-            "enemies": ["LMBass", "Starfish", "Catfish"]
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["Starfish", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["LMBass", "LMBass", "LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass"]
+        },
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": []
         }
 
     ],
@@ -24,7 +48,7 @@
 
     "levelUnlock": [1, 3],
 
-    "startMoney": 900,
+    "startMoney": 100,
 
     "eggPiecesPrices": [150, 300, 450]
 
