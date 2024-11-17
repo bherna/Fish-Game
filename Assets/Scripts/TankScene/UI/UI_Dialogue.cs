@@ -146,8 +146,9 @@ public class UI_Dialogue : MonoBehaviour
     //used for disabling or enabling in showing text ui box
     public void ToggleDialogueBox(bool toggle){
 
-        transform.GetChild(0).gameObject.SetActive(toggle);
-        transform.GetChild(1).gameObject.SetActive(toggle);
+        for(int i = 0; i < transform.childCount; i++){
+            transform.GetChild(i).gameObject.SetActive(toggle);
+        }
     }
 
 
