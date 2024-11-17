@@ -1,0 +1,55 @@
+{
+    "waves": 
+    [
+        {
+            "secTillWaveSpawn": 12,
+            "enemies": ["LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["Starfish", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["LMBass", "LMBass", "LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass"]
+        },
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": []
+        }
+
+    ],
+
+    "loop": true,
+
+    "petNameString": "Salt",
+
+    "levelUnlock": [1, 4],
+
+    "startMoney": 200,
+
+    "eggPiecesPrices": [200, 500, 700]
+
+}

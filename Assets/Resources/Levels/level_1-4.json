@@ -1,0 +1,66 @@
+{
+    "waves": 
+    [
+        {
+            "secTillWaveSpawn": 12,
+            "enemies": ["LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 40,
+            "enemies": ["Starfish", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["LMBass", "LMBass", "LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["LMBass", "LMBass", "LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 30,
+            "enemies": ["Starfish", "LMBass", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["Starfish", "LMBass", "Starfish", "LMBass"]
+        }
+
+    ],
+
+    "loop": true,
+
+    "petNameString": "Khalid",
+
+    "levelUnlock": [1, 0],
+
+    "startMoney": 200,
+
+    "eggPiecesPrices": [500, 1000, 1500]
+
+}
