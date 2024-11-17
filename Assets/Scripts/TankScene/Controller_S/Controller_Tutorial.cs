@@ -1,8 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-
 
 
 public class Controller_Tutorial : MonoBehaviour
@@ -44,14 +40,21 @@ public class Controller_Tutorial : MonoBehaviour
             //get reference to ui_dialogue
             ui_Dialogue = transform.GetChild(0).GetComponent<UI_Dialogue>();
 
-            //start dialogue
-            //if this returns true (this means we have a tutorial scrip to use)
-            if(ui_Dialogue.StartDialogue()){
-                
-                triggers = new bool[20]; // the number of cases we have +1 (just set to some number way above that)
-                return;
+            //are we in the tutorial level
+            int lvl = int.Parse(GameVariables.GetLevel());
+            if(lvl == 1){
+
+                //start dialogue
+                //if this returns true (this means we have a tutorial scrip to use)
+                if(ui_Dialogue.StartDialogue()){
+                    
+                    triggers = new bool[20]; // the number of cases we have +1 (just set to some number way above that)
+                    return;
+                }
+
+                //else we disable tutorial
             }
-            //else we disable tutorial
+
         }
 
         Disable_Tutorial();
