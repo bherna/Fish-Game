@@ -209,6 +209,8 @@ public class Controller_Enemy : MonoBehaviour
             currently_in_wave = false;
             //tell controller pets that enemy wave is over
             Controller_Pets.instance.Annoucement_EndIt(Event_Type.enemyWave);
+            //tell tutorial we finished aswell
+            Controller_Tutorial.instance.EnemyWaveOver();
         }
         
     }

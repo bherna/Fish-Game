@@ -16,7 +16,8 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
     [SerializeField] FishType fishType;
 
     //prefab fish - we are spawning
-    [SerializeField] GameObject fishObj;
+    [SerializeField] GameObject guppyPrefab;
+    [SerializeField] GameObject guppyPrefab_tutorial;
 
 
     void Start()
@@ -48,17 +49,26 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
 
                 case FishType.PlayerFish:
 
-                    //spawn or what ever here
-                    //
-                    //if we can spawn a fish: pay price
-                    if(Controller_Fish.instance.SpawnFish(fishObj, new Vector3(0, 4, transform.position.z))){
-                        Controller_Wallet.instance.SubMoney(obj_price);
+                    //spawn 
+                    //first make sure we arn't in tutorial mode
+                    if(Controller_Tutorial.instance.tutorial_active){
+                        //spawn tutorial version
+                        if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
+                            Controller_Wallet.instance.SubMoney(obj_price);
+                        }
+                    }
+                    else{
+                        //normal mode
+                        //if we can spawn a fish: pay price
+                        if(Controller_Fish.instance.SpawnFish(guppyPrefab, new Vector3(0, 4, transform.position.z))){
+                            Controller_Wallet.instance.SubMoney(obj_price);
+                        }
                     }
                     
                     break;
 
                 case FishType.Enemy:
-                    Instantiate(fishObj, new Vector3(0, 4, transform.position.z), Quaternion.identity);
+                    Instantiate(guppyPrefab, new Vector3(0, 4, transform.position.z), Quaternion.identity);
                     break;
                 
                 default:

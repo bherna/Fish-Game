@@ -53,7 +53,7 @@ public class Controller_Tutorial : MonoBehaviour
             //if this returns true (this means we have a tutorial scrip to use)
             if(ui_Dialogue.StartDialogue()){
                 
-                triggers = new bool[4];
+                triggers = new bool[5]; // this is hard coded (we need to update the size by # of json files+1) (+1 since we start at 1)
                 return;
             }
             //else we disable tutorial
@@ -79,16 +79,27 @@ public class Controller_Tutorial : MonoBehaviour
         
         switch(index){
             case 1 or 3:
-                //first section of the tutorial:
+                // section 1:
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
 
-                //third section, 
+                // section 3, 
                 //now that our fish is hungry, player learns how to feed guppy
                 //player feeds guppy
                 //wait
 
+                // section 4
+                //player encounters first enemy wave
+                //player learns how to get rid of enemies
+
+                //section 5
+                //player finishes the enemy wave
+                //player now waits for guppy to become teen + dropp first coin
+
+                //section 6
+                //now that coin dropped
+                //wait for player to collect coin
                 if(!waiting){
                     //then we have more words to read through
                     //check if this next click ends the script
@@ -104,7 +115,7 @@ public class Controller_Tutorial : MonoBehaviour
 
 
             case 2:
-                //second section
+                // 2 section
                 //now we have a guppy
                 //make player wait for fish to get hungry
 
@@ -126,26 +137,24 @@ public class Controller_Tutorial : MonoBehaviour
                 break;
     
 
-            case 4:
-                //third section
-                //player encounters first enemy wave
-                //player learns how to get rid of enemies
+            case 7:
+                // 7th section
+                //player collects coin
+                //nothing else so we close the tutorial
                 if(!waiting){
                     //then we have more words to read through
                     //check if this next click ends the script
                     KeepReading();
                 }
                 else{
-                    //we are done reading and we now wait for our trigger
-                    //what external event are we waiting for
-                    WaitingForTrigger();
+                    //we are done reading and so just end this
+                    Disable_Tutorial();
                 }
                 break;
 
 
             default:
-                Debug.Log(string.Format("end of tutorial"));
-                Disable_Tutorial();
+                Debug.Log(string.Format("We are in a case that doesn't exsist."));
                 break;
         }
         
@@ -198,10 +207,6 @@ public class Controller_Tutorial : MonoBehaviour
 
         //enable ui shop
         shop_ui_mask.enabled = false;
-
-        //start enemy waves
-        //since we don't want to start right at game start.
-        Controller_Enemy.instance.StartWaves();
 
 
         //----- last ----- //
@@ -258,5 +263,21 @@ public class Controller_Tutorial : MonoBehaviour
         TriggerTemplate(3);
     }
 
+    //once the last enemy is killed this function plays
+    public void EnemyWaveOver(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(4);
+    }
 
+    public void GuppyDropCoin(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(5);
+    }
+
+    public void CollectCoin(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(6);
+    }
+
+    
 }

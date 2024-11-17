@@ -797,7 +797,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shop_ui_mask: {fileID: 5445914971455186086}
-  uI_Dialogue: {fileID: 7559102280704970492}
   tutorial_active: 0
 --- !u!1 &1720307765002467171
 GameObject:
@@ -6347,6 +6346,14 @@ PrefabInstance:
       propertyPath: fishObj
       value: 
       objectReference: {fileID: 957995739772778605, guid: 0698a6a3879cbf24fbe7f99e3a0c50a5, type: 3}
+    - target: {fileID: 5271730897045498842, guid: e65ad2d802d75cf4cb32c172b6c66167, type: 3}
+      propertyPath: guppyPrefab
+      value: 
+      objectReference: {fileID: 957995739772778605, guid: 0698a6a3879cbf24fbe7f99e3a0c50a5, type: 3}
+    - target: {fileID: 5271730897045498842, guid: e65ad2d802d75cf4cb32c172b6c66167, type: 3}
+      propertyPath: guppyPrefab_tutorial
+      value: 
+      objectReference: {fileID: 957995739772778605, guid: 6729d6820d5e27f40bf81093253dc4be, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
