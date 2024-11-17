@@ -78,7 +78,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
     private void OnTriggerStay2D(Collider2D other) {
         
-        //if we hit the tank edge
+        //we're in the boudry, we need to head back
         if(other.gameObject.CompareTag("Boundry")){
 
             //set our velocity towards middle of tank

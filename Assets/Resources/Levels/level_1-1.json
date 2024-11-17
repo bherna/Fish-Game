@@ -7,12 +7,22 @@
         },
 
         {
-            "secTillWaveSpawn": 2,
+            "secTillWaveSpawn": 10,
             "enemies": ["LMBass"]
         },
 
         {
-            "secTillWaveSpawn": 3,
+            "secTillWaveSpawn": 8,
+            "enemies": ["LMBass"]
+        },
+
+        {
+            "secTillWaveSpawn": 20,
+            "enemies": ["Starfish", "Starfish"]
+        },
+
+        {
+            "secTillWaveSpawn": 8,
             "enemies": []
         }
 

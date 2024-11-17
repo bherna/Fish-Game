@@ -1,7 +1,6 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+
 
 public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 {
@@ -60,13 +59,13 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //did we reach rotational velocity threshold 
             //set our attack bool to true, to not build anymore wind up
             if(curr_r_vel > vel_threshold)
-                {
-                    spinning = true;
-                    
-                    //spin move
-                    var target_dir = (currFishTarget.position - transform.position).normalized;
-                    rb.AddForce(target_dir * burst_vel, ForceMode2D.Impulse);
-                }
+            {
+                spinning = true;
+                
+                //spin move
+                var target_dir = (currFishTarget.position - transform.position).normalized;
+                rb.AddForce(target_dir * burst_vel, ForceMode2D.Impulse);
+            }
             
         }
         else{
@@ -90,16 +89,16 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
         //boundry collision
         //if we hit the tank edge so we lose our speed, so we restart rampping
+        //we still use ontriggerSTAY2d for returning to center
         if(other.gameObject.CompareTag("Boundry")){
 
             ResetAttack();
-            
         }
 
-
+        Debug.Log(string.Format("spinning: {0}", spinning));
         //if we are not currently doing our spin move, then return
         //did we collide with fish
-        if(spinning && other.gameObject.CompareTag("Guppy")){
+        if(spinning && (other.gameObject.CompareTag("Guppy") || other.gameObject.CompareTag("Tutorial"))){
 
             //animation
             Instantiate(bite_particle, transform.position, Quaternion.identity);
