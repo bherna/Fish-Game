@@ -14,7 +14,8 @@ public class Controller_Tutorial : MonoBehaviour
 
 
     //tutorial vars
-    private int index = 0; //which section of tutorial we are at
+    private int index = 1; //which section of tutorial we are at We start at 1, 
+                            //since thats how the json files are saved
     private bool waiting = false; //used in waiting for external event
     private bool[] triggers; //list of all our trigger, once they are true, they should start next tutorial section
     
@@ -75,7 +76,7 @@ public class Controller_Tutorial : MonoBehaviour
     //in each section of tutorial, the player will learn something then wait for some external event to play
     //then next section will play
     public void TutorialClick(){
-        Debug.Log("adfs");
+        Debug.Log("clicked");
         switch(index){
             case 1:
                 //first section of the tutorial:
@@ -90,7 +91,7 @@ public class Controller_Tutorial : MonoBehaviour
                 else{
                     //we are done reading and we now wait for our trigger
                     //what external event are we waiting for
-                    Waiting();
+                    WaitingForTrigger();
                 }
                 break;
 
@@ -102,13 +103,14 @@ public class Controller_Tutorial : MonoBehaviour
                 //player feeds guppy
                 //wait
                 if(!waiting){
+                    Debug.Log("In index case 2");
                     //then we have more words to read through
                     //check if this next click ends the script
                     KeepReading();
                 }
                 else{
                     //if this trigger goes off
-                    if(Waiting()){
+                    if(WaitingForTrigger()){
                         //third script is for enemy waves so
                         //start enemy waves
                         Controller_Enemy.instance.StartWaves();
@@ -130,7 +132,7 @@ public class Controller_Tutorial : MonoBehaviour
                 else{
                     //we are done reading and we now wait for our trigger
                     //what external event are we waiting for
-                    Waiting();
+                    WaitingForTrigger();
                 }
                 break;
 
@@ -150,8 +152,9 @@ public class Controller_Tutorial : MonoBehaviour
     //if we have more strings to print to player, then we run the next
     //else we start waiting
     private void KeepReading(){
-
+        Debug.Log(string.Format("Inside keep reading #{0}", index));
         if(!ui_Dialogue.Click()){
+            Debug.Log("no more cliks");
             //now we wait for event
             waiting = true;
             //also disable the dialouge ui
@@ -162,18 +165,25 @@ public class Controller_Tutorial : MonoBehaviour
     //second half of each tutorial section
     //This is the waiting half
     //this function return true once the trigger goes off
-    private bool Waiting(){
+    private bool WaitingForTrigger(){
 
         if(triggers[index]){
+            Debug.Log(string.Format("Trigger #{0} went off", index));
             //event was triggered
             //so we get next script
             index++;
-            waiting = false;
             ui_Dialogue.GetJsonScriptNumber(index.ToString());
+            //also enable the dialouge ui
+            ui_Dialogue.ToggleDialogueBox(true);
+            //reset waiting to false
+            waiting = false;
             return true;
         }
         return false;
     }
+
+
+
 
     private void Disable_Tutorial(){
 
@@ -199,33 +209,42 @@ public class Controller_Tutorial : MonoBehaviour
 
     // ----- types of ways events can trigger ------
 
+    //this function is set into each of the triggers
+    //i = what index we are supposed to be in, 
+    //it our i doesn't match our index, then we dont have the correct trigger
+    private void TriggerTemplate(int i){
+        if(index == i){
+            //if we have a match then we should set trigger to true
+            triggers[index] = true;
+            //then do a click, since we can't expect player to click for us again
+            TutorialClick();
+        }
+    }
 
     // button trigger, these are triggered from the shop buttons
     //each button is assinged an index 
     //index # == to the obj index in the shop_container list
-    public void ShopButtonClick(int index){
+    public void ShopButtonClick(int buttonIndex){
         if(!tutorial_active){return;}
-
+        Debug.Log(string.Format("Button I: {0}\nindex: {1}", buttonIndex, index));
         //first index holds the guppy button, so
-        if(index == 1){
-            triggers[index] = true;
+        if(buttonIndex == 1){
+            TriggerTemplate(1);
         }
     }
-
-
-    // enemywave trigger, when ever a new enemy wave starts, this is executed
-    public void EnemyWaveStarting(){
-        if(!tutorial_active){return;}
-        if(index != 3){return;}
-        triggers[index] = true;
-    }
-
 
     //whenever a fish eats food, this is executed
     public void FishHungry(){
         if(!tutorial_active){return;}
-        if(index != 2){return;}
-        triggers[index] = true;
+        TriggerTemplate(2);
     }
     
+
+    // enemywave trigger, when ever a new enemy wave starts, this is executed
+    public void EnemyWaveStarting(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(3);
+    }
+
+
 }

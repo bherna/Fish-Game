@@ -1,10 +1,14 @@
 {
     "script":
     [
-        "Be ready! An enemy wave is about to start.",
-            
-        "Left click on enemies to lazer them to death.",
-        
-        "/Done, no more tutorial after this."
+        "/After waiting for guppy to get hungry..."
+,
+        "Our Guppy is hungry! Right click anywhere in the tank to place a Pellet.",
+           
+        "Note! If a pellet reaches the bottom of the tank, it will start to evaporate.",
+          
+        "Okay! That's all for now. Happy Fishing! ;)",
+
+        "/Now we wait for enemy wave to start"
     ]
 }

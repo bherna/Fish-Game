@@ -1,12 +1,12 @@
 {
     "script":
     [
-        "Our Guppy is hungry! Right click anywhere in the tank to place a Pellet.",
-           
-        "Note! If a pellet reaches the bottom of the tank, it will start to evaporate.",
-          
-        "Okay! That's all for now. Happy Fishing!",
+        "/After the player buys a guppy....", 
 
-        "/Now we wait for enemy wave to start"
+        "Nice! Now we have a guppy to take care of.",
+           
+        "Let's wait for them to get hungry.",
+
+        "/Now we wait for guppy to get hungry."
     ]
 }

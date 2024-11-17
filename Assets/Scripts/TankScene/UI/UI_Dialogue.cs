@@ -112,11 +112,7 @@ public class UI_Dialogue : MonoBehaviour
             index++;
             textUI.text = string.Empty;
 
-            //if this string line starts with a "/", then we skip it, 
-            //this will mean a comment in our json file, for readabilty
-            if(script[0].ToCharArray()[0] == '/'){
-                return NextLine();
-            }
+            
   
             //start typing line method and return
             StartCoroutine(TypeLine());
