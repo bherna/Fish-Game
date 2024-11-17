@@ -9,7 +9,7 @@ public class Coin_Tutorial : Coin
     //override original to message controller tutorial
 
 
-    public new void OnPointerDown(PointerEventData eventData){
+    public override void OnPointerDown(PointerEventData eventData){
 
         if(Controller_EscMenu.instance.paused){
             return;

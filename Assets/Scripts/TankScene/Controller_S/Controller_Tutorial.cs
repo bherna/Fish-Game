@@ -133,12 +133,10 @@ public class Controller_Tutorial : MonoBehaviour
                     KeepReading();
                 }
                 else{
-                    //if this trigger goes off
-                    if(WaitingForTrigger()){
-                        //third script is for enemy waves so
-                        //start enemy waves
-                        Controller_Enemy.instance.StartWaves();
-                    }
+                    //start the enemy waves 
+                    //and wait for the first annoucement
+                    Controller_Enemy.instance.StartWaves();
+                    WaitingForTrigger();
                     
                 }
                 break;

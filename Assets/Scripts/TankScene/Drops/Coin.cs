@@ -14,7 +14,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         coinValue = newCoinVal;
     }
 
-    public void OnPointerDown(PointerEventData eventData){
+    public virtual void OnPointerDown(PointerEventData eventData){
 
         if(Controller_EscMenu.instance.paused){
             return;

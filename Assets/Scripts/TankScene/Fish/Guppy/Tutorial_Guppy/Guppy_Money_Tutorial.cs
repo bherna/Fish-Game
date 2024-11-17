@@ -7,8 +7,8 @@ public class Guppy_Money_Tutorial : Guppy_Money
     //functions hers are overriden for messaging controller tutorial
 
 
-    
-    protected new void DropMoney(GameObject coinType){
+
+    protected override void DropMoney(GameObject coinType){
 
         
         if(currTime >= secTillMoney){

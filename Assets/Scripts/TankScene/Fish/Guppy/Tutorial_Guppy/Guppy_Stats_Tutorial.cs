@@ -8,7 +8,7 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
     // we just override hungry and ate functoins to send that info to tutorial
 
 
-    private new void GuppyHungry(){
+    protected override void GuppyHungry(){
 
         base.GuppyHungry();
 
@@ -18,7 +18,7 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
 
 
 
-    public new void GuppyEated(int foodValue){
+    public override void GuppyEated(int foodValue){
 
         base.GuppyEated(foodValue);
         

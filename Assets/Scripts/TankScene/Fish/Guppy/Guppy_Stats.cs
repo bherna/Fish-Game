@@ -57,7 +57,7 @@ public class Guppy_Stats : FishStats_ParentClass
         }
     }
 
-    protected void GuppyHungry(){
+    protected virtual void GuppyHungry(){
 
         //guppy is now hungry
         guppy_SM.GuppyToHungry();
@@ -70,7 +70,7 @@ public class Guppy_Stats : FishStats_ParentClass
     }
 
     //used outside this script
-    public void GuppyEated(int foodValue){
+    public virtual void GuppyEated(int foodValue){
 
         //return color to fish
         ChangeTransparency(true); 

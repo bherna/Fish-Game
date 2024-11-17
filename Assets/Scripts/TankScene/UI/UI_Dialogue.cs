@@ -114,7 +114,7 @@ public class UI_Dialogue : MonoBehaviour
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
-            Debug.Log("Next line to print: "+script[index]);
+
             //start typing line method and return
             StartCoroutine(TypeLine());
             return true;

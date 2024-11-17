@@ -50,7 +50,7 @@ public class Guppy_Money : MonoBehaviour
 
    
 
-    protected void DropMoney(GameObject coinType){
+    protected virtual void DropMoney(GameObject coinType){
 
         
         if(currTime >= secTillMoney){
