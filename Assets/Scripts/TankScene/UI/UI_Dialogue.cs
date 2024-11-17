@@ -61,8 +61,16 @@ public class UI_Dialogue : MonoBehaviour
 
         //does this file (tank_world-level.json) exsist
         if(targetFile != null){
+
             //if yes, then we have a tutorial to run
-            //start dialogue
+            
+            //first check for comments
+            //while our current index has a '/' (for comments)
+            while(index < script.Length && script[index].ToCharArray()[0] == '/'){
+                //keep incrementing
+                index++;
+            }
+            //now start dialogue
             StartCoroutine(TypeLine());
             return true;
         }
@@ -108,9 +116,15 @@ public class UI_Dialogue : MonoBehaviour
     //if next line exists, return true
     //else false
     private bool NextLine(){
-        //do we have next line
-        if (index+1 < script.Length){
-            
+
+        //while we have next line
+        //does this new index start with a '/' (for comments)
+        while(index+1 < script.Length && script[index+1].ToCharArray()[0] == '/'){
+            //keep incrementing
+            index++;
+        }
+
+        if(index+1 < script.Length){
             //increment index / reset ui text box / set next expect type
             index++;
             textUI.text = string.Empty;
