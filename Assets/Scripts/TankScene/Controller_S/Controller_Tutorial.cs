@@ -53,7 +53,7 @@ public class Controller_Tutorial : MonoBehaviour
             //if this returns true (this means we have a tutorial scrip to use)
             if(ui_Dialogue.StartDialogue()){
                 
-                triggers = new bool[5]; // this is hard coded (we need to update the size by # of json files+1) (+1 since we start at 1)
+                triggers = new bool[20]; // the number of cases we have +1 (just set to some number way above that)
                 return;
             }
             //else we disable tutorial
@@ -123,21 +123,21 @@ public class Controller_Tutorial : MonoBehaviour
 
             case 4:
                 //section 4
-                //player feeds guppy
+                //player fed guppy
                 //wait for enemy wave to start
 
                 if(!waiting){
                     
                     //then we have more words to read through
                     //check if this next click ends the script
-                    KeepReading();
+                    if(!KeepReading()){
+                        //start the enemy waves 
+                        Controller_Enemy.instance.StartWaves();
+                    }
                 }
                 else{
-                    //start the enemy waves 
-                    //and wait for the first annoucement
-                    Controller_Enemy.instance.StartWaves();
+                    //wait for enemy wave to start
                     WaitingForTrigger();
-                    
                 }
                 break;
     
@@ -169,9 +169,10 @@ public class Controller_Tutorial : MonoBehaviour
 
 
     //first half of each tutorial section
-    //if we have more strings to print to player, then we run the next
-    //else we start waiting
-    private void KeepReading(){
+    //run the click function in the dialogue script
+    //if clicking returns that we have more lines to go we keep reading (true)
+    //else we read our last line and so we are now ready to wait for our event (false)
+    private bool KeepReading(){
         
         if(!ui_Dialogue.Click()){
             
@@ -179,13 +180,21 @@ public class Controller_Tutorial : MonoBehaviour
             waiting = true;
             //also disable the dialouge ui
             ui_Dialogue.ToggleDialogueBox(false);
+
+            return false;
         }
         
+        return true;
     }
     //second half of each tutorial section
     //This is the waiting half
     //this function return true once the trigger goes off
     private bool WaitingForTrigger(){
+
+        if(triggers.Length < index){
+            Debug.Log(string.Format("our tutorial trigger array is to small (pls make bigger)."));
+            return false;
+        }
 
         if(triggers[index]){
             
@@ -199,6 +208,7 @@ public class Controller_Tutorial : MonoBehaviour
             waiting = false;
             return true;
         }
+        
         return false;
     }
 
