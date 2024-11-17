@@ -21,7 +21,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
     // ----------------------------------------------- attack -----------------------------------------------
 
-    private const int attackPower = 1;  //out of 100 health from fish, fish dies in 3 hits
+    private const int attackPower = 2;  //number of bites it takes for starfish to eat guppy
 
     // ----------------------------------------------- movement -----------------------------------------------
     private float curr_r_vel = 0; // current rotational velocity of starfish

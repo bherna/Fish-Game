@@ -94,9 +94,19 @@ public class Controller_Enemy : MonoBehaviour
             //should we spawn wave
             if(curr_sec >= secs_till_next_enemyWave){
 
-                //spawn wave 
-                currently_in_wave = true; // turn off the show we spawn command (since we are spawning)
-                StartCoroutine(SpawnWave());
+                //only run once
+                currently_in_wave = true; 
+                //check if our wave is size 0
+                if(tank_EnemyWaves.GetWave(currWaveIndex).Length > 0){
+                    //spawn wave normally
+                    StartCoroutine(SpawnWave());
+                }
+                else{
+                    Debug.Log("skipped wave");
+                    //we are just using this as a countdown for next wave
+                    NextWaveSetup();
+                    CloserToWaveEnded();
+                }
                 
             }
         }
@@ -145,7 +155,6 @@ public class Controller_Enemy : MonoBehaviour
 
         //get next wave set up
         NextWaveSetup();
-        
         
     }
 
