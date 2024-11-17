@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
-public class Pet_ToggleButton : MonoBehaviour
+public class Pet_ToggleButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public PetNames petName;
     public bool selected = false; //are we currently selected
@@ -13,6 +15,8 @@ public class Pet_ToggleButton : MonoBehaviour
         this.selected = selected;
         SetToggle(selected);
     }
+
+
 
     //on click button
     //check if we are true or false
@@ -57,5 +61,17 @@ public class Pet_ToggleButton : MonoBehaviour
             butt.colors = cb;
         }
         
+    }
+
+
+
+    public void OnPointerEnter(PointerEventData eventData){
+        
+        string petNameString = Enum.GetName(typeof (PetNames), petName);
+        ToolTip.ShowToolTip(petNameString);
+    }
+
+    public void OnPointerExit(PointerEventData eventData){
+        ToolTip.HideToolTip();
     }
 }

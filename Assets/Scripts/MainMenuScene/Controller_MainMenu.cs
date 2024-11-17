@@ -13,6 +13,7 @@ public class Controller_MainMenu : MonoBehaviour
     private string tankSceneName; //current tank level selected (name)
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
 
+    private float timer;
 
     //singleton this
     public static Controller_MainMenu instance {get; private set; }
@@ -37,11 +38,9 @@ public class Controller_MainMenu : MonoBehaviour
             slidePanelsParentObj.transform.GetChild(i).gameObject.SetActive(true);
         }
 
-        //set last panel (pets)
-        //set it to false, since we dont want to see it
+        //set pets panel false, since we dont want to see it
         //also avoid moving it since our pet coords are saved from this (0,0) position
-        transform.GetChild(transform.childCount-1).gameObject.SetActive(false);
-
+        transform.Find("Pets - Container").gameObject.SetActive(false);
     }
 
 
@@ -117,7 +116,7 @@ public class Controller_MainMenu : MonoBehaviour
         //disbale current level panel
         //eneable pet panel
         slidePanelsParentObj.transform.GetChild(curr_screen).gameObject.SetActive(false);
-        transform.GetChild(transform.childCount-1).gameObject.SetActive(true);
+        transform.Find("Pets - Container").gameObject.SetActive(true);
         
 
         //---have pets move to corresponding ui button location---//
@@ -135,7 +134,7 @@ public class Controller_MainMenu : MonoBehaviour
         //enable level panel
         //disable pet panel
         slidePanelsParentObj.transform.GetChild(curr_screen).gameObject.SetActive(true);
-        transform.GetChild(transform.childCount-1).gameObject.SetActive(false);
+        transform.Find("Pets - Container").gameObject.SetActive(false);
 
         //let pets return to idle
         Controller_PetMenu.instance.PetsToIdle();
