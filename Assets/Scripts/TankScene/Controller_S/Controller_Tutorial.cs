@@ -14,7 +14,7 @@ public class Controller_Tutorial : MonoBehaviour
 
 
     //tutorial vars
-    private int index = 1; //which section of tutorial we are at We start at 1, 
+    public int index {get; private set;}= 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
     public bool waiting {get; private set;}= false; //used in waiting for external event
     private bool[] triggers; //list of all our trigger, once they are true, they should start next tutorial section

@@ -10,9 +10,13 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
         
         base.Start();
 
-        //set burnRate to 0
-        //this makes it so guppy can't get hungry until player triggers guppy to be allowd to get hungry
-        burnRate = 0;
+        //if the tutorial is still before index 3 (learning to feed guppy)
+        if(Controller_Tutorial.instance.index < 3){
+            //set burnRate to 0
+            //this makes it so guppy can't get hungry until player triggers guppy to be allowd to get hungry section
+            burnRate = 0;
+        }
+        
     }
 
     protected override void GuppyHungry(){
