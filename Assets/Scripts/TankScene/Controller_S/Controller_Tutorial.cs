@@ -78,7 +78,7 @@ public class Controller_Tutorial : MonoBehaviour
     public void TutorialState(){
         
         switch(index){
-            case 1 or 3 or 5 or 6 or 7:
+            case 1 or 3 or 5 or 7:
                 // section 1:
                 //welcome player
                 //player will learn how to buy first guppy
@@ -91,14 +91,6 @@ public class Controller_Tutorial : MonoBehaviour
                 // section 5
                 //player encounters first enemy wave
                 //player lkills all the enemies
-
-                //section 5
-                //player finishes the enemy wave
-                //player now waits for guppy to become teen + dropp first coin
-
-                //section 6
-                //now that enemies are dead
-                //wait for guppy to grow and drop a coin
 
                 //section 7
                 //now that guppy is teen and coin dropped
@@ -139,7 +131,6 @@ public class Controller_Tutorial : MonoBehaviour
                 //section 4
                 //player fed guppy
                 //wait for enemy wave to start
-
                 if(!waiting){
                     
                     //then we have more words to read through
@@ -154,7 +145,25 @@ public class Controller_Tutorial : MonoBehaviour
                     WaitingForTrigger();
                 }
                 break;
-    
+
+            case 6:
+                //section 6
+                //now that enemies are dead
+                //wait for guppy to grow and drop a coin
+                if(!waiting){
+                    
+                    //then we have more words to read through
+                    //check if this next click ends the script
+                    if(!KeepReading()){
+                        //start the enemy waves 
+                        Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
+                    }
+                }
+                else{
+                    //wait for enemy wave to start
+                    WaitingForTrigger();
+                }
+                break;
 
             case 8:
                 // 8th section

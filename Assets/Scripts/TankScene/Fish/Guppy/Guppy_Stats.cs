@@ -23,7 +23,7 @@ public class Guppy_Stats : FishStats_ParentClass
     private int food_until_next_stage = 3;
     private float current_size = 0.3f; //also our guppy start size
     private float size_growth_speed = 0.15f;
-    private bool updateAge = true;
+    protected bool updateAge = true;
 
     
 

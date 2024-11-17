@@ -10,11 +10,17 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
         
         base.Start();
 
-        //if the tutorial is still before index 3 (learning to feed guppy)
-        if(Controller_Tutorial.instance.index < 3){
+        //if the tutorial is still before index 2 (learning to feed guppy)
+        if(Controller_Tutorial.instance.index < 2){
             //set burnRate to 0
             //this makes it so guppy can't get hungry until player triggers guppy to be allowd to get hungry section
             burnRate = 0;
+        }
+
+        //now we do the same for ageing
+        //check to see if we are before the 6th index (learning about collecting coins)
+        if(Controller_Tutorial.instance.index < 6){
+            updateAge = false;
         }
         
     }
@@ -40,6 +46,10 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
 
     public void GuppyCanEatNow(){
         burnRate = 1;
+    }
+
+    public void GuppyCanAgeNow(){
+        updateAge = true;
     }
 
 }

@@ -133,5 +133,12 @@ public class Controller_Fish : MonoBehaviour
             }
         }
     }
+    public void TutorialEvent_GuppysNowCanAge(){
+        foreach(GameObject fish in fish_list){
+            if(fish.tag == "Tutorial"){
+                fish.GetComponent<Guppy_Stats_Tutorial>().GuppyCanAgeNow();
+            }
+        }
+    }
     
 }
