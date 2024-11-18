@@ -140,22 +140,27 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
     private void ChangeTransparency(bool setFullAlpha){
 
+        //for each sprite that is part of this fish
         //we have to check if its a skinned messrender, or a simple meshrender
-        foreach(var sprite in sprite_transparency){
+        foreach(Transform sprite in sprite_transparency){
 
-            try{
-                //first we try simple messrender
-                if(setFullAlpha){sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
-                else{sprite.GetComponent<MeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
+
+            var mesh = sprite.GetComponent<MeshRenderer>();
+            if(mesh != null){
+
+                if(setFullAlpha){mesh.material.SetColor("_Color", new Color(1,1,1,1));}
+                else{mesh.material.SetColor("_Color", new Color(1,1,1,0.5f));}
             }
-            catch(MissingComponentException ){
-                //else we use skinned mesh
-                if(setFullAlpha){sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,1));}
-                else{sprite.GetComponent<SkinnedMeshRenderer>().material.SetColor("_Color", new Color(1,1,1,0.5f));}
-            } 
-        }
+            
+            var skindMesh = sprite.GetComponent<SkinnedMeshRenderer>();
+            if(skindMesh != null){
 
-        
+                if(setFullAlpha){skindMesh.material.SetColor("_Color", new Color(1,1,1,1));}
+                else{skindMesh.material.SetColor("_Color", new Color(1,1,1,0.5f));}
+            }
+            
+            
+        }
     }
 
 

@@ -27,7 +27,7 @@ public class Pet_DrCrabs : Pet_ParentClass
 
     [SerializeField] GameObject burger;
     [SerializeField] protected coinStack cointargets;                              //stack list holding all possible food targets
-    private GameObject currTarget_Position;       //dr. crabs current position heading towards (used for collecting coins)
+    private GameObject currTarget;       //dr. crabs current position heading towards (used for collecting coins)
     private Event_Type event_type = Event_Type.coin;
 
     private float ability_velocity = 2;
@@ -102,11 +102,11 @@ public class Pet_DrCrabs : Pet_ParentClass
     //once list is empty, enter idle mode again
     private void CoinMode(){
 
-        try{
-            //try to update our position based on game object, if the object is missing, throw exception
-            UpdatePosition(currTarget_Position.transform.position, ability_velocity); 
+        if(currTarget != null){
+            //update our position based on game object, 
+            UpdatePosition(currTarget.transform.position, ability_velocity); 
         }
-        catch(MissingReferenceException){ //new target then
+        else{
             NewCoinTarget();
         }
         
@@ -121,14 +121,14 @@ public class Pet_DrCrabs : Pet_ParentClass
         curr_PetState = Pet_States.ability;
 
         //update food target object, (compare new food to current food target)
-        if( currTarget_Position == null ||
-            Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget_Position.transform.position, transform.position) 
+        if( currTarget == null ||
+            Vector2.Distance(food_obj.transform.position, transform.position) < Vector2.Distance(currTarget.transform.position, transform.position) 
             ){
                 
                 //then update food obj as new food target, since smaller distance to cover
                 //and push into our stack for later use
                 NewTargetVariables();
-                currTarget_Position = food_obj;
+                currTarget = food_obj;
             } 
 
         //finally push to stack
@@ -206,7 +206,7 @@ public class Pet_DrCrabs : Pet_ParentClass
         }
         else{
             //set new smallest distance to get to
-            currTarget_Position = smallest_obj;
+            currTarget = smallest_obj;
         }
         
 
@@ -216,7 +216,7 @@ public class Pet_DrCrabs : Pet_ParentClass
     private void ToIdle(){
 
         curr_PetState = Pet_States.idle;
-        currTarget_Position = null;     //rest to null, else pointer issue
+        currTarget = null;     //rest to null, else pointer issue
 
         //every time we return to idle, we should keep track of how many times we try to return, 
         //so it doesn't look like dr. crabs is just stuck trying to reach the edge of the tank over and over again.

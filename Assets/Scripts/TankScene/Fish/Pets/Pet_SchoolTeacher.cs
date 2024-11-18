@@ -41,7 +41,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
     //          and keep them huddled untill the enemies are all gone 
     //          but won't be able to keep hungry guppies from straying
 
-    //          The school teacher will try to avoid the enemies as much as
+    //          The school teacher will do his best to avoid the enemies as much as
     //          possible. 
 
 

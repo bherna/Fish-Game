@@ -75,11 +75,14 @@ public class Controller_PetMenu : MonoBehaviour
 
     private void SpawnAPet(string fileLoc, int i, PetNames petName, bool accessable){
 
-        GameObject pet;
-        try{
-            //spawn pet
-            pet = Instantiate(Resources.Load(fileLoc + petName.ToString()) as GameObject, Vector2.zero, Quaternion.identity);
 
+        //first get our pet prefab (and make sure its not null)
+        GameObject pet = Resources.Load(fileLoc + petName.ToString()) as GameObject;
+        
+        //if this pet exists, we spawn them,
+        //else we use the missing pet obj instead
+        if(pet != null){
+            pet = Instantiate(Resources.Load(fileLoc + petName.ToString()) as GameObject, Vector2.zero, Quaternion.identity);
             //Pet_Toggle Button set up
             //update pet name and selection
             //update access on button
@@ -88,10 +91,8 @@ public class Controller_PetMenu : MonoBehaviour
             //update pet button to be interactable
             //if we have acces to this pet, set to interactable
             grid_pets.transform.GetChild(i).GetComponent<Button>().interactable = accessable;
-            
         }
-        catch(Exception){
-            
+        else{
             //if pet does not exist,
             //spawn a hidden pet instead
             pet = Instantiate(Resources.Load(fileLoc + "Missing") as GameObject, Vector2.zero, Quaternion.identity);

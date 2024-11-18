@@ -59,14 +59,13 @@ public class Controller_Enemy : MonoBehaviour
         //read in enemy wave json file
         tank_EnemyWaves = GameVariables.GetTank_EnemyWaves();
 
-        //update our seconds until enemy wave starts
-        //if we have an empty enemy waves array, then we dont spawn
-        try{
+        //check if we have waves to spawn first
+        if(tank_EnemyWaves.TotalWavesCount() > 0){
+            //update our seconds till enemy wave
             secs_till_next_enemyWave = tank_EnemyWaves.SecsTillSpawn(currWaveIndex);
-
-        }catch(IndexOutOfRangeException e){
-            Debug.LogError(e);
-            Debug.Log("No Enemy waves to anticipate :( In Enemy_Waves, add new waves for enemy controller to spawn.");
+        }
+        else{
+            Debug.Log("We have no enemy waves to run :p");
             keepSpawning = false;
         }
         

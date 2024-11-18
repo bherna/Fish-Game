@@ -21,18 +21,16 @@ public class UI_ShopContainer : MonoBehaviour
         activeButtonIndex = new List<int>();
         
         for(int index = 0; index < transform.childCount; index++){
-            try{
+            
+            var buttonComp = transform.GetChild(index).GetComponent<Button>();
+            
+            if(buttonComp != null){
                 //add to list 
                 int newI = index;
                 activeButtonIndex.Add(newI);
                 //check for button component -> add listener
-                transform.GetChild(index).GetComponent<Button>().onClick.AddListener(delegate{ListenForClick(newI);});
+                buttonComp.onClick.AddListener(delegate{ListenForClick(newI);});
                 
-            }
-            catch(Exception){
-                
-                //remove new list addition
-                activeButtonIndex.Remove(activeButtonIndex.Count);
             }
             
         }
