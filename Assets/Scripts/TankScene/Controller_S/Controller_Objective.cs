@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
+using UnityEngine.EventSystems;
 
 
-public class Controller_Objective : MonoBehaviour
+public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     //ui image showing what egg sprite
     [SerializeField] Image ui_currEggSprite;
 
-    //display current egg piece cost on screen
-    [SerializeField] TextMeshProUGUI ui_displayCost;
 
     //once we beat this level (buy all three pieces) make this panel active
     [SerializeField] GameObject postGamePanel;
@@ -57,9 +52,6 @@ public class Controller_Objective : MonoBehaviour
         
         //update sprite
         ui_currEggSprite.sprite = eggSprites[obj_index];
-
-        //display obj cost
-        ui_displayCost.text = eggPrices[obj_index].ToString();
 
     
     }
@@ -116,8 +108,6 @@ public class Controller_Objective : MonoBehaviour
             else{
                 //update sprite
                 ui_currEggSprite.sprite = eggSprites[obj_index];
-                //update display obj cost
-                ui_displayCost.text = eggPrices[obj_index].ToString();
 
             }
         }
@@ -151,5 +141,17 @@ public class Controller_Objective : MonoBehaviour
 
         eggSprites = newSprites;
     }
+
+
+    public void OnPointerEnter(PointerEventData eventData){
+        
+        string dispString = string.Format("Buy: Egg Piece {0} \nCost: {1}", obj_index, eggPrices[obj_index].ToString());
+        ToolTip.ShowToolTip(dispString);
+    }
+
+    public void OnPointerExit(PointerEventData eventData){
+        ToolTip.HideToolTip();
+    }
+    
 
 }

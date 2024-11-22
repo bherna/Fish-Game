@@ -1,6 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 
 public class Guppy_Stats : FishStats_ParentClass
 {
@@ -12,10 +14,9 @@ public class Guppy_Stats : FishStats_ParentClass
     [SerializeField] Transform sprite_transform;        //use only for changing the entire size of guppy
 
     // --------------------------------- hunger related ----------------------------------------//
-    private float stomach;
-    private const int startStomach = 20;//total seconds before fish dies of hunger
-    protected float burnRate = 1; //per second (could be changed for other level types "fever")
-    private int hungryRange = startStomach/2; 
+    private float stomach; //total seconds before fish will die of hunger
+    protected float burnRate = 1; //keep at 1, just so have it reference as -1 unit per second
+    private int hungryRange;
 
     // --------------------------------- age related -------------------------------------------//  
     public int current_age_stage {get; private set; } = 0;
@@ -34,7 +35,10 @@ public class Guppy_Stats : FishStats_ParentClass
         base.Start();
         guppy_SM = GetComponent<Guppy_SM>();
 
-        stomach = startStomach;
+        //update stomach
+        StartStomach();
+
+        //update sprite
         ChangeGuppySize(); //to currently held size
 
         
@@ -55,6 +59,15 @@ public class Guppy_Stats : FishStats_ParentClass
 
             GuppyHungry();
         }
+    }
+
+
+    //at the start of game, we update our stomach cap to a random number between a range.
+    //we do this to avoid having all guppys get hungry at same time, if player buys a bunch at once
+    protected void StartStomach(){
+
+        stomach = UnityEngine.Random.Range(15f, 22f);
+        hungryRange = (int)stomach/2;
     }
 
     protected virtual void GuppyHungry(){
@@ -99,8 +112,8 @@ public class Guppy_Stats : FishStats_ParentClass
         amount_food_ate = 0;
         Fish_Birthday(); //early birthday , if we are at max, birthday should just return false
 
-        //update fish stomach to start stomach value
-        stomach = startStomach;
+        //reset stomach
+        StartStomach();
 
     }
 

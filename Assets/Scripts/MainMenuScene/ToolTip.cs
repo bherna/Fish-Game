@@ -9,10 +9,10 @@ public class ToolTip : MonoBehaviour
     public static ToolTip instance {get; private set;}
 
     [SerializeField] private RectTransform canvasRecTrans; //used to get camera scalling
-    private RectTransform backgroundRecTrans; //background image's dimensions
+    private RectTransform backgroundRecTrans; //background image's vector
     private TextMeshProUGUI text; //updating text on screen
-    private RectTransform rectTrans; //used in updating mouse pos
-    private System.Func<string> toolTipFunc;
+    private RectTransform rectTrans; //used in updating our position on canvas
+    private System.Func<string> toolTipFunc; 
 
 
     // Start is called before the first frame update
@@ -37,9 +37,12 @@ public class ToolTip : MonoBehaviour
 
     
     private void SetText(string newText){
-        text.SetText(newText);
-        text.ForceMeshUpdate();
 
+        //set text
+        text.SetText(newText);
+        text.ForceMeshUpdate(); //update mesh before changing bg dimensions
+
+        //update the background dimensions to fit text
         Vector2 textSize = text.GetRenderedValues(false);
         Vector2 paddingSize = new Vector2(text.margin.x, text.margin.y*2);
 
@@ -48,8 +51,12 @@ public class ToolTip : MonoBehaviour
 
 
     private void Update(){
+
+        //update text
         SetText(toolTipFunc());
 
+
+        //update our tool tip position
         Vector2 anchoredPos = Input.mousePosition / canvasRecTrans.localScale.x;
 
         anchoredPos.x = Mathf.Clamp(anchoredPos.x, 0, canvasRecTrans.rect.width - backgroundRecTrans.rect.width);

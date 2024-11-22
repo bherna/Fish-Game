@@ -1,8 +1,8 @@
 using UnityEngine;
-using TMPro;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EventClick_ItemShop_Upgrades : MonoBehaviour
+public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     //list of objecive prices, in order of purchase
@@ -11,9 +11,6 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
     [SerializeField] Image ui_sprite;
     private int index_array = 0;
 
-
-    //display current item cost on screen
-    [SerializeField] TextMeshProUGUI ui_displayCost;
 
 
     //types of upgrads
@@ -33,9 +30,7 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
 
         }
 
-        //display obj cost
-        ui_displayCost.text = prices[index_array].ToString();
-        //sprite
+        //update sprite
         ui_sprite.sprite = sprites[index_array];
     }
 
@@ -81,7 +76,6 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
                 //update sprite + cost
                 index_array++;
                 ui_sprite.sprite = sprites[index_array];
-                ui_displayCost.text = prices[index_array].ToString();
 
                 //upgrade
                 Controller_Food.instance.Upgrade_FoodPower();
@@ -109,4 +103,16 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour
                 break;
         }
     }
+
+    public void OnPointerEnter(PointerEventData eventData){
+        
+        string dispString = string.Format("Buy {0} \nCost: {1}", upgradeType, prices[index_array].ToString());
+        ToolTip.ShowToolTip(dispString);
+    }
+
+    public void OnPointerExit(PointerEventData eventData){
+        ToolTip.HideToolTip();
+    }
+
+    
 }

@@ -7,7 +7,7 @@ public class Screenshot : MonoBehaviour
         
         if(Input.GetKeyUp(KeyCode.P)){ // capture screen shot on 'P'
 
-            string folderPath = "Assets/Screenshots/"; // the path of your project folder
+            string folderPath = System.IO.Directory.GetCurrentDirectory()+ "/" + "Assets/Screenshots/"; // the path of your project folder
 
             if (!System.IO.Directory.Exists(folderPath)) // if this path does not exist yet
                 System.IO.Directory.CreateDirectory(folderPath);  // it will get created

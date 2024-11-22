@@ -1,29 +1,29 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
-public class EventClick_ItemShop_Spawnable : MonoBehaviour
+
+public enum FishType {Guppy, Enemy};
+
+
+
+public class EventClick_ItemShop_Spawnable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
-    //list of objecive prices, in order of purchase
-    [SerializeField] int obj_price = 0;
-
-    //display current item cost on screen
-    [SerializeField] TextMeshProUGUI ui_displayCost;
+    [SerializeField] int fishPrice = 0;
 
     //what are we selling
-    public enum FishType {PlayerFish, Enemy};
-    [SerializeField] FishType fishType;
+    [SerializeField] FishType fishType = FishType.Guppy;
 
-    //prefab fish - we are spawning
+    //prefab fish - what are we spawning
     [SerializeField] GameObject guppyPrefab;
-    [SerializeField] GameObject guppyPrefab_tutorial;
+    [SerializeField] GameObject guppyPrefab_tutorial; //if this is the tutorial tank, we use tutorial fish version
 
 
     void Start()
     {
-        //display obj cost
-        ui_displayCost.text = obj_price.ToString();
+        
     }
 
     void OnEnable()
@@ -43,25 +43,25 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
     public void OnPurchase(){
 
         //is object affordable
-        if(Controller_Wallet.instance.IsAffordable(obj_price)){
+        if(Controller_Wallet.instance.IsAffordable(fishPrice)){
 
             switch(fishType){
 
-                case FishType.PlayerFish:
+                case FishType.Guppy:
 
                     //spawn 
                     //first make sure we arn't in tutorial mode
                     if(Controller_Tutorial.instance.tutorial_active){
                         //spawn tutorial version
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
-                            Controller_Wallet.instance.SubMoney(obj_price);
+                            Controller_Wallet.instance.SubMoney(fishPrice);
                         }
                     }
                     else{
                         //normal mode
                         //if we can spawn a fish: pay price
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab, new Vector3(0, 4, transform.position.z))){
-                            Controller_Wallet.instance.SubMoney(obj_price);
+                            Controller_Wallet.instance.SubMoney(fishPrice);
                         }
                     }
                     
@@ -83,5 +83,17 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour
             Debug.Log("Not enough money to buy fish. ");
         }
 
+    }
+
+
+    public void OnPointerEnter(PointerEventData eventData){
+        
+        string dispString = string.Format("Buy {0}\nCost: ${1}", fishType.ToString(), fishPrice);
+
+        ToolTip.ShowToolTip(dispString);
+    }
+
+    public void OnPointerExit(PointerEventData eventData){
+        ToolTip.HideToolTip();
     }
 }
