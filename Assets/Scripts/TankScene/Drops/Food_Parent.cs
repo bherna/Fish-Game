@@ -4,7 +4,7 @@ using UnityEngine;
 //burger = for burger type from dr. crabs
 public enum FoodTypes {feed, burger}
 
-public class FoodValue : MonoBehaviour
+public class Food_Parent : MonoBehaviour
 {
 
     //feed = how much this food fills the stomach

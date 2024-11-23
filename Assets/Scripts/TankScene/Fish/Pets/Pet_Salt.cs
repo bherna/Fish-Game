@@ -7,7 +7,7 @@ using UnityEngine;
 /// 
 //    Desc: A helper feeder fish, Salt takes on the task of occasionally feeding fish in the tank
 //    Ability:  After _ amount of seconds, Salt has a food charge
-//              When ever a guppy gets hungry, Salt will use one of their charges to instance a peice of food 
+//              When ever a guppy gets hungry, Salt will use their food charge to spawn a peice of food for them
 //              Salt pellet has the same stats as a level 2 food
 //    Rarity: Level Questing
 //
@@ -20,13 +20,15 @@ public class Pet_Salt : Pet_ParentClass
 
 
     [SerializeField] GameObject salt_ref;
-    private float throwStr = 70;
-    private int salt_chargeCount = 0;
-    private float sec_tillCharge = 0;
-    private const float sec_forCharge = 4; 
-    private Event_Type event_type = Event_Type.food;
-    private List<GameObject> guppyList; //incase if multiple guppies call hunger
-    private bool facingTarget = false;
+
+    private const float throwStr = 40;
+    private bool charged = false; //if salt is ready to feed guppy
+    private bool saltInTank = false; // we start with no salt in tank
+    private float sec_tillCharged = 0;
+    private const float secondsTillCharged = 8; 
+
+    private List<GameObject> guppyList; //holds a list of all currenlty hungry guppys
+    private bool facingTarget = false; //true when salt is facing guppy that is currenlty hunger
     private Vector3 faceingVec;
 
 
@@ -49,12 +51,11 @@ public class Pet_Salt : Pet_ParentClass
     {
         base.Update();
 
-        //if we have a charge, dont bother with this
-        if(salt_chargeCount <= 0){
-                sec_tillCharge += Time.deltaTime;
-            if(sec_tillCharge >= sec_forCharge ){
-                salt_chargeCount += 1;
-                sec_tillCharge = 0;
+        //build up food charge
+        if(!charged){
+            sec_tillCharged += Time.deltaTime;
+            if(sec_tillCharged >= secondsTillCharged ){
+                charged = true;
             }
         }
     
@@ -83,14 +84,16 @@ public class Pet_Salt : Pet_ParentClass
     //return to idle
     private void AbilityMode(){
 
-        //also make sure we have a charge to eat
-        if(salt_chargeCount <= 0){
-            //if no charge, then run idle
+        //make sure we have a charge to spend
+        //and no other salt pellet on screen
+        if( !charged && saltInTank ){
+            //if not, run idle
             IdleMode();
         }
         else if(guppyList.Count > 0){
 
             //check incase our guppy died and isnt removed from list
+            //we could remove all null guppys at once here, but there is an issue if i try doing that
             if(guppyList[0] == null){
                 guppyList.RemoveAt(0);
                 return;
@@ -104,7 +107,7 @@ public class Pet_Salt : Pet_ParentClass
                     GetGuppyDirection();
                 }
                 
-                //start turning LERP
+                //start turning LERP(slowly)
                 if(UpdatePosition(faceingVec, idle_velocity)){
                     //once facing
                     facingTarget = true;
@@ -115,6 +118,9 @@ public class Pet_Salt : Pet_ParentClass
                 //we good//
                 //throw food
                 ThrowFood();
+
+                //now there is food in tank
+                saltInTank = true;
 
                 //remove from list
                 //and reset target
@@ -147,7 +153,7 @@ public class Pet_Salt : Pet_ParentClass
         food.GetComponent<Rigidbody2D>().AddForce(dir * throwStr);
 
         //remove charge
-        salt_chargeCount -= 1;
+        charged = false;
     }
 
     private void GetGuppyDirection(){
@@ -160,10 +166,15 @@ public class Pet_Salt : Pet_ParentClass
     //whether or not they need to do something with this annoucement
     public override void Event_Init(Event_Type type, GameObject obj){
 
-        if(type == event_type){
+        if(type == Event_Type.guppyHungry){
             //change to feeding mode
             curr_PetState = Pet_States.ability;
             guppyList.Add(obj);
+        }
+
+        if(type == Event_Type.saltDestroyed){
+            //let salt spawn a new salt_food pellet
+            saltInTank = false;
         }
     }
     public override void Event_EndIt(Event_Type type){

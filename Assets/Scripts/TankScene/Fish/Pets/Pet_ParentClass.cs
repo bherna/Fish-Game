@@ -1,9 +1,10 @@
 using UnityEngine;
 
 
-
+//Each pet will be in one of these states at all times. 
 public enum Pet_States {idle, protect, grabbed, dropped, ability};
-public enum Event_Type {enemyWave, coin, food}
+//Whenever something in the tank need to talk to the pets to trigger a state we use one of the following
+public enum Event_Type {enemyWave, coin, guppyHungry, saltDestroyed}
 
 public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {

@@ -1,4 +1,5 @@
 using System;
+using Steamworks;
 using UnityEngine;
 
 
@@ -22,18 +23,17 @@ public class Pet_MaryFertile : Pet_ParentClass
     [SerializeField] SkinnedMeshRenderer eye_meshRender; 
     [SerializeField] ParticleSystem ps_sweating;
 
-    private Event_Type event_type = Event_Type.enemyWave;
+    // Event_Type event_type = Event_Type.enemyWave;
     private Material[] eyes; //for updating eye sprites
 
     private float curr_secBefore = 0;
-    private float max_secBefore = 7f; //#_ seconds before pregnat
+    private const float max_secBefore = 14f; //#_ seconds before pregnat
     private float curr_secAfter = 0;
-    private float max_secAfter = 5f; //#_ seconds pregnat
+    private const float max_secAfter = 5f; //#_ seconds pregnat
 
     private bool keepCountingBefore = true;
     private bool keepCountingAfter = true;
     
-    private bool inEnemyWave = false;
 
 
 
@@ -94,7 +94,7 @@ public class Pet_MaryFertile : Pet_ParentClass
 
 
         //if we are in enemy wave, return, since we don't want to spawn yet
-        if (inEnemyWave){return;} 
+        if (Controller_Enemy.instance.currently_in_wave){return;} 
         
         //if we are down here, 
         //  - we are ready to spawn guppy
@@ -119,15 +119,13 @@ public class Pet_MaryFertile : Pet_ParentClass
     //start of enemy wave event
     public override void Event_Init(Event_Type type, GameObject obj)
     {
-        if(type != event_type){return;}
-        inEnemyWave = true;
+ 
     }
 
     //end of enemy wave event
     public override void Event_EndIt(Event_Type type)
     {
-        if(type != event_type){return;}
-        inEnemyWave = false;
+
     }
 
 }

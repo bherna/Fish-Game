@@ -1,3 +1,4 @@
+using Steamworks;
 using UnityEngine;
 
 
@@ -240,6 +241,9 @@ public class Controller_Tutorial : MonoBehaviour
 
         //enable timer
         Controller_Timer.instance.StartTimer();
+
+        //start enemy waves incase we didn't start them 
+        Controller_Enemy.instance.StartWaves();
 
 
         //----- last ----- //

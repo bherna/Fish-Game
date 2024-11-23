@@ -424,7 +424,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         {
 
             //eat + destroy obj
-            stomach = other.GetComponent<FoodValue>().GetFoodValue();
+            stomach = other.GetComponent<Food_Parent>().GetFoodValue();
             Controller_Food.instance.TrashThisFood(other.gameObject);
 
             //did fish get full (enough)

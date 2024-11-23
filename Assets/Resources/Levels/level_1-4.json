@@ -2,7 +2,7 @@
     "waves": 
     [
         {
-            "secTillWaveSpawn": 12,
+            "secTillWaveSpawn": 42,
             "enemies": ["LMBass"]
         },
 
@@ -59,7 +59,7 @@
 
     "levelUnlock": [1, 0],
 
-    "startMoney": 200,
+    "startMoney": 20000,
 
     "eggPiecesPrices": [500, 1000, 1500]
 

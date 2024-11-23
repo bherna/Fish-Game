@@ -98,7 +98,7 @@ public class Controller_Enemy : MonoBehaviour
                 //check if our wave is size 0
                 if(tank_EnemyWaves.GetWave(currWaveIndex).Length > 0){
                     //spawn wave normally
-                    StartCoroutine(SpawnWave());
+                    StartCoroutine(SpawnWave_tutorial());
                 }
                 else{
                     Debug.Log("skipped wave");
@@ -111,7 +111,6 @@ public class Controller_Enemy : MonoBehaviour
         }
     }
 
-
     //two parts to this function
     //first part: we announce to player that enemies are going to spawn soon
     //              after a few seconds
@@ -119,7 +118,7 @@ public class Controller_Enemy : MonoBehaviour
     //              spawn all enemies
     //              tell controller_pets that we started a wave, 
     //              then we start getting ready for next wave
-    private IEnumerator SpawnWave(){
+    private IEnumerator SpawnWave_tutorial(){
 
         //annouce (they are comming)
         ui_text.text = "Enemies are coming!";
@@ -129,11 +128,12 @@ public class Controller_Enemy : MonoBehaviour
         Controller_Tutorial.instance.EnemyWaveStarting();
         
         //wait atleast once,
-        //keep waiting if player is in tutorial and is currently reading the dialogue
+        //keep waiting if :     - player is in tutorial and is currently reading the dialogue (so not waiting)
+        //                      - we are still in the tutorial
         do{
             yield return new WaitForSeconds(preAnnouncerTime);
         }
-        while(!Controller_Tutorial.instance.waiting);
+        while(!Controller_Tutorial.instance.waiting && Controller_Tutorial.instance.tutorial_active);
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
