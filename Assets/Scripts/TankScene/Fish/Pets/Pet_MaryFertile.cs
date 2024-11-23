@@ -27,9 +27,9 @@ public class Pet_MaryFertile : Pet_ParentClass
     private Material[] eyes; //for updating eye sprites
 
     private float curr_secBefore = 0;
-    private const float max_secBefore = 14f; //#_ seconds before pregnat
+    private const float max_secBefore = 17f; //#_ seconds before pregnat
     private float curr_secAfter = 0;
-    private const float max_secAfter = 5f; //#_ seconds pregnat
+    private const float max_secAfter = 8f; //#_ seconds pregnat
 
     private bool keepCountingBefore = true;
     private bool keepCountingAfter = true;
