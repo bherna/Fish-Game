@@ -25,7 +25,7 @@ public class Pet_Salt : Pet_ParentClass
     private bool charged = false; //if salt is ready to feed guppy
     private bool saltInTank = false; // we start with no salt in tank
     private float sec_tillCharged = 0;
-    private const float secondsTillCharged = 8; 
+    private const float totalSecsTillCharged = 8; 
 
     private List<GameObject> guppyList; //holds a list of all currenlty hungry guppys
     private bool facingTarget = false; //true when salt is facing guppy that is currenlty hunger
@@ -55,7 +55,7 @@ public class Pet_Salt : Pet_ParentClass
         //onlyyy if we dont have salt in tank already
         if(!charged && !saltInTank){
             sec_tillCharged += Time.deltaTime;
-            if(sec_tillCharged >= secondsTillCharged ){
+            if(sec_tillCharged >= totalSecsTillCharged ){
                 charged = true;
             }
         }

@@ -35,7 +35,7 @@ public class Controller_Pets : MonoBehaviour
         pet_list = new List<GameObject>();
 
         //dont use on release versions...
-        //Test_SpawnPets();//delete this --------------------------
+        Test_SpawnPets();//delete this --------------------------
 
         //nmake sure that PetsAccess has current_Pets_slotted not null
         //else don't spawn any pets
@@ -70,8 +70,9 @@ public class Controller_Pets : MonoBehaviour
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_DrCrabs") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_MaryFertile") as GameObject, Vector2.zero, quaternion.identity));
-        pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Khalid") as GameObject, Vector2.zero, quaternion.identity));
+        //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Khalid") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Salt") as GameObject, Vector2.zero, quaternion.identity));
+        pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Cherry") as GameObject, Vector2.zero, quaternion.identity));
     }
 
 
