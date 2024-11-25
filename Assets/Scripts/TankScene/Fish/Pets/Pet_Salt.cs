@@ -52,7 +52,8 @@ public class Pet_Salt : Pet_ParentClass
         base.Update();
 
         //build up food charge
-        if(!charged){
+        //onlyyy if we dont have salt in tank already
+        if(!charged && !saltInTank){
             sec_tillCharged += Time.deltaTime;
             if(sec_tillCharged >= secondsTillCharged ){
                 charged = true;
@@ -84,12 +85,13 @@ public class Pet_Salt : Pet_ParentClass
     //return to idle
     private void AbilityMode(){
 
-        //make sure we have a charge to spend
-        //and no other salt pellet on screen
-        if( !charged && saltInTank ){
-            //if not, run idle
+        //if we have NO charge
+        // OR we have salt_pellet already in tank
+        if( !charged || saltInTank ){
+            //we
             IdleMode();
         }
+        //make sure we have atleast one guppy that's hungry
         else if(guppyList.Count > 0){
 
             //check incase our guppy died and isnt removed from list
@@ -98,6 +100,7 @@ public class Pet_Salt : Pet_ParentClass
                 guppyList.RemoveAt(0);
                 return;
             }
+
 
             //start facing guppy
             if(!facingTarget){
@@ -123,17 +126,18 @@ public class Pet_Salt : Pet_ParentClass
                 saltInTank = true;
 
                 //remove from list
-                //and reset target
-                facingTarget = false;
-                faceingVec = Vector3.zero;
-                guppyList.RemoveAt(0);
+                //reset values
+                guppyList.RemoveAt(0);      //guppy
+                facingTarget = false;       //sprite
+                faceingVec = Vector3.zero;  //sprite
+                sec_tillCharged = 0;        //food
             }
             
         }
         else{
             //return to idle
             curr_PetState = Pet_States.idle;
-            //get new idle target
+            //get new idle target, else this pet looks like its stuck going back and forth
             NewRandomIdleTarget_Tank();
         }
 
