@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7787629765017505165}
-  - component: {fileID: 3497615596384153346}
+  - component: {fileID: 606014632025020822}
   m_Layer: 0
-  m_Name: Controller_PlayTest
+  m_Name: ---------Testing-Object---------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3497615596384153346
+--- !u!114 &606014632025020822
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,7 +41,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2595697020342152516}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb0cd37d58b600a4aa4b7015f050cc0d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2746355e946015b47a16fbf8329a5354, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeSpeed: 1
+  timeSpeed: 1
