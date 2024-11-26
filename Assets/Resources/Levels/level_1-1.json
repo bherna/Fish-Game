@@ -28,7 +28,7 @@
 
     ],
 
-    "loop": true,
+    "loop": false,
 
     "petNameString": "SchoolTeacher",
 
