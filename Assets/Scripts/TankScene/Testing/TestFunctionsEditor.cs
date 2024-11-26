@@ -17,11 +17,13 @@ public class TestFunctionsEditor : Editor
 
     //all variables that get updated
     SerializedProperty timeSpeedProp;
+    SerializedProperty moneyProp;
 
 
     void OnEnable() {
         //setup serializable properties
         timeSpeedProp = serializedObject.FindProperty("timeSpeed");
+        moneyProp = serializedObject.FindProperty("money");
     }
 
 
@@ -35,18 +37,26 @@ public class TestFunctionsEditor : Editor
   
         GUILayout.Label(string.Format("Update our time speed here: "));
         EditorGUILayout.IntSlider(timeSpeedProp, 1, 100);
+        TestFunctions tf = (TestFunctions)target;
+        if(GUILayout.Button("Update Time")){
+            tf.UpdateTimeSpeed();
+        }
  
 
+        GUILayout.Label(string.Format("How much money to give self: "));
+        EditorGUILayout.IntSlider(moneyProp, 100, 100000);
+        if(GUILayout.Button("Give Money")){
+            tf.GiveMoney();
+        }
 
+
+
+        //assuming tester doesn't have insane reflexes, we can update variables last
         //apply changes to variables
         serializedObject.ApplyModifiedProperties(); 
 
-        TestFunctions tf = (TestFunctions)target;
-        if(GUILayout.Button("Update Time")){
-            
-            tf.UpdateTimeSpeed();
-        }
         
+
     }
 
 }
