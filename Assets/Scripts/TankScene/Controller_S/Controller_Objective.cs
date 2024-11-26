@@ -47,7 +47,7 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
     private void Start() {
 
         //update our variables
-        eggPrices = GameVariables.GetEggPiecesPrices();
+        eggPrices = LocalLevelVariables.GetEggPiecesPrices();
         SetEggSprites();
         
         //update sprite
@@ -92,11 +92,11 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
                 //*** level complete ***
 
                 //new level should be unlocked and new pet?
-                int[] worldLevel = GameVariables.GetlevelUnlock();
+                int[] worldLevel = LocalLevelVariables.GetlevelUnlock();
                 LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
 
                 //new pet
-                var pet = GameVariables.GetPetUnlock();
+                var pet = LocalLevelVariables.GetPetUnlock();
                 PetsAccess.UnlockPet_Access(pet);
 
                 //save game
@@ -130,7 +130,7 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void SetEggSprites(){
 
-        string path = string.Format("EggsSprites/{0}/{0}_", GameVariables.GetPetUnlock_AsString());
+        string path = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetPetUnlock_AsString());
         //Debug.Log(path);
 
         Sprite[] newSprites = new Sprite[]{

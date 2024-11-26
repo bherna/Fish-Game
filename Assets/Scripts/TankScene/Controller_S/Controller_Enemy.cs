@@ -57,7 +57,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(false);
 
         //read in enemy wave json file
-        tank_EnemyWaves = GameVariables.GetTank_EnemyWaves();
+        tank_EnemyWaves = LocalLevelVariables.GetTank_EnemyWaves();
 
         //check if we have waves to spawn first
         if(tank_EnemyWaves.TotalWavesCount() > 0){

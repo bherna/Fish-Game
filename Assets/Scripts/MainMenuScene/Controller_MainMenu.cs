@@ -110,7 +110,7 @@ public class Controller_MainMenu : MonoBehaviour
         //save current tank scene name, so we go to that level after selecting pets
         tankSceneName = tankScene;
         //update the level name aswell, used in the controller enemy script for choosing what json enemywaves file
-        GameVariables.UpdateLevel(level); 
+        LocalLevelVariables.UpdateLevel(level); 
 
         //---move to last panell---//
         //disbale current level panel

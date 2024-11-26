@@ -1,7 +1,10 @@
 using System;
-using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
+
+
+
+
 
 
 [System.Serializable]
@@ -26,7 +29,14 @@ public class WholeJsonScript{
 }
 
 
-public static class GameVariables 
+
+
+
+
+
+
+
+public static class LocalLevelVariables 
 {
     public static string curr_level {get; private set;}= "level_test"; //this json file exsists
   

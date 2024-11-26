@@ -42,7 +42,7 @@ public class Controller_Tutorial : MonoBehaviour
             ui_Dialogue = transform.GetChild(0).GetComponent<UI_Dialogue>();
 
             //are we in the tutorial level
-            int lvl = int.Parse(GameVariables.GetLevel());
+            int lvl = int.Parse(LocalLevelVariables.GetLevel());
             if(lvl == 1){
 
                 //start dialogue

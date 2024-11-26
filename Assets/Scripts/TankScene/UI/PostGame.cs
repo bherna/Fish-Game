@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
@@ -16,10 +17,13 @@ public class PostGame : MonoBehaviour
 
         //update our post game stats here:
         float finalTime = Controller_Timer.instance.GetFinalTime();
-        int min = (int)math.floor(finalTime/60);
-        int sec = (int)finalTime;
-        string milli = Math.Floor(finalTime * 1000).ToString();
-        milli = milli.Substring(milli.Length-3);
+
+        //get minutes (minutes is every 60 seconds)
+        int min = (int)math.floor(finalTime/60);    
+        //get seconds, seconds should be between (0 - 59)
+        int sec = (int)finalTime % 60;     
+        //get milli seconds, the decimal part of our total time    (multiply by 1000 to move 3 places, mod by 1000 to remove seconds)         
+        string milli = (Math.Floor(finalTime * 1000) % 1000).ToString();
 
         showStats.text = string.Format("Final Time: \n{0}:{1}:{2}", min,sec,milli);
     }
