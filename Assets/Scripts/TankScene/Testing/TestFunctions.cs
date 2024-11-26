@@ -1,4 +1,4 @@
-
+#if UNITY_EDITOR
 using UnityEngine;
 
 
@@ -30,3 +30,4 @@ public class TestFunctions : MonoBehaviour
     
 }
 
+#endif
