@@ -7,15 +7,26 @@ using UnityEngine;
 
 public class TestFunctions : MonoBehaviour 
 {
-    public int timeSpeed = 1;
-    public int money = 100;
 
+    //simple function to update our timescale in the game, 
+    //useful to test anything relative to time 
+    public int timeSpeed = 1;
     public void UpdateTimeSpeed(){
         Time.timeScale = timeSpeed;
     }
 
+    //straight up just give tester money
+    //useful in testing if shop items are purchasable / have correct functionality
+    public int money = 100;
     public void GiveMoney(){
         Controller_Wallet.instance.AddMoney(money);
     }
+
+    //function to spawn a pet into the level
+    //useful in testing a certain pet, even if its not unlocked to tester in game
+    public void SpawnPet(PetNames petName){
+        Controller_Pets.instance.Test_SpawnPet(petName);
+    }
+    
 }
 

@@ -18,6 +18,7 @@ public class TestFunctionsEditor : Editor
     //all variables that get updated
     SerializedProperty timeSpeedProp;
     SerializedProperty moneyProp;
+    PetNames petProp;
 
 
     void OnEnable() {
@@ -34,19 +35,30 @@ public class TestFunctionsEditor : Editor
         //always do this at begining of oninspectorGUI
         serializedObject.Update();
 
-  
+
+
+  //time
         GUILayout.Label(string.Format("Update our time speed here: "));
         EditorGUILayout.IntSlider(timeSpeedProp, 1, 100);
         TestFunctions tf = (TestFunctions)target;
         if(GUILayout.Button("Update Time")){
             tf.UpdateTimeSpeed();
         }
- 
 
+        GUILayout.Label(string.Format("\n\n"));//new line
+ //money
         GUILayout.Label(string.Format("How much money to give self: "));
         EditorGUILayout.IntSlider(moneyProp, 100, 100000);
         if(GUILayout.Button("Give Money")){
             tf.GiveMoney();
+        }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+//pets
+        GUILayout.Label(string.Format("Spawn Pet: "));
+        petProp = (PetNames)EditorGUILayout.EnumPopup(petProp);
+        if(GUILayout.Button("Spawn Pet")){
+            tf.SpawnPet(petProp);
         }
 
 
@@ -54,8 +66,6 @@ public class TestFunctionsEditor : Editor
         //assuming tester doesn't have insane reflexes, we can update variables last
         //apply changes to variables
         serializedObject.ApplyModifiedProperties(); 
-
-        
 
     }
 

@@ -59,17 +59,18 @@ public class Controller_Pets : MonoBehaviour
 
     
 
-    //override spawn pets
-    //USED FOR TESTING ONLY
-    private void Test_SpawnPets(){
 
-        Debug.Log("SPAWNED PETS ILLEGALLY");
+    //USED FOR TESTING ONLY
+    //dont spawn pets normally thorugh here
+    public void Test_SpawnPet(PetNames petNames){
+
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_DrCrabs") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_MaryFertile") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Khalid") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Salt") as GameObject, Vector2.zero, quaternion.identity));
-        pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Cherry") as GameObject, Vector2.zero, quaternion.identity));
+
+        pet_list.Add(Instantiate(Resources.Load("Pets/Pet_"+petNames.ToString()) as GameObject, Vector2.zero, quaternion.identity));
     }
 
 
