@@ -120,10 +120,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b34147305c5c5c489e563d8e2a8ecf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 15
+  coinValue: 7
   timeTillTrashed: 1.5
   rb: {fileID: 9203605760568676009}
   collectCoinSoundClip: {fileID: 8300000, guid: a12f0bc00831bfb408684e1cc11f08ae, type: 3}
+  textPopUp: {fileID: 3958849578484643986, guid: 5f79b4eccdc03744386d9fbb1effcaae, type: 3}
 --- !u!114 &1450112052067580422
 MonoBehaviour:
   m_ObjectHideFlags: 0

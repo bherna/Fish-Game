@@ -17,7 +17,7 @@ public class Pet_Khalid_Stats : FishStats_ParentClass
         Controller_Enemy.instance.GetEnemyAtIndex(0).GetComponent<Enemy_ParentClass>().SetTargetFish(Controller_Fish.instance.GetRandomFish());
         
         //play 'die' sound, transisioning to polyp mode
-        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
+        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
     }
 

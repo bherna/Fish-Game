@@ -475,7 +475,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         Controller_Fish.instance.RemoveFish(gameObject);
         
         //play die sound
-        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
+        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
 
         Destroy(gameObject);

@@ -30,13 +30,16 @@ public class AudioManager : MonoBehaviour
     //instance audio
     //play audio
     //destroy self
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume){
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, float pitch){
 
         //spawn in gameobject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
 
         //assing the audio clip
         audioSource.clip = audioClip;
+
+        //assign pitch
+        audioSource.pitch = pitch;
 
         //assign volume
         audioSource.volume = volume;

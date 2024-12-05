@@ -123,11 +123,11 @@ public class Controller_Food : MonoBehaviour
 
             //play sound to know we destroy'd food
             //badd sound effect
-            AudioManager.instance.PlaySoundFXClip(destroySound, transform, 1f);
+            AudioManager.instance.PlaySoundFXClip(destroySound, transform, 1f, 1f);
         }
         else{
             //play good sound effect
-            AudioManager.instance.PlaySoundFXClip(createSound, transform, 1f);
+            AudioManager.instance.PlaySoundFXClip(createSound, transform, 1f, 1f);
         }
     }
 

@@ -114,7 +114,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         Controller_Enemy.instance.CloserToWaveEnded();
 
         //play sound
-        AudioManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f);
+        AudioManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f, 1f);
 
         //die
         Destroy(gameObject);

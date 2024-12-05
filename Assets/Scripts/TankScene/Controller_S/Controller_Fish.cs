@@ -66,10 +66,18 @@ public class Controller_Fish : MonoBehaviour
         fish_list.Add(Instantiate(fishObj, vec_pos, Quaternion.identity));
 
         //play sound
-        AudioManager.instance.PlaySoundFXClip(spawnSoundClip, transform, 1f);
+        AudioManager.instance.PlaySoundFXClip(spawnSoundClip, transform, 1f, 1f);
 
         //return success
         return true;    
+    }
+    
+
+    public void AddAge(){
+
+        foreach(GameObject guppy in fish_list){
+            guppy.GetComponent<Guppy_Stats>().Fish_Birthday();
+        }
     }
 
 

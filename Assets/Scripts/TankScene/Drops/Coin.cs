@@ -9,10 +9,15 @@ public class Coin : MonoBehaviour, IPointerDownHandler
     [SerializeField] float timeTillTrashed = 3f;
     [SerializeField] Rigidbody2D rb;
     [SerializeField] protected AudioClip collectCoinSoundClip;
+    [SerializeField] protected GameObject textPopUp;
+
+
+
 
     public void UpdateCoinVal(int newCoinVal){
         coinValue = newCoinVal;
     }
+
 
     public virtual void OnPointerDown(PointerEventData eventData){
 
@@ -22,8 +27,15 @@ public class Coin : MonoBehaviour, IPointerDownHandler
 
         //add coin
         Controller_Wallet.instance.AddMoney(coinValue);
+
         //playsound
-        AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f);
+        //add a bit of randomness to the pitch to add variance
+        var pitch = Random.Range(0.85f, 1.15f);
+        AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
+        
+        //instantiate text pop up
+        var popup = Instantiate(textPopUp, transform.position, Quaternion.identity);
+        popup.GetComponent<TextPopUp>().UpdateText(string.Format("+{0}",coinValue));
         //destroy
         Destroy(gameObject);
     }

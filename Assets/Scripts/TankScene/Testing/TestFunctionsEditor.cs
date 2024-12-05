@@ -76,7 +76,12 @@ public class TestFunctionsEditor : Editor
 
         GUILayout.Label(string.Format("\n\n"));//new line
 
+//guppy
+        if(GUILayout.Button("Age Guppies")){
+            tf.AddAge();
+        }
 
+        GUILayout.Label(string.Format("\n\n"));//new line
 
 
 

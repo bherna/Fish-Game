@@ -98,7 +98,7 @@ public class Guppy_Stats : FishStats_ParentClass
         stomach += foodValue;
     }
 
-    //the fish ate a burger, 
+    //the fish ate a burger, instead of food pellet
     public void GuppyBurgered(){
 
         //return color to fish
@@ -164,7 +164,7 @@ public class Guppy_Stats : FishStats_ParentClass
         }
     }
 
-    private void Fish_Birthday(){
+    public void Fish_Birthday(){
 
         //if current age is not final stage
         if(current_age_stage < Controller_Fish.instance.GetFishStages().Count-1){
@@ -202,7 +202,7 @@ public class Guppy_Stats : FishStats_ParentClass
         Controller_Fish.instance.RemoveFish(gameObject);
         
         //play die sound
-        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f);}
+        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
 
         Destroy(gameObject);

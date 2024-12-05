@@ -8,6 +8,7 @@ using UnityEngine;
 public class TestFunctions : MonoBehaviour 
 {
 
+
     //simple function to update our timescale in the game, 
     //useful to test anything relative to time 
     public int timeSpeed = 1;
@@ -34,6 +35,12 @@ public class TestFunctions : MonoBehaviour
     public int comboAmount = 1;
     public void AddToCombo(){
         UI_Combo.instance.AddToCombo(comboAmount);
+    }
+
+    
+    //function to increase the age of all guppys in tank currenlty
+    public void AddAge(){
+        Controller_Fish.instance.AddAge();
     }
     
 }
