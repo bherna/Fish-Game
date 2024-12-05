@@ -19,12 +19,14 @@ public class TestFunctionsEditor : Editor
     SerializedProperty timeSpeedProp;
     SerializedProperty moneyProp;
     PetNames petProp;
+    SerializedProperty comboProp;
 
 
     void OnEnable() {
         //setup serializable properties
         timeSpeedProp = serializedObject.FindProperty("timeSpeed");
         moneyProp = serializedObject.FindProperty("money");
+        comboProp = serializedObject.FindProperty("comboAmount");
     }
 
 
@@ -46,6 +48,7 @@ public class TestFunctionsEditor : Editor
         }
 
         GUILayout.Label(string.Format("\n\n"));//new line
+
  //money
         GUILayout.Label(string.Format("How much money to give self: "));
         EditorGUILayout.IntSlider(moneyProp, 100, 100000);
@@ -54,12 +57,26 @@ public class TestFunctionsEditor : Editor
         }
 
         GUILayout.Label(string.Format("\n\n"));//new line
+
 //pets
         GUILayout.Label(string.Format("Spawn Pet: "));
         petProp = (PetNames)EditorGUILayout.EnumPopup(petProp);
         if(GUILayout.Button("Spawn Pet")){
             tf.SpawnPet(petProp);
         }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+
+//combo 
+        GUILayout.Label(string.Format("Add combo: "));
+        EditorGUILayout.IntSlider(comboProp, 1, 10);
+        if(GUILayout.Button("Add to Combo")){
+            tf.AddToCombo();
+        }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+
+
 
 
 

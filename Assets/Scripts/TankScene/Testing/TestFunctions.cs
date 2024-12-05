@@ -27,6 +27,14 @@ public class TestFunctions : MonoBehaviour
     public void SpawnPet(PetNames petName){
         Controller_Pets.instance.Test_SpawnPet(petName);
     }
+
+
+
+    //function to test the combo mech
+    public int comboAmount = 1;
+    public void AddToCombo(){
+        UI_Combo.instance.AddToCombo(comboAmount);
+    }
     
 }
 

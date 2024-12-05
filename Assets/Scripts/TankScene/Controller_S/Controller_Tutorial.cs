@@ -38,8 +38,9 @@ public class Controller_Tutorial : MonoBehaviour
         //THIS SHOULD ALWAYS BE TRUE (false if we are testing things)
         if (tutorial_active){
 
-            //get reference to ui_dialogue
+            //get reference to ui_dialogue, and enable just incase we disable it in inspector for vision
             ui_Dialogue = transform.GetChild(0).GetComponent<UI_Dialogue>();
+            transform.GetChild(0).gameObject.SetActive(true);
 
             //are we in the tutorial level
             int lvl = int.Parse(LocalLevelVariables.GetLevel());
