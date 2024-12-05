@@ -10,13 +10,9 @@ public class TextPopUp : MonoBehaviour
     //call when we get first created
     public void UpdateText(string text){
 
-        uiText = GetComponent<TextMeshPro>();
+        uiText = transform.GetChild(0).GetComponent<TextMeshPro>();
 
         uiText.text = text;
     }
 
-
-    public void DestroySelf(){
-        Destroy(gameObject);
-    }
 }

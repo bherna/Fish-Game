@@ -35,7 +35,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         
         //instantiate text pop up
         var popup = Instantiate(textPopUp, transform.position, Quaternion.identity);
-        popup.GetComponent<TextPopUp>().UpdateText(string.Format("+{0}",coinValue));
+        popup.GetComponent<TextPopUp>().UpdateText(string.Format("+ {0}",coinValue));
         //destroy
         Destroy(gameObject);
     }
