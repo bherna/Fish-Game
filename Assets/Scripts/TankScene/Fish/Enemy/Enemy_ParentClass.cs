@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
 
-public enum Enemy_States {idle, attack};
+public enum Enemy_States {idle, attack, stunned};
 
 public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {

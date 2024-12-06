@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using Steamworks;
 using UnityEngine;
 
 
@@ -42,6 +43,16 @@ public class TestFunctions : MonoBehaviour
     public void AddAge(){
         Controller_Fish.instance.AddAge();
     }
+
+    public void ShakeScreen(){
+        Controller_TankShake.instance.ShakeTank();
+    }
+
+
+    public void SpawnEnemy(string enemyName){
+        Instantiate(Resources.Load("Enemies/" + "Enemy_"+enemyName) as GameObject, Vector2.zero, Quaternion.identity); 
+    }
+
     
 }
 

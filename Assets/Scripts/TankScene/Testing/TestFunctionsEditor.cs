@@ -21,6 +21,9 @@ public class TestFunctionsEditor : Editor
     PetNames petProp;
     SerializedProperty comboProp;
 
+    enum EnemyNames {Starfish, LMBass};
+    EnemyNames enemyProp;
+
 
     void OnEnable() {
         //setup serializable properties
@@ -79,6 +82,24 @@ public class TestFunctionsEditor : Editor
 //guppy
         if(GUILayout.Button("Age Guppies")){
             tf.AddAge();
+        }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+
+
+//tank
+        if(GUILayout.Button("Shake Screen")){
+            tf.ShakeScreen();
+        }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+
+
+//enemy
+        GUILayout.Label(string.Format("Spawn Enemy: "));
+        enemyProp = (EnemyNames)EditorGUILayout.EnumPopup(enemyProp);
+        if(GUILayout.Button(string.Format("Spawn {0}", enemyProp.ToString()))){
+            tf.SpawnEnemy(enemyProp.ToString());
         }
 
         GUILayout.Label(string.Format("\n\n"));//new line

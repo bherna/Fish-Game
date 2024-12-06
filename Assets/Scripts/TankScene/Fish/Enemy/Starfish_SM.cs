@@ -29,7 +29,12 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
     private bool spinning = false; // do we have enough wind up built up to attack target fish
     private const float vel_threshold = 4; //velocity threshold needed for starfish to burst "_units per s"
-    public float burst_vel = 3;    //burst velocity starfish moves at towards target
+    private float burst_vel = 1;    //burst velocity starfish moves at towards target
+
+
+
+    private const float stunDuration = 1.4f;
+    private float stunTimer = 0;
 
 
 
@@ -46,10 +51,63 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
     {
         base.Update();
 
+
+        switch(curr_EnemyState){
+
+            case Enemy_States.idle:
+
+                //in idle, we are going to make the starfish look like its sticking to the tank glass
+                //animation 
+                Idle();
+                break;
+            
+            case Enemy_States.attack:
+                Attak();
+                break;
+
+            case Enemy_States.stunned:
+                Stunned();
+                break;
+
+            default:
+                Debug.Log("Starfish has no state");
+                break;
+        }
+
         
-        //if we have a fish to attack, start wind up
-        //and should we continue wind up
-        if(currFishTarget != null && !spinning){
+        
+
+    }
+
+    //in idle we check if new fish are available to attack
+    //else just stick to the wall
+    private void Idle(){
+
+        currFishTarget = Controller_Fish.instance.GetRandomFish();
+
+        if(currFishTarget != null){
+            curr_EnemyState = Enemy_States.attack;
+        }
+        else{
+
+            //wall stickin time
+        }
+    }
+
+    private void Attak(){
+
+        //first check our fish target
+        if(currFishTarget == null){
+            //go to idle
+            curr_EnemyState = Enemy_States.idle;
+            return;
+        }
+
+
+        //we technically only need to do attack mode when we are building up
+        //rotational velocity, which we use to sling shot our selfs around
+        //we become blind when we are charging (and return when we anything)
+        if(!spinning){ 
 
             //build wind up, and update sprite rotation
             curr_r_vel += r_accel * Time.deltaTime;
@@ -68,12 +126,25 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             }
             
         }
-        else{
-            //else, is there a fish to target?
-            currFishTarget = Controller_Fish.instance.GetRandomFish();
-            return;
-        }
 
+
+    }
+
+
+    private void Stunned(){
+
+        //we just count down in here, (the initial stunned reason should set the timer)
+        //if we reach 0, then we return to idle, idle should take care of the rest
+
+        //also while stunned 
+        //we are open to counter attack from player light trail
+
+        stunTimer -= Time.deltaTime;
+
+        if(stunTimer <= 0){
+            //done
+            curr_EnemyState = Enemy_States.idle;
+        }
     }
 
     private void ResetAttack(){
@@ -93,6 +164,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(other.gameObject.CompareTag("Boundry")){
 
             ResetAttack();
+            return;
         }
 
         //if we are not currently doing our spin move, then return
@@ -107,13 +179,86 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
 
             ResetAttack();
+            return;
 
         }
 
 
-        
+        //this happens when we entercounter counter
+        //player tag should be with the controller_player obj
+        if(curr_EnemyState == Enemy_States.stunned && other.gameObject.CompareTag("Player")){
+
+            Debug.Log(string.Format("KB da starfish."));
+
+            //kb the starfish
+            Vector2 kbVector = (transform.position - other.gameObject.transform.position).normalized;
+
+            rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
+
+            //return to idle
+            curr_EnemyState = Enemy_States.idle;
+            Controller_Player.instance.DeleteTrail();
+
+        }
         
     }
+
+    public new void OnPointerClick(PointerEventData eventData){
+
+
+        //if the game is paused, return
+        if(Controller_EscMenu.instance.paused){
+            return;
+        }
+
+        //first check for posible counter attack move
+        if(spinning){
+
+            //change starfish state
+            stunTimer = stunDuration;
+            curr_EnemyState = Enemy_States.stunned;
+
+            //create flash of light, to show that we countered
+            Debug.Log(string.Format("COUNTERED"));//debug for now iguess
+
+            //we stop moving all together
+            rb.velocity = Vector3.zero;
+
+            //we create a trail particle
+            //for the player
+            Controller_Player.instance.CreateTrail();
+
+
+        }
+        else{
+
+            //create gun particle
+            Controller_Player.instance.Run_GunParticle();
+
+            //damage
+            curr_health -= Controller_Player.instance.Get_GunDamage();
+
+            //knockback
+            Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
+
+            rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
+
+            //die
+            if(curr_health <= 0){
+                Died();
+            }
+        }
+
+
+    }
+
+
+
+
+
+
+
+
 
 
 }
