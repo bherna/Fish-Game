@@ -33,7 +33,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
 
 
-    private const float stunDuration = 1.4f;
     private float stunTimer = 0;
 
 
@@ -144,6 +143,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(stunTimer <= 0){
             //done
             curr_EnemyState = Enemy_States.idle;
+            ResetAttack();
         }
     }
 
@@ -152,6 +152,15 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         spinning = false;
         curr_r_vel = 0;
 
+    }
+
+
+    private void TakeDamage(int damage){
+
+        curr_health -= damage;
+        if(curr_health <= 0){
+            Died();
+        }
     }
 
 
@@ -199,6 +208,11 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             curr_EnemyState = Enemy_States.idle;
             Controller_Player.instance.DeleteTrail();
 
+            TakeDamage(Controller_Player.instance.Get_GunDamage() *2); //for now we'll just double the damage or what ever
+
+            ResetAttack();
+            return; //added for comformateee
+
         }
         
     }
@@ -215,7 +229,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(spinning){
 
             //change starfish state
-            stunTimer = stunDuration;
+            stunTimer = Controller_Player.trailDuration;
             curr_EnemyState = Enemy_States.stunned;
 
             //create flash of light, to show that we countered
@@ -235,18 +249,14 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //create gun particle
             Controller_Player.instance.Run_GunParticle();
 
-            //damage
-            curr_health -= Controller_Player.instance.Get_GunDamage();
 
             //knockback
             Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
 
             rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
 
-            //die
-            if(curr_health <= 0){
-                Died();
-            }
+            //damage
+            TakeDamage(Controller_Player.instance.Get_GunDamage());
         }
 
 

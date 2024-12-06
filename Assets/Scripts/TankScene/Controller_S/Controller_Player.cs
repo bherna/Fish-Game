@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,8 @@ public class Controller_Player : MonoBehaviour
 
     //counter / trail related
     private float trailDistance = 0;
+    private bool isTrailActive = false;
+    public const int trailDuration = 1;
 
 
 
@@ -78,17 +81,40 @@ public class Controller_Player : MonoBehaviour
     //the longer the loop they create, the harder the damage back at the enemy
     public void CreateTrail(){
 
+        //we don't need multiple trails, pointless
+        if(isTrailActive){
+            return;
+        }
+
+        isTrailActive = true;
+
         //make sure values are reset
         trailDistance = 0;
 
         //init new trail obj
         //and attach as child
         Instantiate(trail, transform, worldPositionStays:false);
+
+        //create an countdown to destroy the trail if player doesn't use it in time
+        StartCoroutine(trailCountdown());
+    }
+
+    //countdown, 
+    private IEnumerator trailCountdown(){
+
+        yield return new WaitForSeconds(trailDuration);
+
+        DeleteTrail();
     }
 
 
+    ///delete the trail, but make sure their is trail to delete first, obv
     public void DeleteTrail(){
-        Destroy(transform.GetChild(0).gameObject);
+
+        if(isTrailActive){
+            Destroy(transform.GetChild(0).gameObject);
+            isTrailActive = false;
+        }
     }
 
 
