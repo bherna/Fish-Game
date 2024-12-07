@@ -155,14 +155,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
     }
 
 
-    private void TakeDamage(int damage){
-
-        curr_health -= damage;
-        if(curr_health <= 0){
-            Died();
-        }
-    }
-
 
     private new void OnTriggerEnter2D(Collider2D other) {
 
@@ -193,8 +185,9 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         }
 
 
-        //this happens when we entercounter counter
-        //player tag should be with the controller_player obj
+        //this happens when we entercounter counter ;p
+        //ie, this is after the player already clicked on the starfish, causing them to get stunned, 
+        // now we are expecting for player counter trail to hit us
         if(curr_EnemyState == Enemy_States.stunned && other.gameObject.CompareTag("Player")){
 
             Debug.Log(string.Format("KB da starfish."));
@@ -235,8 +228,12 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //create flash of light, to show that we countered
             Debug.Log(string.Format("COUNTERED"));//debug for now iguess
 
-            //we stop moving all together
-            rb.velocity = Vector3.zero;
+            //we start to move backwards super slowly
+            Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
+            rb.velocity = kbVector * 0.01f;
+
+            //init a bubble particle
+            
 
             //we create a trail particle
             //for the player
@@ -245,18 +242,8 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
         }
         else{
-
-            //create gun particle
-            Controller_Player.instance.Run_GunParticle();
-
-
-            //knockback
-            Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
-
-            rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
-
-            //damage
-            TakeDamage(Controller_Player.instance.Get_GunDamage());
+            //else we just do basic attack (from parent class)
+            base.OnPointerClick(eventData);
         }
 
 

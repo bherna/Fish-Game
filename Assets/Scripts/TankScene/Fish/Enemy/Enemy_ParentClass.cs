@@ -58,22 +58,23 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         //create gun particle
         Controller_Player.instance.Run_GunParticle();
 
-        //damage
-        curr_health -= Controller_Player.instance.Get_GunDamage();
-
         //knockback
-        var kbVector = new Vector2(
-                transform.position.x - eventData.pointerCurrentRaycast.worldPosition.x,
-                transform.position.y - eventData.pointerCurrentRaycast.worldPosition.y
-            ).normalized;
-
+        Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
         rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
 
-        //die
+
+        //damage
+        TakeDamage(Controller_Player.instance.Get_GunDamage());
+        
+    }
+
+
+    protected void TakeDamage(int damage){
+
+        curr_health -= damage;
         if(curr_health <= 0){
             Died();
         }
-        
     }
 
     private void OnTriggerStay2D(Collider2D other) {
