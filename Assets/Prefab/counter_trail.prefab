@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 5899593678783456798}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 3.85, y: -2.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -83,8 +83,8 @@ TrailRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.008620679
-        value: 0.46103728
+        time: 0
+        value: 0.71356344
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -92,8 +92,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.11996341
-        value: 0.11654654
+        time: 0.110808626
+        value: 0.055555344
         inSlope: -1.3392756
         outSlope: -1.3392756
         tangentMode: 0
@@ -101,8 +101,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.29713136
-        value: 0.40194517
+        time: 0.336026
+        value: 0.6292096
         inSlope: -0.0896304
         outSlope: -0.0896304
         tangentMode: 0
@@ -110,26 +110,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.48849487
-        value: 0.103888966
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.6580351
-        value: 0.36363974
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0
-      - serializedVersion: 3
-        time: 0.86782485
-        value: 0.10389629
+        time: 0.904953
+        value: 0.10100937
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -172,7 +154,7 @@ TrailRenderer:
     numCornerVertices: 3
     numCapVertices: 0
     alignment: 0
-    textureMode: 1
+    textureMode: 0
     textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0

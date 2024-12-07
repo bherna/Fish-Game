@@ -1598,6 +1598,10 @@ PrefabInstance:
       value: Controller_Player
       objectReference: {fileID: 0}
     - target: {fileID: 5381587780311730912, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
+      propertyPath: ps
+      value: 
+      objectReference: {fileID: 3311549072945965811, guid: 3e3d6170855443941ae6e03518b4e79b, type: 3}
+    - target: {fileID: 5381587780311730912, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
       propertyPath: targetZ
       value: 
       objectReference: {fileID: 1437510541}
