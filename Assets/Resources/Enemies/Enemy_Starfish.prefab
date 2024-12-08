@@ -47,8 +47,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 0.07
-  m_LinearDrag: 3
+  m_Mass: 0.3
+  m_LinearDrag: 0.4
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -113,7 +113,7 @@ MonoBehaviour:
   damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}
   diedSoundClip: {fileID: 8300000, guid: 4911eca0f7f8b3c41a5d61e7b92a2b29, type: 3}
   bite_particle: {fileID: 148617094261164697, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
-  burst_vel: 4
+  burst_vel: 8
 --- !u!1001 &7493506642186727193
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -29,12 +29,11 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
     private bool spinning = false; // do we have enough wind up built up to attack target fish
     private const float vel_threshold = 4; //velocity threshold needed for starfish to burst "_units per s"
-    private float burst_vel = 1;    //burst velocity starfish moves at towards target
+    public float burst_vel = 8f;    //burst velocity starfish moves at towards target
 
-
+    private float linearDrag = 0; //this is set at start, dont edit the value
 
     private float stunTimer = 0;
-
 
 
     private new void Start() {
@@ -43,6 +42,8 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         //set target fish
         currFishTarget = Controller_Fish.instance.GetRandomFish();
 
+        linearDrag = rb.drag;
+        Debug.Log(string.Format("Drag: {0}", rb.drag));
     }
 
     // Update is called once per frame
@@ -121,7 +122,8 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
                 
                 //spin move
                 var target_dir = (currFishTarget.position - transform.position).normalized;
-                rb.AddForce(target_dir * burst_vel, ForceMode2D.Impulse);
+                rb.velocity = target_dir * burst_vel;
+                rb.drag = 0; //we remove drag, just so we dont get stuck in the middle of the tank (since we expect some obstacle to reset our attack)
             }
             
         }
@@ -151,7 +153,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
         spinning = false;
         curr_r_vel = 0;
-
+        rb.drag = linearDrag; //reset drag, since we dont want to be gliding everywhere
     }
 
 
@@ -233,7 +235,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             rb.velocity = kbVector * 0.01f;
 
             //init a bubble particle
-            
+
 
             //we create a trail particle
             //for the player

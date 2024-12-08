@@ -20,7 +20,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     //stats
     //health should be in # of clicks
     protected int curr_health = 6; 
-    protected const float kbForce = 0.7f;
+    protected const float kbForce = 0.7f; //player related, for tank kb just keep at a vector of 1;
 
 
 
@@ -83,8 +83,8 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         if(other.gameObject.CompareTag("Boundry")){
 
             //set our velocity towards middle of tank
-            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized * kbForce;
-            rb.AddForce(kb, ForceMode2D.Impulse);
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
+            rb.velocity = kb;
             
         }
     }
