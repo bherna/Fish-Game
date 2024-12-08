@@ -1,8 +1,10 @@
 using System;
 using System.Collections;
+
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.VFX;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -15,7 +17,8 @@ public class Controller_Player : MonoBehaviour
 
     public Vector3 mousePos;
 
-    [SerializeField] GameObject ps;
+    private VisualEffect ve;
+    
 
 
     //player stats
@@ -48,6 +51,7 @@ public class Controller_Player : MonoBehaviour
 
     private void Start() {
 
+        ve = GetComponent<VisualEffect>();
     }
 
     private void Update() {
@@ -63,7 +67,8 @@ public class Controller_Player : MonoBehaviour
         
         if(Input.GetMouseButtonDown(0)){
 
-            Instantiate(ps, transform.position, quaternion.identity);
+            ve.Play();
+            
         }
 
     }
