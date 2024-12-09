@@ -5274,7 +5274,7 @@ GameObject:
   - component: {fileID: 8316070647928727048}
   - component: {fileID: 2835097920501689165}
   m_Layer: 4
-  m_Name: Water
+  m_Name: Ripple Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
