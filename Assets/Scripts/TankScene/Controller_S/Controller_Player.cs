@@ -63,7 +63,10 @@ public class Controller_Player : MonoBehaviour
         //used for collitions
         transform.position = new Vector2(mousePos.x, mousePos.y);
         
-        
+        if(Input.GetMouseButtonDown(0)){
+
+            Controller_Ripple.instance.CreateRipple(transform.position);
+        }
 
     }
 
