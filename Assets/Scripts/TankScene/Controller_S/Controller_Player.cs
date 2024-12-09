@@ -4,7 +4,6 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.VFX;
 
 public class Controller_Player : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class Controller_Player : MonoBehaviour
 
     public Vector3 mousePos;
 
-    private VisualEffect ve;
+    
     
 
 
@@ -51,7 +50,6 @@ public class Controller_Player : MonoBehaviour
 
     private void Start() {
 
-        ve = GetComponent<VisualEffect>();
     }
 
     private void Update() {
@@ -65,11 +63,7 @@ public class Controller_Player : MonoBehaviour
         //used for collitions
         transform.position = new Vector2(mousePos.x, mousePos.y);
         
-        if(Input.GetMouseButtonDown(0)){
-
-            ve.Play();
-            
-        }
+        
 
     }
 
