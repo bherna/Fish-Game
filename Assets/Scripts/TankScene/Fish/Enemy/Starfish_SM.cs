@@ -44,7 +44,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         currFishTarget = Controller_Fish.instance.GetRandomFish();
 
         linearDrag = rb.drag;
-        Debug.Log(string.Format("Drag: {0}", rb.drag));
     }
 
     // Update is called once per frame
@@ -92,6 +91,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         else{
 
             //wall stickin time
+            
         }
     }
 
@@ -101,6 +101,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(currFishTarget == null){
             //go to idle
             curr_EnemyState = Enemy_States.idle;
+            ResetAttack(); //else we can cheat winding up 
             return;
         }
 
@@ -188,17 +189,17 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         }
 
 
-        //this happens when we entercounter counter ;p
+        //this happens when we entercounter counter (trail);p
         //ie, this is after the player already clicked on the starfish, causing them to get stunned, 
         // now we are expecting for player counter trail to hit us
         if(curr_EnemyState == Enemy_States.stunned && other.gameObject.CompareTag("Player")){
 
-            Debug.Log(string.Format("KB da starfish."));
-
-            //kb the starfish
+            //kb the starfish (using the player distance traveld with trail)
             Vector2 kbVector = (transform.position - other.gameObject.transform.position).normalized;
+            rb.AddForce(kbVector * Controller_Player.instance.GetDistanceTraveled_Value(), ForceMode2D.Impulse);
 
-            rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
+            //update animation
+            Debug.Log(string.Format("DIstance: {0}", Controller_Player.instance.GetDistanceTraveled_Value()));
 
             //return to idle
             curr_EnemyState = Enemy_States.idle;
@@ -229,7 +230,6 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             curr_EnemyState = Enemy_States.stunned;
 
             //create flash of light, to show that we countered
-            Debug.Log(string.Format("COUNTERED"));//debug for now iguess
 
             //we start to move backwards super slowly
             Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
@@ -242,11 +242,15 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //for the player
             Controller_Player.instance.CreateTrail();
 
-
+            //WE DONT RESET ATTACK HERE
+            //since that get done when the starfish is counter attacked or exits stun state
         }
         else{
             //else we just do basic attack (from parent class)
             base.OnPointerClick(eventData);
+
+            //also reset attack here, else starfish can instantly attack next guppy
+            ResetAttack();
         }
 
 

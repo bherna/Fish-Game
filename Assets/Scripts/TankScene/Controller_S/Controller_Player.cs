@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
-
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,9 +26,10 @@ public class Controller_Player : MonoBehaviour
 
 
     //counter / trail related
-    private float trailDistance = 0;
+    private float distanceTraveled = 0; 
     private bool isTrailActive = false;
-    public const int trailDuration = 1;
+    public const int trailDuration = 1; //in seconds (this is used in enemy code aswell to keep in sync)
+    private Vector2 LastPosition;
 
 
 
@@ -49,7 +50,7 @@ public class Controller_Player : MonoBehaviour
 
 
     private void Start() {
-
+        
     }
 
     private void Update() {
@@ -64,6 +65,15 @@ public class Controller_Player : MonoBehaviour
         transform.position = new Vector2(mousePos.x, mousePos.y);
     
 
+
+        //if we have a trail active, we want to update our distance traveld
+        if(isTrailActive){
+
+            Vector2 newPosition = transform.position;
+            distanceTraveled += (newPosition - LastPosition).magnitude;
+            LastPosition = newPosition;
+        }
+        
     }
 
 
@@ -95,7 +105,8 @@ public class Controller_Player : MonoBehaviour
         isTrailActive = true;
 
         //make sure values are reset
-        trailDistance = 0;
+        distanceTraveled = 0;
+        LastPosition = transform.position;
 
         //init new trail obj
         //and attach as child
@@ -124,4 +135,14 @@ public class Controller_Player : MonoBehaviour
     }
 
 
+    //return the distance traveld but in the form of how strong the 
+    //kb force this should create (out of an average mouse distance movement)
+    public float GetDistanceTraveled_Value(){
+
+        //the distance to create a circle within the screen for me was about 15 units
+        //so
+        //set our 'max' to around there (not to high or else player can't get max kb power)
+        return distanceTraveled / 5; 
+
+    }
 }
