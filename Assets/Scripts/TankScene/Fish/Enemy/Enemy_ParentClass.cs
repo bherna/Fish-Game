@@ -20,8 +20,8 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
     //stats
     //health should be in # of clicks
     protected int curr_health = 6; 
-    protected const float kbForce = 0.7f; //player related, for tank kb just keep at a vector of 1;
-
+    protected const float kbForce_player = 0.7f; //player related, for tank kb just keep at a vector of 1;
+    protected const float kbForce_stunned = 1.2f; //when an enemy is stunned, we use this one instead (since player can just spam click)
 
 
     
@@ -60,7 +60,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
         //knockback
         Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
-        rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
+        rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
 
 
         //damage

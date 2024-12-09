@@ -29,6 +29,7 @@ public class Controller_Ripple : MonoBehaviour
     }
 
 
+    //give a world position and this function will create a ripple on the correct position to ripple with water
     public void CreateRipple(Vector2 init_pos){
 
         Vector3 newPos = new Vector3(init_pos.x, init_pos.y, transform.TransformPoint(transform.position).z);

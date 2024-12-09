@@ -1,5 +1,6 @@
 using UnityEngine.EventSystems;
 using UnityEngine;
+using Steamworks;
 
 
 public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
@@ -29,7 +30,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
     private bool spinning = false; // do we have enough wind up built up to attack target fish
     private const float vel_threshold = 4; //velocity threshold needed for starfish to burst "_units per s"
-    public float burst_vel = 8f;    //burst velocity starfish moves at towards target
+    private float burst_vel = 8f;    //burst velocity starfish moves at towards target
 
     private float linearDrag = 0; //this is set at start, dont edit the value
 
@@ -197,7 +198,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //kb the starfish
             Vector2 kbVector = (transform.position - other.gameObject.transform.position).normalized;
 
-            rb.AddForce(kbVector * kbForce, ForceMode2D.Impulse);
+            rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
 
             //return to idle
             curr_EnemyState = Enemy_States.idle;
@@ -232,10 +233,10 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
             //we start to move backwards super slowly
             Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
-            rb.velocity = kbVector * 0.01f;
+            rb.velocity = kbVector * kbForce_stunned;
 
-            //init a bubble particle
-
+            //init a ripple particle
+            Controller_Ripple.instance.CreateRipple(Controller_Player.instance.transform.position);
 
             //we create a trail particle
             //for the player
