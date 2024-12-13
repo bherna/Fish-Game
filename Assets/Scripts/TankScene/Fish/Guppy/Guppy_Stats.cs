@@ -10,13 +10,15 @@ public class Guppy_Stats : FishStats_ParentClass
     // --------------------------------- gubby script reference --------------------------------//
     private Guppy_SM guppy_SM;
 
-    [SerializeField] List<Transform> sprite_transparency; //use only for sprite transperancy
+    [SerializeField] List<Transform> sprite_meshList; //use only for sprite transperancy
     [SerializeField] Transform sprite_transform;        //use only for changing the entire size of guppy
 
     // --------------------------------- hunger related ----------------------------------------//
     private float stomach; //total seconds before fish will die of hunger
     protected float burnRate = 1; //keep at 1, just so have it reference as -1 unit per second
     private int hungryRange;
+    private Color hungryColor = new Color(165,170,255);
+    private Color fullColor = new Color(1,1,1);
 
     // --------------------------------- age related -------------------------------------------//  
     public int current_age_stage {get; private set; } = 0;
@@ -79,14 +81,14 @@ public class Guppy_Stats : FishStats_ParentClass
         Controller_Pets.instance.Annoucement_Init(Event_Type.guppyHungry, gameObject);
 
         //change sprite transparancy
-        ChangeTransparency(false);
+        SetGuppyColor(hungryColor);
     }
 
     //used outside this script
     public virtual void GuppyEated(int foodValue){
 
         //return color to fish
-        ChangeTransparency(true); 
+        SetGuppyColor(fullColor); 
 
         //set our state to idle again
         guppy_SM.GuppyToIdle();
@@ -102,7 +104,7 @@ public class Guppy_Stats : FishStats_ParentClass
     public void GuppyBurgered(){
 
         //return color to fish
-        ChangeTransparency(true); 
+        SetGuppyColor(fullColor); 
 
         //set our state to idle again
         guppy_SM.GuppyToIdle();
@@ -118,26 +120,28 @@ public class Guppy_Stats : FishStats_ParentClass
     }
 
 
+    //here where setting the guppy's hunger color
+    //we don't really need to edit the transperency since this messes with the alpha cutoff, making
+    //the guppy insvisiable
 
-    private void ChangeTransparency(bool setFullAlpha){
+    private void SetGuppyColor(Color setColor){
 
         //for each sprite that is part of this fish
         //we have to check if its a skinned messrender, or a simple meshrender
-        foreach(Transform sprite in sprite_transparency){
+        foreach(Transform sprite in sprite_meshList){
 
 
             var mesh = sprite.GetComponent<MeshRenderer>();
             if(mesh != null){
 
-                if(setFullAlpha){mesh.material.SetColor("_Color", new Color(1,1,1,1));}
-                else{mesh.material.SetColor("_Color", new Color(1,1,1,0.5f));}
+                mesh.material.SetColor("_Color", new Color(165,170,255));
+                return;
             }
             
             var skindMesh = sprite.GetComponent<SkinnedMeshRenderer>();
             if(skindMesh != null){
 
-                if(setFullAlpha){skindMesh.material.SetColor("_Color", new Color(1,1,1,1));}
-                else{skindMesh.material.SetColor("_Color", new Color(1,1,1,0.5f));}
+                skindMesh.material.SetColor("_Color", new Color(165,170,255)); //no need to set alpha
             }
             
             
