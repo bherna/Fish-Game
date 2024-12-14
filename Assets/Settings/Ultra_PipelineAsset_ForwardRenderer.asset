@@ -16,10 +16,10 @@ MonoBehaviour:
   settings:
     material: {fileID: 2100000, guid: d7eff91adf883494db9dbd5fd180ae71, type: 2}
     renderPassEvent: 400
-    color: {r: 0.005295483, g: 0.023884883, b: 0.16037738, a: 0}
+    color: {r: 0, g: 0, b: 0, a: 0}
     FogDensity: 0.0005
     alpha: 0.025
-    refraction: 0.36
+    refraction: 0.3
     normalmap: {fileID: 2800000, guid: 08ef20a01c156e1428ca81211ca1275d, type: 3}
     UV: {x: 1, y: 1, z: 0.2, w: 0.1}
 --- !u!114 &11400000

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000641369435897523}
   - component: {fileID: 3218499942675396809}
-  - component: {fileID: 1324279619047074518}
+  - component: {fileID: 7864281223597671161}
   m_Layer: 0
   m_Name: Direction_Light_Coins
   m_TagString: Untagged
@@ -95,7 +95,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &1324279619047074518
+--- !u!114 &7864281223597671161
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,7 +161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9078872602292096704}
   - component: {fileID: 8787376202847250285}
-  - component: {fileID: 685013973848601804}
+  - component: {fileID: 833146024645878289}
   m_Layer: 0
   m_Name: Direction_Light_Everything
   m_TagString: Untagged
@@ -177,13 +177,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8414195064714166792}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.65474087, y: 0, z: 0, w: 0.7558535}
+  m_LocalRotation: {x: 0.45041013, y: 0, z: 0, w: 0.8928218}
   m_LocalPosition: {x: 0.4951516, y: 15.11, z: -15.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5174840217320319321}
-  m_LocalEulerAnglesHint: {x: 81.8, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 53.54, y: 0, z: 0}
 --- !u!108 &8787376202847250285
 Light:
   m_ObjectHideFlags: 0
@@ -196,7 +196,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 3.5
+  m_Intensity: 1.6
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -246,7 +246,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &685013973848601804
+--- !u!114 &833146024645878289
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
