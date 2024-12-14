@@ -17,7 +17,7 @@ public class Guppy_Stats : FishStats_ParentClass
     private float stomach; //total seconds before fish will die of hunger
     protected float burnRate = 1; //keep at 1, just so have it reference as -1 unit per second
     private int hungryRange;
-    private Color hungryColor = new Color(165,170,255);
+    private Color hungryColor = new Color(0.63f, 0.66f, 1f);
     private Color fullColor = new Color(1,1,1);
 
     // --------------------------------- age related -------------------------------------------//  
@@ -134,14 +134,16 @@ public class Guppy_Stats : FishStats_ParentClass
             var mesh = sprite.GetComponent<MeshRenderer>();
             if(mesh != null){
 
-                mesh.material.SetColor("_Color", new Color(165,170,255));
-                return;
+                mesh.material.SetColor("_BaseColor", setColor);
+                
             }
-            
-            var skindMesh = sprite.GetComponent<SkinnedMeshRenderer>();
-            if(skindMesh != null){
+            else{
 
-                skindMesh.material.SetColor("_Color", new Color(165,170,255)); //no need to set alpha
+                var skindMesh = sprite.GetComponent<SkinnedMeshRenderer>();
+                if(skindMesh != null){
+
+                    skindMesh.material.SetColor("_BaseColor", setColor); 
+                }
             }
             
             

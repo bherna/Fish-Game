@@ -17,7 +17,13 @@ public class Tank_EnemyWaves
         this.waves = waves;
         this.loop = loop;
     } 
-    
+    public Tank_EnemyWaves(){
+        waves = new Single_EnemyWave[0];
+        loop = false;
+    }    
+
+
+
     //how many enemy waves does this tank have
     public int TotalWavesCount(){
         return waves.Length;

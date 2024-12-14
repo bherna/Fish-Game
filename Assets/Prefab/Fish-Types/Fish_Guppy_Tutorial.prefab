@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dieSoundClip: {fileID: 8300000, guid: 0a659159e9c36764489424d6151a866e, type: 3}
-  sprite_transparency:
+  sprite_meshList:
   - {fileID: 2117457276994168866}
   - {fileID: 8968147748406624031}
   - {fileID: 1093044932409983062}
