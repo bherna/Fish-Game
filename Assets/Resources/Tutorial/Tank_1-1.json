@@ -1,9 +1,15 @@
 {
     "script":
     [
-        "Hello, Welcome to the game.",
+        "Hello, Welcome to your brand new fishi tank.",
+
+        "My name is ■■■■■■■■",
+
+        "Today I will be your personal guide, in how to take care of your brand new fishi tank.",
+
+        "First off, the simplest thing to do is filling it with guppys.",
         
-        "In the shop, click the guppy item to buy 1 guppy for your tank.",
+        "In the shop, click Guppy button to buy 1 guppy for your tank.",
            
         "/Now we wait player to buy a guppy in shop"
   

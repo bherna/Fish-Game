@@ -12,7 +12,6 @@ public class Controller_Tutorial : MonoBehaviour
     public int index {get; private set;}= 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
     public bool waiting {get; private set;}= false; //used in waiting for external event
-    private bool trigger; //used in continuing next tutorial script , we need to keep en-dis-ableing it throughout
     
 
 
@@ -50,7 +49,7 @@ public class Controller_Tutorial : MonoBehaviour
                 //if this returns true (this means we have a tutorial scrip to use)
                 if(ui_Dialogue.StartDialogue()){
                     
-                    trigger = false; // the number of cases we have +1 (just set to some number way above that)
+                    //stuff we might need to init, if thats the case
                     return;
                 }
 
@@ -162,11 +161,7 @@ public class Controller_Tutorial : MonoBehaviour
             //check if this next click ends the script
             KeepReading();
         }
-        else{
-            //we are done reading and we now wait for our trigger
-            //what external event are we waiting for
-            WaitingForTrigger();
-        }
+        //else we wait
     }
 
 
@@ -184,10 +179,7 @@ public class Controller_Tutorial : MonoBehaviour
                 Controller_Fish.instance.TutorialEvent_GuppysNowCanEat();
             }
         }
-        else{
-            //wait for enemy wave to start
-            WaitingForTrigger();
-        }
+        //else we wait
     }
 
 
@@ -204,10 +196,7 @@ public class Controller_Tutorial : MonoBehaviour
                 Controller_Enemy.instance.StartWaves();
             }
         }
-        else{
-            //wait for enemy wave to start
-            WaitingForTrigger();
-        }
+        //else we wait
     }
 
 
@@ -223,10 +212,7 @@ public class Controller_Tutorial : MonoBehaviour
                 Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
             }
         }
-        else{
-            //wait for enemy wave to start
-            WaitingForTrigger();
-        }
+        //else we wait
     }
 
 
@@ -272,27 +258,6 @@ public class Controller_Tutorial : MonoBehaviour
         
         return true;
     }
-    //second half of each tutorial section
-    //This is the waiting half
-    //this function return true once the trigger goes off
-    private bool WaitingForTrigger(){
-
-        if(trigger){
-            
-            //event was triggered
-            //so we get next script
-            index++;
-            ui_Dialogue.GetJsonScriptNumber(index.ToString());
-            //also enable the dialouge ui
-            ui_Dialogue.ToggleDialogueBox(true);
-            //reset waiting to false
-            waiting = false;
-            trigger = false; //reset to false, since we don't want to repeat this
-            return true;
-        }
-        
-        return false;
-    }
 
 
     private void Disable_Tutorial(){
@@ -327,11 +292,27 @@ public class Controller_Tutorial : MonoBehaviour
     private void TriggerTemplate(int i){
 
         //if we are in the correct INDEX, and we are WAITING for the trigger to go off
-        if(index == i && waiting){
-            //if we have a match then we should set trigger to true
-            trigger = true;
-            //then run the tutorial function to continue
-            TutorialState();
+        if(i == index && waiting){
+            
+            //event was triggered
+            //so we get next script
+            index++;
+            ui_Dialogue.GetJsonScriptNumber(index.ToString());
+            //also enable the dialouge ui
+            ui_Dialogue.ToggleDialogueBox(true);
+            //reset waiting to false
+            waiting = false;
+
+        }
+        //if our i is negative
+        //this means that we have failed to do what we wanted
+        else if(i*-1 == index && waiting){
+            
+            //ALT event was triggered
+            //so we stay in the same index, but get the script of ALT event which should be negative version of current index
+            ui_Dialogue.GetJsonScriptNumber(index.ToString());
+            //also enable the dialouge ui
+            ui_Dialogue.ToggleDialogueBox(true);
         }
     }
 
@@ -367,7 +348,7 @@ public class Controller_Tutorial : MonoBehaviour
     //
     public void GuppyStarved(){
         if(!tutorial_active){return;}
-        
+        TriggerTemplate(-3);
     }
     
     // enemywave trigger, when ever a new enemy wave starts, this is executed
