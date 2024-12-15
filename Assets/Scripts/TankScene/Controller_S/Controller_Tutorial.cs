@@ -12,7 +12,7 @@ public class Controller_Tutorial : MonoBehaviour
     public int index {get; private set;}= 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
     public bool waiting {get; private set;}= false; //used in waiting for external event
-    private bool[] triggers; //list of all our trigger, once they are true, they should start next tutorial section
+    private bool trigger; //used in continuing next tutorial script , we need to keep en-dis-ableing it throughout
     
 
 
@@ -50,7 +50,7 @@ public class Controller_Tutorial : MonoBehaviour
                 //if this returns true (this means we have a tutorial scrip to use)
                 if(ui_Dialogue.StartDialogue()){
                     
-                    triggers = new bool[20]; // the number of cases we have +1 (just set to some number way above that)
+                    trigger = false; // the number of cases we have +1 (just set to some number way above that)
                     return;
                 }
 
@@ -58,7 +58,7 @@ public class Controller_Tutorial : MonoBehaviour
             }
 
         }
-
+        //we disable down here, because i feel liek it
         Disable_Tutorial();
     }
 
@@ -78,106 +78,61 @@ public class Controller_Tutorial : MonoBehaviour
     public void TutorialState(){
         
         switch(index){
-            case 1 or 3 or 5 or 7:
-                // section 1:
+            case 1:
+                // section 1: 
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
-
-                // section 3, 
-                //now that our fish is hungry, player learns how to feed guppy
-                //wait for player to feed guppy
-
-                // section 5
-                //player encounters first enemy wave
-                //player lkills all the enemies
-
-                //section 7
-                //now that guppy is teen and coin dropped
-                //wait for player to collect coin
-                if(!waiting){
-                    //then we have more words to read through
-                    //check if this next click ends the script
-                    KeepReading();
-                }
-                else{
-                    //we are done reading and we now wait for our trigger
-                    //what external event are we waiting for
-                    WaitingForTrigger();
-                }
+                S_Basic();
                 break;
-
 
             case 2:
                 // 2 section
                 //now we have a guppy
                 //make player wait for fish to get hungry (make guppy able to get hungry)
-                if(!waiting){
-                    
-                    //then we have more words to read through
-                    //check if this next click ends the script
-                    if(!KeepReading()){
-                        //let guppy get hungry
-                        Controller_Fish.instance.TutorialEvent_GuppysNowCanEat();
-                    }
-                }
-                else{
-                    //wait for enemy wave to start
-                    WaitingForTrigger();
-                }
+                S_BoughtGuppy__UnlockHunger();
+                break;
+
+            case 3:
+                // section 3, 
+                //now that our fish is hungry, player learns how to feed guppy
+                //wait for player to feed guppy
+                S_Basic();
                 break;
 
             case 4:
                 //section 4
                 //player fed guppy
                 //wait for enemy wave to start
-                if(!waiting){
-                    
-                    //then we have more words to read through
-                    //check if this next click ends the script
-                    if(!KeepReading()){
-                        //start the enemy waves 
-                        Controller_Enemy.instance.StartWaves();
-                    }
-                }
-                else{
-                    //wait for enemy wave to start
-                    WaitingForTrigger();
-                }
+                S_FedGuppy__UnlockEnemyWaves();
+                break;
+
+            case 5:
+                // section 5
+                //player encounters first enemy wave
+                //player kills all the enemies
+                S_Basic();
                 break;
 
             case 6:
                 //section 6
                 //now that enemies are dead
                 //wait for guppy to grow and drop a coin
-                if(!waiting){
-                    
-                    //then we have more words to read through
-                    //check if this next click ends the script
-                    if(!KeepReading()){
-                        //start the enemy waves 
-                        Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
-                    }
-                }
-                else{
-                    //wait for enemy wave to start
-                    WaitingForTrigger();
-                }
+                S_EnemyAllDead__UnlockGuppyAgeing();
+                break;
+
+            case 7:
+                //section 7
+                //now that guppy is teen and coin dropped
+                //wait for player to collect coin
+                S_Basic();
                 break;
 
             case 8:
                 // 8th section
                 //player collects coin
                 //nothing else so we close the tutorial
-                if(!waiting){
-                    //then we have more words to read through
-                    //check if this next click ends the script
-                    KeepReading();
-                }
-                else{
-                    //we are done reading and so just end this
-                    Disable_Tutorial();
-                }
+                S_CollectCoin__EndTutorial();
                 break;
 
 
@@ -191,12 +146,120 @@ public class Controller_Tutorial : MonoBehaviour
     }
 
 
+    //these are all the different switch cases we can be,
+    //were sepearating them into here, just for read-ability in the switch function
+    //its starting to get mess-i in there
+    //-------------------------------------------------------------------------------------------------
+
+    //basic switch function
+    //this is essesntially what each switch case does, 
+    //we check if we keep reading
+    //          else we wait for the expected trigger
+    private void S_Basic(){
+
+        if(!waiting){
+            //then we have more words to read through
+            //check if this next click ends the script
+            KeepReading();
+        }
+        else{
+            //we are done reading and we now wait for our trigger
+            //what external event are we waiting for
+            WaitingForTrigger();
+        }
+    }
+
+
+    //this is the first special switch case we have'
+    //we use this when player first buys guppy
+    //this case then lets guppys get hungry
+    //keep reading is also a bool, so we just use it as a check here to start expecting trigger
+    private void S_BoughtGuppy__UnlockHunger(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+                //let guppy get hungry
+                Controller_Fish.instance.TutorialEvent_GuppysNowCanEat();
+            }
+        }
+        else{
+            //wait for enemy wave to start
+            WaitingForTrigger();
+        }
+    }
+
+
+
+    //player has feed guppy
+    //and now we wait for enemy wave to start, so we init it to start
+    private void S_FedGuppy__UnlockEnemyWaves(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+                //start the enemy waves 
+                Controller_Enemy.instance.StartWaves();
+            }
+        }
+        else{
+            //wait for enemy wave to start
+            WaitingForTrigger();
+        }
+    }
+
+
+    //once player eliminates ;[] all the enemies
+    //we now let TUTorial guppys age
+    private void S_EnemyAllDead__UnlockGuppyAgeing(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+                //start the enemy waves 
+                Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
+            }
+        }
+        else{
+            //wait for enemy wave to start
+            WaitingForTrigger();
+        }
+    }
+
+
+
+    //this is the final script message, so we want to disable the tutorial after we finish reading
+    private void S_CollectCoin__EndTutorial(){
+        if(!waiting){
+            //then we have more words to read through
+            //check if this next click ends the script
+            KeepReading();
+        }
+        else{
+            //we are done reading and so just end this
+            Disable_Tutorial();
+        }
+    }
+    //-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
     //first half of each tutorial section
     //run the click function in the dialogue script
     //if clicking returns that we have more lines to go we keep reading (true)
     //else we read our last line and so we are now ready to wait for our event (false)
     private bool KeepReading(){
         
+        //if no more clicks
         if(!ui_Dialogue.Click()){
             
             //now we wait for event
@@ -214,12 +277,7 @@ public class Controller_Tutorial : MonoBehaviour
     //this function return true once the trigger goes off
     private bool WaitingForTrigger(){
 
-        if(triggers.Length < index){
-            Debug.Log(string.Format("our tutorial trigger array is to small (pls make bigger)."));
-            return false;
-        }
-
-        if(triggers[index]){
+        if(trigger){
             
             //event was triggered
             //so we get next script
@@ -229,13 +287,12 @@ public class Controller_Tutorial : MonoBehaviour
             ui_Dialogue.ToggleDialogueBox(true);
             //reset waiting to false
             waiting = false;
+            trigger = false; //reset to false, since we don't want to repeat this
             return true;
         }
         
         return false;
     }
-
-
 
 
     private void Disable_Tutorial(){
@@ -256,16 +313,23 @@ public class Controller_Tutorial : MonoBehaviour
 
 
 
+
+
+
+
+
+
     
     // -------------------------  ------------------------------------
     //this function is set into each of the triggers
     //i = what index we are supposed to be in, (this is pretty much the json file # we are using, its also our case #)
     //if our i doesn't match our index, then we dont have the correct trigger
     private void TriggerTemplate(int i){
+
         //if we are in the correct INDEX, and we are WAITING for the trigger to go off
         if(index == i && waiting){
             //if we have a match then we should set trigger to true
-            triggers[index] = true;
+            trigger = true;
             //then run the tutorial function to continue
             TutorialState();
         }
@@ -299,6 +363,12 @@ public class Controller_Tutorial : MonoBehaviour
         if(!tutorial_active){return;}
         TriggerTemplate(3);
     }
+    //when guppy doesn't eat and starves to death, we want to makes this one keep looping so
+    //
+    public void GuppyStarved(){
+        if(!tutorial_active){return;}
+        
+    }
     
     // enemywave trigger, when ever a new enemy wave starts, this is executed
     public void EnemyWaveStarting(){
@@ -312,15 +382,22 @@ public class Controller_Tutorial : MonoBehaviour
         TriggerTemplate(5);
     }
 
+    //when a guppy poops their first coin (tutorial coin)
     public void GuppyDropCoin(){
         if(!tutorial_active){return;}
         TriggerTemplate(6);
     }
 
+    //when player picks up tutorial coin
     public void CollectCoin(){
         if(!tutorial_active){return;}
         TriggerTemplate(7);
     }
 
     
+
+    // ----------------------------------------------------------------------------------------
+   
+
+
 }

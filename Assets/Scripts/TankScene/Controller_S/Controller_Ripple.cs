@@ -1,4 +1,5 @@
 
+using System;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -34,7 +35,6 @@ public class Controller_Ripple : MonoBehaviour
 
         Vector3 newPos = new Vector3(init_pos.x, init_pos.y, transform.TransformPoint(transform.position).z);
         var newRipple = Instantiate(ripple_ps, newPos, Quaternion.identity);
-
     }
 
 

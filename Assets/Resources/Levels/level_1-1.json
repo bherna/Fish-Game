@@ -4,28 +4,8 @@
         {
             "secTillWaveSpawn": 1,
             "enemies": ["Starfish"]
-        },
-
-        {
-            "secTillWaveSpawn": 10,
-            "enemies": ["LMBass"]
-        },
-
-        {
-            "secTillWaveSpawn": 8,
-            "enemies": ["LMBass"]
-        },
-
-        {
-            "secTillWaveSpawn": 20,
-            "enemies": ["Starfish", "Starfish"]
-        },
-
-        {
-            "secTillWaveSpawn": 8,
-            "enemies": []
         }
-
+ 
     ],
 
     "loop": false,
@@ -34,7 +14,7 @@
 
     "levelUnlock": [1, 2],
 
-    "startMoney": 60,
+    "startMoney": 100,
 
     "eggPiecesPrices": [100, 200, 300]
 

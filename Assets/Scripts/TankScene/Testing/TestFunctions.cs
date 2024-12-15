@@ -53,7 +53,9 @@ public class TestFunctions : MonoBehaviour
         Instantiate(Resources.Load("Enemies/" + "Enemy_"+enemyName) as GameObject, Vector2.zero, Quaternion.identity); 
     }
 
-    
+    public void SpawnRipple(){
+        Controller_Ripple.instance.CreateRipple(Vector2.zero);
+    }
 }
 
 #endif

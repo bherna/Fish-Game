@@ -106,6 +106,14 @@ public class TestFunctionsEditor : Editor
 
 
 
+//random
+        if(GUILayout.Button(string.Format("Spawn Ripple"))){
+            tf.SpawnRipple();
+        }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+
+
         //assuming tester doesn't have insane reflexes, we can update variables last
         //apply changes to variables
         serializedObject.ApplyModifiedProperties(); 
