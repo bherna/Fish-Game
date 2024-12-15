@@ -1095,18 +1095,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
-    - target: {fileID: 4683593446461236281, guid: cfbd0037fee8e5449917abbae3f80e36, type: 3}
-      propertyPath: field of view
-      value: 29.394962
-      objectReference: {fileID: 0}
-    - target: {fileID: 4683593446461236281, guid: cfbd0037fee8e5449917abbae3f80e36, type: 3}
-      propertyPath: m_FocalLength
-      value: 38.60112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4683593446461236281, guid: cfbd0037fee8e5449917abbae3f80e36, type: 3}
-      propertyPath: m_projectionMatrixMode
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
