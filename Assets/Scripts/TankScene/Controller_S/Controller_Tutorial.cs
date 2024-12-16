@@ -1,10 +1,17 @@
 
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class Controller_Tutorial : MonoBehaviour
 {
+
+    //references
+    [SerializeField] GameObject shop_Container;
+
+
+    //privates
     private UI_Dialogue ui_Dialogue;
     public bool tutorial_active = true;
 
@@ -52,6 +59,11 @@ public class Controller_Tutorial : MonoBehaviour
                 if(ui_Dialogue.StartDialogue()){
                     
                     //stuff we might need to init, if thats the case
+
+                    //like the shop buttons, disable thems shts
+                    for(int i = 0; i < shop_Container.transform.childCount; i++){
+                        shop_Container.transform.GetChild(i).GetComponent<Button>().interactable = false;
+                    }
                     return;
                 }
 
@@ -84,7 +96,7 @@ public class Controller_Tutorial : MonoBehaviour
                 //welcome player
                 //player will learn how to buy first guppy
                 //then wait for guppy to get hungry
-                S_Basic();
+                S_Welcome_UnlockGuppy();
                 break;
 
             case 2:
@@ -162,6 +174,21 @@ public class Controller_Tutorial : MonoBehaviour
             //then we have more words to read through
             //check if this next click ends the script
             KeepReading();
+        }
+        //else we wait
+    }
+
+    //When the tutorial starts we are disableing the shop buttons,
+    //we dont want the player just buying things willy nilly now
+    private void S_Welcome_UnlockGuppy(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+                //unlock guppy button
+                shop_Container.transform.GetChild(0).GetComponent<Button>().interactable = true;
+            }
         }
         //else we wait
     }
@@ -285,6 +312,9 @@ public class Controller_Tutorial : MonoBehaviour
     }
 
 
+
+    //these are ust post tutorial things we want to turn on
+    //i dont' really have a better place to put these so...
     private void Disable_Tutorial(){
 
         //enable timer
@@ -409,7 +439,7 @@ public class Controller_Tutorial : MonoBehaviour
         if(!tutorial_active){return;}
 
         //the 'first' index holds the guppy button,
-        if(buttonIndex == 1){
+        if(buttonIndex == 0){
             TriggerTemplate(1);
         }
     }
