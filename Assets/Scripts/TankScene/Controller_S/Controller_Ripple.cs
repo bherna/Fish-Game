@@ -38,4 +38,11 @@ public class Controller_Ripple : MonoBehaviour
     }
 
 
+    //use this to get the z of this object attach to in global space, since apparently we need a way
+    //to ignore transparents, this is the only way i can think of that works for me
+    //just get the Z value, and add -0.1 to the transparent object so it renders in front of this shit 
+    public float GetZ(){
+
+        return transform.TransformPoint(transform.position).z;
+    }
 }

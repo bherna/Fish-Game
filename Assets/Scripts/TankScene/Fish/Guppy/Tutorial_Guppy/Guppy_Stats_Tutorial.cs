@@ -54,11 +54,11 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
 
 
 
-    public new void Died(bool playSound = true){
+    public override void Died(bool playSound = true){
 
         //if the guppy dies then tell tutorial that guppy died
         //else tutorial gets stuck and player doesn't know da f went on
-        Controller_Tutorial.instance.GuppyStarved();
+        Controller_Tutorial.instance.GuppyStarved(transform.position);
 
         base.Died();
     }

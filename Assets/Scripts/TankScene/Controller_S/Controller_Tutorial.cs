@@ -1,4 +1,5 @@
-using Steamworks;
+
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -12,7 +13,8 @@ public class Controller_Tutorial : MonoBehaviour
     public int index {get; private set;}= 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
     public bool waiting {get; private set;}= false; //used in waiting for external event
-    
+    private Vector3 starvePos;
+    private bool altText;
 
 
     //singleton this class
@@ -96,7 +98,7 @@ public class Controller_Tutorial : MonoBehaviour
                 // section 3, 
                 //now that our fish is hungry, player learns how to feed guppy
                 //wait for player to feed guppy
-                S_Basic();
+                S_FishGotHungry__AltEvent();
                 break;
 
             case 4:
@@ -183,6 +185,29 @@ public class Controller_Tutorial : MonoBehaviour
     }
 
 
+    //we need a way to differ from player letting guppy and not
+    //so
+    private void S_FishGotHungry__AltEvent(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+
+                
+                //once we are done reading, we init the OHHHH GOLDEN LIGHT
+                //but make sure they acutally killed the guppy
+                if(altText){
+
+                    // ie give player money since they need money for guppy
+                    //and since they never bought anything else (hopefully) all they get is guppy price 
+                    var fileLoc = "Random/";
+                    Instantiate(Resources.Load(fileLoc + "GoldenLight") as GameObject, starvePos, Quaternion.identity);
+                }
+            }
+        }
+        //else we wait
+    }
 
     //player has feed guppy
     //and now we wait for enemy wave to start, so we init it to start
@@ -293,7 +318,7 @@ public class Controller_Tutorial : MonoBehaviour
 
         //if we are in the correct INDEX, and we are WAITING for the trigger to go off
         if(i == index && waiting){
-            
+ 
             //event was triggered
             //so we get next script
             index++;
@@ -302,6 +327,7 @@ public class Controller_Tutorial : MonoBehaviour
             ui_Dialogue.ToggleDialogueBox(true);
             //reset waiting to false
             waiting = false;
+            altText = false;
 
         }
         //if our i is negative
@@ -310,9 +336,12 @@ public class Controller_Tutorial : MonoBehaviour
             
             //ALT event was triggered
             //so we stay in the same index, but get the script of ALT event which should be negative version of current index
-            ui_Dialogue.GetJsonScriptNumber(index.ToString());
+            ui_Dialogue.GetJsonScriptNumber(i.ToString());
             //also enable the dialouge ui
             ui_Dialogue.ToggleDialogueBox(true);
+            //reset waiting to false again, since we don't want to lose reading ability
+            waiting = false;
+            altText = true;
         }
     }
 
@@ -346,8 +375,10 @@ public class Controller_Tutorial : MonoBehaviour
     }
     //when guppy doesn't eat and starves to death, we want to makes this one keep looping so
     //
-    public void GuppyStarved(){
+    public void GuppyStarved(Vector2 pos){
         if(!tutorial_active){return;}
+        //save the place die
+        starvePos = pos;
         TriggerTemplate(-3);
     }
     
