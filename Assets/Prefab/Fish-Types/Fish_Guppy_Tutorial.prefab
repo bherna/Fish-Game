@@ -184,7 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guppy_Stats: {fileID: 6636998373870812825}
   coin_silver: {fileID: 8605215774676198758, guid: 5dbd607d5a378114697e44d7b9f8cc21, type: 3}
-  coin_gold: {fileID: 8605215774676198758, guid: 6d61aadef4b372547aa388270e364161, type: 3}
+  coin_gold: {fileID: 8605215774676198758, guid: cc894103dbc1cf6498be019d4a275c46, type: 3}
 --- !u!1001 &1339121980451761392
 PrefabInstance:
   m_ObjectHideFlags: 0

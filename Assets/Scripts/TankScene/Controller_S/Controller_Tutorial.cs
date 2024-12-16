@@ -1,4 +1,6 @@
 
+using System.Security.Cryptography;
+using Steamworks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -116,38 +118,66 @@ public class Controller_Tutorial : MonoBehaviour
             case 4:
                 //section 4
                 //player fed guppy
-                //wait for enemy wave to start
-                S_FedGuppy__UnlockEnemyWaves();
+                //unlock ageing , wait for coin, 
+                S_FedGuppy__UnlockGuppyAgeing();
                 break;
 
             case 5:
                 // section 5
-                //player encounters first enemy wave
-                //player kills all the enemies
-                S_Basic();
-                break;
-
-            case 6:
-                //section 6
-                //now that enemies are dead
-                //wait for guppy to grow and drop a coin
-                S_EnemyAllDead__UnlockGuppyAgeing();
-                break;
-
-            case 7:
-                //section 7
                 //now that guppy is teen and coin dropped
                 //wait for player to collect coin
                 S_Basic();
                 break;
 
-            case 8:
-                // 8th section
-                //player collects coin
-                //nothing else so we close the tutorial
-                S_CollectCoin__EndTutorial();
+            case 6:
+                //section 6
+                //now player collected first coin
+                //wait for player to collect _ amount of money
+                        //this is checked with each tutorial coin collected
+                S_Basic();
                 break;
 
+            case 7:
+                //section 7
+                //player has enough money
+                //unlock egg peice in shop
+                S_Money__UnlockEggShop();
+                break;
+
+            case 8:
+                // 8th section
+                //egg shop is now available
+                //wait for player to buy first egg peice
+                S_Basic();
+                break;
+
+            case 9:
+                //9th section
+                //player bought egg piece
+                //wait for player to buy second peice
+                S_Basic();
+                break;
+
+            case 10:
+                //10th section
+                //player bought second peice
+                //start enemy waves + wait for enemy wave to start
+                S_Null__UnlockEnemies();
+                break;
+
+            case 11:
+                //11th section
+                //enemy wave started (annoucement)
+                //wait for player to finish the enemy wave
+                S_Basic();
+                break;
+
+            case 12:
+                //12th section
+                //enemy waves is over
+                //nothing
+                S_EnemysDead__EndTutorial();
+                break;
 
             default:
                 Debug.Log(string.Format("We are in a case that doesn't exsist."));
@@ -237,40 +267,57 @@ public class Controller_Tutorial : MonoBehaviour
     }
 
     //player has feed guppy
-    //and now we wait for enemy wave to start, so we init it to start
-    private void S_FedGuppy__UnlockEnemyWaves(){
+    //now unlock ageing
+    private void S_FedGuppy__UnlockGuppyAgeing(){
         if(!waiting){
                     
             //then we have more words to read through
             //check if this next click ends the script
             if(!KeepReading()){
-                //start the enemy waves 
-                Controller_Enemy.instance.StartWaves();
-            }
-        }
-        //else we wait
-    }
-
-
-    //once player eliminates ;[] all the enemies
-    //we now let TUTorial guppys age
-    private void S_EnemyAllDead__UnlockGuppyAgeing(){
-        if(!waiting){
-                    
-            //then we have more words to read through
-            //check if this next click ends the script
-            if(!KeepReading()){
-                //start the enemy waves 
+                
                 Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
             }
         }
         //else we wait
     }
 
+    private void S_Money__UnlockEggShop(){
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+
+                //unlock the 3rd item == 2 index
+                shop_Container.transform.GetChild(2).GetComponent<Button>().interactable = true;
+
+                //set up an animation so that its more obvious
+                //this trigger will be moved somewhere else
+                EggNowAvailable();
+            }
+        }
+        //else we wait
+    }
+
+
+    private void S_Null__UnlockEnemies(){
+
+        if(!waiting){
+                    
+            //then we have more words to read through
+            //check if this next click ends the script
+            if(!KeepReading()){
+                //unlock enemies
+                Controller_Enemy.instance.StartWaves();
+                
+            }
+        }
+        //else we wait
+    }
 
 
     //this is the final script message, so we want to disable the tutorial after we finish reading
-    private void S_CollectCoin__EndTutorial(){
+    private void S_EnemysDead__EndTutorial(){
         if(!waiting){
             //then we have more words to read through
             //check if this next click ends the script
@@ -442,6 +489,11 @@ public class Controller_Tutorial : MonoBehaviour
         if(buttonIndex == 0){
             TriggerTemplate(1);
         }
+        //this is the egg piece button index
+        else if(buttonIndex == 2){
+            TriggerTemplate(8);
+            TriggerTemplate(9); //we buy the second peice, so just do this
+        }
     }
 
     //whenever a guppy gets hungry, this is executed
@@ -464,29 +516,43 @@ public class Controller_Tutorial : MonoBehaviour
         TriggerTemplate(-3);
     }
     
-    // enemywave trigger, when ever a new enemy wave starts, this is executed
-    public void EnemyWaveStarting(){
-        if(!tutorial_active){return;}
-        TriggerTemplate(4);
-    }
-
-    //once the last enemy is killed this function plays
-    public void EnemyWaveOver(){
-        if(!tutorial_active){return;}
-        TriggerTemplate(5);
-    }
-
     //when a guppy poops their first coin (tutorial coin)
     public void GuppyDropCoin(){
         if(!tutorial_active){return;}
-        TriggerTemplate(6);
+        TriggerTemplate(4);
     }
 
     //when player picks up tutorial coin
     public void CollectCoin(){
         if(!tutorial_active){return;}
+        TriggerTemplate(5);
+
+        //check if player made enough money to start next trigger
+        //we are setting the price to be 120 since player neede money for food aswell
+        if(Controller_Wallet.instance.IsAffordable(120))
+        TriggerTemplate(6);
+    }
+
+    public void EggNowAvailable(){
+        if(!tutorial_active){return;}
+
+        //once the egg shop animation ends, this trigger gets played
         TriggerTemplate(7);
     }
+
+    // enemywave trigger, when ever a new enemy wave starts, this is executed
+    public void EnemyWaveStarting(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(10);
+    }
+
+    //once the last enemy is killed this function plays
+    public void EnemyWaveOver(){
+        if(!tutorial_active){return;}
+        TriggerTemplate(11);
+    }
+
+    
 
     
 

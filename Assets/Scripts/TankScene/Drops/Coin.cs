@@ -7,11 +7,15 @@ public class Coin : MonoBehaviour, IPointerDownHandler
 {
     [SerializeField] protected int coinValue = 0;
     [SerializeField] float timeTillTrashed = 3f;
-    [SerializeField] Rigidbody2D rb;
+    private Rigidbody2D rb;
     [SerializeField] protected AudioClip collectCoinSoundClip;
     [SerializeField] protected GameObject textPopUp;
 
 
+    private void Start(){
+
+        rb = GetComponent<Rigidbody2D>();
+    }
 
 
     public void UpdateCoinVal(int newCoinVal){
