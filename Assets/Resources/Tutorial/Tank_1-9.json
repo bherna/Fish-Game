@@ -1,0 +1,16 @@
+{
+    "script":
+    [
+        "/player bought first peice",
+
+        "Okay, good.",
+
+        "You need to collect three egg peices to complete one egg. So.",
+
+        "Get to work. >:( ",
+
+        "/wait for player to get second peice."
+    ],
+
+    "lineCutOff": 3
+}

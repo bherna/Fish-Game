@@ -1,15 +1,14 @@
 {
     "script":
     [
-        "/now that guppy is a teen and dropped first coin.",
+        "/player makes enough to buy first egg piece",
 
-        "Lookie here :D",
+        "Okay, I think your getting the hang of it.",
 
-        "Its a coin!",
-
-        "Click on the coin to collect it!",
-        
-        "/Wait for player to collect coin." 
+        "Now you can know why you were given this tank.",
+            
+        "/unlock egg pieces in the shop."
+ 
     ],
 
     "lineCutOff": 2

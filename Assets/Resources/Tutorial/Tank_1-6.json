@@ -1,15 +1,20 @@
 {
     "script":
     [
-        "/now that the enemy wave is over.",
 
-        "Good job defending against that enemy wave.",
+        "/now that player collected coin.",
 
-        "Focus on feeding your guppys now",
+        "These coins are our life line.",
 
-        "/wait for guppy to grow into a teen and drops first coin."
+        "They keep the lights on around here.",
+
+        "You might-ov noticed that when you place food pellets, you lose money.",
+
+        "If you don't make enough money to support buying food pellets, welp.",
+
+        "/wait for player too make enough money to buy first egg part, well, slightly more than it, else they lose food access."
 
     ],
 
-    "lineCutOff": 2
+    "lineCutOff": 4
 }

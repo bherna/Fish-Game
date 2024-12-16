@@ -1,0 +1,14 @@
+{
+    "script":
+    [
+        "/now that the enemy wave is over.",
+
+        "Good job defending against that enemy wave.",
+
+        "Focus on feeding your guppys now",
+
+        "/wait ..."
+    ],
+
+    "lineCutOff": 3
+}

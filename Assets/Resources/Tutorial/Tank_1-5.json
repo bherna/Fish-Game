@@ -1,17 +1,19 @@
 {
     "script":
     [
-
-        "/enemy wave is about to start (annoucement part).",
-
-        "Oh Oh. ",
-
-        "Be ready! An enemy wave is about to start.",
-            
-        "Left click on enemies to lazer them to death.",
         
-        "/wait until player kills the last enemy "
+        "/now that guppy is a teen and dropped first coin.",
+
+        "Lookie here :D",
+
+        "Its a coin!",
+
+        "Click on the coin to collect it!",
+        
+        "/Wait for player to collect coin." 
+
+        
     ],
 
-    "lineCutOff": 3
+    "lineCutOff": 2
 }

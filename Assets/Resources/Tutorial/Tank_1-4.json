@@ -4,13 +4,15 @@
 
         "/after feeding the guppy",
 
-        "Now you know how to keep your guppys from starving. Good Job!",
+        "Good Job!",
 
-        "Note! If a pellet reaches the bottom of the tank, it will start to evaporate.",
+        "Now you know how to keep your guppys from starving.",
 
-        "/now we wait for the enemy wave to start (annoumcent part)."
+        "Note! If a pellet reaches the bottom of the tank, it will evaporate.",
+
+        "/now we wait for coin"
 
     ],
 
-    "lineCutOff": 2
+    "lineCutOff": 3
 }

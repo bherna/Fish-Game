@@ -1,18 +1,18 @@
 {
     "script":
     [
-        "/now that player collected coin.",
+        "/Now that egg in shop is available.",
 
-        "These coins are our life line.",
+        "EGG PEICES!!!1!!!11",
 
-        "They keep the lights on around here.",
+        "All our work is to get egg peices, since they are SUPER valueable.",
 
-        "You might-ov noticed that when you place food pellets, you lose money.",
+        "You'll know why later.",
 
-        "If you don't make enough money to support buying food pellets, welp.",
-
-        "/wait for player too make enoughf money to buy first egg part, well, slightly more than it, else they lose food access."
+        "Anyways, buy your first peice.",
+        
+        "/wait for player to buy first egg peice."
     ],
 
-    "lineCutOff": 4
+    "lineCutOff": 3
 }
