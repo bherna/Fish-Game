@@ -7,10 +7,12 @@
 
         "They keep the lights on around here.",
 
-        "You might ov noticed that when you place food pellets, you lose money.",
+        "You might-ov noticed that when you place food pellets, you lose money.",
 
         "If you don't make enough money to support buying food pellets, welp.",
 
         "/wait for player too make enoughf money to buy first egg part, well, slightly more than it, else they lose food access."
-    ]
+    ],
+
+    "lineCutOff": 4
 }

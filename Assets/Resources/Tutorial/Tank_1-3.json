@@ -8,5 +8,7 @@
         "Our Guppy is hungry! Right click anywhere in the tank to place a Pellet.",
 
         "/Now we wait for fish to eat pellet, we also start the enemy waves after wards"
-    ]
+    ],
+    
+    "lineCutOff": 2
 }

@@ -8,5 +8,7 @@
         "Let's wait for them to get hungry.",
 
         "/Now we wait for guppy to get hungry."
-    ]
+    ],
+
+    "lineCutOff": 2
 }

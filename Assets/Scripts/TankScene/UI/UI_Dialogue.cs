@@ -1,16 +1,15 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
-using System;
-using System.IO;
+
 
 
 
 [System.Serializable]
 public class WholeDialogue{
     public string[] script; //same as json file
+
+    public int lineCutOff; //if player does an event after this line number, we can accept it
 }
 
 
@@ -18,12 +17,11 @@ public class UI_Dialogue : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI textUI;
 
-    private string[] script;
-
-    private int index = 0;   //Keeps track of current string[] we are displaying
-    private float textSpeed = 0.05f;
-
-
+    private string[] script; //the current json file, script we are going to display (section)
+    private int lineIndex = 0;   //current line the dialogue is displaying
+    private float textSpeed = 0.05f;                
+    private int lineCutOff = 0;  // this is used in determining if the player can skip the rest of this current script
+                                    //line index counts from 0, make sure to also not skip comment lines they count as well
     
 
     //start method
@@ -57,7 +55,9 @@ public class UI_Dialogue : MonoBehaviour
 
         //get the json file we want to read
         string targetFile = Resources.Load<TextAsset>(filePath).text;
-        script = JsonUtility.FromJson<WholeDialogue>(targetFile).script;
+        var wholeScript = JsonUtility.FromJson<WholeDialogue>(targetFile);
+        script = wholeScript.script;
+        lineCutOff = wholeScript.lineCutOff;
 
         //does this file (tank_world-level.json) exsist
         if(targetFile != null){
@@ -66,9 +66,9 @@ public class UI_Dialogue : MonoBehaviour
             
             //first check for comments
             //while our current index has a '/' (for comments)
-            while(index < script.Length && script[index].ToCharArray()[0] == '/'){
+            while(lineIndex < script.Length && script[lineIndex].ToCharArray()[0] == '/'){
                 //keep incrementing
-                index++;
+                lineIndex++;
             }
             //now start dialogue
             StartCoroutine(TypeLine());
@@ -88,13 +88,13 @@ public class UI_Dialogue : MonoBehaviour
     public bool Click(){
 
         //when our entire dialogue is in the text box, we can move on to next dialogue
-        if(textUI.text == script[index]){
+        if(textUI.text == script[lineIndex]){
             return NextLine();
         }
         //our dialogue still hasn't finished printing, so insta finish it
         else{
             StopAllCoroutines();
-            textUI.text = script[index];
+            textUI.text = script[lineIndex];
             return true;
         }
         
@@ -104,7 +104,7 @@ public class UI_Dialogue : MonoBehaviour
     //slowly types out the current dialogue string we are index'd at
     private IEnumerator TypeLine(){
         //for each char 1 by 1
-        foreach( char c in script[index].ToCharArray()){
+        foreach( char c in script[lineIndex].ToCharArray()){
 
             textUI.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -119,14 +119,14 @@ public class UI_Dialogue : MonoBehaviour
 
         //while we have next line
         //does this new index start with a '/' (for comments)
-        while(index+1 < script.Length && script[index+1].ToCharArray()[0] == '/'){
+        while(lineIndex+1 < script.Length && script[lineIndex+1].ToCharArray()[0] == '/'){
             //keep incrementing
-            index++;
+            lineIndex++;
         }
 
-        if(index+1 < script.Length){
+        if(lineIndex+1 < script.Length){
             //increment index / reset ui text box / set next expect type
-            index++;
+            lineIndex++;
             textUI.text = string.Empty;
 
             //start typing line method and return
@@ -136,10 +136,16 @@ public class UI_Dialogue : MonoBehaviour
         else{
             //no more lines
             //reset values now
-            index = 0;
+            lineIndex = 0;
             textUI.text = string.Empty;
             return false;
         }
+    }
+
+    //used in skipping the script
+    //within the tutorial script, 
+    public bool CanWeSkip(){
+        return lineIndex >= lineCutOff;
     }
 
 

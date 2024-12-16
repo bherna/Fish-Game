@@ -10,5 +10,7 @@
         "Click on the coin to collect it!",
         
         "/Wait for player to collect coin." 
-    ]
+    ],
+
+    "lineCutOff": 2
 }

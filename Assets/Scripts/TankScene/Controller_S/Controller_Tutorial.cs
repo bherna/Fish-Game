@@ -316,34 +316,85 @@ public class Controller_Tutorial : MonoBehaviour
     //if our i doesn't match our index, then we dont have the correct trigger
     private void TriggerTemplate(int i){
 
-        //if we are in the correct INDEX, and we are WAITING for the trigger to go off
-        if(i == index && waiting){
- 
-            //event was triggered
-            //so we get next script
-            index++;
-            ui_Dialogue.GetJsonScriptNumber(index.ToString());
-            //also enable the dialouge ui
-            ui_Dialogue.ToggleDialogueBox(true);
-            //reset waiting to false
-            waiting = false;
-            altText = false;
+
+        if(waiting){
+
+            //if we are in the correct INDEX, and we are WAITING for the trigger to go off
+            if(i == index){
+
+                //event was triggered
+                NextDialogue();
+
+            }
+            //if our i is negative
+            //this means that we have failed to do what we wanted
+            else if(i*-1 == index ){
+                
+                //ALT event was triggered
+                AltDialogue(i);
+            }
 
         }
-        //if our i is negative
-        //this means that we have failed to do what we wanted
-        else if(i*-1 == index && waiting){
-            
-            //ALT event was triggered
-            //so we stay in the same index, but get the script of ALT event which should be negative version of current index
-            ui_Dialogue.GetJsonScriptNumber(i.ToString());
-            //also enable the dialouge ui
-            ui_Dialogue.ToggleDialogueBox(true);
-            //reset waiting to false again, since we don't want to lose reading ability
-            waiting = false;
-            altText = true;
+        else{
+            //else we are not  WAITING, 
+            //this means player is still reading/has the dialogue box open
+
+            //BUT, now they have the ability to skip the rest of the current section they are on
+            //IF they passed a certain part of the tutorial
+            if(ui_Dialogue.CanWeSkip()){
+
+                //if we made it to the skip part, 
+                //all we want to make sure we do is skip through the current dialouge until we have non left
+                //then reset into a next dialouge mode
+                if(i == index){
+                    while(ui_Dialogue.Click()){} //while more clicks repeat
+                    NextDialogue();
+                }
+
+                else if(i*-1 == index){
+                    while(ui_Dialogue.Click()){}
+                    AltDialogue(i);
+                }
+            }
         }
+
     }
+
+
+    //this is a sub function of the trigger template function
+    //this is just for read abililty
+    //this function sets up the next dialouge for the player
+    private void NextDialogue(){
+
+        //so we get next script
+        index++;
+        ui_Dialogue.GetJsonScriptNumber(index.ToString());
+        //also enable the dialouge ui
+        ui_Dialogue.ToggleDialogueBox(true);
+        //reset waiting to false
+        waiting = false;
+        altText = false;
+    }
+
+    //this is the same as the normal next dialogue function
+    //but this one is for alt dialogue options, so we need to get the current index that this can alt into
+    private void AltDialogue(int i){
+
+        //so we stay in the same index, but get the script of ALT event which should be negative version of current index
+        ui_Dialogue.GetJsonScriptNumber(i.ToString());
+        //also enable the dialouge ui
+        ui_Dialogue.ToggleDialogueBox(true);
+        //reset waiting to false again, since we don't want to lose reading ability
+        waiting = false;
+        altText = true;
+    }   
+
+
+
+
+
+
+
 
 
 
@@ -356,7 +407,8 @@ public class Controller_Tutorial : MonoBehaviour
     //index # == to the obj index in the shop_container list
     public void ShopButtonClick(int buttonIndex){
         if(!tutorial_active){return;}
-        //first index holds the guppy button, so
+
+        //the 'first' index holds the guppy button,
         if(buttonIndex == 1){
             TriggerTemplate(1);
         }

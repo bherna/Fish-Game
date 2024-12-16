@@ -13,5 +13,7 @@
            
         "/Now we wait player to buy a guppy in shop"
   
-    ]
+    ],
+
+    "lineCutOff": 4
 }

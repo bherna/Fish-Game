@@ -11,5 +11,7 @@
         "Left click on enemies to lazer them to death.",
         
         "/wait until player kills the last enemy "
-    ]
+    ],
+
+    "lineCutOff": 3
 }
