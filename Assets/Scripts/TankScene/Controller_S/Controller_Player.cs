@@ -14,6 +14,8 @@ public class Controller_Player : MonoBehaviour
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
 
+
+    //since this is public, if any ui elemnt needs it position when clicked, we can use this
     public Vector3 mousePos;
 
     

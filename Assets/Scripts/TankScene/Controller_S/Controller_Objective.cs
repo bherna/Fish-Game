@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System;
 
 
 public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
@@ -12,6 +13,7 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
 
     //once we beat this level (buy all three pieces) make this panel active
     [SerializeField] GameObject postGamePanel;
+
 
     //egg pieces sprite and prices associated
     private Sprite[] eggSprites;
@@ -80,8 +82,15 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
             //update money
             Controller_Wallet.instance.SubMoney(eggPrices[obj_index]);
 
+            //update tooltip if needed
+            ToolTip.ShowToolTip(DisplayText());
+
+            //show we bought, with a pop up
+            Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", eggPrices[obj_index]));
+
             //update index
             obj_index += 1;
+
 
             //is the final objective bought
             if(obj_index >= final_obj){
@@ -143,10 +152,22 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
     }
 
 
-    public void OnPointerEnter(PointerEventData eventData){
+    private string DisplayText(){
+
+        //if we bought the last egg peice, dont show
+        if(obj_index >= 3){
+            return string.Format("No more peices to buy");
+        }
+        else{
+            return string.Format("Buy: Egg Piece {0} \nCost: {1}", obj_index, eggPrices[obj_index].ToString());
+        }
         
-        string dispString = string.Format("Buy: Egg Piece {0} \nCost: {1}", obj_index, eggPrices[obj_index].ToString());
-        ToolTip.ShowToolTip(dispString);
+    }
+
+
+    public void OnPointerEnter(PointerEventData eventData){
+
+        ToolTip.ShowToolTip(DisplayText());
     }
 
     public void OnPointerExit(PointerEventData eventData){

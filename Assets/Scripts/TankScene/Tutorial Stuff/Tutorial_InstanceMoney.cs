@@ -13,7 +13,6 @@ public class Tutorial_InstanceMoney : MonoBehaviour
 {
 
     private int moneyToAdd = 20;
-    [SerializeField] private GameObject textPopUp;
     private Vector3 origin;
     private bool neverPlayed = true;
 
@@ -67,8 +66,7 @@ public class Tutorial_InstanceMoney : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         //instantiate text pop up
-        var popup = Instantiate(textPopUp, transform.position, Quaternion.identity);
-        popup.GetComponent<TextPopUp>().UpdateText(string.Format("+ {0}", moneyToAdd));
+        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}", moneyToAdd));
         Controller_Wallet.instance.AddMoney(moneyToAdd);
         //destroy obj
         Destroy(gameObject);

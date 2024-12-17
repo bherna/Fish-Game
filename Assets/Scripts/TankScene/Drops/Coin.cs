@@ -9,7 +9,6 @@ public class Coin : MonoBehaviour, IPointerDownHandler
     [SerializeField] float timeTillTrashed = 3f;
     private Rigidbody2D rb;
     [SerializeField] protected AudioClip collectCoinSoundClip;
-    [SerializeField] protected GameObject textPopUp;
 
 
     private void Start(){
@@ -38,8 +37,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
         
         //instantiate text pop up
-        var popup = Instantiate(textPopUp, transform.position, Quaternion.identity);
-        popup.GetComponent<TextPopUp>().UpdateText(string.Format("+ {0}",coinValue));
+        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}",coinValue));
         //destroy
         Destroy(gameObject);
     }

@@ -714,6 +714,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8049561154694550191, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: textPopUp
+      value: 
+      objectReference: {fileID: 772341808404254484, guid: 843ddd0253b6a6e4795090f23d28c965, type: 3}
     - target: {fileID: 8625137527499391134, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_Name
       value: Canvas-UI
@@ -880,6 +884,10 @@ PrefabInstance:
     - target: {fileID: 6257003776929468886, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
       propertyPath: m_Name
       value: Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 6368509356336341591, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7050074533948834122, guid: 1b43ae9c1cf3c40418a0bef7367ed052, type: 3}
       propertyPath: m_Size.y
