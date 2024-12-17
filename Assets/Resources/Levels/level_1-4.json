@@ -2,55 +2,30 @@
     "waves": 
     [
         {
-            "secTillWaveSpawn": 42,
+            "secTillWaveSpawn": 52,
             "enemies": ["LMBass"]
         },
 
         {
-            "secTillWaveSpawn": 20,
+            "secTillWaveSpawn": 60,
             "enemies": ["Starfish"]
         },
 
         {
-            "secTillWaveSpawn": 30,
+            "secTillWaveSpawn": 75,
             "enemies": ["LMBass", "Starfish"]
         },
 
         {
-            "secTillWaveSpawn": 40,
+            "secTillWaveSpawn": 43,
             "enemies": ["LMBass", "Starfish"]
         },
 
         {
-            "secTillWaveSpawn": 40,
+            "secTillWaveSpawn": 88,
             "enemies": ["Starfish", "Starfish"]
-        },
-
-        {
-            "secTillWaveSpawn": 20,
-            "enemies": ["LMBass", "LMBass", "LMBass"]
-        },
-
-        {
-            "secTillWaveSpawn": 30,
-            "enemies": ["LMBass"]
-        },
-
-        {
-            "secTillWaveSpawn": 20,
-            "enemies": ["LMBass", "LMBass", "LMBass"]
-        },
-
-        {
-            "secTillWaveSpawn": 30,
-            "enemies": ["Starfish", "LMBass", "Starfish"]
-        },
-
-        {
-            "secTillWaveSpawn": 20,
-            "enemies": ["Starfish", "LMBass", "Starfish", "LMBass"]
         }
-
+        
     ],
 
     "loop": true,
