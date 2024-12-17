@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,11 +26,15 @@ public class Controller_EscMenu : MonoBehaviour
     //references to the shop ui and the esc menu
     //shop ui so player can't buy when menu open
     //and esc menu reference to open and close
-    [SerializeField] GameObject Shop_UI;
+    [SerializeField] GameObject Shop_Container;
     [SerializeField] GameObject Esc_UI;
 
 
-
+    //a list of the current interactive setting for each button in the shop
+    //if we dont know what they were before disableing them, then
+    //we don't know if they should be turned on yet, 
+    //since we have progression now, we don't want to just turn them all on (CHEATERS)
+    private bool[] interactive_list;
 
 
     //singleton this class
@@ -83,11 +88,18 @@ public class Controller_EscMenu : MonoBehaviour
         //pause audio listeners
         AudioListener.pause = true;
 
+
+        interactive_list = new bool[Shop_Container.transform.childCount];
+        int i = 0;
         //disable ui buttons (so player can't purchase)
         //                                                          the true here is on purpose, we want to grab all buttons,
         //                                                          not just the active ones
-        foreach(var btn in Shop_UI.GetComponentsInChildren<Button>(true)){
-            btn.interactable = false;
+        foreach(var btn in Shop_Container.GetComponentsInChildren<Button>(true)){
+
+            interactive_list[i] = btn.interactable;//save
+            i++;
+            btn.interactable = false; //then disable
+
         }
 
         //enable esc ui
@@ -99,8 +111,10 @@ public class Controller_EscMenu : MonoBehaviour
         PauseTank(false);
         AudioListener.pause = false;
 
-        foreach(var btn in Shop_UI.GetComponentsInChildren<Button>(true)){
-            btn.interactable = true;
+        int i = 0;
+        foreach(var btn in Shop_Container.GetComponentsInChildren<Button>(true)){
+            btn.interactable = interactive_list[i];
+            i++;
         }
 
         //disable esc ui
