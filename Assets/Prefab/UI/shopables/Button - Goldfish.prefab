@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1101807828340855564}
   - component: {fileID: 1606334470267902956}
   m_Layer: 5
-  m_Name: Image
+  m_Name: fishi - Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,7 +101,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 707882781224197014}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -180,10 +180,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84670bd74fad6e47b49ead384e94084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currSprite: {fileID: 1606334470267902956}
   fishPrice: 20
   fishType: 0
-  guppyPrefab: {fileID: 0}
-  guppyPrefab_tutorial: {fileID: 0}
+  guppyPrefab: {fileID: 957995739772778605, guid: 0698a6a3879cbf24fbe7f99e3a0c50a5, type: 3}
+  guppyPrefab_tutorial: {fileID: 957995739772778605, guid: 6729d6820d5e27f40bf81093253dc4be, type: 3}
 --- !u!1 &5568747353033881156
 GameObject:
   m_ObjectHideFlags: 0

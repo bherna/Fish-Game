@@ -2,13 +2,12 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
 {
 
     //list of objecive prices, in order of purchase
     [SerializeField] int[] prices;
     [SerializeField] Sprite[] sprites;
-    [SerializeField] Image ui_sprite;
     private int index_array = 0;
 
 
@@ -31,39 +30,30 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler,
         }
 
         //update sprite
-        ui_sprite.sprite = sprites[index_array];
+        currSprite.sprite = sprites[index_array];
     }
 
 
-    void OnEnable()
-    {
-        //Register Button Events
-        GetComponent<Button>().onClick.AddListener(() => OnPurchase());
-    }
-
-    void OnDisable()
-    {
-        //Un-Register Button Events
-        GetComponent<Button>().onClick.RemoveAllListeners();
-    }
-
-    
 
 
     //when button pushed to purchase
-    public void OnPurchase(){
+    public override void OnPurchase(){
 
-        //is object affordable
+        //FIRST
+        //CAN WE BUY THE shopable
         if(Controller_Wallet.instance.IsAffordable(prices[index_array])){
 
             //purchase obj
             Controller_Wallet.instance.SubMoney(prices[index_array]);
+            //visual
+            Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", prices[index_array]));
         }
         else{
             
             Debug.Log("Not enough money to buy upgrade: " + upgradeType.ToString());
             return;
         }
+        //if not then return and null a null a null a dlfsaj
 
         switch(upgradeType){
 
@@ -75,7 +65,7 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler,
 
                 //update sprite + cost
                 index_array++;
-                ui_sprite.sprite = sprites[index_array];
+                currSprite.sprite = sprites[index_array];
 
                 //upgrade
                 Controller_Food.instance.Upgrade_FoodPower();
@@ -85,11 +75,11 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler,
                     //disable button, since we reached max
                     GetComponent<Button>().interactable = false;
                 }
-
+                
                 break;
 
             case Upgrades.FishTotal:
-
+                //????
                 Controller_Fish.instance.Upgrade_fishMax();
                 break;
 
@@ -104,14 +94,10 @@ public class EventClick_ItemShop_Upgrades : MonoBehaviour, IPointerEnterHandler,
         }
     }
 
-    public void OnPointerEnter(PointerEventData eventData){
+    public override void OnPointerEnter(PointerEventData eventData){
         
         string dispString = string.Format("Buy {0} \nCost: {1}", upgradeType, prices[index_array].ToString());
         ToolTip.ShowToolTip(dispString);
-    }
-
-    public void OnPointerExit(PointerEventData eventData){
-        ToolTip.HideToolTip();
     }
 
     

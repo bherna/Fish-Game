@@ -1,6 +1,4 @@
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
@@ -8,7 +6,7 @@ public enum FishType {Guppy, Enemy};
 
 
 
-public class EventClick_ItemShop_Spawnable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
 {
 
     [SerializeField] int fishPrice = 0;
@@ -21,26 +19,12 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour, IPointerEnterHandler
     [SerializeField] GameObject guppyPrefab_tutorial; //if this is the tutorial tank, we use tutorial fish version
 
 
-    void Start()
-    {
-        
-    }
 
-    void OnEnable()
-    {
-        //Register Button Events
-        GetComponent<Button>().onClick.AddListener(() => OnPurchase());
-    }
-
-    void OnDisable()
-    {
-        //Un-Register Button Events
-        GetComponent<Button>().onClick.RemoveAllListeners();
-    }
+    
 
 
     //when button pushed to purchase
-    public void OnPurchase(){
+    public override void OnPurchase(){
 
         //is object affordable
         if(Controller_Wallet.instance.IsAffordable(fishPrice)){
@@ -50,7 +34,10 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour, IPointerEnterHandler
                 case FishType.Guppy:
 
                     //spawn 
-                    //first make sure we arn't in tutorial mode
+                    //either way we are going to show price so
+                    Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", fishPrice));
+
+                    //NOW make sure we arn't in tutorial mode
                     if(Controller_Tutorial.instance.tutorial_active){
                         //spawn tutorial version
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
@@ -86,14 +73,11 @@ public class EventClick_ItemShop_Spawnable : MonoBehaviour, IPointerEnterHandler
     }
 
 
-    public void OnPointerEnter(PointerEventData eventData){
+    public override void OnPointerEnter(PointerEventData eventData){
         
         string dispString = string.Format("Buy {0}\nCost: ${1}", fishType.ToString(), fishPrice);
 
         ToolTip.ShowToolTip(dispString);
     }
 
-    public void OnPointerExit(PointerEventData eventData){
-        ToolTip.HideToolTip();
-    }
 }

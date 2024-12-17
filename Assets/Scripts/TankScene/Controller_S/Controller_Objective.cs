@@ -4,12 +4,8 @@ using UnityEngine.EventSystems;
 using System;
 
 
-public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
 {
-
-    //ui image showing what egg sprite
-    [SerializeField] Image ui_currEggSprite;
-
 
     //once we beat this level (buy all three pieces) make this panel active
     [SerializeField] GameObject postGamePanel;
@@ -53,27 +49,17 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
         SetEggSprites();
         
         //update sprite
-        ui_currEggSprite.sprite = eggSprites[obj_index];
+        currSprite.sprite = eggSprites[obj_index];
 
     
     }
 
-    void OnEnable()
-    {
-        //Register Button Events
-        GetComponent<Button>().onClick.AddListener(() => OnPurchase());
-    }
-
-    void OnDisable()
-    {
-        //Un-Register Button Events
-        GetComponent<Button>().onClick.RemoveAllListeners();
-    }
+    
 
     
 
     //when button pushed to purchase
-    public void OnPurchase(){
+    public override void OnPurchase(){
 
         //if enough money
         //buy
@@ -116,7 +102,7 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
             }
             else{
                 //update sprite
-                ui_currEggSprite.sprite = eggSprites[obj_index];
+                currSprite.sprite = eggSprites[obj_index];
 
             }
         }
@@ -165,14 +151,11 @@ public class Controller_Objective : MonoBehaviour, IPointerEnterHandler, IPointe
     }
 
 
-    public void OnPointerEnter(PointerEventData eventData){
+    public override void OnPointerEnter(PointerEventData eventData){
 
         ToolTip.ShowToolTip(DisplayText());
     }
 
-    public void OnPointerExit(PointerEventData eventData){
-        ToolTip.HideToolTip();
-    }
     
 
 }
