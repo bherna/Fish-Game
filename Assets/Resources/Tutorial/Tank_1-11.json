@@ -12,5 +12,7 @@
         "/wait until player kills the last enemy "
     ],
 
-    "lineCutOff": 2
+    "lineCutOff": 2,
+
+    "pause": false
 }

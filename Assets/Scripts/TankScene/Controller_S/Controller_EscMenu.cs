@@ -4,13 +4,29 @@ using UnityEngine.UI;
 public class Controller_EscMenu : MonoBehaviour
 {
 
-    //is the game currently paused
+    //Here we have paused and eseMenuOpen, 
+    //when the game is paused, the tank's delta time is set to 0
+    //but that doesn't mean that the esc menu is open, we can have it open without DIRECTLY pausing
+    //but having the esc menu open SHOULD HAVE the tank paused.
+    //so
+    //if the tank is not pause and we open the esc menu, then we pause here
+    //if the tank is alreadyyy paused and we open the esc menu, then we don't bother pausing, but we flag this
+    
     public bool paused {get; private set;} = false;
     private bool escMenuOpen = false;
 
-    //reference to ui tab holding store items
-    [SerializeField] GameObject ui_tab;
-    [SerializeField] GameObject ui_esc;
+
+    //the flag bool is used to tell this esc menu class to either unpause the tank when we close the menu or not
+    //since we can have an _ number of pauses going on, we count total pauses
+    // when we pause -> +1 flag, unpause -> -1 flag (then we check if flag == 0, causeing unpause tank)
+    private int flag = 0; //
+
+
+    //references to the shop ui and the esc menu
+    //shop ui so player can't buy when menu open
+    //and esc menu reference to open and close
+    [SerializeField] GameObject Shop_UI;
+    [SerializeField] GameObject Esc_UI;
 
 
 
@@ -41,7 +57,7 @@ public class Controller_EscMenu : MonoBehaviour
             
             //pause game
             //open escape menu
-            PauseLevel();
+            OpenMainMenu();
             escMenuOpen = true;
 
 
@@ -50,46 +66,82 @@ public class Controller_EscMenu : MonoBehaviour
 
             //unpause game
             //close escape menu
-            UnPauseLevel();
+            CloseMainMenu();
             escMenuOpen = false;
 
 
         }
     }
 
-    public void PauseLevel(){
+
+//-----------------------------------------------------------------------------------------------------------
+//this functions are used for opening and closing the main menu ui stuff
+    public void OpenMainMenu(){
 
         //pause all time references (physics, time)
-        Time.timeScale = 0;
+        PauseTank(true);
         //pause audio listeners
         AudioListener.pause = true;
-        //paused boolean (other scripts reference this for user onclick event)
-        paused = true;
 
         //disable ui buttons (so player can't purchase)
-        foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
+        //                                                          the true here is on purpose, we want to grab all buttons,
+        //                                                          not just the active ones
+        foreach(var btn in Shop_UI.GetComponentsInChildren<Button>(true)){
             btn.interactable = false;
         }
 
         //enable esc ui
-        ui_esc.SetActive(true);
+        Esc_UI.SetActive(true);
     }
 
-    public void UnPauseLevel(){
+    public void CloseMainMenu(){
 
-        Time.timeScale = 1;
+        PauseTank(false);
         AudioListener.pause = false;
-        paused = false;
 
-        foreach(var btn in ui_tab.GetComponentsInChildren<Button>(true)){
+        foreach(var btn in Shop_UI.GetComponentsInChildren<Button>(true)){
             btn.interactable = true;
         }
 
         //disable esc ui
-        ui_esc.SetActive(false);
+        Esc_UI.SetActive(false);
     }
 
 
+//-----------------------------------------------------------------------------------------------------------
 
     
+
+
+
+
+    //this function is used in making sure our tank isn't already paused
+    //if it is, we don't want to unpause after we close the esc menu
+    //it can also be referenced by other functions, outside this obj
+    //parameter: true == pause the tank, false == unpause
+    public void PauseTank(bool pauseOrNot){
+
+        
+        if(pauseOrNot){
+            //just add one to flag
+            flag++;
+            //since we don't know if this is the first or not
+            //we just set to 0, doesn't hurt
+            Time.timeScale = 0; 
+            //now we are offisshally paused
+            paused = true;
+        }
+        else{
+            //we want to unpause
+            //so
+            flag--; //sub 1
+            //then check for 0
+            if(flag <= 0){
+                //unpause
+                Time.timeScale = 1;
+                //yea
+                paused = false;
+            }
+        }
+    }
 }

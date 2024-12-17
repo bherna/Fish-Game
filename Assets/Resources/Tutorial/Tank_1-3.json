@@ -10,5 +10,7 @@
         "/Now we wait for fish to eat pellet, we also start the enemy waves after wards"
     ],
     
-    "lineCutOff": 2
+    "lineCutOff": 2,
+
+    "pause": true
 }

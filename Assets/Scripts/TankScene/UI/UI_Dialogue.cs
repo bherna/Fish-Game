@@ -10,6 +10,8 @@ public class WholeDialogue{
     public string[] script; //same as json file
 
     public int lineCutOff; //if player does an event after this line number, we can accept it
+
+    public bool pause; //should this current dialogue pause the game for the player, for ease of reading
 }
 
 
@@ -22,6 +24,7 @@ public class UI_Dialogue : MonoBehaviour
     private float textSpeed = 0.05f;                
     private int lineCutOff = 0;  // this is used in determining if the player can skip the rest of this current script
                                     //line index counts from 0, make sure to also not skip comment lines they count as well
+    public bool pause {get; private set;}
     
 
     //start method
@@ -58,6 +61,7 @@ public class UI_Dialogue : MonoBehaviour
         var wholeScript = JsonUtility.FromJson<WholeDialogue>(targetFile);
         script = wholeScript.script;
         lineCutOff = wholeScript.lineCutOff;
+        pause = wholeScript.pause;
 
         //does this file (tank_world-level.json) exsist
         if(targetFile != null){

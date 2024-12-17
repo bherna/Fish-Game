@@ -12,5 +12,7 @@
         "/wait for player to get second peice."
     ],
 
-    "lineCutOff": 3
+    "lineCutOff": 3,
+
+    "pause": true
 }

@@ -10,5 +10,7 @@
         "/Now we wait for guppy to get hungry."
     ],
 
-    "lineCutOff": 2
+    "lineCutOff": 2,
+
+    "pause": false
 }

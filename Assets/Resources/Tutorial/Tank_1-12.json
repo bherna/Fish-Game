@@ -12,5 +12,7 @@
         "/we are done with the tutorial at this point, i guess... or maybe i might add a tutorial to show how to build the egg?"
     ],
 
-    "lineCutOff": 3
+    "lineCutOff": 3,
+
+    "pause": true
 }

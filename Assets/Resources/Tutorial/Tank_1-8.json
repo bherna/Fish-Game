@@ -14,5 +14,7 @@
         "/wait for player to buy first egg peice."
     ],
 
-    "lineCutOff": 3
+    "lineCutOff": 3,
+
+    "pause": true
 }

@@ -12,5 +12,7 @@
         "/if we set the linecutoff to 0, and the enemy wave to start right away, we can ignore the message >:D."
     ],
 
-    "lineCutOff": 0
+    "lineCutOff": 0,
+
+    "pause": false
 }

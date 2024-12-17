@@ -15,5 +15,7 @@
         
     ],
 
-    "lineCutOff": 2
+    "lineCutOff": 2,
+
+    "pause": true
 }

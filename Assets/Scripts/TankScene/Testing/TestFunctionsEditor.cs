@@ -44,7 +44,7 @@ public class TestFunctionsEditor : Editor
 
   //time
         GUILayout.Label(string.Format("Update our time speed here: "));
-        EditorGUILayout.IntSlider(timeSpeedProp, 1, 100);
+        EditorGUILayout.IntSlider(timeSpeedProp, 0, 100);
         TestFunctions tf = (TestFunctions)target;
         if(GUILayout.Button("Update Time")){
             tf.UpdateTimeSpeed();

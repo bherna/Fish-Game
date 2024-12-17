@@ -19,6 +19,6 @@ public class EscMenu : MonoBehaviour
     }
 
     public void ReturnToGame(){
-        Controller_EscMenu.instance.UnPauseLevel();
+        Controller_EscMenu.instance.CloseMainMenu();
     }
 }

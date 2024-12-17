@@ -1,7 +1,4 @@
 
-using System.Security.Cryptography;
-using Steamworks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,9 +18,10 @@ public class Controller_Tutorial : MonoBehaviour
     //tutorial vars
     public int index {get; private set;}= 1; //which section of tutorial we are at We start at 1, 
                             //since thats how the json files are saved
-    public bool waiting {get; private set;}= false; //used in waiting for external event
-    private Vector3 starvePos;
-    private bool altText;
+    public bool waiting {get; private set;}= false; //we are either WAITING for triggers or displaying dialogue
+    private Vector3 starvePos; //if a tutorial guppy dies, we want to know where they died to spawn money
+    private bool altText; //if true, we enter a alternative dialogue option
+    private bool unpauseFlag = false; //if true, then we should tell the escmenu controller we should unpause the tank
 
 
     //singleton this class
@@ -352,6 +350,12 @@ public class Controller_Tutorial : MonoBehaviour
             //also disable the dialouge ui
             ui_Dialogue.ToggleDialogueBox(false);
 
+            //unpause the tank, if needed
+            if(unpauseFlag){
+                Controller_EscMenu.instance.PauseTank(false);
+                unpauseFlag = false;
+            }
+
             return false;
         }
         
@@ -451,6 +455,9 @@ public class Controller_Tutorial : MonoBehaviour
         //reset waiting to false
         waiting = false;
         altText = false;
+
+        //also check if we should pause the tank
+        PauseTank();
     }
 
     //this is the same as the normal next dialogue function
@@ -464,13 +471,26 @@ public class Controller_Tutorial : MonoBehaviour
         //reset waiting to false again, since we don't want to lose reading ability
         waiting = false;
         altText = true;
+
+        //also check if we should pause the tank
+        PauseTank();
     }   
 
 
+    //since we dont want to be willy nilly saying to the esc menu that we should unpause
+    //the tank whenever we feel like it
+    //we have to check for false triggers
+    private void PauseTank(){
 
+        //only if true
+        if( ui_Dialogue.pause){
+            Controller_EscMenu.instance.PauseTank(true);
+            //and set flag
+            unpauseFlag = true;
+        }
+    }
 
-
-
+    
 
 
 
