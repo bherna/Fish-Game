@@ -2585,7 +2585,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6976670582389677633
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5308,6 +5308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f89be8bb08b239449e6c36de2a7800e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRecTrans: {fileID: 7569186588323293630}
   textPopUp: {fileID: 6089214943604285427, guid: 09803cbd6d293f14981da61f960fe13d, type: 3}
 --- !u!1 &8346874982966346175
 GameObject:

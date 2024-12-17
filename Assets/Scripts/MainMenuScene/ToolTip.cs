@@ -8,7 +8,7 @@ public class ToolTip : MonoBehaviour
 
     public static ToolTip instance {get; private set;}
 
-    [SerializeField] private RectTransform canvasRecTrans; //used to get camera scalling
+    [SerializeField] private RectTransform canvasRecTrans; //used to get camera scalling (canvas-ui)
     private RectTransform backgroundRecTrans; //background image's vector
     private TextMeshProUGUI text; //updating text on screen
     private RectTransform rectTrans; //used in updating our position on canvas
