@@ -120,11 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e9fa12cf20ece4f9686fd9ae387f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinValue: 7
+  moneyValue: 12
   timeTillTrashed: 1.5
-  rb: {fileID: 9203605760568676009}
   collectCoinSoundClip: {fileID: 8300000, guid: a12f0bc00831bfb408684e1cc11f08ae, type: 3}
-  textPopUp: {fileID: 772341808404254484, guid: 843ddd0253b6a6e4795090f23d28c965, type: 3}
 --- !u!114 &1450112052067580422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,8 +135,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e966e3f1686609a4697d871bc985dfbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 140
-  coinSprite: {fileID: 7894647518852954858}
+  spinType: 0
+  spinSpeed: 180
+  moneySprite: {fileID: 7894647518852954858}
+  tiltMax: 45
+  tiltSpeed: 0
 --- !u!1001 &5910409107811658554
 PrefabInstance:
   m_ObjectHideFlags: 0

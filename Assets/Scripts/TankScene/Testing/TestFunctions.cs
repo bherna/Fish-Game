@@ -1,5 +1,6 @@
 #if UNITY_EDITOR
 using Steamworks;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -22,6 +23,12 @@ public class TestFunctions : MonoBehaviour
     public int money = 100;
     public void GiveMoney(){
         Controller_Wallet.instance.AddMoney(money);
+    }
+
+    //create an object for the scene, that WON'T be affected to missing references
+    public GameObject creationObj;
+    public void CreateObj(){
+        Instantiate(creationObj, Vector2.zero, Quaternion.identity);
     }
 
     //function to spawn a pet into the level

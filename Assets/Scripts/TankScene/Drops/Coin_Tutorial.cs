@@ -16,7 +16,7 @@ public class Coin_Tutorial : Coin
         }
 
         //add coin
-        Controller_Wallet.instance.AddMoney(coinValue);
+        Controller_Wallet.instance.AddMoney(moneyValue);
         //playsound
         AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, 1f);
 

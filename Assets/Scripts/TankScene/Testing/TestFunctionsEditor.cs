@@ -20,16 +20,17 @@ public class TestFunctionsEditor : Editor
     SerializedProperty moneyProp;
     PetNames petProp;
     SerializedProperty comboProp;
+    SerializedProperty creationObj;
 
     enum EnemyNames {Starfish, LMBass};
     EnemyNames enemyProp;
-
 
     void OnEnable() {
         //setup serializable properties
         timeSpeedProp = serializedObject.FindProperty("timeSpeed");
         moneyProp = serializedObject.FindProperty("money");
         comboProp = serializedObject.FindProperty("comboAmount");
+        creationObj = serializedObject.FindProperty("creationObj");
     }
 
 
@@ -58,6 +59,17 @@ public class TestFunctionsEditor : Editor
         if(GUILayout.Button("Give Money")){
             tf.GiveMoney();
         }
+
+        GUILayout.Label(string.Format("\n\n"));//new line
+        
+
+//creation
+        GUILayout.Label(string.Format("Create object for tank scene: "));
+        EditorGUILayout.ObjectField(creationObj);
+        if(GUILayout.Button("Create Object")){
+            tf.CreateObj();
+        }
+
 
         GUILayout.Label(string.Format("\n\n"));//new line
 

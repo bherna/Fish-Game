@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using System;
+using Unity.Mathematics;
 
 public enum Enemy_States {idle, attack, stunned};
 
@@ -9,6 +10,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 {
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
+    [SerializeField] protected GameObject gem; //on die we drop this
     protected Rigidbody2D rb;
     protected Enemy_States curr_EnemyState;
     
@@ -116,6 +118,9 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
         //play sound
         AudioManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f, 1f);
+
+        //drop gem
+        Instantiate(gem, transform.position, Quaternion.identity);
 
         //die
         Destroy(gameObject);

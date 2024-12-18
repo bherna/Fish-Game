@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Coin : MonoBehaviour, IPointerDownHandler
 {
-    [SerializeField] protected int coinValue = 0;
+    [SerializeField] protected int moneyValue = 0;
     [SerializeField] float timeTillTrashed = 3f;
     private Rigidbody2D rb;
     [SerializeField] protected AudioClip collectCoinSoundClip;
@@ -17,8 +17,8 @@ public class Coin : MonoBehaviour, IPointerDownHandler
     }
 
 
-    public void UpdateCoinVal(int newCoinVal){
-        coinValue = newCoinVal;
+    public void UpdateCoinVal(int newMonVal){
+        moneyValue = newMonVal;
     }
 
 
@@ -29,7 +29,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         }
 
         //add coin
-        Controller_Wallet.instance.AddMoney(coinValue);
+        Controller_Wallet.instance.AddMoney(moneyValue);
 
         //playsound
         //add a bit of randomness to the pitch to add variance
@@ -37,7 +37,7 @@ public class Coin : MonoBehaviour, IPointerDownHandler
         AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
         
         //instantiate text pop up
-        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}",coinValue));
+        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}",moneyValue));
         //destroy
         Destroy(gameObject);
     }
