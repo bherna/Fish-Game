@@ -89,9 +89,9 @@ public class Controller_EscMenu : MonoBehaviour
         AudioListener.pause = true;
 
 
+        //disable ui buttons (so player can't purchase)
         interactive_list = new bool[Shop_Container.transform.childCount];
         int i = 0;
-        //disable ui buttons (so player can't purchase)
         //                                                          the true here is on purpose, we want to grab all buttons,
         //                                                          not just the active ones
         foreach(var btn in Shop_Container.GetComponentsInChildren<Button>(true)){
@@ -104,6 +104,9 @@ public class Controller_EscMenu : MonoBehaviour
 
         //enable esc ui
         Esc_UI.SetActive(true);
+
+        //if tutorial is active, hide from view
+        Controller_Tutorial.instance.HideTutorial(false);
     }
 
     public void CloseMainMenu(){
@@ -119,6 +122,9 @@ public class Controller_EscMenu : MonoBehaviour
 
         //disable esc ui
         Esc_UI.SetActive(false);
+
+        //if tutorial is active, return its view
+        Controller_Tutorial.instance.HideTutorial(true);
     }
 
 

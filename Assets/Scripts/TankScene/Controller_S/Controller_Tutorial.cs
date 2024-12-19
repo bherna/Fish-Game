@@ -490,6 +490,17 @@ public class Controller_Tutorial : MonoBehaviour
         }
     }
 
+    //used in the esc menu
+    //when we need to pause the game
+    //when toggle == true, we set dialogue to visable
+    public void HideTutorial(bool toggle){
+
+        if(tutorial_active){
+            ui_Dialogue.ToggleDialogueBox(toggle);
+        }
+
+    }
+
     
 
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,8 +42,8 @@ public class Guppy_Stats : FishStats_ParentClass
         //update stomach
         StartStomach();
 
-        //update sprite
-        ChangeGuppySize(); //to currently held size
+        //set sprite size
+        sprite_transform.transform.localScale = new Vector3(current_size, current_size, current_size);
 
         
     }
@@ -153,9 +154,25 @@ public class Guppy_Stats : FishStats_ParentClass
         
     }
 
-    private void ChangeGuppySize(){
+    private IEnumerator ChangeGuppySize(float newSizeDelta){
+        Debug.Log("Started grow");
 
-        sprite_transform.transform.localScale = new Vector3(current_size, current_size, current_size);
+        var newSize = current_size + newSizeDelta;
+        //now loop
+        while(current_size < newSize){
+            Debug.Log("growing...");
+            //update size
+            current_size += Time.deltaTime * 2;
+            sprite_transform.transform.localScale = new Vector3(current_size, current_size, current_size);
+
+            //then we wait, so its not instant growth
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        //update size to be EXACTLY the new size
+        //since the float gets gross
+        sprite_transform.transform.localScale = new Vector3(newSize, newSize, newSize);
+
     }
 
 
@@ -178,10 +195,10 @@ public class Guppy_Stats : FishStats_ParentClass
         if(!updateAge){return;} 
 
         //update age
-        //but before we increment index, we update other variables
+        //but before we increment index, we update other variables, since they are dependnt on curr index
         //sprite
-        current_size += spriteGrowthFor_ageStage[curr_ageStage]; 
-        ChangeGuppySize();
+        //
+        StartCoroutine(ChangeGuppySize(spriteGrowthFor_ageStage[curr_ageStage])); 
         
         //reset
         curr_foodAte = 0;

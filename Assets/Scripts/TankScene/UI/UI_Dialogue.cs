@@ -111,7 +111,7 @@ public class UI_Dialogue : MonoBehaviour
         foreach( char c in script[lineIndex].ToCharArray()){
 
             textUI.text += c;
-            yield return new WaitForSecondsRealtime(textSpeed);
+            yield return new WaitForSeconds(textSpeed);
         }
     }
 
@@ -156,10 +156,13 @@ public class UI_Dialogue : MonoBehaviour
     //used for disabling or enabling in showing text ui box
     public void ToggleDialogueBox(bool toggle){
 
+        //for each part of the dialogue box (bg, outline, text ..)
         for(int i = 0; i < transform.childCount; i++){
             transform.GetChild(i).gameObject.SetActive(toggle);
         }
     }
 
+
+    //
 
 }
