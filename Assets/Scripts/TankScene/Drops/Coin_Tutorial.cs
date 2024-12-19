@@ -1,9 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Coin_Tutorial : Coin
+public class Coin_Tutorial : MoneyValue
 {
 
     //override original to message controller tutorial

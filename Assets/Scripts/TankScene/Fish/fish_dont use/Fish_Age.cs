@@ -17,7 +17,7 @@ public class Fish_Age : MonoBehaviour
     private bool updateAge = true;
 
     [SerializeField] private float fish_size_current = 0.6f;
-    [SerializeField] private float fish_size_scale = 0.1f;
+    //[SerializeField] private float fish_size_scale = 0.1f;
 
 
 
@@ -43,7 +43,7 @@ public class Fish_Age : MonoBehaviour
     }
 
     public void Fish_Birthday(){
-
+/*
         //if current age is not final stage
         if(current_age_stage < Controller_Fish.instance.GetFishStages().Count-1){
             
@@ -60,6 +60,7 @@ public class Fish_Age : MonoBehaviour
             //we are done aging
             updateAge = false;
         }
+*/
     }
 
 

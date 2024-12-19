@@ -15,7 +15,7 @@ public class TrashCan : MonoBehaviour
 
         if(other.gameObject.CompareTag("Money"))
         {
-            other.gameObject.GetComponent<Coin>().OnTrashCoin();
+            other.gameObject.GetComponent<MoneyValue>().OnTrashCoin();
         }
     }
 }

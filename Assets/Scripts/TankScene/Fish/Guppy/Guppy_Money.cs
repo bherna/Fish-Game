@@ -15,6 +15,7 @@ public class Guppy_Money : MonoBehaviour
     //money prefabs
     [SerializeField] GameObject coin_silver; //teen
     [SerializeField] GameObject coin_gold; //adult
+    [SerializeField] GameObject coin_diamond; //Gem variant   its a pun, goldfish -> gemfish, HAHAHAHAHAA
 
     private void Start() {
         guppy_Stats = GetComponent<Guppy_Stats>();
@@ -26,21 +27,31 @@ public class Guppy_Money : MonoBehaviour
     {
 
         //drop money
-        switch(guppy_Stats.current_age_stage){
+        switch(guppy_Stats.curr_ageStage){
 
+        //baby 
             case 0:
                 //do nothing
                 break;
+        //teen
             case 1:
                 //drop money
                 currTime += Time.deltaTime;//update timer
                 DropMoney(coin_silver);
                 break;
+        //adult
             case 2:
                 //drop money              
                 currTime += Time.deltaTime;//update timer
                 DropMoney(coin_gold);
                 break;
+        //gem
+            case 3:
+                //drop Diamond
+                currTime += Time.deltaTime;//update timer
+                DropMoney(coin_diamond);
+                break;
+        //error
             default:
                 Debug.Log("Should not be this old...");
                 break;

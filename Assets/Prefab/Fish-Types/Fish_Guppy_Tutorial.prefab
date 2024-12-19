@@ -169,7 +169,7 @@ MonoBehaviour:
   - {fileID: 661406108102175504}
   - {fileID: 7893824331456782660}
   sprite_transform: {fileID: 2539228165053564403}
-  amount_food_ate: 0
+  curr_foodAte: 0
 --- !u!114 &7941478267289678308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185,6 +185,7 @@ MonoBehaviour:
   guppy_Stats: {fileID: 6636998373870812825}
   coin_silver: {fileID: 8605215774676198758, guid: 5dbd607d5a378114697e44d7b9f8cc21, type: 3}
   coin_gold: {fileID: 8605215774676198758, guid: cc894103dbc1cf6498be019d4a275c46, type: 3}
+  coin_diamond: {fileID: 8605215774676198758, guid: bd9190d588d7bf84a95fd429b1b0d0c7, type: 3}
 --- !u!1001 &1339121980451761392
 PrefabInstance:
   m_ObjectHideFlags: 0

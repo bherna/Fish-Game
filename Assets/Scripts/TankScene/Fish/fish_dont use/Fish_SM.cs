@@ -446,8 +446,8 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
         //if the fish is being dropped, and we collide with another fish, and fish ages are same
         if( Fish_States.dropped == fishCurrentState &&
             other.gameObject.CompareTag("Fish") &&
-            other.gameObject.GetComponent<Fish_Age>().current_age_stage == GetComponent<Fish_Age>().current_age_stage &&
-            GetComponent<Fish_Age>().current_age_stage < Controller_Fish.instance.GetFishStages().Count-1
+            other.gameObject.GetComponent<Fish_Age>().current_age_stage == GetComponent<Fish_Age>().current_age_stage 
+            //GetComponent<Fish_Age>().current_age_stage < Controller_Fish.instance.GetFishStages().Count-1
         ){
 
             //then combine the two

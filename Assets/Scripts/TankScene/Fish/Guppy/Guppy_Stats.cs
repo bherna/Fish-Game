@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -21,12 +22,12 @@ public class Guppy_Stats : FishStats_ParentClass
     private Color fullColor = new Color(1,1,1);
 
     // --------------------------------- age related -------------------------------------------//  
-    public int current_age_stage {get; private set; } = 0;
-    public float amount_food_ate = 0;
-    private int food_until_next_stage = 3;
+    public int curr_ageStage {get; private set; } = 0; //used in getting list indexes below
+    private int[] foodForNext_ageStage = {3, 5, 60}; //to teenfish, to adultfish, to gemfish                             
+    public float curr_foodAte = 0; //so far
     private float current_size = 0.3f; //also our guppy start size
-    private float size_growth_speed = 0.15f;
-    protected bool updateAge = true;
+    private float[] spriteGrowthFor_ageStage = {0.15f, 0.15f, 0}; //how much does a guppy grow by, indexing is same as food till next stage
+    protected bool updateAge = true; //if true, then we arn't at max age yet
 
     
 
@@ -111,7 +112,7 @@ public class Guppy_Stats : FishStats_ParentClass
 
         //-------burger specific ------
         //we skipp to next stage
-        amount_food_ate = 0;
+        curr_foodAte = 0;
         Fish_Birthday(); //early birthday , if we are at max, birthday should just return false
 
         //reset stomach
@@ -161,10 +162,11 @@ public class Guppy_Stats : FishStats_ParentClass
     private void Ate(){
         if(updateAge){
 
-            //update age of fish
-            amount_food_ate += 1;
-
-            if(amount_food_ate >= food_until_next_stage){
+            //increment food ate
+            curr_foodAte += 1;
+            
+            //check if this is enough to go to next ageStage
+            if(curr_foodAte >= foodForNext_ageStage[curr_ageStage]){
                 Fish_Birthday();
             }
         }
@@ -172,19 +174,24 @@ public class Guppy_Stats : FishStats_ParentClass
 
     public void Fish_Birthday(){
 
-        //if current age is not final stage
-        if(current_age_stage < Controller_Fish.instance.GetFishStages().Count-1){
-            
-            //update 
-            current_age_stage += 1;
-            current_size += size_growth_speed;
-            ChangeGuppySize();
+        //this is a check in case we are freely giving out birthdays to guppys
+        if(!updateAge){return;} 
 
-            //reset
-            amount_food_ate = 0;
-            
-        }
-        else{
+        //update age
+        //but before we increment index, we update other variables
+        //sprite
+        current_size += spriteGrowthFor_ageStage[curr_ageStage]; 
+        ChangeGuppySize();
+        
+        //reset
+        curr_foodAte = 0;
+
+        //now we increment
+        curr_ageStage += 1; //one year older bro
+
+        //if we reached final stage, then stop updating age
+        if(curr_ageStage > foodForNext_ageStage.Count()){
+        
             //we are done aging
             updateAge = false;
         }

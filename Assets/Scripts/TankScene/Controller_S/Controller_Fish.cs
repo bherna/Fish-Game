@@ -11,7 +11,6 @@ public class Controller_Fish : MonoBehaviour
     //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
     [SerializeField] AudioClip spawnSoundClip;
-    [SerializeField] List<string> fish_stages;
 
 
 
@@ -38,17 +37,6 @@ public class Controller_Fish : MonoBehaviour
 
         //create empty fish list
         fish_list = new List<GameObject>();
-
-
-        //fish stages list
-        fish_stages = new List<string>
-        {
-            "Baby",
-            "Teen",
-            "Adult"
-        };
-
-
     }
 
     public bool SpawnFish(GameObject fishObj, Vector3 vec_pos){
@@ -86,14 +74,6 @@ public class Controller_Fish : MonoBehaviour
         fish_list.Remove(fish);
 
     }
-
-
-    //return whole fish stages list
-    public List<string> GetFishStages(){
-
-        return fish_stages;
-    }
-
 
 
     public Transform GetRandomFish(){
