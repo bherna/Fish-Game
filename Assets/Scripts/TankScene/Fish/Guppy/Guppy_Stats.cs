@@ -68,7 +68,7 @@ public class Guppy_Stats : FishStats_ParentClass
     //we do this to avoid having all guppys get hungry at same time, if player buys a bunch at once
     protected void StartStomach(){
 
-        stomach = UnityEngine.Random.Range(15f, 22f);
+        stomach = UnityEngine.Random.Range(15f, 17f);
         hungryRange = (int)stomach/2;
     }
 

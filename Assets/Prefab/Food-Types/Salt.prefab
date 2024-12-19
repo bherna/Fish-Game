@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6865941456071360280}
   - component: {fileID: 2499901471311194591}
   - component: {fileID: -2243787666379401709}
-  - component: {fileID: 2186388173222181560}
   - component: {fileID: 395336051077838898}
+  - component: {fileID: 3128087071574213819}
   - component: {fileID: 3138865642137024959}
   m_Layer: 8
   m_Name: Salt
@@ -109,20 +109,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2186388173222181560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213281205517056372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a30ef358f0d76540b3c538844a20793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 34
-  foodSprite: {fileID: 4011140653058660249}
 --- !u!114 &395336051077838898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,8 +121,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4562fd0897cb5941a81e0e78b4dfcac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodValue: 30
+  foodValue: 15
   foodType: 0
+--- !u!114 &3128087071574213819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213281205517056372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e966e3f1686609a4697d871bc985dfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinType: 2
+  spinSpeed: 34
+  dropSprite: {fileID: 4011140653058660249}
+  tiltMax: 45
+  tiltSpeed: 0
 --- !u!114 &3138865642137024959
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinType: 0
   spinSpeed: 110
-  moneySprite: {fileID: 7635671961413866739}
+  dropSprite: {fileID: 7635671961413866739}
   tiltMax: 45
   tiltSpeed: 0
 --- !u!1001 &539402678784419547

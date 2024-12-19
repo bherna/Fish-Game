@@ -1,11 +1,11 @@
 using UnityEngine;
 
-public class MoneySpin : MonoBehaviour
+public class DropSpin : MonoBehaviour
 {
-    enum SpinType {Spin, Tilt};
+    enum SpinType {Spin, Tilt, AllSpin};
     [SerializeField] SpinType spinType;
     [SerializeField] int spinSpeed;
-    [SerializeField] GameObject moneySprite;
+    [SerializeField] GameObject dropSprite;
 
 
     //need to keep a reference of the x rotation, just incase its not 0
@@ -27,7 +27,7 @@ public class MoneySpin : MonoBehaviour
     //
     private void Start() {
         //save the whole number part, who cares if its 1 degree off
-        xBase = (int)moneySprite.transform.rotation.eulerAngles.x;
+        xBase = (int)dropSprite.transform.rotation.eulerAngles.x;
 
     }
 
@@ -39,7 +39,7 @@ public class MoneySpin : MonoBehaviour
             //mostly used by coins
             case SpinType.Spin:
                 //simple rotate on y axis animation
-                moneySprite.transform.Rotate(0, Time.deltaTime*spinSpeed,  0, Space.Self);
+                dropSprite.transform.Rotate(0, Time.deltaTime*spinSpeed,  0, Space.Self);
                 break;
 
             //mostly used my diamond/ gems
@@ -50,7 +50,13 @@ public class MoneySpin : MonoBehaviour
                 //while doing this, we also do a continous y spin rotation, like simple spin
                 GetTilt();
                 GetSpin();
-                moneySprite.transform.rotation = Quaternion.Euler(xBase + tiltAngle, spinAngle, 0);
+                dropSprite.transform.rotation = Quaternion.Euler(xBase + tiltAngle, spinAngle, 0);
+                break;
+
+            //used for the foods
+            case SpinType.AllSpin:
+                var xyz = Time.deltaTime * spinSpeed;
+                dropSprite.transform.Rotate(xyz, xyz, xyz, Space.Self);
                 break;
 
         }

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 6865941456071360280}
   - component: {fileID: 2499901471311194591}
   - component: {fileID: -2243787666379401709}
-  - component: {fileID: 2186388173222181560}
   - component: {fileID: -1738796050537533881}
+  - component: {fileID: 1763449331713623337}
   m_Layer: 8
   m_Name: Food1
   m_TagString: Food
@@ -108,20 +108,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &2186388173222181560
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213281205517056372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a30ef358f0d76540b3c538844a20793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 34
-  foodSprite: {fileID: 7855811395954649946}
 --- !u!114 &-1738796050537533881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -134,7 +120,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91f80b010c8ba04697fa71428afa19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  foodValue: 20
+  foodValue: 12
+  foodType: 0
+--- !u!114 &1763449331713623337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213281205517056372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e966e3f1686609a4697d871bc985dfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinType: 2
+  spinSpeed: 34
+  dropSprite: {fileID: 7855811395954649946}
+  tiltMax: 45
+  tiltSpeed: 0
 --- !u!1001 &7841686779785054195
 PrefabInstance:
   m_ObjectHideFlags: 0

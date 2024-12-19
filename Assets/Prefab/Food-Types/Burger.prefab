@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 2515684403942779505}
   - component: {fileID: 7646910804001391391}
   - component: {fileID: 4772164410532193642}
-  - component: {fileID: -1129297208614394177}
   - component: {fileID: 2613484312692557380}
+  - component: {fileID: 6871360498571463871}
   m_Layer: 0
   m_Name: Burger
   m_TagString: Food
@@ -108,20 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &-1129297208614394177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2729657837944973757}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a30ef358f0d76540b3c538844a20793, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 34
-  foodSprite: {fileID: 7652201375613271342}
 --- !u!114 &2613484312692557380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +122,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   foodValue: 0
   foodType: 1
+--- !u!114 &6871360498571463871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2729657837944973757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e966e3f1686609a4697d871bc985dfbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spinType: 2
+  spinSpeed: 34
+  dropSprite: {fileID: 7652201375613271342}
+  tiltMax: 45
+  tiltSpeed: 0
 --- !u!1001 &8907307807507442747
 PrefabInstance:
   m_ObjectHideFlags: 0

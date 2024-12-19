@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e9fa12cf20ece4f9686fd9ae387f62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moneyValue: 1000
+  moneyValue: 250
   timeTillTrashed: 1.5
   collectCoinSoundClip: {fileID: 8300000, guid: a12f0bc00831bfb408684e1cc11f08ae, type: 3}
 --- !u!114 &1450112052067580422
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spinType: 1
   spinSpeed: 64
-  moneySprite: {fileID: 7843067115216348306}
+  dropSprite: {fileID: 7843067115216348306}
   tiltMax: 45
   tiltSpeed: 14
 --- !u!1001 &1441473718912614894
