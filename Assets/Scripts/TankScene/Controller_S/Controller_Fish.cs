@@ -10,7 +10,6 @@ public class Controller_Fish : MonoBehaviour
 
     //list of current fish in tank
     [SerializeField] List<GameObject> fish_list;
-    [SerializeField] AudioClip spawnSoundClip;
 
 
 
@@ -52,9 +51,6 @@ public class Controller_Fish : MonoBehaviour
 
         //spawn at top of tank
         fish_list.Add(Instantiate(fishObj, vec_pos, Quaternion.identity));
-
-        //play sound
-        AudioManager.instance.PlaySoundFXClip(spawnSoundClip, transform, 1f, 1f);
 
         //return success
         return true;    

@@ -10,6 +10,9 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
     //once we beat this level (buy all three pieces) make this panel active
     [SerializeField] GameObject postGamePanel;
 
+    //the three sound effects when buying
+    [SerializeField] AudioClip[] eggPieces_audioClips;
+
 
     //egg pieces sprite and prices associated
     private Sprite[] eggSprites;
@@ -68,15 +71,18 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             //update money
             Controller_Wallet.instance.SubMoney(eggPrices[obj_index]);
 
-            //update tooltip if needed
-            ToolTip.ShowToolTip(DisplayText());
 
             //show we bought, with a pop up
             Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", eggPrices[obj_index]));
 
-            //update index
+            //show we bought, with sound effect as well
+            AudioManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
+
+            //----- ---- update index LAST ---- ---- //
             obj_index += 1;
 
+            //update tooltip if needed
+            ToolTip.ShowToolTip(DisplayText());
 
             //is the final objective bought
             if(obj_index >= final_obj){

@@ -47,13 +47,15 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
             Controller_Wallet.instance.SubMoney(prices[index_array]);
             //visual
             Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", prices[index_array]));
+            //sound
+            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
         }
         else{
             
+            //if not then return and null a null a null a dlfsaj
             Debug.Log("Not enough money to buy upgrade: " + upgradeType.ToString());
             return;
         }
-        //if not then return and null a null a null a dlfsaj
 
         switch(upgradeType){
 

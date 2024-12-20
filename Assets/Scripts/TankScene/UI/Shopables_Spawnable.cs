@@ -29,13 +29,16 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
         //is object affordable
         if(Controller_Wallet.instance.IsAffordable(fishPrice)){
 
+            
+            //either way we are going to show price so
+            Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", fishPrice));
+            //and sound
+            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
+
             switch(fishType){
 
                 case FishType.Guppy:
-
                     //spawn 
-                    //either way we are going to show price so
-                    Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", fishPrice));
 
                     //NOW make sure we arn't in tutorial mode
                     if(Controller_Tutorial.instance.tutorial_active){

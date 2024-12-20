@@ -331,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currSprite: {fileID: 7271032766084645241}
+  buySoundClip: {fileID: 8300000, guid: b63bae6b7a9a42e4ea441084ea798eee, type: 3}
   prices: 1e0000006400000000000000
   sprites:
   - {fileID: 21300000, guid: 74d0ac202176560498ad289e42b0da08, type: 3}

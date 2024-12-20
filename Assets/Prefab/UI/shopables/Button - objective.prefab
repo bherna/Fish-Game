@@ -106,7 +106,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currSprite: {fileID: 3283640750484035945}
+  buySoundClip: {fileID: 8300000, guid: 2be5c8148c6554e4e9bbe83cc93be07f, type: 3}
   postGamePanel: {fileID: 0}
+  eggPieces_audioClips:
+  - {fileID: 8300000, guid: 2be5c8148c6554e4e9bbe83cc93be07f, type: 3}
+  - {fileID: 8300000, guid: 2d8891c6bf9a8604fbbf1d07ac7ab3ef, type: 3}
+  - {fileID: 8300000, guid: cd7cb47debcdc47479c4e4fd3e9a163f, type: 3}
 --- !u!1 &5344743453136648465
 GameObject:
   m_ObjectHideFlags: 0

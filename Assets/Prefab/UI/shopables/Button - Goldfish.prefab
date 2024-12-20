@@ -181,6 +181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currSprite: {fileID: 1606334470267902956}
+  buySoundClip: {fileID: 8300000, guid: 9e29f46bd8bbd9942a2c57c6a6d3e70b, type: 3}
   fishPrice: 20
   fishType: 0
   guppyPrefab: {fileID: 957995739772778605, guid: 0698a6a3879cbf24fbe7f99e3a0c50a5, type: 3}

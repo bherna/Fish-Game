@@ -122,7 +122,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moneyValue: 250
   timeTillTrashed: 1.5
-  collectCoinSoundClip: {fileID: 8300000, guid: a12f0bc00831bfb408684e1cc11f08ae, type: 3}
+  collectCoinSoundClip: {fileID: 8300000, guid: a1765970e676bbc458ad6189a9a3796a, type: 3}
 --- !u!114 &1450112052067580422
 MonoBehaviour:
   m_ObjectHideFlags: 0

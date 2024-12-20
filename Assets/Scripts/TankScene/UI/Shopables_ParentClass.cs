@@ -9,6 +9,9 @@ public abstract class Shopables_ParentClass : MonoBehaviour
     //the currently displayed sprite for this button
     [SerializeField] protected Image currSprite;
 
+    //sound effect when buying things
+    [SerializeField] protected AudioClip buySoundClip;
+
     
     //event listeners
     //this means that every shopable should have the onpurhcase func

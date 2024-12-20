@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 661406108102175504}
   - {fileID: 7893824331456782660}
   sprite_transform: {fileID: 2539228165053564403}
+  ageUpClip: {fileID: 8300000, guid: 37dfcb2badb91464c97f2c790ff33dd1, type: 3}
   curr_foodAte: 0
 --- !u!114 &8117179177184847187
 MonoBehaviour:

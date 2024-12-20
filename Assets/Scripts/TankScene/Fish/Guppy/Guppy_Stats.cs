@@ -23,6 +23,7 @@ public class Guppy_Stats : FishStats_ParentClass
     private Color fullColor = new Color(1,1,1);
 
     // --------------------------------- age related -------------------------------------------//  
+    [SerializeField] protected AudioClip ageUpClip;
     public int curr_ageStage {get; private set; } = 0; //used in getting list indexes below
     private int[] foodForNext_ageStage = {3, 5, 60}; //to teenfish, to adultfish, to gemfish                             
     public float curr_foodAte = 0; //so far
@@ -199,6 +200,7 @@ public class Guppy_Stats : FishStats_ParentClass
         //sprite
         //
         StartCoroutine(ChangeGuppySize(spriteGrowthFor_ageStage[curr_ageStage])); 
+        AudioManager.instance.PlaySoundFXClip(ageUpClip, transform, 1f, 1f);
         
         //reset
         curr_foodAte = 0;
