@@ -24,6 +24,7 @@ public class Guppy_Stats : FishStats_ParentClass
 
     // --------------------------------- age related -------------------------------------------//  
     [SerializeField] protected AudioClip ageUpClip;
+    [SerializeField] protected AudioClip ateClip;
     public int curr_ageStage {get; private set; } = 0; //used in getting list indexes below
     private int[] foodForNext_ageStage = {3, 5, 60}; //to teenfish, to adultfish, to gemfish                             
     public float curr_foodAte = 0; //so far
@@ -178,6 +179,10 @@ public class Guppy_Stats : FishStats_ParentClass
 
 
     private void Ate(){
+
+        //play eating sound
+        AudioManager.instance.PlaySoundFXClip(ateClip, transform, 1f, 1f);
+
         if(updateAge){
 
             //increment food ate

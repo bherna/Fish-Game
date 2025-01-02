@@ -112,6 +112,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2be5c8148c6554e4e9bbe83cc93be07f, type: 3}
   - {fileID: 8300000, guid: 2d8891c6bf9a8604fbbf1d07ac7ab3ef, type: 3}
   - {fileID: 8300000, guid: cd7cb47debcdc47479c4e4fd3e9a163f, type: 3}
+  eggPiece: {fileID: 1916760180823262736, guid: 0f7cbe2a4c611c248b5910d41b57ae04, type: 3}
 --- !u!1 &5344743453136648465
 GameObject:
   m_ObjectHideFlags: 0

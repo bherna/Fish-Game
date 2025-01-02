@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.PlayerLoop;
 
 
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
@@ -12,6 +13,9 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
     //the three sound effects when buying
     [SerializeField] AudioClip[] eggPieces_audioClips;
+
+    //egg piece gamobject to spawn into tank
+    [SerializeField] GameObject eggPiece;
 
 
     //egg pieces sprite and prices associated
@@ -78,7 +82,13 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             //show we bought, with sound effect as well
             AudioManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
 
-            //----- ---- update index LAST ---- ---- //
+            //spawn egg piece
+            var newEggPiece = Instantiate(eggPiece, Vector2.zero, Quaternion.identity);
+            newEggPiece.GetComponent<EggPiece>().index.Add(obj_index);
+            newEggPiece.GetComponent<EggPiece>().newSprite = eggSprites[obj_index];
+
+
+            //----- ---- update index (LAST, else we break) ---- ---- //
             obj_index += 1;
 
             //update tooltip if needed

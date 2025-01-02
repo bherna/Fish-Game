@@ -421,6 +421,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8293533338295589413, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -7272156892337906217, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -6210841925353007007, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -5380195307793382766, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.036
@@ -432,6 +444,14 @@ PrefabInstance:
     - target: {fileID: -5332579957641150712, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: -831720868117892703, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -689956693155279541, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -446720966362081643, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_LocalScale.x
@@ -449,6 +469,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.17
       objectReference: {fileID: 0}
+    - target: {fileID: -53704942158011319, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 202881532516077794, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.07
@@ -457,9 +481,21 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.06
       objectReference: {fileID: 0}
+    - target: {fileID: 772060674402695491, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_Name
       value: tank1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3622105037399643269, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5388491257721482645, guid: 7756009418ab67f4192893fa0ed0a7e5, type: 3}
       propertyPath: m_LocalPosition.y
