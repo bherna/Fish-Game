@@ -57,6 +57,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //ep_0 should not enter this
         var ep_n = other.gameObject.GetComponent<EggPiece>();
         if(
+            ep_n != null &&
             eggState == EggPiece_States.Dropped &&
             ep_n.index.Contains(index[0]-1))
         {
@@ -94,7 +95,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     //----------------------------------------------------------  mouse drag related ---------------------------
     public void OnBeginDrag(PointerEventData data){
-
+        Debug.Log("wereking");
         //change to grabbed state
         eggState = EggPiece_States.Grabbed;
 
@@ -102,12 +103,13 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     }
     public void OnDrag(PointerEventData data){
-
+Debug.Log("wereking");
         //now just follow the mouse position
         transform.position = Controller_Player.instance.mousePos;
 
     }
     public void OnEndDrag(PointerEventData data){
+        Debug.Log("wereking");
         //drop state
         eggState = EggPiece_States.Dropped;
 
