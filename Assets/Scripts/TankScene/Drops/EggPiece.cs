@@ -39,6 +39,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     public Sprite newSprite; // used in accepting new sprite from controller;
     private SpriteRenderer sr;
+    private Rigidbody2D rb;
 
 
     private void Start() {
@@ -46,6 +47,9 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //get sprite renderer
         sr = GetComponent<SpriteRenderer>();
         sr.sprite = newSprite;
+
+        rb = GetComponent<Rigidbody2D>();
+
     }
 
 
@@ -95,7 +99,8 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     //----------------------------------------------------------  mouse drag related ---------------------------
     public void OnBeginDrag(PointerEventData data){
-        Debug.Log("wereking");
+        Debug.Log(string.Format("gravity: %d",rb.gravityScale));
+        rb.gravityScale = 0;
         //change to grabbed state
         eggState = EggPiece_States.Grabbed;
 
@@ -103,13 +108,14 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     }
     public void OnDrag(PointerEventData data){
-Debug.Log("wereking");
+        Debug.Log("wereking");
         //now just follow the mouse position
         transform.position = Controller_Player.instance.mousePos;
 
     }
     public void OnEndDrag(PointerEventData data){
         Debug.Log("wereking");
+        rb.gravityScale = 1;
         //drop state
         eggState = EggPiece_States.Dropped;
 
