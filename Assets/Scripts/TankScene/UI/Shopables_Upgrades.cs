@@ -30,7 +30,7 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
         }
 
         //update sprite
-        currSprite.sprite = sprites[index_array];
+        currUISprite.sprite = sprites[index_array];
     }
 
 
@@ -67,7 +67,7 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
 
                 //update sprite + cost
                 index_array++;
-                currSprite.sprite = sprites[index_array];
+                currUISprite.sprite = sprites[index_array];
 
                 //upgrade
                 Controller_Food.instance.Upgrade_FoodPower();

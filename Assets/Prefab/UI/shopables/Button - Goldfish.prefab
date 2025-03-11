@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e84670bd74fad6e47b49ead384e94084, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currSprite: {fileID: 1606334470267902956}
+  currUISprite: {fileID: 1606334470267902956}
   buySoundClip: {fileID: 8300000, guid: 9e29f46bd8bbd9942a2c57c6a6d3e70b, type: 3}
   fishPrice: 20
   fishType: 0

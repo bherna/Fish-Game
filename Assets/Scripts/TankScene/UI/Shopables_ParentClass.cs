@@ -7,7 +7,7 @@ public abstract class Shopables_ParentClass : MonoBehaviour
 {
 
     //the currently displayed sprite for this button
-    [SerializeField] protected Image currSprite;
+    [SerializeField] protected Image currUISprite;
 
     //sound effect when buying things
     [SerializeField] protected AudioClip buySoundClip;

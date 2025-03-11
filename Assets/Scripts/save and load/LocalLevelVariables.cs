@@ -86,7 +86,7 @@ public static class LocalLevelVariables
     }
 
 
-    public static PetNames GetPetUnlock(){
+    public static PetNames GetUnlockPet_Enum(){
 
         if(flag){return PetNames.SchoolTeacher;}
 
@@ -96,13 +96,13 @@ public static class LocalLevelVariables
         return petToUnlock;
     }
     
-    public static string GetPetUnlock_AsString(){
+    public static string GetUnlockPet_Name(){
         if(flag){return null;}
 
         return wholeJsonScript.petNameString;
     }
 
-    public static int[] GetlevelUnlock(){
+    public static int[] GetUnlockLevel(){
         if(flag){return null;}
         return wholeJsonScript.levelUnlock;
     }

@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0e0a57e7804c0e4880f4e4205733d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currSprite: {fileID: 7271032766084645241}
+  currUISprite: {fileID: 7271032766084645241}
   buySoundClip: {fileID: 8300000, guid: b63bae6b7a9a42e4ea441084ea798eee, type: 3}
   prices: 1e0000006400000000000000
   sprites:

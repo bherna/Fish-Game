@@ -19,7 +19,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
 
     //egg pieces sprite and prices associated
-    private Sprite[] eggSprites;
+    public Sprite[] eggSprites;
     private int[] eggPrices;
 
     //current objective index
@@ -55,10 +55,21 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         eggPrices = LocalLevelVariables.GetEggPiecesPrices();
         SetEggSprites();
         
-        //update sprite
-        currSprite.sprite = eggSprites[obj_index];
 
-    
+        //fill in the sprite list for egg pieces to purchase
+        //resources/eggsprites/petname/petname_i
+        string filePath = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetUnlockPet_Name());
+        eggSprites = new Sprite[3];
+
+        for(int i = 0; i < 3; i++){
+            //this should give
+            eggSprites[i] = Resources.Load<Sprite>(filePath+(i+1).ToString());
+
+        }
+
+        //update sprite
+        currUISprite.sprite = eggSprites[obj_index];
+
     }
 
     
@@ -103,11 +114,11 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
                 //*** level complete ***
 
                 //new level should be unlocked and new pet?
-                int[] worldLevel = LocalLevelVariables.GetlevelUnlock();
+                int[] worldLevel = LocalLevelVariables.GetUnlockLevel();
                 LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
 
                 //new pet
-                var pet = LocalLevelVariables.GetPetUnlock();
+                var pet = LocalLevelVariables.GetUnlockPet_Enum();
                 PetsAccess.UnlockPet_Access(pet);
 
                 //save game
@@ -118,7 +129,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             }
             else{
                 //update sprite
-                currSprite.sprite = eggSprites[obj_index];
+                currUISprite.sprite = eggSprites[obj_index];
 
             }
         }
@@ -141,7 +152,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
     private void SetEggSprites(){
 
-        string path = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetPetUnlock_AsString());
+        string path = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetUnlockPet_Name());
         //Debug.Log(path);
 
         Sprite[] newSprites = new Sprite[]{
