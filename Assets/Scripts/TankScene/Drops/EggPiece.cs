@@ -132,6 +132,12 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         sr.sprite = Resources.Load<Sprite>(newSprite);
 
+
+        //did we finish assembling?
+        if(index.Count >= Controller_Objective.instance.final_obj){
+            Controller_Objective.instance.LevelComplete();
+        }
+
     }
 
 

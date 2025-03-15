@@ -109,21 +109,6 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
                 //deactivate button
                 GetComponent<Button>().interactable = false;
-
-                //*** level complete ***
-
-                //new level should be unlocked and new pet?
-                int[] worldLevel = LocalLevelVariables.GetUnlockLevel();
-                LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
-
-                //new pet
-                var pet = LocalLevelVariables.GetUnlockPet_Enum();
-                PetsAccess.UnlockPet_Access(pet);
-
-                //save game
-                SaveLoad.SaveGame();
-
-                GameDone();
                 
             }
             else{
@@ -137,6 +122,23 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             //Debug.Log("Not enough money");
         }
         
+    }
+
+    public void LevelComplete(){
+        //*** level complete ***
+
+        //new level should be unlocked and new pet?
+        int[] worldLevel = LocalLevelVariables.GetUnlockLevel();
+        LevelsAccess.UnlockLevel_Access(worldLevel[0], worldLevel[1]);
+
+        //new pet
+        var pet = LocalLevelVariables.GetUnlockPet_Enum();
+        PetsAccess.UnlockPet_Access(pet);
+
+        //save game
+        SaveLoad.SaveGame();
+
+        GameDone();
     }
 
     //run this when game is over
