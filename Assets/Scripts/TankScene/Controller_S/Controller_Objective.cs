@@ -1,8 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using System;
-using UnityEngine.PlayerLoop;
+
 
 
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
@@ -27,7 +26,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
     //final objective index
     //there will always be 3 pieces to buy
-    private int final_obj = 3;
+    public int final_obj {get; private set;} = 3;
 
 
 
@@ -63,7 +62,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
         for(int i = 0; i < 3; i++){
             //this should give
-            eggSprites[i] = Resources.Load<Sprite>(filePath+(i+1).ToString());
+            eggSprites[i] = Resources.Load<Sprite>(filePath+i.ToString());
 
         }
 
