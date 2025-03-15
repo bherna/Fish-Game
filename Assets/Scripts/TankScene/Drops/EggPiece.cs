@@ -62,10 +62,6 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         if(ep_n == null){
             return;
         }
-        else{
-            Debug.Log("WE good");
-        }
-
 
 
         //if we are hovering over an egg piece or dropping in
@@ -82,14 +78,21 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 // if we are the ep_0, then don't check lower bound
                 // if we are ep_max, then don't check upper bound
 
-                if((index[0] > 0 && ep_n.index.Contains(index[0]-1)) ||
-                    (index[0] < Controller_Objective.instance.final_obj && ep_n.index.Contains(index[0]+1))
-                    ){
-                    //then combine
-                    //by updating ep_n sprite + increment our index
-                    ep_n.AttachSprite(index);
-                    //delete self
-                    Destroy(gameObject);
+
+                //for each index in this dropped ep
+                foreach(int i in index){
+                    
+                    //index[0] > 0, we check for 0 sincec thats the first ep_n possible
+                    if((i > 0 && ep_n.index.Contains(i-1)) ||
+                        (i < Controller_Objective.instance.final_obj-1 && ep_n.index.Contains(i+1))
+                        ){
+                        //then combine
+                        //by updating ep_n sprite + increment our index
+                        ep_n.AttachSprite(index);
+                        //delete self
+                        Destroy(gameObject);
+                        break;//incase we dont stop on destroy
+                    }
                 }
                 break;
                 
@@ -105,10 +108,8 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
 
 
-    //if we are ep_, then we have access to these functins
+    //this function will only be called on collided egg peices
     public void AttachSprite(List<int> new_indexs){
-
-        Debug.Log("we attached");
 
         //attach all new ep_indexs to the lower index
         //if new ep_index is lower than index[0], then make that our new ep_base
@@ -123,8 +124,14 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         }
 
         //update sprite
-        //idk yet
-        Debug.Log("COMbinesddeddd");
+        index.Sort();
+        string newSprite = string.Format("EggsSprites/{0}/{0}", LocalLevelVariables.GetUnlockPet_Name());
+        foreach(int i in index){
+            newSprite = newSprite+"_"+i.ToString();
+        }
+
+        sr.sprite = Resources.Load<Sprite>(newSprite);
+
     }
 
 
