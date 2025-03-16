@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEditor.UI;
+using Unity.VisualScripting;
 
 
 
@@ -38,15 +39,21 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private EggPiece_States eggState = EggPiece_States.Idle;
 
     public Sprite newSprite; // used in accepting new sprite from controller;
-    private SpriteRenderer sr;
+    private SpriteRenderer EggPieceSprite; //visual representation of our index[].total
+    public SpriteRenderer EggShellSprite; //when onHover, this will show up 
     private Rigidbody2D rb;
 
 
     private void Start() {
         
         //get sprite renderer
-        sr = GetComponent<SpriteRenderer>();
-        sr.sprite = newSprite;
+        //eggpiece
+        EggPieceSprite = GetComponent<SpriteRenderer>();
+        EggPieceSprite.sprite = newSprite;
+
+        //egg shell
+        EggShellSprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        ChangeTransparency(0);
 
         rb = GetComponent<Rigidbody2D>();
 
@@ -71,6 +78,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 return;
             case EggPiece_States.Grabbed:
                 //then make the collidee show its being hovered on, by highlighting complete egg as bg
+                ep_n.ChangeTransparency(0.6f);
                 break;
 
             case EggPiece_States.Dropped:
@@ -101,10 +109,28 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                 break;
         }
         
-            
+    }
+
+    void OnCollisionExit2D(Collision2D other){
+
+        //grab collidee's egg script
+        var ep_n = other.gameObject.GetComponent<EggPiece>();
+
+        //if none, then return
+        if(ep_n == null){
+            return;
+        }
+
+        ep_n.ChangeTransparency(0);
+    }
+    
 
 
-        
+    //does what the function is called, but only changes the egg shell alpha
+    //used in onhover logic
+    private void ChangeTransparency(float alphaValue){
+
+        EggShellSprite.color = new Color(0.95f, 0.49f, 0.54f, alphaValue); //set alpha to 0
     }
 
 
@@ -130,7 +156,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             newSprite = newSprite+"_"+i.ToString();
         }
 
-        sr.sprite = Resources.Load<Sprite>(newSprite);
+        EggPieceSprite.sprite = Resources.Load<Sprite>(newSprite);
 
 
         //did we finish assembling?
