@@ -57,10 +57,10 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
         //fill in the sprite list for egg pieces to purchase
         //resources/eggsprites/petname/petname_i
-        string filePath = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetUnlockPet_Name());
+        string filePath = string.Format("EggsSprites/EggCracks/Egg_");
         eggSprites = new Sprite[3];
 
-        for(int i = 0; i < 3; i++){
+        for(int i = 0; i < final_obj; i++){
             //this should give
             eggSprites[i] = Resources.Load<Sprite>(filePath+i.ToString());
 
@@ -95,7 +95,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             //spawn egg piece
             var newEggPiece = Instantiate(eggPiece, Vector2.zero, Quaternion.identity);
             newEggPiece.GetComponent<EggPiece>().index.Add(obj_index);
-            newEggPiece.GetComponent<EggPiece>().newSprite = eggSprites[obj_index];
+            
 
 
             //----- ---- update index (LAST, else we break) ---- ---- //

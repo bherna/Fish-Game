@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
-using UnityEditor.UI;
-using Unity.VisualScripting;
+
 
 
 
@@ -37,25 +36,28 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     ///idle is the default state an egg piece starts as, since its not grabbed or dropped
     enum EggPiece_States {Idle, Grabbed, Dropped};
     private EggPiece_States eggState = EggPiece_States.Idle;
-
-    public Sprite newSprite; // used in accepting new sprite from controller;
-    private SpriteRenderer EggPieceSprite; //visual representation of our index[].total
-    public SpriteRenderer EggShellSprite; //when onHover, this will show up 
+    private SpriteMask EggPieceMask; //visual representation of our index[].total (total cracks we are using)
+    private SpriteRenderer EggSilhouette; //when onHover, this will show up 
     private Rigidbody2D rb;
+    public CapsuleCollider2D crackCollider;
 
 
     private void Start() {
         
-        //get sprite renderer
-        //eggpiece
-        EggPieceSprite = GetComponent<SpriteRenderer>();
-        EggPieceSprite.sprite = newSprite;
-
-        //egg shell
-        EggShellSprite = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
+        //set sprite renderers
+        //egg silhouette
+        EggSilhouette = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
         ChangeTransparency(0);
 
+        //eggpiece crack mask
+        EggPieceMask = transform.GetChild(1).gameObject.GetComponent<SpriteMask>(); //update what crack we are using
+        SetPetEgg();
+
+        //rigidbody
         rb = GetComponent<Rigidbody2D>();
+
+        //collider
+        crackCollider = GetComponent<CapsuleCollider2D>();
 
     }
 
@@ -126,11 +128,11 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     
 
 
-    //does what the function is called, but only changes the egg shell alpha
+    //does what the function is called, but only changes the egg silhouette alpha
     //used in onhover logic
     private void ChangeTransparency(float alphaValue){
 
-        EggShellSprite.color = new Color(0.95f, 0.49f, 0.54f, alphaValue); //set alpha to 0
+        EggSilhouette.color = new Color(0.95f, 0.49f, 0.54f, alphaValue); //set alpha to 0
     }
 
 
@@ -149,33 +151,56 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
             index.Add(i);
         }
 
-        //update sprite
-        index.Sort();
-        string newSprite = string.Format("EggsSprites/{0}/{0}", LocalLevelVariables.GetUnlockPet_Name());
-        foreach(int i in index){
-            newSprite = newSprite+"_"+i.ToString();
-        }
-
-        EggPieceSprite.sprite = Resources.Load<Sprite>(newSprite);
-
+        //update our egg to display all pieces we combined now
+        UpdateCracks();
 
         //did we finish assembling?
         if(index.Count >= Controller_Objective.instance.final_obj){
             Controller_Objective.instance.LevelComplete();
         }
+    }
+
+
+    private void UpdateCracks(){
+
+        //update sprite
+        index.Sort();
+        string newSprite = string.Format("EggsSprites/EggCracks/Egg");
+        string item = "";
+        foreach(int i in index){
+            item = item+"_"+i.ToString();
+        }
+
+        EggPieceMask.sprite = Resources.Load<Sprite>(newSprite+item);
+
+        //update the collision box
+        crackCollider.offset = EggColliders.crack1["Egg"+item].offset;
+        crackCollider.size = EggColliders.crack1["Egg"+item].size;
+        crackCollider.direction = EggColliders.crack1["Egg"+item].orientation;
+        
 
     }
 
 
+    //sets the crack type and what pet egg art to use
+    public void SetPetEgg(){
 
+        //update the acual pet egg we are using (not the crack type)
+        string filePath = string.Format("EggsSprites/{0}_Full", LocalLevelVariables.GetUnlockPet_Name());
+        Sprite petEgg = Resources.Load<Sprite>(filePath);
+        transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = petEgg;
 
-
+        //update the sprite crack to use
+        UpdateCracks();
+    }
 
 
 
     //----------------------------------------------------------  mouse drag related ---------------------------
     public void OnBeginDrag(PointerEventData data){
         rb.gravityScale = 0;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        transform.rotation = new Quaternion(0,0,0,0);
         //change to grabbed state
         eggState = EggPiece_States.Grabbed;
 
@@ -189,6 +214,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     }
     public void OnEndDrag(PointerEventData data){
         rb.gravityScale = 1;
+        rb.constraints = RigidbodyConstraints2D.None;
         //drop state
         eggState = EggPiece_States.Dropped;
 
