@@ -87,7 +87,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
 
             //show we bought, with a pop up
-            Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", eggPrices[obj_index]));
+            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", eggPrices[obj_index]));
 
             //show we bought, with sound effect as well
             AudioManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
@@ -124,7 +124,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         
     }
 
-    public void LevelComplete(){
+    public void LevelComplete(Vector2 position){
         //*** level complete ***
 
         //new level should be unlocked and new pet?
@@ -138,15 +138,24 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         //save game
         SaveLoad.SaveGame();
 
-        GameDone();
+        HatchEggScene(position);
     }
 
-    //run this when game is over
-    public void GameDone(){
+    //run this when game is over and we have an egg to hatch
+    public void HatchEggScene(Vector2 position){
 
         //show stats
         //postgamepanel should let the player exit to main menu
         Controller_Timer.instance.StopTimer();
+
+        //before we show the exit level screen, we want to do an animation 
+        //of taking the completed egg and waiting for it to hatch into our new pet
+        //
+        Controller_PopUp.instance.StartEggHatch(position);
+    }
+
+    //let player exit level, by activating the ui element that has the return to main menu button
+    public void ActivatePostEndGameUI(){
         postGamePanel.SetActive(true);
     }
 

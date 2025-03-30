@@ -161,3 +161,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasRecTrans: {fileID: 2814843345185997375}
   textPopUp: {fileID: 6089214943604285427, guid: 09803cbd6d293f14981da61f960fe13d, type: 3}
+  eggPopUp: {fileID: 1739314262256482120, guid: 5139f20d33ce1944db8a731c3c6d7fd7, type: 3}

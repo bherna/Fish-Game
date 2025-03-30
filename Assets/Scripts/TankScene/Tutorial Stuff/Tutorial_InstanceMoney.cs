@@ -66,7 +66,7 @@ public class Tutorial_InstanceMoney : MonoBehaviour
         yield return new WaitForSeconds(seconds);
 
         //instantiate text pop up
-        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}", moneyToAdd));
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyToAdd));
         Controller_Wallet.instance.AddMoney(moneyToAdd);
         //destroy obj
         Destroy(gameObject);

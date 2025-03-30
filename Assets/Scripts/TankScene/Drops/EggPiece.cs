@@ -156,7 +156,8 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         //did we finish assembling?
         if(index.Count >= Controller_Objective.instance.final_obj){
-            Controller_Objective.instance.LevelComplete();
+            Controller_Objective.instance.LevelComplete(transform.position);
+            //destory self
         }
     }
 

@@ -31,7 +31,7 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
 
             
             //either way we are going to show price so
-            Controller_PopUp.instance.CreatePopUp(string.Format("- {0}", fishPrice));
+            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", fishPrice));
             //and sound
             AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
 

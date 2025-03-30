@@ -37,7 +37,7 @@ public class MoneyValue : MonoBehaviour, IPointerDownHandler
         AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
         
         //instantiate text pop up
-        Controller_PopUp.instance.CreatePopUp(string.Format("+ {0}",moneyValue));
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}",moneyValue));
         //destroy
         Destroy(gameObject);
     }

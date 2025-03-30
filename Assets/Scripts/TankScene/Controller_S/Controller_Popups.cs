@@ -17,6 +17,7 @@ public class Controller_PopUp : MonoBehaviour
     //
     [SerializeField] RectTransform canvasRecTrans; //the canvas-ui object
     [SerializeField] GameObject textPopUp;
+    [SerializeField] GameObject eggPopUp;
 
     //single ton this class
     public static Controller_PopUp instance {get; private set; }
@@ -37,11 +38,11 @@ public class Controller_PopUp : MonoBehaviour
 
 
     //all we need is other  classes to reference the popup creation
-    public void CreatePopUp(string displayText){
+    public void CreateTextPopUp(string displayText){
 
         //create a pop up
         var popup = Instantiate(textPopUp);
-        popup.transform.SetParent(transform); //do this before setting position atleast
+        popup.transform.SetParent(transform); //do this before setting position atleast (else we are placed at the bottom of entire stack, outside of ui canvas)
         popup.GetComponent<TextPopUp>().UpdateText(displayText);
 
 
@@ -62,5 +63,30 @@ public class Controller_PopUp : MonoBehaviour
         popup.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
         
         //Input.mousePosition + Vector3.right;
+    }
+
+
+    //same as this one, but controller objective will only use this (assuming)
+    //used in creating a new ui egg that slowly centers on screen, given a starting position
+    // (will always be the same size as the one in the tank)
+    //how this is going to be done:
+    //  - assuming the egg that called level complete is destroyed, we take its position
+    //  - create a new UI version of the completed egg
+    //  - start to move and zoom egg into desired position (middle of screen-ish)
+    //  - remove saturation and pop it open (this will be place holder animation untill I learn to generalized egg hatches)
+    //  - show new pet unlocked and name
+    //  - continue ....
+    public void StartEggHatch(Vector2 position){
+
+        //create egg
+        var egg = Instantiate(eggPopUp);
+        egg.transform.SetParent(transform); //do this before setting position atleast (else we are placed at the bottom of entire stack, outside of ui canvas)
+
+        //update start position to match that of the in tank egg
+        Vector3 startPos = transform.InverseTransformPoint(position);
+        Vector2 endPos = new Vector2(canvasRecTrans.rect.width/2, canvasRecTrans.rect.height/2 - 100);
+        egg.GetComponent<EggPopUp>().StartEndPoints(startPos, endPos);
+        egg.GetComponent<EggPopUp>().StartMoving();
+
     }
 }
