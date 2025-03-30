@@ -83,7 +83,8 @@ public class Controller_PopUp : MonoBehaviour
         egg.transform.SetParent(transform); //do this before setting position atleast (else we are placed at the bottom of entire stack, outside of ui canvas)
 
         //update start position to match that of the in tank egg
-        Vector3 startPos = transform.InverseTransformPoint(position);
+        Vector2 viewportPosition = Camera.main.WorldToViewportPoint(position);   
+        Vector2 startPos = new Vector2(viewportPosition.x * canvasRecTrans.sizeDelta.x, viewportPosition.y * canvasRecTrans.sizeDelta.y);
         Vector2 endPos = new Vector2(canvasRecTrans.rect.width/2, canvasRecTrans.rect.height/2 - 100);
         egg.GetComponent<EggPopUp>().StartEndPoints(startPos, endPos);
         egg.GetComponent<EggPopUp>().StartMoving();

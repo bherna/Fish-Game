@@ -10,7 +10,7 @@ public class EggPopUp : MonoBehaviour
 
 
     // -------------------------------------------- used in editing position --------------------------------------------
-    private const int timeToTake_Position = 4; //number of seconds it should take our egg to reach center of screen (useful if we have a tune to play)
+    private const int timeToTake_Position = 3; //number of seconds it should take our egg to reach center of screen (useful if we have a tune to play)
     private float currTimeAT = 0; //in interpolation
     private Vector2 startPos; //in interpolation
     private Vector2 endPos; 
@@ -18,11 +18,11 @@ public class EggPopUp : MonoBehaviour
     // -------------------------------------------- used in deSaturate() --------------------------------------------
     private Image petEgg; // image - pet egg child 
     private Color eggAlpha; //used in pop
-    private const int timeToTake_Desaturation = 5;
+    private const int timeToTake_Desaturation = 4;
 
     // -------------------------------------------- used in Pop() --------------------------------------------
     private const int timeToTake_Pop = 1;
-    private const float popHeight = 2;
+    private const float popHeight = 100;
 
 
 
@@ -46,7 +46,7 @@ public class EggPopUp : MonoBehaviour
         transform.position = startPos;
         this.startPos = startPos;
         this.endPos = endPos;
-        Debug.Log(string.Format("StartPos: {0}, End pos: {1}", this.startPos, this.endPos));
+
     }
 
     //lets pop up controller have contol of when to start moving the sprite.
@@ -146,10 +146,10 @@ public class EggPopUp : MonoBehaviour
             eggAlpha.a = Mathf.Lerp(0, 100, interpolationRatio); 
 
             //up down animation
-            float offset = popHeight * Mathf.Sin(interpolationRatio * 180);
+            float offset = popHeight * Mathf.Sin(interpolationRatio * Mathf.PI);
             Vector2 vZero = endPos;
-            vZero.y = offset;
-            transform.position = vZero;
+            vZero.y += offset;
+            transform.GetChild(1).transform.position = vZero;
             
             //update
             currTimeAT += Time.deltaTime;
