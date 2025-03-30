@@ -11,7 +11,7 @@ public class EggPopUp : MonoBehaviour
 
     // -------------------------------------------- used in editing position --------------------------------------------
     private const int timeToTake_Position = 3; //number of seconds it should take our egg to reach center of screen (useful if we have a tune to play)
-    private float currTimeAT = 0; //in interpolation
+    public float currTimeAT = 0; //in interpolation
     private Vector2 startPos; //in interpolation
     private Vector2 endPos; 
 
@@ -22,7 +22,7 @@ public class EggPopUp : MonoBehaviour
 
     // -------------------------------------------- used in Pop() --------------------------------------------
     private const int timeToTake_Pop = 1;
-    private const float popHeight = 100;
+    private const int popHeight = 100;
 
 
 
@@ -115,7 +115,8 @@ public class EggPopUp : MonoBehaviour
         if( currTimeAT <= timeToTake_Desaturation){
 
             float interpolationRatio = currTimeAT / timeToTake_Desaturation;
-            eggAlpha.a = Mathf.Lerp(100, 0, interpolationRatio); 
+            eggAlpha.a = Mathf.Lerp(1, 0, interpolationRatio); 
+            petEgg.color = eggAlpha; 
 
             currTimeAT += Time.deltaTime;
 
@@ -143,7 +144,8 @@ public class EggPopUp : MonoBehaviour
 
             //re-add alpha to pet image
             float interpolationRatio = currTimeAT / timeToTake_Pop;
-            eggAlpha.a = Mathf.Lerp(0, 100, interpolationRatio); 
+            eggAlpha.a = Mathf.Lerp(0, 1, interpolationRatio); 
+            petEgg.color = eggAlpha; 
 
             //up down animation
             float offset = popHeight * Mathf.Sin(interpolationRatio * Mathf.PI);
