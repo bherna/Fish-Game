@@ -136,7 +136,6 @@ public class TutorialReaderParent : MonoBehaviour
     //if our i doesn't match our index, then we dont have the correct trigger
     protected void TriggerTemplate(int i){
 
-
         if(waiting){
 
             //if we are in the correct INDEX, and we are WAITING for the trigger to go off
@@ -145,13 +144,6 @@ public class TutorialReaderParent : MonoBehaviour
                 //event was triggered
                 NextDialogue();
 
-            }
-            //if our i is negative
-            //this means that we have failed to do what we wanted
-            else if(i*-1 == index ){
-                
-                //ALT event was triggered
-                AltDialogue(i);
             }
 
         }
@@ -170,14 +162,48 @@ public class TutorialReaderParent : MonoBehaviour
                     while(ui_Dialogue.Click()){} //while more clicks repeat
                     NextDialogue();
                 }
+            }
+        }
+    }
 
-                else if(i*-1 == index){
+    //same logic as above, just that we are checking for alternative scripts, 
+    //since there can be multiple alternantives, we need a way to differ from each one,
+    // ( on an int is not possible, so we use a tuple)
+    //tuple (1, 2), 
+    // 1 == index we want to be in
+    // 2 == which alternative script we want to run off this, if correct index, alternatives start at 1
+    protected void TriggerTemplate((int, int) i){
+
+        if(waiting){
+
+            //if we are in the correct INDEX, and we are WAITING for the trigger to go off
+            //since we are a tuple, we were set off as an alternative trigger
+            //this means that we have failed to do what we wanted
+            //and so check if we are in the correct index first
+            if(i.Item1 == index ){
+                
+                //ALT event was triggered
+                AltDialogue(i.Item2);
+            }
+
+        }
+        else{
+            //else we are not  WAITING, 
+            //this means player is still reading/has the dialogue box open
+
+            //BUT, now they have the ability to skip the rest of the current section they are on
+            //IF they passed a certain part of the tutorial
+            if(ui_Dialogue.CanWeSkip()){
+
+                //if we made it to the skip part, 
+                //all we want to make sure we do is skip through the current dialouge until we have non left
+                //then reset into a next dialouge mode
+                if(i.Item1 == index){
                     while(ui_Dialogue.Click()){}
-                    AltDialogue(i);
+                    AltDialogue(i.Item2);
                 }
             }
         }
-
     }
 
     
@@ -188,7 +214,7 @@ public class TutorialReaderParent : MonoBehaviour
 
         //so we get next script
         index++;
-        ui_Dialogue.GetJsonScriptNumber(index.ToString());
+        ui_Dialogue.GetJsonScriptNumber(index, 0);
         //also enable the dialouge ui
         ui_Dialogue.ToggleDialogueBox(true);
         //reset waiting to false
@@ -201,10 +227,10 @@ public class TutorialReaderParent : MonoBehaviour
 
     //this is the same as the normal next dialogue function
     //but this one is for alt dialogue options, so we need to get the current index that this can alt into
-    protected void AltDialogue(int i){
+    protected void AltDialogue(int alt_i){
 
-        //so we stay in the same index, but get the script of ALT event which should be negative version of current index
-        ui_Dialogue.GetJsonScriptNumber(i.ToString());
+        //so we stay in the same index, but get the ALT script same index, just differ alt index
+        ui_Dialogue.GetJsonScriptNumber(index, alt_i);
         //also enable the dialouge ui
         ui_Dialogue.ToggleDialogueBox(true);
         //reset waiting to false again, since we don't want to lose reading ability

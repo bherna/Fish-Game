@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using TMPro;
+using System.Reflection;
 
 
 
@@ -37,7 +38,7 @@ public class UI_Dialogue : MonoBehaviour
         //set string to empty/ index to 0
         textUI.text = string.Empty;
 
-        return GetJsonScriptNumber("1");
+        return GetJsonScriptNumber(1, 0);
         
     }
 
@@ -45,16 +46,16 @@ public class UI_Dialogue : MonoBehaviour
     //Used in opening the next json file that holds our next script for tutorial
     //if the json file exsists, then we have a script to run, return true
     //else return false
-    //we also update our script in here, so we don't have to return it
+    //we also update our script in here, so we don't have to return it (just bool)
 
     //For each tutorial, there should be a list of json files
-    //The naming convention should be 'Tank_{0}-{1}'
-    //{0} == the tank world we are using, 
-    //{1} == this is the script index, we start at 1 and increment from there
-    public bool GetJsonScriptNumber(string scriptNum){
+    //The naming convention should be 'Script_{1}-{2}'
+    //{1} == the tutorial index, 
+    //{2} == the alternative in this index, if none, set to 0, 0 == main script to run vs 1,2,3,... are alternatives
+    public bool GetJsonScriptNumber(int scriptNum, int altNum){
 
         //Import in the json file that this tank_world-leve will use
-        string filePath = "Json/TutorialScripts/Level1-1/Tank_" + LocalLevelVariables.GetTankWorld_String()+"-"+scriptNum;
+        string filePath = string.Format("Json/TutorialScripts/{0}/Script_{1}-{2}", LocalLevelVariables.curr_level, scriptNum, altNum);
 
         //get the json file we want to read
         string targetFile = Resources.Load<TextAsset>(filePath).text;

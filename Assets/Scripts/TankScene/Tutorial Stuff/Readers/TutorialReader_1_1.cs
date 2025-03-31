@@ -289,7 +289,7 @@ public class TutorialReader_1_1 : TutorialReaderParent
     public override void GuppyStarved(Vector2 pos){
         //save the place die
         starvePos = pos;
-        TriggerTemplate(-3);
+        TriggerTemplate((3, 1));
     }
     
     //when a guppy poops their first coin (tutorial coin)
