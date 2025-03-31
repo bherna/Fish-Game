@@ -109,7 +109,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
                 }
 
                 //also check if this was a tutorial push
-                Controller_Tutorial.instance.GuppyHungry();
+                TutorialReaderParent.instance.GuppyHungry();
                 
             }
         }

@@ -54,7 +54,7 @@ public class UI_Dialogue : MonoBehaviour
     public bool GetJsonScriptNumber(string scriptNum){
 
         //Import in the json file that this tank_world-leve will use
-        string filePath = "Tutorial/Tank_" + LocalLevelVariables.GetTankWorld()+"-"+scriptNum;
+        string filePath = "Json/TutorialScripts/Level1-1/Tank_" + LocalLevelVariables.GetTankWorld_String()+"-"+scriptNum;
 
         //get the json file we want to read
         string targetFile = Resources.Load<TextAsset>(filePath).text;

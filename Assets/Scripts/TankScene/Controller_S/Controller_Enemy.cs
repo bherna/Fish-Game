@@ -125,7 +125,7 @@ public class Controller_Enemy : MonoBehaviour
         annoucement_ui.SetActive(true);
 
         //announce to controlle tutorial
-        Controller_Tutorial.instance.EnemyWaveStarting();
+        TutorialReaderParent.instance.EnemyWaveStarting();
         
         //wait atleast once,
         //keep waiting if :     - player is in tutorial and is currently reading the dialogue (so not waiting)
@@ -133,7 +133,7 @@ public class Controller_Enemy : MonoBehaviour
         do{
             yield return new WaitForSeconds(preAnnouncerTime);
         }
-        while(!Controller_Tutorial.instance.waiting && Controller_Tutorial.instance.tutorial_active);
+        while(!TutorialReaderParent.instance.waiting && Controller_Tutorial.instance.tutorial_active);
 
         //for each enemy in our current wave
         enemies = new List<GameObject>();
@@ -222,7 +222,7 @@ public class Controller_Enemy : MonoBehaviour
             //tell controller pets that enemy wave is over
             Controller_Pets.instance.Annoucement_EndIt(Event_Type.enemyWave);
             //tell tutorial we finished aswell
-            Controller_Tutorial.instance.EnemyWaveOver();
+            TutorialReaderParent.instance.EnemyWaveOver();
         }
         
     }

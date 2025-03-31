@@ -106,7 +106,10 @@ public class Controller_EscMenu : MonoBehaviour
         Esc_UI.SetActive(true);
 
         //if tutorial is active, hide from view
-        Controller_Tutorial.instance.HideTutorial(false);
+        //make sure it exists first
+        if(Controller_Tutorial.instance.tutorial_active){
+            TutorialReaderParent.instance.HideTutorial(false);
+        }
     }
 
     public void CloseMainMenu(){
@@ -124,7 +127,7 @@ public class Controller_EscMenu : MonoBehaviour
         Esc_UI.SetActive(false);
 
         //if tutorial is active, return its view
-        Controller_Tutorial.instance.HideTutorial(true);
+        TutorialReaderParent.instance.HideTutorial(true);
     }
 
 

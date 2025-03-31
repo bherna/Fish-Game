@@ -43,6 +43,6 @@ public class UI_ShopContainer : MonoBehaviour
     private void ListenForClick(int index){
 
         //return
-        Controller_Tutorial.instance.ShopButtonClick(index);
+        TutorialReaderParent.instance.ShopButtonClick(index);
     }
 }

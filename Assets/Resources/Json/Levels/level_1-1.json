@@ -16,6 +16,8 @@
 
     "startMoney": 100,
 
-    "eggPiecesPrices": [100, 200, 300]
+    "eggPiecesPrices": [100, 200, 300],
+
+    "tutorialToRun": true
 
 }

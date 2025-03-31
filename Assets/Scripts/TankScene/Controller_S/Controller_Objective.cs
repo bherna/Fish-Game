@@ -57,7 +57,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
         //fill in the sprite list for egg pieces to purchase
         //resources/eggsprites/petname/petname_i
-        string filePath = string.Format("EggsSprites/EggCracks/Egg_");
+        string filePath = string.Format("Eggs/EggCracks/Egg_");
         eggSprites = new Sprite[3];
 
         for(int i = 0; i < final_obj; i++){
@@ -162,7 +162,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
     private void SetEggSprites(){
 
-        string path = string.Format("EggsSprites/{0}/{0}_", LocalLevelVariables.GetUnlockPet_Name());
+        string path = string.Format("Eggs/{0}/{0}_", LocalLevelVariables.GetUnlockPet_Name());
         //Debug.Log(path);
 
         Sprite[] newSprites = new Sprite[]{

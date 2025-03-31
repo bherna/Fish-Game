@@ -166,7 +166,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         //update sprite
         index.Sort();
-        string newSprite = string.Format("EggsSprites/EggCracks/Egg");
+        string newSprite = string.Format("Eggs/EggCracks/Egg");
         string item = "";
         foreach(int i in index){
             item = item+"_"+i.ToString();
@@ -187,7 +187,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     public void SetPetEgg(){
 
         //update the acual pet egg we are using (not the crack type)
-        string filePath = string.Format("EggsSprites/{0}_Full", LocalLevelVariables.GetUnlockPet_Name());
+        string filePath = string.Format("Eggs/{0}_Full", LocalLevelVariables.GetUnlockPet_Name());
         Sprite petEgg = Resources.Load<Sprite>(filePath);
         transform.GetChild(1).transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().sprite = petEgg;
 

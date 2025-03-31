@@ -19,7 +19,7 @@ public class Coin_Tutorial : MoneyValue
 
 
         //controller tutorial
-        Controller_Tutorial.instance.CollectCoin();
+        TutorialReaderParent.instance.CollectCoin();
 
         //destroy
         Destroy(gameObject);

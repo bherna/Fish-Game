@@ -22,7 +22,7 @@ public class Guppy_Money_Tutorial : Guppy_Money
             Instantiate(coinType, pos, Quaternion.identity);
 
             //message tutorial
-            Controller_Tutorial.instance.GuppyDropCoin();
+            TutorialReaderParent.instance.GuppyDropCoin();
         }
     }
 }

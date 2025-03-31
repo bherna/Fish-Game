@@ -31,7 +31,7 @@ public class EggPopUp : MonoBehaviour
 
         //set pet egg sprite
         petEgg = transform.GetChild(1).gameObject.GetComponent<Image>();
-        string filePath = string.Format("EggsSprites/{0}_Full", LocalLevelVariables.GetUnlockPet_Name());
+        string filePath = string.Format("Eggs/{0}_Full", LocalLevelVariables.GetUnlockPet_Name());
         petEgg.sprite = Resources.Load<Sprite>(filePath);
 
 
@@ -125,7 +125,7 @@ public class EggPopUp : MonoBehaviour
         else{
 
             //update image to be new pet 
-            string filePath = string.Format("EggsSprites/{0}_Full", LocalLevelVariables.GetUnlockPet_Name()); //update to where pet animatins will be
+            string filePath = string.Format("Eggs/{0}_Full", LocalLevelVariables.GetUnlockPet_Name()); //update to where pet animatins will be
             petEgg.sprite = Resources.Load<Sprite>(filePath);
             
             //reset and move to next state

@@ -26,6 +26,8 @@ public class WholeJsonScript{
     public int startMoney;
 
     public int[] eggPiecesPrices;
+
+    public bool tutorialToRun;
 }
 
 
@@ -59,7 +61,7 @@ public static class LocalLevelVariables
     private static string LoadResourceTextfile()
     {
 
-        string filePath = "Levels/" + curr_level;
+        string filePath = "Json/Levels/" + curr_level;
 
         TextAsset targetFile = Resources.Load<TextAsset>(filePath);
 
@@ -67,14 +69,20 @@ public static class LocalLevelVariables
     }
 
     //return what tank we are in
-    public static string GetTankWorld(){
+    public static string GetTankWorld_String(){
         if(flag){return "0";}
         return Regex.Match(curr_level, @"\d+").Value;
     }
+    public static int GetTankWorld_Int(){
+        return int.Parse(GetTankWorld_String());
+    }
     //get the level we are in
-    public static string GetLevel(){
+    public static string GetLevel_String(){
         if(flag){return "0";}
         return Regex.Match(curr_level, @"\d+", RegexOptions.RightToLeft).Value;
+    }
+    public static int GetLevel_Int(){
+        return int.Parse(GetLevel_String());
     }
 
 
@@ -95,6 +103,7 @@ public static class LocalLevelVariables
 
         return petToUnlock;
     }
+
     
     public static string GetUnlockPet_Name(){
         if(flag){return null;}
@@ -115,6 +124,12 @@ public static class LocalLevelVariables
     public static int[] GetEggPiecesPrices(){
         if(flag){return null;}
         return wholeJsonScript.eggPiecesPrices;
+    }
+
+    //returns true if a tutorial exists for this level
+    public static bool ThereIsTutorial(){
+        if(wholeJsonScript == null){return false;}
+        return wholeJsonScript.tutorialToRun;
     }
 
 
