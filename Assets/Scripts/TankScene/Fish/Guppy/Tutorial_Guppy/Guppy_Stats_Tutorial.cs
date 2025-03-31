@@ -19,7 +19,7 @@ public class Guppy_Stats_Tutorial : Guppy_Stats
 
         //now we do the same for ageing
         //check to see if we are before the 6th index (learning about collecting coins)
-        if(TutorialReaderParent.instance.index < 6){
+        if(TutorialReaderParent.instance.index < 4){
             updateAge = false;
         }
         

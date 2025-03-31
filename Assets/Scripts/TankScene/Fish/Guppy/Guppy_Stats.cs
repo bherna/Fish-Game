@@ -157,12 +157,10 @@ public class Guppy_Stats : FishStats_ParentClass
     }
 
     private IEnumerator ChangeGuppySize(float newSizeDelta){
-        Debug.Log("Started grow");
 
         var newSize = current_size + newSizeDelta;
         //now loop
         while(current_size < newSize){
-            Debug.Log("growing...");
             //update size
             current_size += Time.deltaTime * 2;
             sprite_transform.transform.localScale = new Vector3(current_size, current_size, current_size);

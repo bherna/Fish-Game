@@ -57,6 +57,7 @@ public class Controller_Fish : MonoBehaviour
     }
     
 
+    //for all guppies in the tank, we increment 1 age stage, so baby -> teen and teen -> adults
     public void AddAge(){
 
         foreach(GameObject guppy in fish_list){
@@ -65,6 +66,7 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
+    //does what its called
     public void RemoveFish(GameObject fish){
 
         fish_list.Remove(fish);
@@ -72,6 +74,8 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
+    //gets a reference to one of the guppies we have in the tank
+    //this is useful for enemies to randomly choose a prey
     public Transform GetRandomFish(){
 
         //if fish list is empty
