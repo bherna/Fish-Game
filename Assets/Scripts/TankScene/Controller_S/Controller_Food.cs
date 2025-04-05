@@ -147,7 +147,7 @@ public class Controller_Food : MonoBehaviour
         return foodPellets_list.Count;
     }
 
-    public void Upgrade_foodMax(){
+    public void Upgrade_FoodMax(){
         maxFood += 1;
     }
 

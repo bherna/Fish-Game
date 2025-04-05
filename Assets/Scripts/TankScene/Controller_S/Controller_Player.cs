@@ -79,7 +79,7 @@ public class Controller_Player : MonoBehaviour
     }
 
 
-    public void Upgrade_gunPower() {
+    public void Upgrade_GunPower() {
         gunPower += 1;
     }
 

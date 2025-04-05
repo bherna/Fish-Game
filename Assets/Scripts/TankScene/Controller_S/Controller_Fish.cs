@@ -94,7 +94,7 @@ public class Controller_Fish : MonoBehaviour
     }
 
 
-    public void Upgrade_fishMax(){
+    public void Upgrade_FishMax(){
         maxFish += 1;
     }
 

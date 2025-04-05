@@ -39,28 +39,13 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
     //when button pushed to purchase
     public override void OnPurchase(){
 
-        //FIRST
-        //CAN WE BUY THE shopable
-        if(Controller_Wallet.instance.IsAffordable(prices[index_array])){
-
-            //purchase obj
-            Controller_Wallet.instance.SubMoney(prices[index_array]);
-            //visual
-            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", prices[index_array]));
-            //sound
-            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
-        }
-        else{
-            
-            //if not then return and null a null a null a dlfsaj
-            Debug.Log("Not enough money to buy upgrade: " + upgradeType.ToString());
-            return;
-        }
+        PrintTransaction();
 
         switch(upgradeType){
 
             case Upgrades.foodMax:
-                Controller_Food.instance.Upgrade_foodMax();
+
+                Controller_Food.instance.Upgrade_FoodMax();
                 break;
 
             case Upgrades.foodPower:
@@ -82,18 +67,34 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
 
             case Upgrades.FishTotal:
                 //????
-                Controller_Fish.instance.Upgrade_fishMax();
+                Controller_Fish.instance.Upgrade_FishMax();
                 break;
 
             case Upgrades.GunPower:
 
-                Controller_Player.instance.Upgrade_gunPower();
+                Controller_Player.instance.Upgrade_GunPower();
                 break;
                 
             default:
                 Debug.Log("no Upgrade was set...");
                 break;
         }
+    }
+
+    private void PrintTransaction(){
+
+        //FIRST
+        //CAN WE BUY THE shopable
+        if(Controller_Wallet.instance.IsAffordable(prices[index_array])){
+
+            //purchase obj
+            Controller_Wallet.instance.SubMoney(prices[index_array]);
+            //visual
+            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", prices[index_array]));
+            //sound
+            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
+        }
+    
     }
 
     public override void OnPointerEnter(PointerEventData eventData){

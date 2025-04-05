@@ -138,14 +138,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         //save game
         SaveLoad.SaveGame();
 
-        HatchEggScene(position);
-    }
-
-    //run this when game is over and we have an egg to hatch
-    public void HatchEggScene(Vector2 position){
-
-        //show stats
-        //postgamepanel should let the player exit to main menu
+        //stop timer for post stats
         Controller_Timer.instance.StopTimer();
 
         //before we show the exit level screen, we want to do an animation 
