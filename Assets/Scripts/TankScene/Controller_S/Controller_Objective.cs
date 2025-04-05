@@ -154,6 +154,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         Controller_PopUp.instance.StartEggHatch(position);
     }
 
+
     //let player exit level, by activating the ui element that has the return to main menu button
     public void ActivatePostEndGameUI(){
         postGamePanel.SetActive(true);

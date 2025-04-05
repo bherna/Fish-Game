@@ -1,10 +1,6 @@
 {
     "waves": 
     [
-        {
-            "secTillWaveSpawn": 1,
-            "enemies": ["Starfish"]
-        }
  
     ],
 

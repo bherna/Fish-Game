@@ -29,11 +29,6 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
         //is object affordable
         if(Controller_Wallet.instance.IsAffordable(fishPrice)){
 
-            
-            //either way we are going to show price so
-            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", fishPrice));
-            //and sound
-            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
 
             switch(fishType){
 
@@ -43,8 +38,10 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
                     //NOW make sure we arn't in tutorial mode
                     if(Controller_Tutorial.instance.tutorial_active){
                         //spawn tutorial version
+                        //if we can spawn a fish: pay price
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
                             Controller_Wallet.instance.SubMoney(fishPrice);
+                            PrintTransaction();
                         }
                     }
                     else{
@@ -52,6 +49,7 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
                         //if we can spawn a fish: pay price
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab, new Vector3(0, 4, transform.position.z))){
                             Controller_Wallet.instance.SubMoney(fishPrice);
+                            PrintTransaction();
                         }
                     }
                     
@@ -73,6 +71,15 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
             Debug.Log("Not enough money to buy fish. ");
         }
 
+    }
+
+    //if purchace was successfull, display visuals on screen/ears
+    private void PrintTransaction(){
+
+        //show price pop up
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", fishPrice));
+        //and sound pop up
+        AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
     }
 
 

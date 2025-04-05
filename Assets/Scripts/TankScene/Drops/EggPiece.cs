@@ -99,6 +99,10 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                         //then combine
                         //by updating ep_n sprite + increment our index
                         ep_n.AttachSprite(index);
+                        
+                        //send message to tutorial that we combined here too,
+                        TutorialReaderParent.instance.EggPieceCombined();
+
                         //delete self
                         Destroy(gameObject);
                         break;//incase we dont stop on destroy

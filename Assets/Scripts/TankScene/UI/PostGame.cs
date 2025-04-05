@@ -13,7 +13,13 @@ public class PostGame : MonoBehaviour
     private void Awake() {
         
         //once game is over we get activated
-        //so
+
+        //do we need to do tutorial stuff first?
+        if(TutorialReaderParent.instance.PostGameUI()){
+            //this should return true on tutorial 1-1
+            //now re-disable post game
+            gameObject.SetActive(false);
+        }
 
         //update our post game stats here:
         float finalTime = Controller_Timer.instance.GetFinalTime();

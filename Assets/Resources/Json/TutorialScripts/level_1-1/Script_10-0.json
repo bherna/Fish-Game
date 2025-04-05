@@ -3,13 +3,13 @@
     [
         "/player bought second peice",
 
-        "One more to go!",
+        "Now that there's two egg pieces in the tank, I can show you the power of combining!",
 
-        "/unlock enemy waves + wait for enemy wave to start.",
+        "Grab one egg piece of your choice and place it ontop of the other piece you didn't pick.",
 
-        "/funny thing, if we just have a json script with only comments, the dialoge breaks. SOOOO,",
+        "Pretty simple. ",
 
-        "/if we set the linecutoff to 0, and the enemy wave to start right away, we can ignore the message >:D."
+        "/wait for player to combine peices"
     ],
 
     "lineCutOff": 0,

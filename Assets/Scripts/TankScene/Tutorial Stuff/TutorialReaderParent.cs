@@ -134,7 +134,9 @@ public class TutorialReaderParent : MonoBehaviour
     //this function is set into each of the triggers
     //i = what index we are supposed to be in, (this is pretty much the json file # we are using, its also our case #)
     //if our i doesn't match our index, then we dont have the correct trigger
-    protected void TriggerTemplate(int i){
+
+    //we also return bool which checcks if we succcessfully triggerd (are waiting and correct index)
+    protected bool TriggerTemplate(int i){
 
         if(waiting){
 
@@ -143,9 +145,8 @@ public class TutorialReaderParent : MonoBehaviour
 
                 //event was triggered
                 NextDialogue();
-
+                return true;
             }
-
         }
         else{
             //else we are not  WAITING, 
@@ -162,8 +163,12 @@ public class TutorialReaderParent : MonoBehaviour
                     while(ui_Dialogue.Click()){} //while more clicks repeat
                     NextDialogue();
                 }
+                return true;
             }
         }
+        
+        //if we wern't  successfull, return false then
+        return false;
     }
 
     //same logic as above, just that we are checking for alternative scripts, 
@@ -295,6 +300,12 @@ public class TutorialReaderParent : MonoBehaviour
     public virtual void GuppyDropCoin(){}
     public virtual void CollectCoin(){}
     public virtual void EggNowAvailable(){}
+    public virtual void EggPieceCombined(){}
+    public virtual bool PostGameUI(){return false;}
+
+
+
+    //Level 1-3 triggers: ------------------------------------------------------------------------------------
     public virtual void EnemyWaveStarting(){}
     public virtual void EnemyWaveOver(){}
 }

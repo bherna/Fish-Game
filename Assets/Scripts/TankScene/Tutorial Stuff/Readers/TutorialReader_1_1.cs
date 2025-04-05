@@ -99,22 +99,22 @@ public class TutorialReader_1_1 : TutorialReaderParent
             case 10:
                 //10th section
                 //player bought second peice
-                //start enemy waves + wait for enemy wave to start
-                S_Null__UnlockEnemies();
+                //wait for player to combine egg peices
+                S_Basic();
                 break;
 
             case 11:
                 //11th section
-                //enemy wave started (annoucement)
-                //wait for player to finish the enemy wave
+                //player combines peices
+                //wait for post game ui is enabled
                 S_Basic();
                 break;
 
             case 12:
                 //12th section
-                //enemy waves is over
+                //post game ui is enabled  is up
                 //nothing
-                S_EnemysDead__EndTutorial();
+                S_PostGameUI__EndTutorial();
                 break;
 
             default:
@@ -242,15 +242,19 @@ public class TutorialReader_1_1 : TutorialReaderParent
 
 
     //this is the final script message, so we want to disable the tutorial after we finish reading
-    private void S_EnemysDead__EndTutorial(){
+    private void S_PostGameUI__EndTutorial(){
         if(!waiting){
             //then we have more words to read through
             //check if this next click ends the script
             KeepReading();
         }
         else{
+            //and enable postgame ui, since we close it 
+            Controller_Objective.instance.ActivatePostEndGameUI();
+            
             //we are done reading and so just end this
             Disable_Tutorial();
+
         }
     }
     
@@ -313,17 +317,23 @@ public class TutorialReader_1_1 : TutorialReaderParent
         TriggerTemplate(7);
     }
 
-    // enemywave trigger, when ever a new enemy wave starts, this is executed
-    public override void EnemyWaveStarting(){
+    // egg piece, trigger this one, player was able to successfully able to combine two egg pieces together
+    public override void EggPieceCombined(){
+
+        //on succccessfull combination
         TriggerTemplate(10);
     }
 
-    //once the last enemy is killed this function plays
-    public override void EnemyWaveOver(){
-        TriggerTemplate(11);
-    }
 
-    
+    //return triggertemplate bool
+    //  - if our trigger succccessfully went through, we return true
+    //  - else false on fails
+    //this only works on main script, alt scripts don't return anything
+    public override bool PostGameUI(){
+
+        //return true if we are in the correct index to trigger in
+        return TriggerTemplate(11);
+    }
 
     
 

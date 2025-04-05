@@ -1,15 +1,17 @@
 {
     "script":
     [
-        "/enemy wave is about to start (annoucement part).",
+        "/Player combines peices",
 
-        "Oh Oh. ",
+        "Nice!",
 
-        "Be ready! An enemy wave is about to start.",
-            
-        "Left click on enemies to lazer them to death.",
+        "Remember . . . . Combining the egg pieces is just as important as buying them.",
+
+        "Else the {redacted} won't accept your egg.",
+
+        "Anyways, keep on it and complete the egg now. I think you got the hang of it, for now.",
         
-        "/wait until player kills the last enemy "
+        "/Wait for post game ui to be enabled"
     ],
 
     "lineCutOff": 2,

@@ -1,15 +1,11 @@
 {
     "script":
     [
-        "/now that the enemy wave is over.",
+        "/post game ui is enabled",
 
-        "Good job defending against that enemy wave.",
+        "Alrighttt!!, you made it. Now you can put this guy to work!",
 
-        "Make sure to keep an eye out for your guppys when in an enemy wave",
-
-        "They will always get hungry no matter the situation they are in. very cringe if i say so my self",
-
-        "/we are done with the tutorial at this point, i guess... or maybe i might add a tutorial to show how to build the egg?"
+        "/end of tutorial, here."
     ],
 
     "lineCutOff": 3,
