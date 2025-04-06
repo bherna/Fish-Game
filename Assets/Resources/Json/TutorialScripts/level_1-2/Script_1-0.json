@@ -1,0 +1,15 @@
+{
+    "script":
+    [
+
+        "/unlock enemy waves + wait for enemy wave to start.",
+
+        " ",
+
+        "/now we wait for the first enemy wave to show up...."
+    ],
+
+    "lineCutOff": 0,
+
+    "pause": false
+}

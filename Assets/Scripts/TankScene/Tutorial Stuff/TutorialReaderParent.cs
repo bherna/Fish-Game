@@ -35,24 +35,25 @@ public class TutorialReaderParent : MonoBehaviour
     
         
         //get reference to ui_dialogue,
+        //this has to be reference regardless, else we get errors (to lazy to remove the dependencies else where)
         ui_Dialogue = Controller_Tutorial.instance.GetUI_Dialogue();
 
         //are we in the tutorial level
         if(LocalLevelVariables.ThereIsTutorial()){
 
-            //enable just incase we disable it in inspector for vision
+            //enable just incase we disable our dialogue in inspector (easier to view game)
             Controller_Tutorial.instance.SetUIActive(true);
 
             //start dialogue
             //if this returns true (this means we have a tutorial scrip to use)
             if(ui_Dialogue.StartDialogue()){
                 
-                //-----------------------------------------------  stuff we might need to init, if thats the case -----------------------------------------------
+                //stuff we might need to init, if thats the case
 
-                //like the shop buttons, disable thems shts
-                for(int i = 0; i < Controller_Tutorial.instance.GetShopItemsCount(); i++){
-                    Controller_Tutorial.instance.SetShopItemActive(i, false);
-                }
+                //make sure that its something that all tutorial levels, need booted up
+
+                //else if its specific to the tutorial level, add override in the function below in personal tutorial levell
+                OnTutorialStart();
                 
             }
         }
@@ -62,6 +63,29 @@ public class TutorialReaderParent : MonoBehaviour
         }
         
     }
+
+
+
+    //---------------------------- These two functions are dependent on each other to run tutorial ----------------------------
+
+    
+      void Update (){
+
+        //if we have our tutorial stil active 
+        //keep expecting mouse clicks
+        if(Input.GetMouseButtonDown(0)){
+            TutorialState();
+        }
+    }
+
+    //Ever tutorial reader needs to have a tutorial state function
+    //refer to tutorial reader 1-1 for an example
+    //essentially we need to have a switch statement that checks for what index in the tutoriall we are looking into
+    protected virtual void TutorialState(){}  //abstract classes cant be added as components
+
+    //update this is there is something we need to do right away when we start the tutorial
+    protected virtual void OnTutorialStart(){}  //abstract classes cant be added as components, so just used empty virual :(
+
 
 
     //-------------------------------------------------------------------------------------------------
@@ -292,6 +316,9 @@ public class TutorialReaderParent : MonoBehaviour
 
 
 
+    //technicallly any of these funtions (below) can be called, just make sure to override this verion of them,
+    //else theres no value to them ;p
+    //theyre just ordered in where they are first ever used in
 
     //Level 1-1 triggers:--------------------------------------------------------------------------------------
     public virtual void GuppyHungry(){}
@@ -305,7 +332,7 @@ public class TutorialReaderParent : MonoBehaviour
 
 
 
-    //Level 1-3 triggers: ------------------------------------------------------------------------------------
+    //Level 1-2 triggers: ------------------------------------------------------------------------------------
     public virtual void EnemyWaveStarting(){}
     public virtual void EnemyWaveOver(){}
 }

@@ -28,6 +28,6 @@
 
     "eggPiecesPrices": [150, 400, 650],
 
-    "tutorialToRun": false
+    "tutorialToRun": true
 
 }

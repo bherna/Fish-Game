@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Steamworks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TutorialReader_1_1 : TutorialReaderParent
@@ -9,26 +10,24 @@ public class TutorialReader_1_1 : TutorialReaderParent
     //we should only have variables here if
     //they don't account for all tutorial readers
     //soo
+    //this is specific to this tutorial, 
     private Vector3 starvePos; //if a tutorial guppy dies, we want to know where they died to spawn money
 
-    //this is specific to this tutorial, so don't bother adding to the parent class
+    
+    protected override void OnTutorialStart(){
 
-
-
-    void Update (){
-
-        //if we have our tutorial stil active 
-        //keep expecting mouse clicks
-        if(Input.GetMouseButtonDown(0)){
-            TutorialState();
+        //like the shop buttons, disable thems shts
+        for(int i = 0; i < Controller_Tutorial.instance.GetShopItemsCount(); i++){
+            Controller_Tutorial.instance.SetShopItemActive(i, false);
         }
     }
-
+  
 
     //Player click method is used to move tutorial forward
     //in each section of tutorial, the player will learn something then wait for some external event to play
     //then next section will play
-    public void TutorialState(){
+    //this is triggered in the update function (parent cllass)
+    protected override void TutorialState(){
         
         switch(index){
             case 1:
@@ -225,22 +224,6 @@ public class TutorialReader_1_1 : TutorialReaderParent
     }
 
 
-    private void S_Null__UnlockEnemies(){
-
-        if(!waiting){
-                    
-            //then we have more words to read through
-            //check if this next click ends the script
-            if(!KeepReading()){
-                //unlock enemies
-                Controller_Enemy.instance.StartWaves();
-                
-            }
-        }
-        //else we wait
-    }
-
-
     //this is the final script message, so we want to disable the tutorial after we finish reading
     private void S_PostGameUI__EndTutorial(){
         if(!waiting){
@@ -249,7 +232,7 @@ public class TutorialReader_1_1 : TutorialReaderParent
             KeepReading();
         }
         else{
-            //and enable postgame ui, since we close it 
+            //and enable postgame ui, since we close it (to show text on egg hatch)
             Controller_Objective.instance.ActivatePostEndGameUI();
             
             //we are done reading and so just end this
@@ -258,6 +241,12 @@ public class TutorialReader_1_1 : TutorialReaderParent
         }
     }
     
+
+
+
+
+
+
 
 
 

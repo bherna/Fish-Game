@@ -64,17 +64,14 @@ public class UI_Dialogue : MonoBehaviour
         lineCutOff = wholeScript.lineCutOff;
         pause = wholeScript.pause;
 
-        //does this file (tank_world-level.json) exsist
+        //does this file (Script_{1}-{2}.json) exsist
         if(targetFile != null){
 
             //if yes, then we have a tutorial to run
             
             //first check for comments
-            //while our current index has a '/' (for comments)
-            while(lineIndex < script.Length && script[lineIndex].ToCharArray()[0] == '/'){
-                //keep incrementing
-                lineIndex++;
-            }
+            SkipComments(0);
+
             //now start dialogue
             StartCoroutine(TypeLine());
             return true;
@@ -122,12 +119,7 @@ public class UI_Dialogue : MonoBehaviour
     //else false
     private bool NextLine(){
 
-        //while we have next line
-        //does this new index start with a '/' (for comments)
-        while(lineIndex+1 < script.Length && script[lineIndex+1].ToCharArray()[0] == '/'){
-            //keep incrementing
-            lineIndex++;
-        }
+        SkipComments(1);
 
         if(lineIndex+1 < script.Length){
             //increment index / reset ui text box / set next expect type
@@ -144,6 +136,22 @@ public class UI_Dialogue : MonoBehaviour
             lineIndex = 0;
             textUI.text = string.Empty;
             return false;
+        }
+
+    }
+
+
+    //int param allows to check next index, instead of current line
+    private void SkipComments(int plusN){
+
+        //while we have next line
+        //and current index is not empty (ie this "" )
+        //does this new index start with a '/' (for comments)
+        while(  lineIndex+plusN < script.Length &&
+                script[lineIndex+plusN].Length > 0 &&
+                script[lineIndex+plusN].ToCharArray()[0] == '/'){
+            //keep incrementing
+            lineIndex++;
         }
     }
 
