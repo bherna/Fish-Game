@@ -38,15 +38,4 @@ public class PostGame : MonoBehaviour
         
     }
 
-
-    
-    public void GoToMainMenu(){
-
-        //return time and audio back to normal
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        
-        //return
-        SceneManager.LoadScene("MainMenu");
-    }
 }

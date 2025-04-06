@@ -13,7 +13,7 @@ public class Controller_Timer : MonoBehaviour
     private float timerCount = 0;
 
     //used for pausing the timer
-    private bool dontCount = true;
+    private bool dontCount = false;
 
 
 
@@ -36,11 +36,10 @@ public class Controller_Timer : MonoBehaviour
     void Start()
     {
         timer_text.text = string.Format("00:00");
+
     }
 
-    public void StartTimer(){
-        dontCount = false;
-    }
+    //so far only used in stopping timer when level is complete
     public void StopTimer(){
         dontCount = true;
     }

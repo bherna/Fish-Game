@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
+using UnityEngine.SceneManagement;
 
 
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
@@ -151,6 +151,16 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
     //let player exit level, by activating the ui element that has the return to main menu button
     public void ActivatePostEndGameUI(){
         postGamePanel.SetActive(true);
+    }
+
+    public void GoToMainMenu(){
+
+        //return time and audio back to normal
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        
+        //return
+        SceneManager.LoadScene("MainMenu");
     }
 
 

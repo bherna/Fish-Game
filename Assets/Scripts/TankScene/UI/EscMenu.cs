@@ -1,4 +1,4 @@
-using UnityEngine.SceneManagement;
+
 using UnityEngine;
 
 public class EscMenu : MonoBehaviour
@@ -6,12 +6,7 @@ public class EscMenu : MonoBehaviour
     
     public void GoToMainMenu(){
 
-        //return time and audio back to normal
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        
-        //return
-        SceneManager.LoadScene("MainMenu");
+        Controller_Objective.instance.GoToMainMenu();
     }
 
     public void Settings(){

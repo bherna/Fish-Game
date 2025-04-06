@@ -136,9 +136,6 @@ public class TutorialReaderParent : MonoBehaviour
     //i dont' really have a better place to put these so...
     protected void Disable_Tutorial(){
 
-        //enable timer
-        Controller_Timer.instance.StartTimer();
-
         //start enemy waves incase we didn't start them 
         Controller_Enemy.instance.StartWaves();
 

@@ -109,7 +109,7 @@ public class UI_Dialogue : MonoBehaviour
         foreach( char c in script[lineIndex].ToCharArray()){
 
             textUI.text += c;
-            yield return new WaitForSeconds(textSpeed);
+            yield return new WaitForSecondsRealtime(textSpeed); 
         }
     }
 
