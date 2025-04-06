@@ -286,7 +286,17 @@ public class TutorialReaderParent : MonoBehaviour
     //when we need to pause the game
     //when toggle == true, we set dialogue to visable
     public void HideTutorial(bool toggle){
-        ui_Dialogue.ToggleDialogueBox(toggle);
+
+        //if we are not waiting, then toggle the ui dialogue box to either visable or not,
+        if(!waiting)
+        {
+            ui_Dialogue.ToggleDialogueBox(toggle); 
+        }
+        //else we are waiting to event trigger and don't want the dialogue box open regardless
+        else{
+            ui_Dialogue.ToggleDialogueBox(false); 
+        }
+        
     }
 
     
