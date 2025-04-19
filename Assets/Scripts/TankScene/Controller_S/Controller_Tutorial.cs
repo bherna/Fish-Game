@@ -11,7 +11,7 @@ public class Controller_Tutorial : MonoBehaviour
     [SerializeField] GameObject shop_Container;
     [SerializeField] GameObject UI_Dialogue; //this is the actual GameObject, used in enabling and disabling ui 
     public bool tutorial_active {get; private set;} = true;
-
+    public bool sell_tutorial_fish = false;
 
     //singleton this class
     public static Controller_Tutorial instance {get; private set; }
@@ -74,8 +74,6 @@ public class Controller_Tutorial : MonoBehaviour
     public UI_Dialogue GetUI_Dialogue(){
         return UI_Dialogue.GetComponent<UI_Dialogue>();
     }
-
-
 
 
 

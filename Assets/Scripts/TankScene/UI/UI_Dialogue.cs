@@ -22,7 +22,7 @@ public class UI_Dialogue : MonoBehaviour
 
     private string[] script; //the current json file, script we are going to display (section)
     private int lineIndex = 0;   //current line the dialogue is displaying
-    private float textSpeed = 0.05f;                
+    private float textSpeed = 0.02f;                
     private int lineCutOff = 0;  // this is used in determining if the player can skip the rest of this current script
                                     //line index counts from 0, make sure to also not skip comment lines they count as well
     public bool pause {get; private set;}

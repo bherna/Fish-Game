@@ -20,6 +20,9 @@ public class TutorialReader_1_1 : TutorialReaderParent
         for(int i = 0; i < Controller_Tutorial.instance.GetShopItemsCount(); i++){
             Controller_Tutorial.instance.SetShopItemActive(i, false);
         }
+
+        //we also want to sell tutorial fish in this tutorial
+        Controller_Tutorial.instance.sell_tutorial_fish = true;
     }
   
 
@@ -201,6 +204,7 @@ public class TutorialReader_1_1 : TutorialReaderParent
             if(!KeepReading()){
                 
                 Controller_Fish.instance.TutorialEvent_GuppysNowCanAge();
+                Controller_Tutorial.instance.sell_tutorial_fish = false;
             }
         }
         //else we wait

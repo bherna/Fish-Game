@@ -36,7 +36,7 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
                     //spawn 
 
                     //NOW make sure we arn't in tutorial mode
-                    if(Controller_Tutorial.instance.tutorial_active){
+                    if(Controller_Tutorial.instance.sell_tutorial_fish){
                         //spawn tutorial version
                         //if we can spawn a fish: pay price
                         if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
