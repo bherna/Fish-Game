@@ -90,4 +90,18 @@ public class Controller_PopUp : MonoBehaviour
         egg.GetComponent<EggPopUp>().StartMoving();
 
     }
+
+
+
+    public void SetTextPopupAlpha(bool val){
+
+        foreach(Transform child in gameObject.transform)
+        {
+            var script = child.gameObject.GetComponent<TextPopUp>();
+
+            if(script != null){
+                script.SetTextAlpha(val);
+            }
+        }
+    }
 }

@@ -291,6 +291,7 @@ public class TutorialReaderParent : MonoBehaviour
         if(!waiting)
         {
             ui_Dialogue.ToggleDialogueBox(toggle); 
+            //dont bother with textpop's since they only need to reappear on waiting or disabled
         }
         //else we are waiting to event trigger and don't want the dialogue box open regardless
         else{

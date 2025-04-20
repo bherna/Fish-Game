@@ -169,6 +169,10 @@ public class UI_Dialogue : MonoBehaviour
         for(int i = 0; i < transform.childCount; i++){
             transform.GetChild(i).gameObject.SetActive(toggle);
         }
+
+        //this is a good place to put this
+        //hide or show txtpopup's, since they get in the way of reading 
+        Controller_PopUp.instance.SetTextPopupAlpha(!toggle);
     }
 
 
