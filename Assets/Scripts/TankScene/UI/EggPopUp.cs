@@ -125,7 +125,7 @@ public class EggPopUp : MonoBehaviour
         else{
 
             //update image to be new pet 
-            string filePath = string.Format("Eggs/{0}_Full", LocalLevelVariables.GetUnlockPet_Name()); //update to where pet animatins will be
+            string filePath = string.Format("Pets/Sprites/{0}", LocalLevelVariables.GetUnlockPet_Name()); //update to where pet sprites will be
             petEgg.sprite = Resources.Load<Sprite>(filePath);
             
             //reset and move to next state
@@ -157,13 +157,12 @@ public class EggPopUp : MonoBehaviour
             currTimeAT += Time.deltaTime;
             
         } 
-        //once we are done with that, we can finally call the continue button from objective controller
+        //once we are done with that, we can finally call the continue button from objective controller (pet description)
         else{
             //but dont forget to stop doing this code again
             currEggState = EggStates.Idle;
 
-            //now button activate !
-            Controller_Objective.instance.ActivatePostEndGameUI();
+            Controller_Objective.instance.ActivatePetDescUI();
         }
         
         

@@ -7,8 +7,16 @@ using UnityEngine.SceneManagement;
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
 {
 
-    //once we beat this level (buy all three pieces) make this panel active
+
+    //before finishing the level, we should have unlocked a pet
+    //so activate this panel
+    [SerializeField] GameObject petDescPanel;
+
+
+    //once we beat this level make this panel active
     [SerializeField] GameObject postGamePanel;
+
+
 
     //the three sound effects when buying
     [SerializeField] AudioClip[] eggPieces_audioClips;
@@ -151,6 +159,10 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
     //let player exit level, by activating the ui element that has the return to main menu button
     public void ActivatePostEndGameUI(){
         postGamePanel.SetActive(true);
+    }
+
+    public void ActivatePetDescUI(){
+        petDescPanel.SetActive(true);
     }
 
     public void GoToMainMenu(){

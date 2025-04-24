@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 
-public enum PetNames {SchoolTeacher, DrCrabs, WhiteKnight, TinyOctopus, Athos, Porthos, Aramis, Khalid, MaryFertile, Salt, Cherry, Missing}
+public enum PetNames {Charlie, DrCrabs, WhiteKnight, TinyOctopus, Athos, Porthos, Aramis, Khalid, Mary, Salt, Cherry, Missing}
 
 public static class PetsAccess 
 {
@@ -19,7 +19,7 @@ public static class PetsAccess
     // * the ordering matches how they are displayed in the main menu pet selection screen
     // * ALSO MAKE SURE WE HAVE A "./resources/mainmenu/petswim/{PetName}" obj reference to show (you can duplicate the missing prefab, just change the name) 
     private static Dictionary<PetNames, bool> newGamePetsDictionary = new Dictionary<PetNames, bool>{
-            {PetNames.SchoolTeacher, false},
+            {PetNames.Charlie, false},
             {PetNames.DrCrabs, false},
             {PetNames.WhiteKnight, false},
             {PetNames.Cherry, false},
@@ -28,7 +28,7 @@ public static class PetsAccess
             {PetNames.Porthos, false},
             {PetNames.Aramis, false},
             {PetNames.Khalid, false},
-            {PetNames.MaryFertile, false},
+            {PetNames.Mary, false},
             {PetNames.Salt, false}
 
         };

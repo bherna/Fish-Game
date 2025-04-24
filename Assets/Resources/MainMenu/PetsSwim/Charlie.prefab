@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 360511734030061005}
   - component: {fileID: 4098865657598235688}
   m_Layer: 0
-  m_Name: MaryFertile
+  m_Name: Charlie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2680567993857285458}
+  - {fileID: 3387786829308012099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &360511734030061005
@@ -91,8 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fba036decdd405f4782544d930e8e9c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sprite_transform: {fileID: 2680567993857285458}
---- !u!1001 &489499572241182548
+  sprite_transform: {fileID: 3387786829308012099}
+--- !u!1001 &1040905273317807080
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -100,57 +100,57 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8831779259944041435}
     m_Modifications:
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2932854408787093692, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
+    - target: {fileID: 3042761353202151185, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
       propertyPath: m_Name
-      value: fish_v1_MaryFertile
+      value: fish_v1_SchoolTeacher
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
---- !u!4 &2680567993857285458 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
+--- !u!4 &3387786829308012099 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 2591899819035406854, guid: 26c78a605d2fa314ea1218d711d1dc58, type: 3}
-  m_PrefabInstance: {fileID: 489499572241182548}
+  m_CorrespondingSourceObject: {fileID: 2409953535142065579, guid: ddbb56d844b9d634498c0e0d44fe2000, type: 3}
+  m_PrefabInstance: {fileID: 1040905273317807080}
   m_PrefabAsset: {fileID: 0}

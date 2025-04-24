@@ -96,7 +96,7 @@ public static class LocalLevelVariables
 
     public static PetNames GetUnlockPet_Enum(){
 
-        if(flag){return PetNames.SchoolTeacher;}
+        if(flag){return PetNames.Charlie;}
 
         //get pet to unlock string name from json file and convert to PetName enum type, 
         Enum.TryParse(wholeJsonScript.petNameString, out PetNames petToUnlock);
