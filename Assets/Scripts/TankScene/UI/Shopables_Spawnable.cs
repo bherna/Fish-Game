@@ -33,24 +33,22 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
             switch(fishType){
 
                 case FishType.Guppy:
+                
                     //spawn 
-
+                    GameObject fishType;
                     //NOW make sure we arn't in tutorial mode
                     if(Controller_Tutorial.instance.sell_tutorial_fish){
-                        //spawn tutorial version
-                        //if we can spawn a fish: pay price
-                        if(Controller_Fish.instance.SpawnFish(guppyPrefab_tutorial, new Vector3(0, 4, transform.position.z))){
-                            Controller_Wallet.instance.SubMoney(fishPrice);
-                            PrintTransaction();
-                        }
+                        fishType = guppyPrefab_tutorial;
                     }
                     else{
-                        //normal mode
-                        //if we can spawn a fish: pay price
-                        if(Controller_Fish.instance.SpawnFish(guppyPrefab, new Vector3(0, 4, transform.position.z))){
-                            Controller_Wallet.instance.SubMoney(fishPrice);
-                            PrintTransaction();
-                        }
+                        fishType = guppyPrefab;
+                    }
+                    
+                    //if we can spawn a fish: pay price
+                    if(Controller_Fish.instance.SpawnFish(fishType, new Vector3(0, 4, transform.position.z))){
+                        Controller_Wallet.instance.SubMoney(fishPrice);
+                        PrintTransaction();
+                        //other funcs here 
                     }
                     
                     break;

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Controller_Fish : MonoBehaviour
@@ -51,6 +52,9 @@ public class Controller_Fish : MonoBehaviour
 
         //spawn at top of tank
         fish_list.Add(Instantiate(fishObj, vec_pos, Quaternion.identity));
+
+        //requirements funcc (since all babies can be inmportant)
+        PetReq_ParentClass.instance.UpdateGuppyCounter_Age(0, 1);
 
         //return success
         return true;    
@@ -128,5 +132,22 @@ public class Controller_Fish : MonoBehaviour
             }
         }
     }
+
+
+
+
+    ////---------------------- requirements ------------------------------------------
+    /// returns the number of guppys of current age requested
+    public int HowManyGuppysAtAge_(int age){
+
+        int count = 0;
+
+        foreach(GameObject fish in fish_list){
+            if(fish.GetComponent<Guppy_Stats>().curr_ageStage == age){
+                count+=1;
+            }
+        }
+        return count;
+    } 
     
 }

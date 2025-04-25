@@ -196,10 +196,11 @@ public class Guppy_Stats : FishStats_ParentClass
     public void Fish_Birthday(){
 
         //this is a check in case we are freely giving out birthdays to guppys
+        //dont want to go past max age
         if(!updateAge){return;} 
 
         //update age
-        //but before we increment index, we update other variables, since they are dependnt on curr index
+        //but before we increment index, we update other variables, THAT are dependnt on curr index
         //sprite
         //
         StartCoroutine(ChangeGuppySize(spriteGrowthFor_ageStage[curr_ageStage])); 
@@ -210,6 +211,10 @@ public class Guppy_Stats : FishStats_ParentClass
 
         //now we increment
         curr_ageStage += 1; //one year older bro
+
+        //post age functions: ---------------
+        //requirements class dependencies
+        PetReq_ParentClass.instance.UpdateGuppyCounter_Age(curr_ageStage, 1);
 
         //if we reached final stage, then stop updating age
         if(curr_ageStage > foodForNext_ageStage.Count()){
@@ -239,6 +244,7 @@ public class Guppy_Stats : FishStats_ParentClass
         //play die sound
         if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
+        PetReq_ParentClass.instance.UpdateGuppyCounter_Age(curr_ageStage, -1);
 
         Destroy(gameObject);
     }

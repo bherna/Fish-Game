@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
 {
 
+    //when we egg is finally assembled, the final eggpeice will save its own reference here for level complete()
+    private GameObject finalEggPiece;
+
 
     //before finishing the level, we should have unlocked a pet
     //so activate this panel
@@ -132,7 +135,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         
     }
 
-    public void LevelComplete(Vector2 position){
+    public void LevelComplete(){
         //*** level complete ***
 
         //new level should be unlocked and new pet?
@@ -152,7 +155,17 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         //before we show the exit level screen, we want to do an animation 
         //of taking the completed egg and waiting for it to hatch into our new pet
         //
-        Controller_PopUp.instance.StartEggHatch(position);
+        Controller_PopUp.instance.StartEggHatch(finalEggPiece.transform.position);
+        Destroy(finalEggPiece);
+    }
+
+
+
+
+
+    //final egg peice will call this once egg is fully assembled
+    public void SetFinalEggPiece(GameObject finalPie){
+        finalEggPiece = finalPie;
     }
 
 
@@ -174,6 +187,12 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         //return
         SceneManager.LoadScene("MainMenu");
     }
+
+
+
+
+
+
 
 
     private void SetEggSprites(){

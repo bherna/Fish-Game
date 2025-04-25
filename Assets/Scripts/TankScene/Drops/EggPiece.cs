@@ -160,8 +160,11 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
         //did we finish assembling?
         if(index.Count >= Controller_Objective.instance.final_obj){
-            Controller_Objective.instance.LevelComplete(transform.position);
-            Destroy(gameObject);
+            
+            //send message to requirements
+            Controller_Requirements.instance.StartDisplaying();
+            //send referencec of self to objective controller, used in deleteing self later
+            Controller_Objective.instance.SetFinalEggPiece(gameObject);
         }
     }
 
