@@ -25,7 +25,6 @@ public class TextPopUp : MonoBehaviour
             //re-enable animator
             transform.GetChild(0).GetComponent<Animator>().enabled = true;
             //it'll do the rest of the work for us
-            Debug.Log("enable");
         }
         else{
 
@@ -36,7 +35,6 @@ public class TextPopUp : MonoBehaviour
             temp.a = 0;
             uiText.color = temp;
             uiText.ForceMeshUpdate();
-            Debug.Log("disable");
         }
         
 

@@ -10,7 +10,7 @@ public class PetReq_Mary : PetReq_ParentClass
     private int babies = 0;
 
     //how many babies do we want in tank as req
-    private const int babies_req = 10;
+    private const int babies_req = 7;
 
 
 
