@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2061490338847990505}
   - component: {fileID: -4302505666004751044}
   - component: {fileID: 3035881236039833595}
+  - component: {fileID: 2465572430545596895}
   m_Layer: 13
   m_Name: EggPiece
   m_TagString: Untagged
@@ -112,6 +113,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 1.64}
   m_Size: {x: 3.33, y: 1.44}
   m_Direction: 1
+--- !u!210 &2465572430545596895
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1916760180823262736}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_SortAtRoot: 0
 --- !u!1 &4827675642755420693
 GameObject:
   m_ObjectHideFlags: 0

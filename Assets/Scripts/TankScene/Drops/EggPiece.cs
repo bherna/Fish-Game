@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Rendering;
 
 
 
@@ -40,6 +41,7 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
     private SpriteRenderer EggSilhouette; //when onHover, this will show up 
     private Rigidbody2D rb;
     public CapsuleCollider2D crackCollider;
+    private SortingGroup sortGroup; //this lets egg mask avoid masking other egg peices
 
 
     private void Start() {
@@ -59,8 +61,10 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         //collider
         crackCollider = GetComponent<CapsuleCollider2D>();
 
-    }
+        sortGroup = GetComponent<SortingGroup>();
+        sortGroup.sortingOrder = index[0];
 
+    }
 
     void OnCollisionStay2D(Collision2D other)
     {
