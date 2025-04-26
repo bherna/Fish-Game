@@ -36,7 +36,7 @@ public class PetReq_Charlie : PetReq_ParentClass
 
         if(!toggle){return;}
 
-        string ourTex = string.Format("Requirements:\nAdult Guppys {0} / {1}", adults, adults_req);
+        string ourTex = string.Format("Requirements:\n~~~~~~~~~~~~~~~~\nAdult Guppys: {0} / {1}", adults, adults_req);
         Controller_Requirements.instance.UpdateReqs(ourTex);
 
 

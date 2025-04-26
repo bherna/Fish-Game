@@ -185,6 +185,9 @@ public class Guppy_Stats : FishStats_ParentClass
 
             //increment food ate
             curr_foodAte += 1;
+
+            //requirements call 
+            PetReq_ParentClass.instance.GuppyAte();
             
             //check if this is enough to go to next ageStage
             if(curr_foodAte >= foodForNext_ageStage[curr_ageStage]){

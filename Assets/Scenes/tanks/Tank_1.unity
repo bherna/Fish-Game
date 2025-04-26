@@ -363,6 +363,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3531040969604787194, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
   m_PrefabInstance: {fileID: 1085883341}
   m_PrefabAsset: {fileID: 0}
+--- !u!224 &500375299 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8354886819594476893, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+  m_PrefabInstance: {fileID: 1085883341}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &558767769
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -608,6 +613,19 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3531040969604787194, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3668872544295381589, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
+      propertyPath: m_text
+      value: 'Requirements:
+
+        item #1 ldfsaf  afsdfsdfasdfasdf
+
+        Item
+        #2 ldsafds'
+      objectReference: {fileID: 0}
     - target: {fileID: 4655479560039159126, guid: 5bc8c9e1515778a479dd9ec22e79f075, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1354,6 +1372,14 @@ PrefabInstance:
       propertyPath: showReqs
       value: 
       objectReference: {fileID: 1529126075}
+    - target: {fileID: 4025837743679722373, guid: 487064bdbf0867a46b125176a45f9d92, type: 3}
+      propertyPath: Requirements_Panel
+      value: 
+      objectReference: {fileID: 500375298}
+    - target: {fileID: 4025837743679722373, guid: 487064bdbf0867a46b125176a45f9d92, type: 3}
+      propertyPath: backgroundRecTrans
+      value: 
+      objectReference: {fileID: 500375299}
     - target: {fileID: 6137155056302221207, guid: 487064bdbf0867a46b125176a45f9d92, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

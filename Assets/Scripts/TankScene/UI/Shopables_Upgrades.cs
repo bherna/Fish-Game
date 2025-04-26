@@ -61,6 +61,8 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
                 if(index_array >= prices.Length-1 ){
                     //disable button, since we reached max
                     GetComponent<Button>().interactable = false;
+                    //send to requirement contrller
+                    PetReq_ParentClass.instance.MaxFoodReached();
                 }
                 
                 break;

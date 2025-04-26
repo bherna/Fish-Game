@@ -8,7 +8,7 @@ public class PetReq_Khalid : PetReq_ParentClass
 
     //khalid's egg whats adult guppys to be sacrificed during en enemy wave
     private int ADeaths = 0;
-    private const int ADeaths_req = 10;
+    private const int ADeaths_req = 6;
 
 
      public override void StartReqs()
@@ -32,7 +32,7 @@ public class PetReq_Khalid : PetReq_ParentClass
 
         if(!toggle){return;}
 
-        string ourTex = string.Format("Requirements:\nAdult Deaths during Enemy Wave: {0} / {1}\nIncome: ${2} / ${3}", ADeaths, ADeaths_req, income, income_req);
+        string ourTex = string.Format("Requirements:\n~~~~~~~~~~~~~~~~\nAdult Deaths during Enemy Wave: {0} / {1}\n\nIncome: ${2} / ${3}", ADeaths, ADeaths_req, income, income_req);
         Controller_Requirements.instance.UpdateReqs(ourTex);
 
 

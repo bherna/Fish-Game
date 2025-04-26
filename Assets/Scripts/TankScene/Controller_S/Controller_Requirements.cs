@@ -13,7 +13,7 @@ public class Controller_Requirements : MonoBehaviour
     //once that is done, the egg will send an event to this class to start running this code
     //this script's only goal is to be a on/off switch to the acutal requirments class
     public void StartDisplaying(){
-        UIPage.SetActive(true);
+        Requirements_Panel.SetActive(true);
         GetComponent<PetReq_ParentClass>().StartReqs(); //toggle on funcc
     }
 
@@ -21,10 +21,18 @@ public class Controller_Requirements : MonoBehaviour
     //also we need to have a reference  to the ui element that holds the text for displaying requirements
     [SerializeField] TextMeshProUGUI showReqs;
     //the entire panel holding requirements ui, used in hiding
-    [SerializeField] GameObject UIPage;
+    [SerializeField] GameObject Requirements_Panel;
+    [SerializeField] RectTransform backgroundRecTrans; //same requirements panel just the acutal rect trans
 
     public void UpdateReqs(string newText){
         showReqs.text = newText;
+        showReqs.ForceMeshUpdate(); //update mesh before changing bg dimensions
+
+        //update the background dimensions to fit text
+        Vector2 textSize = showReqs.GetRenderedValues(false);
+        Vector2 paddingSize = new Vector2(showReqs.margin.x+50, showReqs.margin.y*2+50);
+
+        backgroundRecTrans.sizeDelta = textSize + paddingSize;
     }
 
 

@@ -83,6 +83,10 @@ public class PetReq_ParentClass : MonoBehaviour
     public virtual void UpdateGuppyCounter_Age(int age, int val){}
 
 
+    //event is used every time a guppy eats a pellet
+    public virtual void GuppyAte(){}
 
+    //call when max food in shop is bought
+    public virtual void MaxFoodReached(){}
 
 }

@@ -41,7 +41,7 @@ public class PetReq_Mary : PetReq_ParentClass
 
         if(!toggle){return;}
 
-        string ourTex = string.Format("Requirements:\nBaby Guppys {0} / {1}\nIncome: ${2} / ${3}", babies, babies_req, income, income_req);
+        string ourTex = string.Format("Requirements:\n~~~~~~~~~~~~~~~~\nBaby Guppys: {0} / {1}\n\nIncome: ${2} / ${3}", babies, babies_req, income, income_req);
         Controller_Requirements.instance.UpdateReqs(ourTex);
 
 
