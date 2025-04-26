@@ -1,11 +1,16 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Controller_Wallet : MonoBehaviour
 {
 
     //current money
     private int current_money;
+
+    //used in determining total money earned per second
+    private int income;
 
     //post current money
     [SerializeField] TextMeshProUGUI ui_text;
@@ -47,6 +52,8 @@ public class Controller_Wallet : MonoBehaviour
 
         current_money += money;
         UpdateMoney();
+
+        income += money;
     }
 
     public void SubMoney(int money){
@@ -63,6 +70,30 @@ public class Controller_Wallet : MonoBehaviour
 
         ui_text.text = current_money.ToString();
     }
+
+
+
+    //this function is used in determining the money made per seccond
+    //only calculate the income during requirements phase, since we don't need it right now outside of that
+    public IEnumerator CalculateIncome(){
+
+        while(PetReq_ParentClass.instance.toggle){
+
+            //calculate new income (just set money earned as new income)
+            PetReq_ParentClass.instance.SetIncome(income);
+
+            //reset values
+            income = 0;
+
+            //do again after second
+            yield return new WaitForSeconds(1);
+            
+        }
+
+    }
+
+
+    
 
 
 }

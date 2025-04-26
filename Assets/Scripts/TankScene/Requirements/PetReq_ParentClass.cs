@@ -12,12 +12,24 @@ public class PetReq_ParentClass : MonoBehaviour
 
     //what every pet egg hatch requirement will need is a $/second 
     //  - this is just a simple income requirement, seems stupid but what ever
-    //      this is just to get people to not rely on simple guppy builds. I want players to figure out new income methods that will be unlocked throughout their gameplay
-    public float income {get; protected set;} =  0;
+    //      this is just to get people to not rely on simple guppy builds. I want players to figure out new income methods that will be unlocked throughout their gameplay 
+    protected int income =  0;   //this is the one that is activly changing evry second
+    protected int income_req =  0; //this is the one we want to achive (shoulld be updated in child classes)
+
+
+    public void SetIncome(int newIncome){
+        income = newIncome;
+
+        PostUpdates();
+    }
+
+
+
+
 
 
     //used in stopping checks
-    protected bool toggle = false;
+    public bool toggle {get; protected set;}= false;
     public virtual void StartReqs(){
         toggle = true;
     }

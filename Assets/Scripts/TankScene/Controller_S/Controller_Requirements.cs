@@ -24,7 +24,6 @@ public class Controller_Requirements : MonoBehaviour
     [SerializeField] GameObject UIPage;
 
     public void UpdateReqs(string newText){
-        Debug.Log("updadated text");
         showReqs.text = newText;
     }
 
