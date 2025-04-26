@@ -104,7 +104,9 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             AudioManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
 
             //spawn egg piece
-            var newEggPiece = Instantiate(eggPiece, Vector2.zero, Quaternion.identity);
+            var tankArea = TankCollision.instance.GetTankSpawnArea();
+            Vector2 randSpawn = new Vector2(Random.Range(tankArea.Item1, tankArea.Item2), tankArea.Item4);
+            var newEggPiece = Instantiate(eggPiece, randSpawn, Quaternion.identity);
             newEggPiece.GetComponent<EggPiece>().index.Add(obj_index);
             
 

@@ -44,8 +44,12 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
                         fishType = guppyPrefab;
                     }
                     
+                    //get random spawn position
+                    var tankArea = TankCollision.instance.GetTankSpawnArea();
+                    Vector2 randSpawn = new Vector2(Random.Range(tankArea.Item1, tankArea.Item2), tankArea.Item4);
+
                     //if we can spawn a fish: pay price
-                    if(Controller_Fish.instance.SpawnFish(fishType, new Vector3(0, 4, transform.position.z))){
+                    if(Controller_Fish.instance.SpawnFish(fishType, randSpawn)){
                         Controller_Wallet.instance.SubMoney(fishPrice);
                         PrintTransaction();
                         //other funcs here 
@@ -54,7 +58,7 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
                     break;
 
                 case FishType.Enemy:
-                    Instantiate(guppyPrefab, new Vector3(0, 4, transform.position.z), Quaternion.identity);
+                    Instantiate(guppyPrefab, new Vector3(0, 4), Quaternion.identity);
                     break;
                 
                 default:

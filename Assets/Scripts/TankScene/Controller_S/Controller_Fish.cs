@@ -1,4 +1,4 @@
-using System;
+
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -39,10 +39,11 @@ public class Controller_Fish : MonoBehaviour
         fish_list = new List<GameObject>();
     }
 
-    public bool SpawnFish(GameObject fishObj, Vector3 vec_pos){
 
-        //Debug.Log("Fish Spawned");
+    //if vec_pos is left empty then just spawn in a random spot 
+    public bool SpawnFish(GameObject fishObj, Vector2 vec_pos){
 
+        
         //spawn new fish if max is not reached
         if(fish_list.Count >= maxFish){
 

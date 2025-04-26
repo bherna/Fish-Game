@@ -53,6 +53,9 @@ public class TankCollision : MonoBehaviour
         GetBoundry_D();
     }
 
+
+    //these methods are used to get tank collider dimensions, 
+
     private void GetSwim_D(){
 
         var w = swimRange.size.x;
@@ -98,6 +101,12 @@ public class TankCollision : MonoBehaviour
 
     }
 
+
+
+
+
+    //these can be used, if we need to do some dimension size math
+
     public (float, float, float, float) GetTankSwimArea(){
             return (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
     } 
@@ -113,6 +122,9 @@ public class TankCollision : MonoBehaviour
 
 
 
+
+
+    //method used for displaying the tank colliders together at once in inspector + scene
     protected void OnDrawGizmosSelected() {
    
         //swim range
