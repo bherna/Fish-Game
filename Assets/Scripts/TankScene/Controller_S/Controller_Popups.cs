@@ -16,8 +16,11 @@ public class Controller_PopUp : MonoBehaviour
 
     //
     [SerializeField] RectTransform canvasRecTrans; //the canvas-ui object
-    [SerializeField] GameObject textPopUp;
-    [SerializeField] GameObject eggPopUp;
+    [SerializeField] GameObject textPopUp; //actual prefab reference, not instantiated one
+    [SerializeField] GameObject eggPopUp; //same   /\
+
+    //this is the actual instanitated reference of eggpopup, whenever we need to move it
+    private GameObject eggPopUp_ref;
 
     //single ton this class
     public static Controller_PopUp instance {get; private set; }
@@ -79,22 +82,26 @@ public class Controller_PopUp : MonoBehaviour
     public void StartEggHatch(Vector2 position){
 
         //create egg
-        var egg = Instantiate(eggPopUp);
-        egg.transform.SetParent(transform); //do this before setting position atleast (else we are placed at the bottom of entire stack, outside of ui canvas)
+        eggPopUp_ref = Instantiate(eggPopUp);
+        eggPopUp_ref.transform.SetParent(transform); //do this before setting position atleast (else we are placed at the bottom of entire stack, outside of ui canvas)
 
         //update start position to match that of the in tank egg
         Vector2 viewportPosition = Camera.main.WorldToViewportPoint(position);   
         Vector2 startPos = new Vector2(viewportPosition.x * canvasRecTrans.sizeDelta.x, viewportPosition.y * canvasRecTrans.sizeDelta.y);
         Vector2 endPos = new Vector2(canvasRecTrans.rect.width/2, canvasRecTrans.rect.height/2 - 100);
-        egg.GetComponent<EggPopUp>().StartEndPoints(startPos, endPos);
-        egg.GetComponent<EggPopUp>().StartMoving();
+        eggPopUp_ref.GetComponent<EggPopUp>().StartEndPoints(startPos, endPos);
+        eggPopUp_ref.GetComponent<EggPopUp>().StartMoving();
 
     }
 
 
 
-    public void SetTextPopupAlpha(bool val){
+    //this is used to move pop ups away /hide from the ui dialogue text box area, 
+    //else it will be hard to read what any of the text is saying
+    public void DisplacePopUps(bool val){
 
+
+        //for text popups, just hide them by setting alpha to 0
         foreach(Transform child in gameObject.transform)
         {
             var script = child.gameObject.GetComponent<TextPopUp>();
@@ -103,5 +110,25 @@ public class Controller_PopUp : MonoBehaviour
                 script.SetTextAlpha(val);
             }
         }
+
+
+        //for egg pop up, we want to displace its position
+        //first check if we have an eggpopup
+        if(eggPopUp_ref == null){return;}
+        //now displace
+        if(val){
+
+            //val == true means we want to return 
+            //place at dead endpos again
+            Vector2 endPos = new Vector2(canvasRecTrans.rect.width/2, canvasRecTrans.rect.height/2 - 100);
+            eggPopUp_ref.transform.position = endPos;
+
+        }
+        else{
+            //move up higher
+            Vector2 endPos = new Vector2(canvasRecTrans.rect.width/2, canvasRecTrans.rect.height/2 + 200);
+            eggPopUp_ref.transform.position = endPos;
+        }
+
     }
 }

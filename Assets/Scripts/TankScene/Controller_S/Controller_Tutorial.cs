@@ -52,7 +52,7 @@ public class Controller_Tutorial : MonoBehaviour
 
     //used in disabling UI_Dialogue from being visable
     //true == set to visable
-    //when in viewing from heirarchy , i forget to reenable, so just do this for me
+    //when in viewing from heirarchy , if i forget to reenable, so just do this for me
     public void SetUIActive(bool active){
         UI_Dialogue.SetActive(active);
     }

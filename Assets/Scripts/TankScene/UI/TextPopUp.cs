@@ -24,7 +24,7 @@ public class TextPopUp : MonoBehaviour
             
             //re-enable animator
             transform.GetChild(0).GetComponent<Animator>().enabled = true;
-            //it'll do the rest of the work for us
+            //animator will do the rest of the work for us
         }
         else{
 
