@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class EggColliders
-{
-    
-    public class ColliderDem
+
+
+public class ColliderDem
     {
         public Vector2 offset;
         public Vector2 size;
@@ -19,6 +18,9 @@ public static class EggColliders
 
     }
 
+
+public static class EggColliders
+{
 
     //crack type one 
     private static ColliderDem Egg_0 = new ColliderDem(new Vector2(0f, -1.17f), new Vector2(3.53f, 2.61f), CapsuleDirection2D.Horizontal);

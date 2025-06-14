@@ -43,32 +43,12 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
     }
 
-
+    //---------------------------------------------------- standard enemy fish code to function -------------------------------------
     public void SetTargetFish(Transform newFishTarget){
 
         currFishTarget = newFishTarget;
     }
 
-    
-    public void OnPointerClick(PointerEventData eventData){
-
-        //if the game is paused, return
-        if(Controller_EscMenu.instance.paused){
-            return;
-        }
-
-        //create gun particle
-        Controller_Player.instance.Run_GunParticle();
-
-        //knockback
-        Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
-        rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
-
-
-        //damage
-        TakeDamage(Controller_Player.instance.Get_GunDamage());
-        
-    }
 
 
     protected void TakeDamage(int damage){
@@ -79,27 +59,10 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         }
     }
 
-    private void OnTriggerStay2D(Collider2D other) {
-        
-        //we're in the boudry, we need to head back
-        if(other.gameObject.CompareTag("Boundry")){
-
-            //set our velocity towards middle of tank
-            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
-            rb.velocity = kb;
-            
-        }
-    }
-
-
-    protected void OnTriggerEnter2D(Collider2D other) {
-
-        
-    }
-
 
     //overrideing our original updatePosition
-    public bool UpdatePosition(Vector3 target_pos, float current_Vel){
+    public bool UpdatePosition(Vector3 target_pos, float current_Vel)
+    {
 
         var dir = (target_pos - transform.position).normalized;
 
@@ -125,24 +88,87 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
         //die
         Destroy(gameObject);
     }
+    
 
 
-    protected new void OnDrawGizmosSelected() {
+    ///--------------------------------------- collision related code here -----------------------------------------------------------
 
-        switch(curr_EnemyState){
+    //2nd-dairy colider, used for interacting with tank
+    public virtual void Coll_OnTrigger(Collider2D other)
+    {
+
+    }
+
+    //whenever enemy is casually inside boundry, (collisionStay)
+    public virtual void Coll_OnStay(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Boundry"))
+        {
+
+            //set our velocity towards middle of tank
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
+            rb.velocity = kb; 
+
+        }
+    }
+
+
+    //2nd-dairy collider, used for interactin with player (clicks)
+    //Purpose of seperating collision and onpointerclick is to be able to dynamically edit collision box of tank interaction vs player interaction
+    public virtual void OnPointerClick(PointerEventData eventData)
+    {
+
+        //if the game is paused, return
+        if (Controller_EscMenu.instance.paused)
+        {
+            return;
+        }
+
+        //create gun particle
+        Controller_Player.instance.Run_GunParticle();
+
+        //knockback
+        Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
+        rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
+
+
+        //damage
+        TakeDamage(Controller_Player.instance.Get_GunDamage());
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ///------------------------------------------------------ scene ui code not really important to functionality ----------------------------
+
+    protected new void OnDrawGizmosSelected()
+    {
+
+        switch (curr_EnemyState)
+        {
             case Enemy_States.idle:
                 //curr idle target
                 Gizmos.color = Color.white;
                 Gizmos.DrawWireSphere(idleTarget, 0.5f);
                 break;
             case Enemy_States.attack:
-                if(currFishTarget == null){return;}
+                if (currFishTarget == null) { return; }
                 //current fish target
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(currFishTarget.transform.position, 0.5f);
                 break;
         }
-        
+
     }
 
 

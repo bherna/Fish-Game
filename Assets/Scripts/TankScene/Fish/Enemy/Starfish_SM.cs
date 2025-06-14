@@ -3,7 +3,7 @@ using UnityEngine;
 using Steamworks;
 
 
-public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
+public class Starfish_SM : Enemy_ParentClass 
 {
 
     //star fish
@@ -18,6 +18,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
 
     [SerializeField] ParticleSystem bite_particle;
+    [SerializeField] Starfish_Collider starfish_coll;
 
     // ----------------------------------------------- attack -----------------------------------------------
 
@@ -44,6 +45,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         currFishTarget = Controller_Fish.instance.GetRandomFish();
 
         linearDrag = rb.drag;
+
     }
 
     // Update is called once per frame
@@ -101,6 +103,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(currFishTarget == null){
             //go to idle
             curr_EnemyState = Enemy_States.idle;
+            starfish_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack(); //else we can cheat winding up 
             return;
         }
@@ -108,7 +111,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
         //we technically only need to do attack mode when we are building up
         //rotational velocity, which we use to sling shot our selfs around
-        //we become blind when we are charging (and return when we anything)
+        //we become blind when we are charging (and return when we hit anything)
         if(!spinning){ 
 
             //build wind up, and update sprite rotation
@@ -126,6 +129,10 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
                 var target_dir = (currFishTarget.position - transform.position).normalized;
                 rb.velocity = target_dir * burst_vel;
                 rb.drag = 0; //we remove drag, just so we dont get stuck in the middle of the tank (since we expect some obstacle to reset our attack)
+
+                //allso set our collider orientation here finally
+                int angle = (int)(Mathf.Atan2(currFishTarget.position.y - transform.position.y, currFishTarget.position.x - transform.position.x) * Mathf.Rad2Deg);
+                starfish_coll.SetOrientation(Enemy_States.attack, angle);
             }
             
         }
@@ -147,6 +154,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         if(stunTimer <= 0){
             //done
             curr_EnemyState = Enemy_States.idle;
+            starfish_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
         }
     }
@@ -160,7 +168,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
 
 
-    private new void OnTriggerEnter2D(Collider2D other) {
+    public override void Coll_OnTrigger(Collider2D other) {
 
 
         //boundry collision
@@ -168,6 +176,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         //we still use ontriggerSTAY2d for returning to center
         if(other.gameObject.CompareTag("Boundry")){
 
+            starfish_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
             return;
         }
@@ -183,6 +192,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //attack this fish
             other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
 
+            starfish_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
             return;
 
@@ -203,6 +213,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
 
             //return to idle
             curr_EnemyState = Enemy_States.idle;
+            starfish_coll.SetOrientation(Enemy_States.idle, 0);
             Controller_Player.instance.DeleteTrail();
 
             TakeDamage(Controller_Player.instance.Get_GunDamage() *2); //for now we'll just double the damage or what ever
@@ -214,7 +225,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
         
     }
 
-    public new void OnPointerClick(PointerEventData eventData){
+    public override void OnPointerClick(PointerEventData eventData){
 
 
         //if the game is paused, return
@@ -228,6 +239,7 @@ public class Starfish_SM : Enemy_ParentClass, IPointerClickHandler
             //change starfish state
             stunTimer = Controller_Player.trailDuration;
             curr_EnemyState = Enemy_States.stunned;
+            starfish_coll.SetOrientation(Enemy_States.stunned, 0);
 
             //create flash of light, to show that we countered
 
