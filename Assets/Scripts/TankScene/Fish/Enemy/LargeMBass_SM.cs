@@ -143,10 +143,10 @@ public class LargeMBass_SM : Enemy_ParentClass
 
 
     //when player clicks on bass we run this
-    public new void OnPointerClick(PointerEventData eventData) {
+    public override void On_PlayerClick() {
 
         //run original function
-        base.OnPointerClick(eventData);
+        base.On_PlayerClick();
 
         //reset 
         curr_velocity = 0;

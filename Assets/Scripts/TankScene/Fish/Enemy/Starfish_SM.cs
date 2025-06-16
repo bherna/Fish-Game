@@ -18,7 +18,7 @@ public class Starfish_SM : Enemy_ParentClass
 
 
     [SerializeField] ParticleSystem bite_particle;
-    [SerializeField] Starfish_Collider starfish_coll;
+    [SerializeField] Starfish_Collider player_coll;
 
     // ----------------------------------------------- attack -----------------------------------------------
 
@@ -103,7 +103,7 @@ public class Starfish_SM : Enemy_ParentClass
         if(currFishTarget == null){
             //go to idle
             curr_EnemyState = Enemy_States.idle;
-            starfish_coll.SetOrientation(Enemy_States.idle, 0);
+            player_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack(); //else we can cheat winding up 
             return;
         }
@@ -132,7 +132,7 @@ public class Starfish_SM : Enemy_ParentClass
 
                 //allso set our collider orientation here finally
                 int angle = (int)(Mathf.Atan2(currFishTarget.position.y - transform.position.y, currFishTarget.position.x - transform.position.x) * Mathf.Rad2Deg);
-                starfish_coll.SetOrientation(Enemy_States.attack, angle);
+                player_coll.SetOrientation(Enemy_States.attack, angle);
             }
             
         }
@@ -154,7 +154,7 @@ public class Starfish_SM : Enemy_ParentClass
         if(stunTimer <= 0){
             //done
             curr_EnemyState = Enemy_States.idle;
-            starfish_coll.SetOrientation(Enemy_States.idle, 0);
+            player_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
         }
     }
@@ -168,15 +168,18 @@ public class Starfish_SM : Enemy_ParentClass
 
 
 
-    public override void Coll_OnTrigger(Collider2D other) {
-
+    public override void On_TankStay(Collider2D other) {
 
         //boundry collision
         //if we hit the tank edge so we lose our speed, so we restart rampping
         //we still use ontriggerSTAY2d for returning to center
         if(other.gameObject.CompareTag("Boundry")){
 
-            starfish_coll.SetOrientation(Enemy_States.idle, 0);
+            //set our velocity towards middle of tank
+            Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
+            rb.velocity = kb; 
+
+            player_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
             return;
         }
@@ -192,7 +195,7 @@ public class Starfish_SM : Enemy_ParentClass
             //attack this fish
             other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
 
-            starfish_coll.SetOrientation(Enemy_States.idle, 0);
+            player_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
             return;
 
@@ -213,7 +216,7 @@ public class Starfish_SM : Enemy_ParentClass
 
             //return to idle
             curr_EnemyState = Enemy_States.idle;
-            starfish_coll.SetOrientation(Enemy_States.idle, 0);
+            player_coll.SetOrientation(Enemy_States.idle, 0);
             Controller_Player.instance.DeleteTrail();
 
             TakeDamage(Controller_Player.instance.Get_GunDamage() *2); //for now we'll just double the damage or what ever
@@ -225,26 +228,27 @@ public class Starfish_SM : Enemy_ParentClass
         
     }
 
-    public override void OnPointerClick(PointerEventData eventData){
 
+    //this isn't the normal onplayerclick method, this is our own version to avoid calling it here (should be called from {enemyname}_collider)
+    public override void On_PlayerClick()
+    {
 
         //if the game is paused, return
-        if(Controller_EscMenu.instance.paused){
-            return;
-        }
+        if (Controller_EscMenu.instance.paused){return;}
 
         //first check for posible counter attack move
-        if(spinning){
+        if (spinning)
+        {
 
             //change starfish state
             stunTimer = Controller_Player.trailDuration;
             curr_EnemyState = Enemy_States.stunned;
-            starfish_coll.SetOrientation(Enemy_States.stunned, 0);
+            player_coll.SetOrientation(Enemy_States.stunned, 0);
 
             //create flash of light, to show that we countered
 
             //we start to move backwards super slowly
-            Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
+            Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
             rb.velocity = kbVector * kbForce_stunned;
 
             //init a ripple particle
@@ -257,9 +261,10 @@ public class Starfish_SM : Enemy_ParentClass
             //WE DONT RESET ATTACK HERE
             //since that get done when the starfish is counter attacked or exits stun state
         }
-        else{
+        else
+        {
             //else we just do basic attack (from parent class)
-            base.OnPointerClick(eventData);
+            base.On_PlayerClick();
 
             //also reset attack here, else starfish can instantly attack next guppy
             ResetAttack();

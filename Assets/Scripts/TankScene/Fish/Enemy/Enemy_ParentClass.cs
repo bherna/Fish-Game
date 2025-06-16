@@ -1,12 +1,11 @@
-using System.Collections;
+
 using UnityEngine.EventSystems;
 using UnityEngine;
-using System;
-using Unity.Mathematics;
+
 
 public enum Enemy_States {idle, attack, stunned};
 
-public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
+public class Enemy_ParentClass : Fish_ParentClass_Movement 
 {
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
@@ -93,19 +92,20 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
     ///--------------------------------------- collision related code here -----------------------------------------------------------
 
-    //2nd-dairy colider, used for interacting with tank
-    public virtual void Coll_OnTrigger(Collider2D other)
+    //2nd-dairy colider, used for interacting with tank(oncollisionEnter2d)
+    public virtual void On_TankEnter(Collider2D other)
     {
 
     }
 
-    //whenever enemy is casually inside boundry, (collisionStay)
-    public virtual void Coll_OnStay(Collider2D other)
+    //whenever enemy is casually inside boundry, (oncollisionStay2d)
+    public virtual void On_TankStay(Collider2D other)
     {
         if (other.gameObject.CompareTag("Boundry"))
         {
 
             //set our velocity towards middle of tank
+            //(IF CHANGED, UPDATE THIS IN CHILD CLASSES)
             Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
             rb.velocity = kb; 
 
@@ -115,25 +115,28 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement, IPointerClickHandler
 
     //2nd-dairy collider, used for interactin with player (clicks)
     //Purpose of seperating collision and onpointerclick is to be able to dynamically edit collision box of tank interaction vs player interaction
-    public virtual void OnPointerClick(PointerEventData eventData)
+    //this isn't the normal onplayerclick method, this is our own version to avoid calling it here (should be called from {enemyname}_collider)
+    public virtual void On_PlayerClick()
     {
-
         //if the game is paused, return
-        if (Controller_EscMenu.instance.paused)
+        if  (Controller_EscMenu.instance.paused){return;}
+        
+        //get click
+        if (Controller_Player.instance.GetPlayerClick())
         {
-            return;
+            //create gun particle
+            Controller_Player.instance.Run_GunParticle();
+
+            //knockback
+            Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
+            rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
+
+
+            //damage
+            TakeDamage(Controller_Player.instance.Get_GunDamage());
         }
 
-        //create gun particle
-        Controller_Player.instance.Run_GunParticle();
-
-        //knockback
-        Vector2 kbVector = (transform.position - eventData.pointerCurrentRaycast.worldPosition).normalized;
-        rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
-
-
-        //damage
-        TakeDamage(Controller_Player.instance.Get_GunDamage());
+        
 
     }
 

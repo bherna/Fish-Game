@@ -10,12 +10,12 @@ public class TrashCan : MonoBehaviour
 
         if(other.gameObject.CompareTag("Food"))
         {
-            Controller_Food.instance.TrashThisFood(other.gameObject);
+            other.gameObject.GetComponent<Drop_Food>().OnTrashDrop();
         }
 
-        if(other.gameObject.CompareTag("Money"))
+        else if(other.gameObject.CompareTag("Money"))
         {
-            other.gameObject.GetComponent<MoneyValue>().OnTrashCoin();
+            other.gameObject.GetComponent<Drop_Money>().OnTrashDrop();
         }
     }
 }

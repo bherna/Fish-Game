@@ -21,7 +21,7 @@ public class Guppy_Collision : MonoBehaviour
         {
 
             //eat + destroy obj
-            var foodscript = other.GetComponent<Food_Parent>();
+            var foodscript = other.GetComponent<Drop_Food>();
             switch(foodscript.foodType){
 
                 case FoodTypes.feed:

@@ -1,6 +1,7 @@
 
 using UnityEngine;
 
+
 public class Starfish_Collider : Enemy_Collider_ParentClass
 {
 
@@ -23,9 +24,16 @@ public class Starfish_Collider : Enemy_Collider_ParentClass
     // Start is called before the first frame update
     protected override void Start()
     {
-        capCollider = GetComponent<CapsuleCollider2D>();
-        SetOrientation(Enemy_States.idle, 0);
+        //this should work for all collilder types
         enemy_ParentClass = transform.parent.GetComponent<Starfish_SM>();
+
+        //specific to starfish player collider
+        if (colliderType == ColliderType.Player)
+        {
+            capCollider = GetComponent<CapsuleCollider2D>();
+            SetOrientation(Enemy_States.idle, 0);
+        }
+        //else we don't do this and we return
 
     }
 
@@ -62,8 +70,8 @@ public class Starfish_Collider : Enemy_Collider_ParentClass
 
     }
 
-    
 
+    
     
 
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Food_Salt : Food_Parent
+public class Drop_Food_Salt : Drop_Food
 {
     
 
