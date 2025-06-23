@@ -119,22 +119,19 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
     public virtual void On_PlayerClick()
     {
         //if the game is paused, return
-        if  (Controller_EscMenu.instance.paused){return;}
+        if (Controller_EscMenu.instance.paused) { return; }
         
-        //get click
-        if (Controller_Player.instance.GetPlayerClick())
-        {
-            //create gun particle
-            Controller_Player.instance.Run_GunParticle();
+        
+        //create gun particle
+        Controller_Player.instance.Run_GunParticle();
 
-            //knockback
-            Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
-            rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
+        //knockback
+        Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
+        rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
 
 
-            //damage
-            TakeDamage(Controller_Player.instance.Get_GunDamage());
-        }
+        //damage
+        TakeDamage(Controller_Player.instance.Get_GunDamage());
 
         
 

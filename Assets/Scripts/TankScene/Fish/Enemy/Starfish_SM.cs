@@ -1,6 +1,6 @@
-using UnityEngine.EventSystems;
+
 using UnityEngine;
-using Steamworks;
+
 
 
 public class Starfish_SM : Enemy_ParentClass 
@@ -18,7 +18,9 @@ public class Starfish_SM : Enemy_ParentClass
 
 
     [SerializeField] ParticleSystem bite_particle;
-    [SerializeField] Starfish_Collider player_coll;
+
+    //used in clicking events
+    private Starfish_P_Collider player_coll;
 
     // ----------------------------------------------- attack -----------------------------------------------
 
@@ -40,6 +42,8 @@ public class Starfish_SM : Enemy_ParentClass
 
     private new void Start() {
         base.Start();
+
+        player_coll = GetComponent<Starfish_P_Collider>();
         
         //set target fish
         currFishTarget = Controller_Fish.instance.GetRandomFish();
@@ -229,10 +233,8 @@ public class Starfish_SM : Enemy_ParentClass
     }
 
 
-    //this isn't the normal onplayerclick method, this is our own version to avoid calling it here (should be called from {enemyname}_collider)
     public override void On_PlayerClick()
     {
-
         //if the game is paused, return
         if (Controller_EscMenu.instance.paused){return;}
 
@@ -269,10 +271,7 @@ public class Starfish_SM : Enemy_ParentClass
             //also reset attack here, else starfish can instantly attack next guppy
             ResetAttack();
         }
-
-
     }
-
 
 
 

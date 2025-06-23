@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class Starfish_Collider : Enemy_Collider_ParentClass
+public class Starfish_P_Collider : MonoBehaviour
 {
 
 
@@ -18,22 +18,19 @@ public class Starfish_Collider : Enemy_Collider_ParentClass
     private ColliderDem idle_col = new ColliderDem(new Vector2(0, 0), new Vector2(1.5f, 1.5f), CapsuleDirection2D.Horizontal);
 
     ////-------------------------------------------------------- other //-------------------------------------------------------
+    private Starfish_SM starfish_SM;
 
+    /// 
 
 
     // Start is called before the first frame update
-    protected override void Start()
+    protected void Start()
     {
-        //this should work for all collilder types
-        enemy_ParentClass = transform.parent.GetComponent<Starfish_SM>();
 
-        //specific to starfish player collider
-        if (colliderType == ColliderType.Player)
-        {
-            capCollider = GetComponent<CapsuleCollider2D>();
-            SetOrientation(Enemy_States.idle, 0);
-        }
-        //else we don't do this and we return
+        starfish_SM = GetComponent<Starfish_SM>();
+
+        capCollider = GetComponent<CapsuleCollider2D>();
+        SetOrientation(Enemy_States.idle, 0);
 
     }
 
@@ -72,7 +69,11 @@ public class Starfish_Collider : Enemy_Collider_ParentClass
 
 
     
-    
+    //this isn't the normal onplayerclick method, this is our own version to avoid calling it here (should be called from {enemyname}_collider)
+    public void OnMouseDown()
+    {
+        starfish_SM.On_PlayerClick();
+    }
 
 
 }

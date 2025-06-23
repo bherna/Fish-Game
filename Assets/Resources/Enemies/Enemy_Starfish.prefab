@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3809900087771002649}
   - component: {fileID: 7394080560007591877}
   - component: {fileID: 4898481799985411436}
+  - component: {fileID: 6537375375185738866}
+  - component: {fileID: 5092950715428660044}
   m_Layer: 10
   m_Name: Enemy_Starfish
   m_TagString: Enemy
@@ -31,7 +33,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4146565532039655730}
   - {fileID: 576249032583664541}
   - {fileID: 3948798086876093730}
   m_Father: {fileID: 0}
@@ -80,47 +81,13 @@ MonoBehaviour:
   diedSoundClip: {fileID: 8300000, guid: 4911eca0f7f8b3c41a5d61e7b92a2b29, type: 3}
   gem: {fileID: 8605215774676198758, guid: bd9190d588d7bf84a95fd429b1b0d0c7, type: 3}
   bite_particle: {fileID: 148617094261164697, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
-  player_coll: {fileID: 2211072849782333271}
---- !u!1 &6235638431409961114
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4146565532039655730}
-  - component: {fileID: 2057165437990057927}
-  - component: {fileID: 2211072849782333271}
-  m_Layer: 10
-  m_Name: PlayerClick_Collider
-  m_TagString: Enemy
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4146565532039655730
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235638431409961114}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 3809900087771002649}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &2057165437990057927
+--- !u!70 &6537375375185738866
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235638431409961114}
+  m_GameObject: {fileID: 5292263530791328344}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -149,19 +116,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.4, y: 0}
   m_Size: {x: 2.4, y: 1.4}
   m_Direction: 1
---- !u!114 &2211072849782333271
+--- !u!114 &5092950715428660044
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6235638431409961114}
+  m_GameObject: {fileID: 5292263530791328344}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e6e2893b3f994744955955eac5fcf32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderType: 1
 --- !u!1 &7747690015624911598
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,8 +138,8 @@ GameObject:
   m_Component:
   - component: {fileID: 576249032583664541}
   - component: {fileID: 5698566677075223493}
-  - component: {fileID: 5451640138488738678}
-  m_Layer: 10
+  - component: {fileID: 4213382652549475683}
+  m_Layer: 2
   m_Name: Tank_Collider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -230,7 +196,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.85
---- !u!114 &5451640138488738678
+--- !u!114 &4213382652549475683
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -239,10 +205,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7747690015624911598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e6e2893b3f994744955955eac5fcf32, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bc86c70c5b52b84a9847255ddf218c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderType: 2
 --- !u!1001 &7493506642186727193
 PrefabInstance:
   m_ObjectHideFlags: 0
