@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
+using Steamworks;
 
 
 
@@ -247,13 +248,21 @@ public class EggPiece : MonoBehaviour
 
     }
     void OnMouseDrag(){
+
         //now just follow the mouse position
         transform.position = (Vector2)Controller_Player.instance.mousePos - crackCollider.offset;
+        
 
     }
     
     //this is used as the main funciton on mouseup
     void OnMouseUp() {
+
+        //when we are letting go, make sure we don't leave the screen
+        Vector2 tempTrans = transform.position;
+        tempTrans.x = Mathf.Clamp(tempTrans.x, Controller_Player.instance.min.x + crackCollider.size.x, Controller_Player.instance.max.x - crackCollider.size.x);
+        tempTrans.y = Mathf.Clamp(tempTrans.y, Controller_Player.instance.min.y + crackCollider.size.y, Controller_Player.instance.max.y - crackCollider.size.y);
+        transform.position = tempTrans;
 
         rb.gravityScale = 1;
         rb.constraints = RigidbodyConstraints2D.None;

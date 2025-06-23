@@ -34,6 +34,10 @@ public class Controller_Player : MonoBehaviour
     private Vector2 LastPosition;
 
 
+    //used for clamping mousepos on screen
+    public Vector3 max { get; private set; }
+    public Vector3 min { get; private set; }
+
 
     //single ton this class
     public static Controller_Player instance { get; private set; }
@@ -56,6 +60,12 @@ public class Controller_Player : MonoBehaviour
 
     private void Start()
     {
+        float v3 = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
+        Camera cam = Camera.main;
+
+
+        max = cam.ViewportToWorldPoint(new Vector3(1, 1, v3));
+        min = cam.ViewportToWorldPoint(new Vector3(0, 0, v3));
 
     }
 
@@ -63,13 +73,18 @@ public class Controller_Player : MonoBehaviour
     {
 
         //get mouse pos
+        //but make sure not to leave the screen
         var screenPos = Input.mousePosition;
         screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
         mousePos = Camera.main.ScreenToWorldPoint(screenPos);
 
+        mousePos.x = Mathf.Clamp(mousePos.x, min.x, max.x);
+        mousePos.y = Mathf.Clamp(mousePos.y, min.y, max.y);
+
+
         //move self there
         //used for collisions
-        transform.position = new Vector2(mousePos.x, mousePos.y);
+        transform.position = new Vector2(screenPos.x, screenPos.y);
 
 
         //if we have a trail active, we want to update our distance traveld
