@@ -18,7 +18,7 @@ public class Drop_Parent : MonoBehaviour
 
     //jsut used to set up colliders, so they're not all out of sync from each other
     //base set up for use, here we do nothing, but put what ever code in the player if statement
-    public virtual void OnTriggerStay2D(Collider2D collision)
+    public virtual void OnMouseDown()
     {
 
         // ----------------------------------------- keep this in this exact order or we break stuff --------------------------
@@ -27,14 +27,6 @@ public class Drop_Parent : MonoBehaviour
             return;
         }
 
-
-        //-------------------------------------- this would be the example interaction collider code (from drop_money)
-        /*
-        else if (Controller_Player.instance.GetPlayerClick())
-        {
-
-        }
-        */
     }
 
 

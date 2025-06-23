@@ -1,6 +1,4 @@
 using System.Collections;
-
-using UnityEngine.EventSystems;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
@@ -26,7 +24,7 @@ using UnityEngine.Rendering;
 //we always keep ep_0 over any other ep_n, for comformaty
 //ep_0 's sprite will change when ever a new egg piece is attached.
 
-public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class EggPiece : MonoBehaviour
 {
 
     public List<int> index; // this should be updated in controller_obj
@@ -66,19 +64,44 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
     }
 
+
+
+
     void OnCollisionStay2D(Collision2D other)
     {
+
+        //this is to check if we are messing with another egg peice
+        //grab collidee's egg script
+        var ep_n = other.gameObject.GetComponent<EggPiece>();
+        //
+        if (ep_n != null)
+        {
+            OnEggContact(ep_n);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D other){
+
         //grab collidee's egg script
         var ep_n = other.gameObject.GetComponent<EggPiece>();
 
         //if none, then return
-        if(ep_n == null){
-            return;
+        if(ep_n != null){
+            ep_n.ChangeTransparency(0);
         }
 
+        
+    }
 
+
+
+
+
+    private void OnEggContact(EggPiece ep_n)
+    {
         //if we are hovering over an egg piece or dropping in
-        switch(eggState){
+        switch (eggState)
+        {
             case EggPiece_States.Idle:
                 //do nothing, sincec egg peices can be colliding casually
                 return;
@@ -94,16 +117,18 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
                 //for each index in this dropped ep
-                foreach(int i in index){
-                    
+                foreach (int i in index)
+                {
+
                     //index[0] > 0, we check for 0 sincec thats the first ep_n possible
-                    if((i > 0 && ep_n.index.Contains(i-1)) ||
-                        (i < Controller_Objective.instance.final_obj-1 && ep_n.index.Contains(i+1))
-                        ){
+                    if ((i > 0 && ep_n.index.Contains(i - 1)) ||
+                        (i < Controller_Objective.instance.final_obj - 1 && ep_n.index.Contains(i + 1))
+                        )
+                    {
                         //then combine
                         //by updating ep_n sprite + increment our index
                         ep_n.AttachSprite(index);
-                        
+
                         //send message to tutorial that we combined here too,
                         TutorialReaderParent.instance.EggPieceCombined();
 
@@ -113,32 +138,19 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
                     }
                 }
                 break;
-                
+
             default:
                 Debug.Log("No state possible");
                 break;
         }
-        
-    }
-
-    void OnCollisionExit2D(Collision2D other){
-
-        //grab collidee's egg script
-        var ep_n = other.gameObject.GetComponent<EggPiece>();
-
-        //if none, then return
-        if(ep_n == null){
-            return;
-        }
-
-        ep_n.ChangeTransparency(0);
     }
     
 
 
     //does what the function is called, but only changes the egg silhouette alpha
     //used in onhover logic
-    private void ChangeTransparency(float alphaValue){
+    private void ChangeTransparency(float alphaValue)
+    {
 
         EggSilhouette.color = new Color(0.95f, 0.49f, 0.54f, alphaValue); //set alpha to 0
     }
@@ -209,22 +221,40 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
 
 
     //----------------------------------------------------------  mouse drag related ---------------------------
-    public void OnBeginDrag(PointerEventData data){
+
+    
+    void OnTriggerStay2D(Collider2D other)
+    {
+        //onc
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+
+    }
+
+
+
+    //functino break downs
+    void OnMouseDown() {
+
         rb.gravityScale = 0;
         rb.constraints = RigidbodyConstraints2D.FreezeAll;
-        transform.rotation = new Quaternion(0,0,0,0);
+        transform.rotation = new Quaternion(0, 0, 0, 0);
         //change to grabbed state
         eggState = EggPiece_States.Grabbed;
 
         //grab sound
 
     }
-    public void OnDrag(PointerEventData data){
+    void OnMouseDrag(){
         //now just follow the mouse position
-        transform.position = Controller_Player.instance.mousePos;
+        transform.position = (Vector2)Controller_Player.instance.mousePos - crackCollider.offset;
 
     }
-    public void OnEndDrag(PointerEventData data){
+    
+    //this is used as the main funciton on mouseup
+    void OnMouseUp() {
+
         rb.gravityScale = 1;
         rb.constraints = RigidbodyConstraints2D.None;
         //drop state
@@ -235,6 +265,8 @@ public class EggPiece : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDrag
         IEnumerator co = IdleReturn();
         StartCoroutine(co);
     }
+
+
     private IEnumerator IdleReturn() {
 
         yield return new WaitForSeconds(0.1f);

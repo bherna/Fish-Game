@@ -22,7 +22,6 @@ public class Controller_Player : MonoBehaviour
 
 
 
-
     //player stats
     //gun stat
     private int gunPower = 1;
@@ -180,7 +179,6 @@ public class Controller_Player : MonoBehaviour
     }
 
     //------------------------------ --------------------------------  -------------------------------
-
 
 
 

@@ -15,15 +15,10 @@ public class Drop_Money : Drop_Parent
     
 
 
-    public override void OnTriggerStay2D(Collider2D collision)
+    public override void OnMouseDown()
     {
 
-        base.OnTriggerStay2D(collision);
-        
-        if (Controller_Player.instance.GetPlayerClick())
-        {
-            Collect();
-        }
+        Collect();
  
     }
 
