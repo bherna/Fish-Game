@@ -1,4 +1,5 @@
 
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -105,10 +106,9 @@ public class Starfish_SM : Enemy_ParentClass
 
         //first check our fish target
         if(currFishTarget == null){
-            //go to idle
-            curr_EnemyState = Enemy_States.idle;
-            player_coll.SetOrientation(Enemy_States.idle, 0);
-            ResetAttack(); //else we can cheat winding up 
+
+            //if we have no target then reset attack + idle mode
+            ResetAttack(); 
             return;
         }
 
@@ -156,14 +156,16 @@ public class Starfish_SM : Enemy_ParentClass
         stunTimer -= Time.deltaTime;
 
         if(stunTimer <= 0){
-            //done
-            curr_EnemyState = Enemy_States.idle;
-            player_coll.SetOrientation(Enemy_States.idle, 0);
+            //done 
             ResetAttack();
         }
     }
 
     private void ResetAttack(){
+
+        //set our current state to ide + set our player collider to idle
+        curr_EnemyState = Enemy_States.idle;
+        player_coll.SetOrientation(Enemy_States.idle, 0);
 
         spinning = false;
         curr_r_vel = 0;
@@ -183,7 +185,6 @@ public class Starfish_SM : Enemy_ParentClass
             Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
             rb.velocity = kb; 
 
-            player_coll.SetOrientation(Enemy_States.idle, 0);
             ResetAttack();
             return;
         }
@@ -193,13 +194,14 @@ public class Starfish_SM : Enemy_ParentClass
         if(spinning && (other.gameObject.CompareTag("Guppy") || other.gameObject.CompareTag("Tutorial"))){
 
             //animation
-            Instantiate(bite_particle, transform.position, Quaternion.identity);
+            Vector2 mid = Vector2.Lerp(transform.position, other.gameObject.transform.position, 0.5f); 
+            Instantiate(bite_particle, mid, Quaternion.identity);
             //sound?
 
             //attack this fish
             other.gameObject.GetComponent<Guppy_Stats>().TakeDamage(attackPower);
 
-            player_coll.SetOrientation(Enemy_States.idle, 0);
+            //resets
             ResetAttack();
             return;
 
@@ -217,15 +219,14 @@ public class Starfish_SM : Enemy_ParentClass
 
             //update animation
             Debug.Log(string.Format("DIstance: {0}", Controller_Player.instance.GetDistanceTraveled_Value()));
-
-            //return to idle
-            curr_EnemyState = Enemy_States.idle;
-            player_coll.SetOrientation(Enemy_States.idle, 0);
+            
             Controller_Player.instance.DeleteTrail();
 
             TakeDamage(Controller_Player.instance.Get_GunDamage() *2); //for now we'll just double the damage or what ever
 
+            //return to idle
             ResetAttack();
+
             return; //added for comformateee
 
         }

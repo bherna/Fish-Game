@@ -42,7 +42,8 @@ public class Controller_Pets : MonoBehaviour
         var spawnArea = TankCollision.instance.GetTankSpawnArea();
 
         //spawn pets into tank
-        foreach (PetNames pet in PetsAccess.current_pets_slotted){
+        foreach (PetNames pet in PetsAccess.current_pets_slotted)
+        {
 
             var spawnPoint = new Vector3(
                 Random.Range(spawnArea.Item1, spawnArea.Item2),
@@ -51,26 +52,30 @@ public class Controller_Pets : MonoBehaviour
             );
 
             //spawn new pet on screen and add to list
-            if(pet != PetNames.Missing){
-                pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_"+pet.ToString()) as GameObject, spawnPoint, quaternion.identity));
+            if (pet != PetNames.Missing)
+            {
+                pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_" + pet.ToString()) as GameObject, spawnPoint, quaternion.identity));
             }
+            
         }
     }
 
-    
+
 
 
     //USED FOR TESTING ONLY
     //dont spawn pets normally thorugh here
-    public void Test_SpawnPet(PetNames petNames){
+    //use the --------------testing - object ----------- game object to spawn them in
+    public void Test_SpawnPet(PetNames petNames)
+    {
 
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_SchoolTeacher") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_DrCrabs") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_MaryFertile") as GameObject, Vector2.zero, quaternion.identity));
         //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Khalid") as GameObject, Vector2.zero, quaternion.identity));
-        //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Salt") as GameObject, Vector2.zero, quaternion.identity));
+        //pet_list.Add(Instantiate(Resources.Load("Pets/" + "Pet_Cherry") as GameObject, Vector2.zero, quaternion.identity));
 
-        pet_list.Add(Instantiate(Resources.Load("Pets/Pet_"+petNames.ToString()) as GameObject, Vector2.zero, quaternion.identity));
+        pet_list.Add(Instantiate(Resources.Load("Pets/Pet_" + petNames.ToString()) as GameObject, Vector2.zero, quaternion.identity));
     }
 
 
