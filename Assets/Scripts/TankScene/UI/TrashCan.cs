@@ -6,16 +6,22 @@ public class TrashCan : MonoBehaviour
 {
 
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
 
-        if(other.gameObject.CompareTag("Food"))
+        if (other.gameObject.CompareTag("Food"))
         {
             other.gameObject.GetComponent<Drop_Food>().OnTrashDrop();
         }
 
-        else if(other.gameObject.CompareTag("Money"))
+        else if (other.gameObject.CompareTag("Money"))
         {
             other.gameObject.GetComponent<Drop_Money>().OnTrashDrop();
+        }
+
+        else if (other.gameObject.CompareTag("Pet"))
+        {
+            other.gameObject.GetComponent<Pet_ParentClass>().OnTouchGround();
         }
     }
 }

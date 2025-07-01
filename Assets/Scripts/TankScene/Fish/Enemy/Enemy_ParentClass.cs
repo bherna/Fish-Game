@@ -140,7 +140,14 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
 
 
 
+    //this isn't really 'collision' per say, but used when collideing with pets 
+    //specifiicallly with cherry (so far)
+    //functions purpose is to stun this enemy
+    //we can pass an integer to update the number of seconds the stun can last
+    public virtual void OnStunned(int numOfSeconds)
+    {
 
+    }
 
 
 

@@ -10,6 +10,7 @@ public class Pet_Cherry : Pet_ParentClass
     [SerializeField] Sprite open; //when pearl is ready use this sprite
 
     [SerializeField] GameObject pearl;
+    private Rigidbody2D rb;
 
     //event calling event type
     private Event_Type event_type = Event_Type.PearlCollected;
@@ -29,16 +30,97 @@ public class Pet_Cherry : Pet_ParentClass
         //dont any of the movement stuff, so no base.start() method
 
         //update sec_Max
-        sec_Max= Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
+        sec_Max = Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
+
+        //for falling
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
+
+
+
+
+
+    //cherry is a special interactable pet, 
+    //when enemies are present, cherry can be dropped onto enemies to stun them
     private new void Update()
     {
         base.Update();
 
-        if(!pearlReady){
-            
+        switch (curr_PetState)
+        {
+            case Pet_States.idle:
+                break;
+
+            case Pet_States.grabbed:
+                //while grabbed, all we do extra is set our pos to be with mouse
+                transform.position = Controller_Player.instance.mousePos;
+                break;
+
+            case Pet_States.dropped:
+                break;
+        }
+
+
+
+        //also do this always, (maybe might be changed to be everything besides grabbed)
+        //moved to own functino for readability
+        MakePearl();
+
+    }
+
+    //when cherry collides with enemy, and currnent state is dropped, stun enemy
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy")  && curr_PetState == Pet_States.dropped) {
+            collision.gameObject.GetComponent<Enemy_ParentClass>().OnStunned(4);
+        }
+    }
+
+
+
+
+
+
+    //three functions to switch between states
+    //the only purpose of the states, is to check to see if we are being dropped
+    //but to be dropped, we need to be grabbed ...
+    //so
+    //one from bot of tank, dropped -> idle
+    public override void OnTouchGround()
+    {
+        Debug.Log("we heare");
+        curr_PetState = Pet_States.idle;
+        //set gravity scale to 0 since we are at bottom
+        rb.gravityScale = 0;
+        rb.velocity = Vector3.zero;
+    }
+    //one from player onmousedown, idle/dropped -> grabbed
+    public void OnMouseDown()
+    {
+        curr_PetState = Pet_States.grabbed;
+        //set gravity to 0
+        rb.gravityScale = 0;
+        rb.velocity = Vector3.zero;
+    }
+    // ----------- WE DONT NEED ONE FOR ON DRAG, SINCE WE JUST CARE ABOUT THE DOWN AND UP EVENTS ------------ 
+    //one from player onmouseup, grabbed -> dropped
+    public void OnMouseUp()
+    {
+        curr_PetState = Pet_States.dropped;
+        //set gravity scale to _ since we are now wanting to fall
+        rb.gravityScale = 1;
+        rb.velocity = Vector3.zero;
+    }
+
+
+
+
+    private void MakePearl()
+    {
+        if (!pearlReady)
+        {
+
             //build up pearl
             sec_tillPearl += Time.deltaTime;
 
@@ -62,12 +144,12 @@ public class Pet_Cherry : Pet_ParentClass
             }
 
         }
-
     }
 
 
-    private void PearlCollected(){
-        
+    private void PearlCollected()
+    {
+
         //Debug.Log(string.Format("Clicked Cherry"));
 
         //reset variables

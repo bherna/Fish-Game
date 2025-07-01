@@ -38,7 +38,7 @@ public class Starfish_SM : Enemy_ParentClass
 
     private float linearDrag = 0; //this is set at start, dont edit the value
 
-    private float stunTimer = 0;
+    private float stunTimer = 0; //how long the stun lasts till finish (is set dynamicall, so no real hardset value)
 
 
     private new void Start() {
@@ -244,9 +244,8 @@ public class Starfish_SM : Enemy_ParentClass
         {
 
             //change starfish state
-            stunTimer = Controller_Player.trailDuration;
-            curr_EnemyState = Enemy_States.stunned;
-            player_coll.SetOrientation(Enemy_States.stunned, 0);
+            OnStunned(Controller_Player.trailDuration);
+            
 
             //create flash of light, to show that we countered
 
@@ -278,7 +277,13 @@ public class Starfish_SM : Enemy_ParentClass
 
 
 
-
+    public override void OnStunned(int numOfSeconds)
+    {
+        //when stunned, we do this
+        player_coll.SetOrientation(Enemy_States.stunned, 0);
+        curr_EnemyState = Enemy_States.stunned;
+        stunTimer = numOfSeconds;
+    }
 
 
 

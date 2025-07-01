@@ -44,7 +44,12 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
     }
 
 
-    
+
+    //idk how to get the tank trash can to talk to cherry
+    public virtual void OnTouchGround()
+    {
+
+    }
 
 
 

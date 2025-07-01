@@ -17,7 +17,6 @@ public class Drop_Money : Drop_Parent
 
     public override void OnMouseDown()
     {
-
         Collect();
  
     }
