@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+
+using System;
 using UnityEngine;
 
 public class Pet_Cherry : Pet_ParentClass
@@ -30,7 +30,7 @@ public class Pet_Cherry : Pet_ParentClass
         //dont any of the movement stuff, so no base.start() method
 
         //update sec_Max
-        sec_Max = Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
+        sec_Max = UnityEngine.Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
 
         //for falling
         rb = GetComponent<Rigidbody2D>();
@@ -54,10 +54,13 @@ public class Pet_Cherry : Pet_ParentClass
 
             case Pet_States.grabbed:
                 //while grabbed, all we do extra is set our pos to be with mouse
-                transform.position = Controller_Player.instance.mousePos;
+                Vector2 pos = Controller_Player.instance.mousePos;
+                pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4);
+                transform.position = pos;
                 break;
 
             case Pet_States.dropped:
+
                 break;
         }
 
@@ -89,7 +92,7 @@ public class Pet_Cherry : Pet_ParentClass
     //one from bot of tank, dropped -> idle
     public override void OnTouchGround()
     {
-        Debug.Log("we heare");
+        if(curr_PetState == Pet_States.grabbed){ return; } //else we can go past the trash/botom of tank collider
         curr_PetState = Pet_States.idle;
         //set gravity scale to 0 since we are at bottom
         rb.gravityScale = 0;
@@ -114,6 +117,13 @@ public class Pet_Cherry : Pet_ParentClass
     }
 
 
+    //don't need this since update does this for us
+    /*
+    public void OMouseDrag()
+    {
+        transform.position = Controller_Player.instance.mousePos;
+    }
+    */
 
 
     private void MakePearl()
@@ -136,7 +146,7 @@ public class Pet_Cherry : Pet_ParentClass
                 //--------------------
 
                 //update next sec_max 
-                sec_Max = Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
+                sec_Max = UnityEngine.Random.Range(totalSecForPearl.Item1, totalSecForPearl.Item2);
 
                 //instantiate a pearl
                 Vector3 pos = transform.position - Vector3.forward;

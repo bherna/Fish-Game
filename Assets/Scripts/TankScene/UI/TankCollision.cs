@@ -36,14 +36,24 @@ public class TankCollision : MonoBehaviour
     float boundry_xUpper;
     float boundry_yLower;
     float boundry_yUpper;
-       
-    private void Awake() {
-        
+
+    //trashcan range
+    float trash_xLower;
+    float trash_xUpper;
+    float trash_yLower;
+    float trash_yUpper;
+
+
+    private void Awake()
+    {
+
         //delete duplicate of this instance
-        if (instance != null && instance != this){
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
 
@@ -51,6 +61,7 @@ public class TankCollision : MonoBehaviour
         GetSwim_D();
         GetSpawn_D();
         GetBoundry_D();
+        GetTrash_D();
     }
 
 
@@ -102,13 +113,26 @@ public class TankCollision : MonoBehaviour
     }
 
 
+    private void GetTrash_D() {
+        
+        var w = trash.size.x;
+        var h = trash.size.y;
+
+        var trash_pos = trash.offset;
+
+        trash_xLower = trash_pos.x - w/2;
+        trash_xUpper = trash_pos.x + w/2;
+
+        trash_yLower = trash_pos.y - h/2;
+        trash_yUpper = trash_pos.y + h/2;
+    }
 
 
 
     //these can be used, if we need to do some dimension size math
 
-    public (float, float, float, float) GetTankSwimArea(){
-            return (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
+    public (float, float, float, float) GetTankSwimArea() {
+        return (swim_xLower, swim_xUpper, swim_yLower, swim_yUpper);
     } 
 
     public (float, float, float, float) GetTankSpawnArea(){
@@ -119,7 +143,9 @@ public class TankCollision : MonoBehaviour
         return (boundry_xLower ,boundry_xUpper, boundry_yLower, boundry_yUpper);
     }
 
-
+    public (float, float, float, float) GetTrashArea(){
+        return (trash_xLower ,trash_xUpper, trash_yLower, trash_yUpper);
+    }
 
 
 
