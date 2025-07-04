@@ -1,6 +1,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Pet_Cherry : Pet_ParentClass
 {
@@ -12,6 +13,7 @@ public class Pet_Cherry : Pet_ParentClass
     [SerializeField] Sprite open; //when pearl is ready use this sprite
 
     [SerializeField] GameObject pearl;
+    private BoxCollider2D coll;
     private Rigidbody2D rb;
 
 
@@ -29,7 +31,7 @@ public class Pet_Cherry : Pet_ParentClass
 
 
     //how long the enmy will be stunned for
-    private int stunDuration = 3;
+    private int stunDuration = 4;
 
 
 
@@ -47,6 +49,7 @@ public class Pet_Cherry : Pet_ParentClass
 
         //for falling
         rb = GetComponent<Rigidbody2D>();
+        coll = GetComponent<BoxCollider2D>();
     }
 
 
@@ -68,7 +71,7 @@ public class Pet_Cherry : Pet_ParentClass
             case Pet_States.grabbed:
                 //while grabbed, all we do extra is set our pos to be with mouse
                 Vector2 pos = Controller_Player.instance.mousePos;
-                pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4);
+                pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4+coll.size.y);
                 transform.position = pos;
                 break;
 
@@ -93,7 +96,7 @@ public class Pet_Cherry : Pet_ParentClass
             Enemy_ParentClass script = collision.gameObject.GetComponent<Enemy_ParentClass>();
             if (script != null)
             {
-                script.OnStunned(4);
+                script.OnStunned(stunDuration);
             }
         }
     }
@@ -142,15 +145,6 @@ public class Pet_Cherry : Pet_ParentClass
         transform.position = Controller_Player.instance.mousePos;
     }
     */
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-
-        //if we have an enemy collision + cherry is currently falling (only case) -> STUN enemy
-        if (collision.transform.tag == "Enemy" && curr_PetState == Pet_States.dropped)
-        {
-            collision.gameObject.GetComponent<Enemy_ParentClass>().OnStunned(stunDuration);
-        }
-    }
 
 
     private void MakePearl()
