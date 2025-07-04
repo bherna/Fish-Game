@@ -5,6 +5,8 @@ using UnityEngine;
 public class Pet_Cherry : Pet_ParentClass
 {
 
+
+
     [SerializeField] SpriteRenderer sprite; //actual sprite component
     [SerializeField] Sprite closed; //main cherry sprite to use
     [SerializeField] Sprite open; //when pearl is ready use this sprite
@@ -12,14 +14,25 @@ public class Pet_Cherry : Pet_ParentClass
     [SerializeField] GameObject pearl;
     private Rigidbody2D rb;
 
+
+
     //event calling event type
     private Event_Type event_type = Event_Type.PearlCollected;
+
+
 
     //pearl production var's
     private float sec_tillPearl = 0; //current count in seconds
     private (float, float) totalSecForPearl = (36f, 70f);
     private float sec_Max = 0; //what amount of time we plan on waiting for a pearl
     private bool pearlReady = false;
+
+
+    //how long the enmy will be stunned for
+    private int stunDuration = 3;
+
+
+
 
 
 
@@ -75,8 +88,13 @@ public class Pet_Cherry : Pet_ParentClass
     //when cherry collides with enemy, and currnent state is dropped, stun enemy
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")  && curr_PetState == Pet_States.dropped) {
-            collision.gameObject.GetComponent<Enemy_ParentClass>().OnStunned(4);
+        if (collision.gameObject.CompareTag("Enemy") && curr_PetState == Pet_States.dropped)
+        {
+            Enemy_ParentClass script = collision.gameObject.GetComponent<Enemy_ParentClass>();
+            if (script != null)
+            {
+                script.OnStunned(4);
+            }
         }
     }
 
@@ -124,6 +142,15 @@ public class Pet_Cherry : Pet_ParentClass
         transform.position = Controller_Player.instance.mousePos;
     }
     */
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        //if we have an enemy collision + cherry is currently falling (only case) -> STUN enemy
+        if (collision.transform.tag == "Enemy" && curr_PetState == Pet_States.dropped)
+        {
+            collision.gameObject.GetComponent<Enemy_ParentClass>().OnStunned(stunDuration);
+        }
+    }
 
 
     private void MakePearl()

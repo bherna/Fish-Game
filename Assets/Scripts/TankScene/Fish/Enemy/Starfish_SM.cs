@@ -169,6 +169,7 @@ public class Starfish_SM : Enemy_ParentClass
 
         spinning = false;
         curr_r_vel = 0;
+        curr_sprite_r = 0;      //reset this so it doesn't keep growing past max INT size
         rb.drag = linearDrag; //reset drag, since we dont want to be gliding everywhere
     }
 
@@ -276,7 +277,8 @@ public class Starfish_SM : Enemy_ParentClass
 
 
 
-
+    //used by other objects to stun this enemy 
+    //is also used as the main stun method when countered aswell
     public override void OnStunned(int numOfSeconds)
     {
         //when stunned, we do this
