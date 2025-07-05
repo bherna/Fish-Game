@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4772164410532193642}
   - component: {fileID: 2613484312692557380}
   - component: {fileID: 6871360498571463871}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Burger
   m_TagString: Food
   m_Icon: {fileID: 0}
@@ -120,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c91f80b010c8ba04697fa71428afa19b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeTillTrashed: 3
   foodValue: 0
   foodType: 1
 --- !u!114 &6871360498571463871
@@ -147,9 +148,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2515684403942779505}
     m_Modifications:
+    - target: {fileID: 107994271830119176, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1274248050078142741, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
       propertyPath: m_Name
       value: burger_v1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1274248050078142741, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1937912837117840303, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
       propertyPath: m_LocalPosition.x
@@ -190,6 +199,22 @@ PrefabInstance:
     - target: {fileID: 1937912837117840303, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3865290374294210962, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4998039028286681959, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172827546672697689, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7193534065287268343, guid: 971ad6bed1b83014da0e99292eb0c687, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

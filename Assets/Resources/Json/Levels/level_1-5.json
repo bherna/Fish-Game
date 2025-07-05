@@ -3,12 +3,12 @@
     [
         {
             "secTillWaveSpawn": 52,
-            "enemies": ["LMBass"]
+            "enemies": ["Starfish"]
         },
 
         {
             "secTillWaveSpawn": 60,
-            "enemies": ["Starfish"]
+            "enemies": ["LMBass"]
         },
 
         {
@@ -30,13 +30,13 @@
 
     "loop": true,
 
-    "petNameString": "Khalid",
+    "petNameString": "Cherry",
 
-    "levelUnlock": [1, 5],
+    "levelUnlock": [1, 0],
 
-    "startMoney": 200,
+    "startMoney": 400,
 
-    "eggPiecesPrices": [750, 1500, 2400],
+    "eggPiecesPrices": [1000, 2000, 3010],
 
     "tutorialToRun": false
 

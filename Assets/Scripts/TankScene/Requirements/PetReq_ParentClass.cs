@@ -13,11 +13,12 @@ public class PetReq_ParentClass : MonoBehaviour
     //what every pet egg hatch requirement will need is a $/second 
     //  - this is just a simple income requirement, seems stupid but what ever
     //      this is just to get people to not rely on simple guppy builds. I want players to figure out new income methods that will be unlocked throughout their gameplay 
-    protected int income_cur =  0;   //this is the one that is activly changing evry second
-    protected int income_req =  0; //this is the one we want to achive (shoulld be updated in child classes)
+    protected int income_cur = 0;   //this is the one that is activly changing evry second
+    protected int income_req = 0; //this is the one we want to achive (shoulld be updated in child classes)
 
 
-    public void SetIncome(int newIncome){
+    public void SetIncome(int newIncome)
+    {
 
         //only run this if we are activly getting requirements
         if (toggle)
@@ -25,7 +26,7 @@ public class PetReq_ParentClass : MonoBehaviour
             income_cur = newIncome;
             PostUpdates();
         }
-        
+
     }
 
 
@@ -34,22 +35,26 @@ public class PetReq_ParentClass : MonoBehaviour
 
 
     //used in stopping checks
-    public bool toggle {get; protected set;}= false;
-    public virtual void StartReqs(){
+    public bool toggle { get; protected set; } = false;
+    public virtual void StartReqs()
+    {
         toggle = true;
     }
 
 
     //singleton this class
-    public static PetReq_ParentClass instance {get; private set; }
-    void Awake (){
+    public static PetReq_ParentClass instance { get; private set; }
+    void Awake()
+    {
 
         //delete duplicate of this instance
 
-        if (instance != null && instance != this){
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
     }
@@ -67,9 +72,10 @@ public class PetReq_ParentClass : MonoBehaviour
 
     //used after updating any of our requirements, one to update the text in the ui, and another to check if completed
     //THIS CLASS SHOULD BE OVERRIDED, per pet class
-    protected virtual void PostUpdates(){
+    protected virtual void PostUpdates()
+    {
 
-        if(!toggle){return;}
+        if (!toggle) { return; }
 
         string ourTex = string.Format("Requirements:\nNULLLLLLLLLLLLLLLLLL");
 
@@ -85,13 +91,15 @@ public class PetReq_ParentClass : MonoBehaviour
     //only time val is -1, is when they die, so
     //Example,  a guppy is a adult dies from starvation, age = 2 and val = -1
     //what this functino will do, will be determined by the pet egg
-    public virtual void UpdateGuppyCounter_Age(int age, int val){}
+    public virtual void UpdateGuppyCounter_Age(int age, int val) { }
 
 
     //event is used every time a guppy eats a pellet
-    public virtual void GuppyAte(){}
+    public virtual void GuppyAte() { }
 
     //call when max food in shop is bought
-    public virtual void MaxFoodReached(){}
+    public virtual void MaxFoodReached() { }
+    public virtual void FoodDissolved() { }
+
 
 }

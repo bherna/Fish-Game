@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: -2243787666379401709}
   - component: {fileID: 395336051077838898}
   - component: {fileID: 3128087071574213819}
-  - component: {fileID: 3138865642137024959}
   m_Layer: 8
   m_Name: Salt
   m_TagString: Food
@@ -121,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4562fd0897cb5941a81e0e78b4dfcac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeTillTrashed: 3
   foodValue: 15
   foodType: 0
 --- !u!114 &3128087071574213819
@@ -140,18 +140,6 @@ MonoBehaviour:
   dropSprite: {fileID: 4011140653058660249}
   tiltMax: 45
   tiltSpeed: 0
---- !u!114 &3138865642137024959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1213281205517056372}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d914949274354e47aa6e5ab3277e60e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &4765159332770183528
 PrefabInstance:
   m_ObjectHideFlags: 0

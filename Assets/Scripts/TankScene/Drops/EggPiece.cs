@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Rendering;
 using Steamworks;
+using System.Linq;
 
 
 
@@ -67,7 +68,8 @@ public class EggPiece : MonoBehaviour
 
 
 
-
+    //on collision 2d functions are for colliding with other egg peices mostly
+    //since egg pieces are not triggers
     void OnCollisionStay2D(Collision2D other)
     {
 
@@ -92,6 +94,25 @@ public class EggPiece : MonoBehaviour
         }
 
         
+    }
+
+
+
+
+    //when we  have triggers to collide with (not egg pieces)
+    void OnTriggerStay2D(Collider2D other)
+    {
+        //if we collide with food
+        if (other.transform.tag == "Food")
+        {
+            PetReq_ParentClass.instance.FoodDissolved();
+            other.gameObject.GetComponent<Drop_Parent>().OnTrashDrop();
+        }
+
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+
     }
 
 
@@ -167,10 +188,13 @@ public class EggPiece : MonoBehaviour
             index.Insert(0, new_indexs[0]);
             new_indexs.RemoveAt(0);
         }
-
+        //add the rest to the end of current index list
         foreach(int i in new_indexs){
             index.Add(i);
         }
+
+        //remove duplicates incase we have multiple egg collisions
+        index = new HashSet<int>(index).ToList();
 
         //update our egg to display all pieces we combined now
         UpdateCracks();
@@ -221,19 +245,14 @@ public class EggPiece : MonoBehaviour
 
 
 
-    //----------------------------------------------------------  mouse drag related ---------------------------
 
     
-    void OnTriggerStay2D(Collider2D other)
-    {
-        //onc
-    }
-    void OnTriggerExit2D(Collider2D other)
-    {
-
-    }
 
 
+
+
+
+    //----------------------------------------------------------  mouse drag related ---------------------------
 
     //functino break downs
     void OnMouseDown() {
