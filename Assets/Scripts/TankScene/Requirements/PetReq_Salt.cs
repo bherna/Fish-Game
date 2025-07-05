@@ -23,9 +23,6 @@ public class PetReq_Salt : PetReq_ParentClass
         //update requiremtns board + checker (last)
         PostUpdates();
 
-        //start the income caller, since we want to keep track of that stuff
-        StartCoroutine(Controller_Wallet.instance.CalculateIncome());
-
     }
 
 
@@ -36,12 +33,12 @@ public class PetReq_Salt : PetReq_ParentClass
 
         string ourTex = string.Format(
             "Requirements:\n~~~~~~~~~~~~~~~~\nFeed Guppys: {0} / {1}\n\nBought Max Food Power: {2}\n\nIncome: ${3} / ${4}",
-            feeds, feeds_req, foodText, income, income_req);
+            feeds, feeds_req, foodText, income_cur, income_req);
         Controller_Requirements.instance.UpdateReqs(ourTex);
 
 
         //did we complete our reqs
-        if(feeds >= feeds_req && income >= income_req && maxFood){
+        if(feeds >= feeds_req && income_cur >= income_req && maxFood){
             
             //we done, and we can stop
             toggle = false;
@@ -70,9 +67,11 @@ public class PetReq_Salt : PetReq_ParentClass
 
 
 
-    public override void MaxFoodReached(){
+    public override void MaxFoodReached()
+    {
         maxFood = true;
         foodText = "Yes";
+        PostUpdates();
     }
 
 }

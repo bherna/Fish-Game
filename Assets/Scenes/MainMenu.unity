@@ -2196,6 +2196,14 @@ PrefabInstance:
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 5600240340502724567, guid: f47c549ea1b5899499d9ad57a3adc5f6, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5600240340502724567, guid: f47c549ea1b5899499d9ad57a3adc5f6, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b35042a57e1fe0d40b387cb1bbcc6db4, type: 3}
+    - target: {fileID: 5600240340502724567, guid: f47c549ea1b5899499d9ad57a3adc5f6, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}

@@ -8,92 +8,144 @@ public class Controller_Wallet : MonoBehaviour
 
     //current money
     private int current_money;
-
-    //used in determining total money earned per second
-    private int income;
-
-    //post current money
+    //post current money for ui
     [SerializeField] TextMeshProUGUI ui_text;
+
+
+
+    //this is to keep track of income
+    //but income is calculated in a combo format, 
+    //if the player keeps continously collecting money fast enough 'income' will go up
+    //if they stop after _ seconds, income -> 0
+    private int income;
+    //we also need timer stuff
+    //both in seconds
+    private int countDownTimer = 0;
+    private const int timerStart = 4;
 
 
 
 
 
     //reference to self
-    public static Controller_Wallet instance {get; private set; }
+    public static Controller_Wallet instance { get; private set; }
 
-    private void Awake() {
-        
+    private void Awake()
+    {
+
         //delete duplicate of this instance
 
-        if (instance != null && instance != this){
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
 
-    }   
-
-
-
-
-
-    private void Start() {
-
-        current_money = LocalLevelVariables.GetStartMoney();
-        UpdateMoney();
-        //Debug.Log("Gamvar: "+GameVariables.GetStartMoney());
-        //Debug.Log("Our start money: "+current_money);
     }
 
-    
-    public void AddMoney(int money){
+
+
+
+    /// ------------------------------------------ base functions ----------------------------------------------
+
+    private void Start()
+    {
+        //set our start money for this level
+        current_money = LocalLevelVariables.GetStartMoney();
+        UpdateMoney();
+    }
+
+
+    public void AddMoney(int money)
+    {
 
         current_money += money;
         UpdateMoney();
 
-        income += money;
+        AddToCombo(money);
     }
 
-    public void SubMoney(int money){
+    public void SubMoney(int money)
+    {
         current_money -= money;
         UpdateMoney();
     }
 
-    public bool IsAffordable(int price){
+    public bool IsAffordable(int price)
+    {
         return price <= current_money;
     }
 
-
-    private void UpdateMoney(){
-
+    //used for updating the total money player has (store ui)
+    private void UpdateMoney()
+    {
         ui_text.text = current_money.ToString();
     }
 
 
 
-    //this function is used in determining the money made per seccond
-    //only calculate the income during requirements phase, since we don't need it right now outside of that
-    public IEnumerator CalculateIncome(){
+    //----------------------------------------------------- combo related -------------------------------------
 
-        while(PetReq_ParentClass.instance.toggle){
+    //the function every obj will reference
+    //all they need to think about is adding to the combo
+    public void AddToCombo(int amt)
+    {
 
-            //calculate new income (just set money earned as new income)
-            PetReq_ParentClass.instance.SetIncome(income);
-
-            //reset values
-            income = 0;
-
-            //do again after second
-            yield return new WaitForSeconds(1);
-            
+        //if we have no combo 
+        if (income == 0)
+        {
+            //start new combo
+            countDownTimer = timerStart;
+            income = amt;
+            //update teext 
+            UI_Combo.instance.UpdateText(income.ToString());
+            //start countdown
+            StartCoroutine(CountDown());
         }
+        else if (income >= 1)
+        {
 
+            //add to combo level
+            income += amt;
+            UI_Combo.instance.UpdateText(income.ToString());
+            //reset countdown
+            countDownTimer = timerStart;
+        }
     }
 
 
-    
+
+    private IEnumerator CountDown()
+    {
+
+        while (countDownTimer > 0)
+        {
+
+            //wait for 1 second to pass
+            yield return new WaitForSeconds(1);
+            //sub
+            countDownTimer -= 1;
+            Debug.Log("while loop pass -1");
+
+
+            //update pet-req text
+            PetReq_ParentClass.instance.SetIncome(income);
+
+        }
+
+
+        //else we lost the combo 
+        //reset
+        countDownTimer = 0;
+        income = 0;
+        UI_Combo.instance.UpdateText("0");
+        PetReq_ParentClass.instance.SetIncome(0);
+
+    }
+
 
 
 }

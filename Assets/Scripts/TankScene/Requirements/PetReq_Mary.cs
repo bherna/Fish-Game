@@ -29,9 +29,6 @@ public class PetReq_Mary : PetReq_ParentClass
         //update requiremtns board + checker (last)
         PostUpdates();
 
-        //start the income caller, since we want to keep track of that stuff
-        StartCoroutine(Controller_Wallet.instance.CalculateIncome());
-
     }
 
 
@@ -41,12 +38,12 @@ public class PetReq_Mary : PetReq_ParentClass
 
         if(!toggle){return;}
 
-        string ourTex = string.Format("Requirements:\n~~~~~~~~~~~~~~~~\nBaby Guppys: {0} / {1}\n\nIncome: ${2} / ${3}", babies, babies_req, income, income_req);
+        string ourTex = string.Format("Requirements:\n~~~~~~~~~~~~~~~~\nBaby Guppys: {0} / {1}\n\nIncome: ${2} / ${3}", babies, babies_req, income_cur, income_req);
         Controller_Requirements.instance.UpdateReqs(ourTex);
 
 
         //did we complete our reqs
-        if(babies >= babies_req && income >= income_req){
+        if(babies >= babies_req && income_cur >= income_req){
             
             //we done, and we can stop
             toggle = false;

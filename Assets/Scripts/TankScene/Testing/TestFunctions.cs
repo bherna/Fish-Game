@@ -42,7 +42,7 @@ public class TestFunctions : MonoBehaviour
     //function to test the combo mech
     public int comboAmount = 1;
     public void AddToCombo(){
-        UI_Combo.instance.AddToCombo(comboAmount);
+        Controller_Wallet.instance.AddToCombo(comboAmount);
     }
 
     
