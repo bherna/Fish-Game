@@ -1,16 +1,14 @@
-using System;
 using System.Collections;
-using System.Linq;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UI;
+
 
 public class Controller_Player : MonoBehaviour
 {
 
     [SerializeField] ParticleSystem Gun_particle;
     [SerializeField] GameObject trail;
+    private int trailTotal = 0; // this keeps track of current chained trails
+    private Coroutine timer;
 
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
@@ -30,7 +28,7 @@ public class Controller_Player : MonoBehaviour
     //counter / trail related
     private float distanceTraveled = 0;
     private bool isTrailActive = false;
-    public const int trailDuration = 1; //in seconds (this is used in enemy code aswell to keep in sync)
+    public const int trailDuration = 1; //in seconds how long we can counter for(this is used in enemy code aswell to keep in sync)
     private Vector2 LastPosition;
 
 
@@ -84,14 +82,14 @@ public class Controller_Player : MonoBehaviour
 
         //move self there
         //used for collisions
-        transform.position = new Vector2(screenPos.x, screenPos.y);
-
+        transform.position = new Vector2(mousePos.x, mousePos.y);
+        //if we need to use transfomr.position, just know its not the tank area
 
         //if we have a trail active, we want to update our distance traveld
         if (isTrailActive)
         {
-
-            Vector2 newPosition = transform.position;
+            //update distance counter
+            Vector2 newPosition = mousePos;
             distanceTraveled += (newPosition - LastPosition).magnitude;
             LastPosition = newPosition;
         }
@@ -134,21 +132,29 @@ public class Controller_Player : MonoBehaviour
         //we don't need multiple trails, pointless
         if (isTrailActive)
         {
-            return;
+            //we don't want to reset distance travel'd
+            trailTotal += 1;
+
+            StopCoroutine(timer);
+            timer = StartCoroutine(trailCountdown());
         }
+        else
+        {
+            isTrailActive = true;
 
-        isTrailActive = true;
+            //make sure values are reset
+            distanceTraveled = 0;
+            LastPosition = mousePos;
+            trailTotal = 1;
 
-        //make sure values are reset
-        distanceTraveled = 0;
-        LastPosition = transform.position;
+            //init new trail obj
+            Instantiate(trail, transform, worldPositionStays: false);
 
-        //init new trail obj
-        //and attach as child
-        Instantiate(trail, transform, worldPositionStays: false);
-
-        //create an countdown to destroy the trail if player doesn't use it in time
-        StartCoroutine(trailCountdown());
+            //create an countdown to destroy the trail if player doesn't use it in time
+            timer = StartCoroutine(trailCountdown());
+        }
+        
+        
     }
 
     //countdown, 
@@ -169,6 +175,8 @@ public class Controller_Player : MonoBehaviour
         {
             Destroy(transform.GetChild(0).gameObject);
             isTrailActive = false;
+            trailTotal = 0;
+            timer = null;
         }
     }
 

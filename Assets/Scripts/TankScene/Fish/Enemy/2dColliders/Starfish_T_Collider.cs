@@ -11,10 +11,6 @@ public class Starfish_T_Collider : Enemy_Collider_ParentClass
     }
 
 
-    void OnMouseDown()
-    {
-
-    }
     
     //nothing different from base parent class really
 }

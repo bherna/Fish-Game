@@ -1303,7 +1303,7 @@ PrefabInstance:
     - target: {fileID: 606014632025020822, guid: 346a3917a0c3c734bb17e0947c4961c6, type: 3}
       propertyPath: creationObj
       value: 
-      objectReference: {fileID: 8605215774676198758, guid: bd9190d588d7bf84a95fd429b1b0d0c7, type: 3}
+      objectReference: {fileID: 5292263530791328344, guid: 0914d4eaf7f777d4586440e43221dfb8, type: 3}
     - target: {fileID: 2595697020342152516, guid: 346a3917a0c3c734bb17e0947c4961c6, type: 3}
       propertyPath: m_Name
       value: ---------Testing-Object---------
@@ -1648,6 +1648,10 @@ PrefabInstance:
     - target: {fileID: 1770249457380820585, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
       propertyPath: m_Name
       value: Controller_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1770249457380820585, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5381587780311730912, guid: 90a6ca491d774a2438b9f5df6726b7d1, type: 3}
       propertyPath: ps

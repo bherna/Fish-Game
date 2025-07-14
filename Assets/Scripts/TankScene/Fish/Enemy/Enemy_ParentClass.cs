@@ -25,15 +25,20 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
     protected const float kbForce_stunned = 1.2f; //when an enemy is stunned, we use this one instead (since player can just spam click)
 
 
-    
-    protected new void Start() {
-        
+    //particles
+    [SerializeField] protected ParticleSystem stun_particle;
+
+
+
+    protected new void Start()
+    {
+
         //references
         rb = GetComponent<Rigidbody2D>();
 
         //idle target set
         NewRandomIdleTarget_Tank();
-        
+
         //attack mode target set
         SetTargetFish(Controller_Fish.instance.GetRandomFish());
 
@@ -111,6 +116,11 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
 
         }
     }
+    
+    public virtual void On_TankExit(Collider2D other)
+    {
+
+    }
 
 
     //2nd-dairy collider, used for interactin with player (clicks)
@@ -120,8 +130,8 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
     {
         //if the game is paused, return
         if (Controller_EscMenu.instance.paused) { return; }
-        
-        
+
+
         //create gun particle
         Controller_Player.instance.Run_GunParticle();
 
@@ -133,7 +143,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
         //damage
         TakeDamage(Controller_Player.instance.Get_GunDamage());
 
-        
+
 
     }
 
@@ -146,7 +156,10 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
     //we can pass an integer to update the number of seconds the stun can last
     public virtual void OnStunned(int numOfSeconds)
     {
-
+        //for every enemy, we want to play stunned visual
+        //so instantiate and update duration
+        var particle = Instantiate(stun_particle, transform);
+        Destroy(particle, numOfSeconds);
     }
 
 

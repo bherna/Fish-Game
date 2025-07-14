@@ -41,11 +41,13 @@ public class Starfish_SM : Enemy_ParentClass
     private float stunTimer = 0; //how long the stun lasts till finish (is set dynamicall, so no real hardset value)
 
 
-    private new void Start() {
+
+    private new void Start()
+    {
         base.Start();
 
         player_coll = GetComponent<Starfish_P_Collider>();
-        
+
         //set target fish
         currFishTarget = Controller_Fish.instance.GetRandomFish();
 
@@ -144,7 +146,7 @@ public class Starfish_SM : Enemy_ParentClass
 
     }
 
-
+    //this is the stunned state function, for getting stunned go to on_stunned
     private void Stunned(){
 
         //we just count down in here, (the initial stunned reason should set the timer)
@@ -161,7 +163,8 @@ public class Starfish_SM : Enemy_ParentClass
         }
     }
 
-    private void ResetAttack(){
+    private void ResetAttack()
+    {
 
         //set our current state to ide + set our player collider to idle
         curr_EnemyState = Enemy_States.idle;
@@ -184,9 +187,12 @@ public class Starfish_SM : Enemy_ParentClass
 
             //set our velocity towards middle of tank
             Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
-            rb.velocity = kb; 
+            rb.velocity = kb;
 
-            ResetAttack();
+            //if we are currently stunned we dont want to reset our attack just yet
+            if (curr_EnemyState != Enemy_States.stunned) {
+                ResetAttack();
+            }
             return;
         }
 
@@ -212,14 +218,14 @@ public class Starfish_SM : Enemy_ParentClass
         //this happens when we entercounter counter (trail);p
         //ie, this is after the player already clicked on the starfish, causing them to get stunned, 
         // now we are expecting for player counter trail to hit us
-        if(curr_EnemyState == Enemy_States.stunned && other.gameObject.CompareTag("Player")){
+        if(curr_EnemyState == Enemy_States.stunned && Controller_Player.instance.GetDistanceTraveled_Value() > 1 && other.gameObject.CompareTag("Player")){
 
             //kb the starfish (using the player distance traveld with trail)
             Vector2 kbVector = (transform.position - other.gameObject.transform.position).normalized;
             rb.AddForce(kbVector * Controller_Player.instance.GetDistanceTraveled_Value(), ForceMode2D.Impulse);
 
             //update animation
-            Debug.Log(string.Format("DIstance: {0}", Controller_Player.instance.GetDistanceTraveled_Value()));
+            //Debug.Log(string.Format("DIstance: {0}", Controller_Player.instance.GetDistanceTraveled_Value()));
             
             Controller_Player.instance.DeleteTrail();
 
@@ -234,19 +240,20 @@ public class Starfish_SM : Enemy_ParentClass
         
     }
 
+    
+
 
     public override void On_PlayerClick()
     {
         //if the game is paused, return
-        if (Controller_EscMenu.instance.paused){return;}
+        if (Controller_EscMenu.instance.paused) { return; }
 
         //first check for posible counter attack move
         if (spinning)
         {
-
             //change starfish state
             OnStunned(Controller_Player.trailDuration);
-            
+
 
             //create flash of light, to show that we countered
 
@@ -255,7 +262,8 @@ public class Starfish_SM : Enemy_ParentClass
             rb.velocity = kbVector * kbForce_stunned;
 
             //init a ripple particle
-            Controller_Ripple.instance.CreateRipple(Controller_Player.instance.transform.position);
+            Vector2 midpoint = Vector2.Lerp(Controller_Player.instance.transform.position, transform.position, 0.5f);
+            Controller_Ripple.instance.CreateRipple(midpoint);
 
             //we create a trail particle
             //for the player
@@ -285,6 +293,9 @@ public class Starfish_SM : Enemy_ParentClass
         player_coll.SetOrientation(Enemy_States.stunned, 0);
         curr_EnemyState = Enemy_States.stunned;
         stunTimer = numOfSeconds;
+
+        //make our enemy have a stun visual
+        base.OnStunned(numOfSeconds);
     }
 
 

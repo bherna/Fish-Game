@@ -128,7 +128,7 @@ public class Controller_Wallet : MonoBehaviour
             yield return new WaitForSeconds(1);
             //sub
             countDownTimer -= 1;
-            Debug.Log("while loop pass -1");
+            //Debug.Log("while loop pass -1");
 
 
             //update pet-req text

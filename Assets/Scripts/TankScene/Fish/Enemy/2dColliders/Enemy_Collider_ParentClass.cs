@@ -45,7 +45,10 @@ public abstract class Enemy_Collider_ParentClass : MonoBehaviour
         enemy_ParentClass.On_TankStay(collision); 
     }
 
-
+    public void OTriggerExit2D(Collider2D collision)
+    {
+        enemy_ParentClass.On_TankExit(collision); 
+    }
 
 
 }
