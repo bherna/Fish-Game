@@ -34,11 +34,15 @@ public class Pet_Khalid : Pet_ParentClass
     private float ability_velocity = 2;
 
 
-    private new void Start(){
+    private new void Start()
+    {
         base.Start();
 
         //since game is in 30 frames a second (there are 60 frames in polp animation) so 2/timelength instead of 1/timelength
-        animator.SetFloat("polypSpeed", 2/secondsInPolyp);
+        animator.SetFloat("polypSpeed", 2 / secondsInPolyp);
+
+        //front facing pet
+        IProfile = false;
         
     }
 

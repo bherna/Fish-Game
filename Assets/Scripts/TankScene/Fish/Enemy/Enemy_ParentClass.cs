@@ -10,7 +10,6 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
     [SerializeField] protected AudioClip damageSoundClip;
     [SerializeField] protected AudioClip diedSoundClip;
     [SerializeField] protected GameObject gem; //on die we drop this
-    protected Rigidbody2D rb;
     protected Enemy_States curr_EnemyState;
     
 
@@ -32,9 +31,9 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
 
     protected new void Start()
     {
+        base.Start();
 
         //references
-        rb = GetComponent<Rigidbody2D>();
 
         //idle target set
         NewRandomIdleTarget_Tank();
@@ -44,6 +43,11 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
 
         //start in attack mode if possible
         curr_EnemyState = Enemy_States.attack;
+
+        //all enemy fish will be dynamic in its movement
+        //a select few will be front facing, so we'll have to update them per enemy
+        IStatic = false;
+        
 
     }
 
@@ -63,17 +67,6 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
         }
     }
 
-
-    //overrideing our original updatePosition
-    public bool UpdatePosition(Vector3 target_pos, float current_Vel)
-    {
-
-        var dir = (target_pos - transform.position).normalized;
-
-        rb.AddForce(dir * current_Vel * Time.deltaTime, ForceMode2D.Force);
-
-        return true;
-    }
 
 
     //fish died

@@ -26,7 +26,7 @@ public class LargeMBass_SM : Enemy_ParentClass
     //movement related
     public const float max_velocity = 30; // max velocity bass can reach
     private float curr_velocity = 0; //velocity the bass currently has
-    private const float acceleration = 2.3f; //how fast lm-bass builds up speed
+    private const float acceleration = 5.3f; //how fast lm-bass builds up speed
 
 
     //attack related
@@ -79,12 +79,10 @@ public class LargeMBass_SM : Enemy_ParentClass
     //get a random point on the screen
     protected void IdleMode()
     {
-
         float distance = Vector3.Distance(idleTarget, transform.position);
 
         if (Mathf.Abs(distance) > targetRadius)
         {
-
             UpdatePosition(idleTarget, curr_velocity);
         }
 

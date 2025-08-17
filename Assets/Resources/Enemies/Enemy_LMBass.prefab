@@ -80,7 +80,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: feba1b2cce12f0f49a54c5d86226b5d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colliderType: 0
 --- !u!1 &5292263530791328344
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +92,7 @@ GameObject:
   - component: {fileID: 7394080560007591877}
   - component: {fileID: 7659717776646066776}
   - component: {fileID: 6649427104375054601}
+  - component: {fileID: 1944003358891142804}
   m_Layer: 10
   m_Name: Enemy_LMBass
   m_TagString: Enemy
@@ -160,6 +160,7 @@ MonoBehaviour:
   damageSoundClip: {fileID: 8300000, guid: b9214cd22b6485d4ba58b75213fe41bd, type: 3}
   diedSoundClip: {fileID: 8300000, guid: 4911eca0f7f8b3c41a5d61e7b92a2b29, type: 3}
   gem: {fileID: 8605215774676198758, guid: bd9190d588d7bf84a95fd429b1b0d0c7, type: 3}
+  stun_particle: {fileID: 4706683994696194229, guid: 8db228d96569ab441a992ed2956ee004, type: 3}
   bite_particle: {fileID: 148617094261164697, guid: 441a68b3d0b86c74c8af3f836e074e9f, type: 3}
 --- !u!70 &6649427104375054601
 CapsuleCollider2D:
@@ -196,6 +197,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 2.4, y: 1.45}
   m_Direction: 1
+--- !u!114 &1944003358891142804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5292263530791328344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287a67619150fe6469a8031c66df4461, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8405361668250059606
 PrefabInstance:
   m_ObjectHideFlags: 0

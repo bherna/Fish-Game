@@ -1,6 +1,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -37,14 +38,15 @@ public class Pet_DrCrabs : Pet_ParentClass
 
 
 
-
-
     // Start is called before the first frame update
     private new void Start()
     {
         base.Start();
 
         cointargets = new coinStack();
+
+        //front facing pet
+        IProfile = false;
         
     }
 

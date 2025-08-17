@@ -7,9 +7,13 @@ public class Pets_InMainMenu : Pet_ParentClass
     private float ability_vel = 3;
     private bool facingCorrectly = false;
 
+    protected const bool StaticFish = true;
+    protected const bool WithProfile = true;
+
     //run when we spawn this pet
     //save the spot this fish needs to swim to when we go to the pets ui panel
-    public void SetCoords(Vector3 coords){
+    public void SetCoords(Vector3 coords)
+    {
 
         coordPos = coords;
     }

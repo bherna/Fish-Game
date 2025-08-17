@@ -53,6 +53,8 @@ public class Starfish_SM : Enemy_ParentClass
 
         linearDrag = rb.drag;
 
+        //front facing enemy
+        IProfile = false;
     }
 
     // Update is called once per frame

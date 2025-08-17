@@ -69,7 +69,8 @@ public class Starfish_P_Collider : MonoBehaviour
 
 
     
-    //this isn't the normal onplayerclick method, this is our own version to avoid calling it here (should be called from {enemyname}_collider)
+    //this isn't the normal onplayerclick method, 
+    //this is our own version to avoid calling it here (should be called from {enemyname}_collider)
     public void OnMouseDown()
     {
         starfish_SM.On_PlayerClick();

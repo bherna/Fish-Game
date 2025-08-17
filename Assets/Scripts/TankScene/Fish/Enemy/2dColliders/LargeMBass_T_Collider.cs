@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LargeMBass_Collider : Enemy_Collider_ParentClass
+public class LargeMBass_T_Collider : Enemy_Collider_ParentClass
 {
-    CapsuleCollider2D capCollider;
+    CapsuleCollider2D capCollider; //we don't reall use this one for this script really
 
 
     protected override void Start()
@@ -13,4 +13,5 @@ public class LargeMBass_Collider : Enemy_Collider_ParentClass
         enemy_ParentClass = transform.parent.GetComponent<LargeMBass_SM>();
 
     }
+
 }
