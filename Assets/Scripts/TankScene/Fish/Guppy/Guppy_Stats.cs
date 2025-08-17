@@ -15,6 +15,10 @@ public class Guppy_Stats : FishStats_ParentClass
     [SerializeField] List<Transform> sprite_meshList; //use only for sprite transperancy
     [SerializeField] Transform sprite_transform;        //use only for changing the entire size of guppy
 
+
+    //-------------------------------- dead related --------------------------------------------//
+    [SerializeField] GameObject guppyDead;
+
     // --------------------------------- hunger related ----------------------------------------//
     private float stomach; //total seconds before fish will die of hunger
     protected float burnRate = 1; //keep at 1, just so have it reference as -1 unit per second
@@ -247,7 +251,14 @@ public class Guppy_Stats : FishStats_ParentClass
         //play die sound
         if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
+        //update pet req if needed
         PetReq_ParentClass.instance.UpdateGuppyCounter_Age(curr_ageStage, -1);
+
+        //send a message to pets saying we died aswell
+        Controller_Pets.instance.Annoucement_Init(Event_Type.guppyDead);
+
+        //instantiate dead version of guppy
+        Instantiate(guppyDead, transform.position, Quaternion.identity);
 
         Destroy(gameObject);
     }

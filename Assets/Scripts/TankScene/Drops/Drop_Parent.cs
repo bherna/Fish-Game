@@ -11,7 +11,7 @@ public class Drop_Parent : MonoBehaviour
 
 
 
-    protected void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }

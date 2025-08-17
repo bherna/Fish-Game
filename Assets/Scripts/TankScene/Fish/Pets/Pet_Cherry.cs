@@ -14,12 +14,11 @@ public class Pet_Cherry : Pet_ParentClass
 
     [SerializeField] GameObject pearl;
     private BoxCollider2D coll;
-    private Rigidbody2D rb;
 
 
 
     //event calling event type
-    private Event_Type event_type = Event_Type.PearlCollected;
+    private Event_Type event_type = Event_Type.pearlCollected;
 
 
 

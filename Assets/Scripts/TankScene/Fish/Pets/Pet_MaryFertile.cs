@@ -1,5 +1,6 @@
 using System;
 using Steamworks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -31,9 +32,16 @@ public class Pet_MaryFertile : Pet_ParentClass
     private float curr_secAfter = 0;
     private const float max_secAfter = 8f; //#_ seconds pregnat
 
-    private bool keepCountingBefore = true;
-    private bool keepCountingAfter = true;
-    
+
+    // -- ------------------ depression related - ---------------------
+    private const int DeadGuppyThreshold = 5;
+    private int guppysDeathToll = 0;
+
+    private GameObject foodTarget;
+    private const int FoodAteThreshold = 10;
+    private int foodsEaten = 0;
+    private int hungry_velocity = 2;
+
 
 
 
@@ -52,6 +60,10 @@ public class Pet_MaryFertile : Pet_ParentClass
         ps_sweating.Stop();
         var temp_main = ps_sweating.main;
         temp_main.duration = max_secAfter; //gues this is a pointer to ps_sweating duration
+
+
+        //we also start in stage1, not idle
+        curr_PetState = Pet_States.stage1;
     }
 
     // Update is called once per frame
@@ -59,43 +71,77 @@ public class Pet_MaryFertile : Pet_ParentClass
     {
         base.Update(); //incase
 
-        IdleMode(); //movement
-        
+        //using this as just movement, since all she does is swim around the tank
+        IdleMode(); 
 
+
+        switch (curr_PetState)
+        {
+            //incase we somehow start with idle
+            case Pet_States.idle:
+            case Pet_States.stage1:
+
+                Stage1Mode();
+                break;
+
+            case Pet_States.stage2:
+
+                Stage2Mode();
+                break;
+
+            case Pet_States.ability:
+                AbilityMode();
+                break;
+
+            case Pet_States.depressed:
+                DepressedMode();
+                break;
+
+            default:
+                Debug.Log("should NOT be here");
+                break;
+        }
+
+        
+        
+    }
+
+    private void Stage1Mode()
+    {
         //keep adding untill mary becomes pregnant
-        if(keepCountingBefore)
+        curr_secBefore += Time.deltaTime;
+
+        //if we can become preg
+        if (curr_secBefore >= max_secBefore)
         {
-            curr_secBefore += Time.deltaTime;
+            //mary is now pregnant
+            animator.SetBool("isPreg", true);
+            eye_meshRender.material = eyes[1]; //1 == closed eye 'blink'
+            ps_sweating.Play(); //play sweating particles
 
-            if(curr_secBefore >= max_secBefore){
-                //stop counting
-                keepCountingBefore = false;
-                //mary is now pregnant
-                animator.SetBool("isPreg", true);
-                eye_meshRender.material = eyes[1]; //1 == closed eye 'blink'
-                ps_sweating.Play(); //play sweating particles
-
-            }
-            return;
+            //enter next state
+            curr_PetState = Pet_States.stage2;
         }
+    }
 
+    private void Stage2Mode()
+    {
+        //same counter setup but now mary is pregnant
+        curr_secAfter += Time.deltaTime;
 
-        //same thing but now mary is pregnant
-        if(keepCountingAfter)
+        if (curr_secAfter >= max_secAfter)
         {
-            curr_secAfter += Time.deltaTime;
-
-            if(curr_secAfter >= max_secAfter){
-                //stop counting
-                keepCountingAfter = false;
-            }
-            return;
+            //enter next stage
+            curr_PetState = Pet_States.ability;
         }
+    }
 
 
+    private void AbilityMode()
+    {
         //if we are in enemy wave, return, since we don't want to spawn yet
-        if (Controller_Enemy.instance.currently_in_wave){return;} 
-        
+        if (Controller_Enemy.instance.currently_in_wave) { return; }
+
         //if we are down here, 
         //  - we are ready to spawn guppy
         //  - we are not in enemy wave
@@ -105,21 +151,98 @@ public class Pet_MaryFertile : Pet_ParentClass
         animator.SetBool("isPreg", false);
         eye_meshRender.material = eyes[0]; //0 == open eye 
         ps_sweating.Stop(); //stop sweating
+
         //reset
         curr_secBefore = 0;
         curr_secAfter = 0;
-        keepCountingBefore = true;
-        keepCountingAfter = true;
-        
-        
+        curr_PetState = Pet_States.stage1;
     }
 
+
+
+    //while depressed we can't do anything
+    private void DepressedMode()
+    {
+        //have to escape depression to go back to normal states
+        //for now just eat 10 food pellets 
+
+
+        //if wer not targeting food (ie:current target food is null) 
+        //          : target a food
+        //          : and just idle this frame
+        if (foodTarget == null)
+        {
+            NewFoodTarget_Tank();
+            IdleMode();
+        }
+        else
+        {
+            //else
+            //follow food
+            //head towards target 
+            UpdatePosition(foodTarget.transform.position, hungry_velocity);
+        }
+
+    }
+
+    private void NewFoodTarget_Tank(){
+
+        //new target
+        NewTargetVariables();
+
+        //find food to followe 
+        var closestDis = float.PositiveInfinity;
+        var allFoods = Controller_Food.instance.GetAllFood();
+        if(allFoods.Count == 0){return;}
+
+        //for all food objs in scene, get the closest
+        var tempTarget = allFoods[0];
+        foreach (GameObject food in allFoods){
+
+            var newDis = (transform.position - food.transform.position).sqrMagnitude;
+
+            if(newDis < closestDis){
+
+                closestDis = newDis;
+                tempTarget = food;  
+            }
+        }
+        //
+        foodTarget = tempTarget;
+        
+        //once the fish or the trash can gets to the food, the food destroysSelf(), and foodtarget = null again
+    }
+
+
+
+    //public method that is used by the collider class mostly, 
+    //everytime mary eats food while depressed we want to increment food eaten
+    public void EatedFood()
+    {
+        foodsEaten += 1;
+        if (foodsEaten >= FoodAteThreshold)
+        {
+            //reset mary: only need to set to stage 1, from their she should be able to sort what stage she's in
+            curr_PetState = Pet_States.stage1;
+            foodsEaten = 0;
+        }
+    }
 
 
     //start of enemy wave event
     public override void Event_Init(Event_Type type, GameObject obj)
     {
- 
+        if (type != Event_Type.guppyDead) { return; }
+
+        guppysDeathToll += 1;
+
+        if (guppysDeathToll >= DeadGuppyThreshold)
+        {
+            //we enter depression
+            curr_PetState = Pet_States.depressed;
+            //reset
+            guppysDeathToll = 0;
+        }
     }
 
     //end of enemy wave event

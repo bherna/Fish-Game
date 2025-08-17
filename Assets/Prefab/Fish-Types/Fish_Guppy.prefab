@@ -169,6 +169,7 @@ MonoBehaviour:
   - {fileID: 661406108102175504}
   - {fileID: 7893824331456782660}
   sprite_transform: {fileID: 2539228165053564403}
+  guppyDead: {fileID: 8932523599287342008, guid: aebb4ee617415804cb3d14f2eb0cdc72, type: 3}
   ageUpClip: {fileID: 8300000, guid: 37dfcb2badb91464c97f2c790ff33dd1, type: 3}
   ateClip: {fileID: 8300000, guid: c559ab80b33283f4cadc3f5ede1936d9, type: 3}
   curr_foodAte: 0

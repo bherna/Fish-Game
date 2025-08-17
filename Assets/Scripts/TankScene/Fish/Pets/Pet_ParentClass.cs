@@ -2,15 +2,15 @@ using UnityEngine;
 
 
 //Each pet will be in one of these states at all times. 
-public enum Pet_States {idle, protect, grabbed, dropped, ability};
+public enum Pet_States {idle, protect, grabbed, dropped, ability, stun, depressed, stage1, stage2};
 //Whenever something in the tank need to talk to the pets to trigger a state we use one of the following
-public enum Event_Type {enemyWave, coin, guppyHungry, saltDestroyed, PearlCollected}
+public enum Event_Type {enemyWave, coin, guppyHungry, saltDestroyed, pearlCollected, guppyDead}
 
 public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 {
 
     //-----------------------------                 -----------------------------------------//
-    protected Pet_States curr_PetState;
+    public Pet_States curr_PetState { protected set; get; }
 
     
 
