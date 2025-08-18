@@ -67,7 +67,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
         switch(curr_PetState){
 
             case Pet_States.idle:
-                IdleMode();
+                IdleMode(idle_velocity);
                 break;
             case Pet_States.protect:
                 ProtectMode();

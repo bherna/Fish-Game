@@ -71,29 +71,28 @@ public class Pet_MaryFertile : Pet_ParentClass
     {
         base.Update(); //incase
 
-        //using this as just movement, since all she does is swim around the tank
-        IdleMode(); 
-
 
         switch (curr_PetState)
         {
             //incase we somehow start with idle
             case Pet_States.idle:
             case Pet_States.stage1:
-
+                //using this as just movement, since all she does is swim around the tank
+                IdleMode(idle_velocity); 
                 Stage1Mode();
                 break;
 
             case Pet_States.stage2:
-
+                IdleMode(idle_velocity); 
                 Stage2Mode();
                 break;
 
             case Pet_States.ability:
+                IdleMode(idle_velocity); 
                 AbilityMode();
                 break;
 
-            case Pet_States.depressed:
+            case Pet_States.depressed: 
                 DepressedMode();
                 break;
 
@@ -173,10 +172,18 @@ public class Pet_MaryFertile : Pet_ParentClass
         if (foodTarget == null)
         {
             NewFoodTarget_Tank();
-            IdleMode();
+        }
+
+
+        //if no food, just idle mode code, with hun
+        if (foodTarget == null)
+        {
+            IdleMode(hungry_velocity);
         }
         else
         {
+
+            Debug.Log("hunger located");
             //else
             //follow food
             //head towards target 
@@ -232,16 +239,20 @@ public class Pet_MaryFertile : Pet_ParentClass
     //start of enemy wave event
     public override void Event_Init(Event_Type type, GameObject obj)
     {
-        if (type != Event_Type.guppyDead) { return; }
-
-        guppysDeathToll += 1;
-
-        if (guppysDeathToll >= DeadGuppyThreshold)
+        //check if this is for a dead guppy,
+        // also check if we are currently depress, cause we dont want to increment if we are
+        if (type == Event_Type.guppyDead && curr_PetState != Pet_States.depressed)
         {
-            //we enter depression
-            curr_PetState = Pet_States.depressed;
-            //reset
-            guppysDeathToll = 0;
+
+            guppysDeathToll += 1;
+
+            if (guppysDeathToll >= DeadGuppyThreshold)
+            {
+                //we enter depression
+                curr_PetState = Pet_States.depressed;
+                //reset
+                guppysDeathToll = 0;
+            }
         }
     }
 

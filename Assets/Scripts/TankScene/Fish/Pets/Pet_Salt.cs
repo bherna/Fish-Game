@@ -64,7 +64,7 @@ public class Pet_Salt : Pet_ParentClass
         switch(curr_PetState){
 
             case Pet_States.idle:
-                IdleMode();
+                IdleMode(idle_velocity);
                 break;
             case Pet_States.ability:
                 AbilityMode();
@@ -89,7 +89,7 @@ public class Pet_Salt : Pet_ParentClass
         // OR we have salt_pellet already in tank
         if( !charged || saltInTank ){
             //we
-            IdleMode();
+            IdleMode(idle_velocity);
         }
         //make sure we have atleast one guppy that's hungry
         else if(guppyList.Count > 0){

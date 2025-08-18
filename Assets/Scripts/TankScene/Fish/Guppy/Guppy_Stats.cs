@@ -18,6 +18,7 @@ public class Guppy_Stats : FishStats_ParentClass
 
     //-------------------------------- dead related --------------------------------------------//
     [SerializeField] GameObject guppyDead;
+    private float[] deadSpriteSizes = { 0.27f, 0.45f, 0.50f };
 
     // --------------------------------- hunger related ----------------------------------------//
     private float stomach; //total seconds before fish will die of hunger
@@ -30,7 +31,7 @@ public class Guppy_Stats : FishStats_ParentClass
     [SerializeField] protected AudioClip ageUpClip;
     [SerializeField] protected AudioClip ateClip;
     public int curr_ageStage {get; private set; } = 0; //used in getting list indexes below
-    private int[] foodForNext_ageStage = {3, 5, 60}; //to teenfish, to adultfish, to gemfish                             
+    private int[] foodForNext_ageStage = {3, 5, 27}; //to teenfish, to adultfish, to gemfish                             
     public float curr_foodAte = 0; //so far
     private float current_size = 0.3f; //also our guppy start size
     private float[] spriteGrowthFor_ageStage = {0.15f, 0.15f, 0}; //how much does a guppy grow by, indexing is same as food till next stage
@@ -258,7 +259,8 @@ public class Guppy_Stats : FishStats_ParentClass
         Controller_Pets.instance.Annoucement_Init(Event_Type.guppyDead);
 
         //instantiate dead version of guppy
-        Instantiate(guppyDead, transform.position, Quaternion.identity);
+        var deadgup = Instantiate(guppyDead, transform.position, Quaternion.identity);
+        deadgup.transform.localScale = new Vector3(deadSpriteSizes[curr_ageStage], deadSpriteSizes[curr_ageStage], 1);
 
         Destroy(gameObject);
     }

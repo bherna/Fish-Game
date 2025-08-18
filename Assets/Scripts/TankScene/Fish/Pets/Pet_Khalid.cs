@@ -59,7 +59,7 @@ public class Pet_Khalid : Pet_ParentClass
         switch(curr_PetState){
 
             case Pet_States.idle:
-                IdleMode();
+                IdleMode(idle_velocity);
                 break;
             case Pet_States.protect:
                 ProtectMode();
@@ -102,7 +102,7 @@ public class Pet_Khalid : Pet_ParentClass
 
         //movement
         //after that, we just move normally around the tank, i guess
-        IdleMode();
+        IdleMode(idle_velocity);
 
     }
 

@@ -27,13 +27,13 @@ public abstract class Pet_ParentClass : Fish_ParentClass_Movement
 
     //move around the tank
     //get a random point on the screen
-    protected void IdleMode(){
+    protected void IdleMode(float curr_vel){
 
         var distance = Vector3.Distance(idleTarget, transform.position);
 
         if(Mathf.Abs(distance) > targetRadius){
             
-            UpdatePosition(idleTarget, idle_velocity);
+            UpdatePosition(idleTarget, curr_vel);
         }
 
         //get new point once fish reaches it
