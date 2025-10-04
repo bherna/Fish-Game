@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 using UnityEngine;
 
 
-public enum Enemy_States {idle, attack, stunned};
+public enum Enemy_States {idle, attack, stunned, ability};
 
 public class Enemy_ParentClass : Fish_ParentClass_Movement 
 {
@@ -71,7 +71,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
 
     //fish died
     //dont want to flat out destroy object
-    protected void Died(){
+    protected virtual void Died(){
 
         //remove the enemy from list
         Controller_Enemy.instance.CloserToWaveEnded();
@@ -136,9 +136,13 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
         //damage
         TakeDamage(Controller_Player.instance.Get_GunDamage());
 
-
-
     }
+
+
+    //since we need one for player collision
+    public virtual void On_PlayerEnter(Collider2D collision) { }
+    public virtual void On_PlayerStay(Collider2D collision) { }
+    public virtual void On_PlayerExit(Collider2D collision) { }
 
 
 

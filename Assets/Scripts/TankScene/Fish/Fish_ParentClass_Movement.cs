@@ -134,6 +134,7 @@ public class Fish_ParentClass_Movement : MonoBehaviour
 
 
 
+    //create a new idle target, that is within the tank dimensions and outside the fish range.
     protected virtual void NewRandomIdleTarget_Tank()
     {
 

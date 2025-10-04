@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+
 using UnityEngine;
 
 
@@ -7,22 +9,23 @@ public class Controller_Player : MonoBehaviour
 
     [SerializeField] ParticleSystem Gun_particle;
     [SerializeField] GameObject trail;
-    private int trailTotal = 0; // this keeps track of current chained trails
-    private Coroutine timer;
-
+    
     //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
     [SerializeField] Transform targetZ;
 
 
+
+
     //since this is public, if any ui elemnt needs it position when clicked, we can use this
-    public Vector3 mousePos;
-
-
+    public Vector3 mousePos = new Vector3(0,0,0);
 
 
     //player stats
     //gun stat
     private int gunPower = 1;
+    public int cursorSpeed_base = 45; //player will be able to adjust this in the settings, Adjust this value
+    public int cursorSpeed_curr = 45; //what is used in game
+
 
 
     //counter / trail related
@@ -30,11 +33,17 @@ public class Controller_Player : MonoBehaviour
     private bool isTrailActive = false;
     public const int trailDuration = 1; //in seconds how long we can counter for(this is used in enemy code aswell to keep in sync)
     private Vector2 LastPosition;
+    private int trailTotal = 0; // this keeps track of current chained trails
+    private Coroutine timer;
 
 
     //used for clamping mousepos on screen
     public Vector3 max { get; private set; }
     public Vector3 min { get; private set; }
+
+    
+
+
 
 
     //single ton this class
@@ -56,12 +65,20 @@ public class Controller_Player : MonoBehaviour
     }
 
 
+
+
+
+
     private void Start()
     {
+        //set up mouse variables, im not sure what it all means tho ;p
         float v3 = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
         Camera cam = Camera.main;
 
 
+        
+
+       
         max = cam.ViewportToWorldPoint(new Vector3(1, 1, v3));
         min = cam.ViewportToWorldPoint(new Vector3(0, 0, v3));
 
@@ -69,21 +86,30 @@ public class Controller_Player : MonoBehaviour
 
     private void Update()
     {
-
-        //get mouse pos
-        //but make sure not to leave the screen
+/*
+        //get mouse pos + make sure not to leave the screen
         var screenPos = Input.mousePosition;
         screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
-        mousePos = Camera.main.ScreenToWorldPoint(screenPos);
 
-        mousePos.x = Mathf.Clamp(mousePos.x, min.x, max.x);
-        mousePos.y = Mathf.Clamp(mousePos.y, min.y, max.y);
+        mousePos = Camera.main.ScreenToWorldPoint(screenPos); //convert to world pos
+        mousePos.x = Mathf.Clamp(mousePos.x, min.x, max.x); //clamp
+        mousePos.y = Mathf.Clamp(mousePos.y, min.y, max.y); //clamp
 
 
-        //move self there
-        //used for collisions
+
+        //collider (since coll is attached to gameobject)
         transform.position = new Vector2(mousePos.x, mousePos.y);
-        //if we need to use transfomr.position, just know its not the tank area
+        //if we need to use transfomr.position, just know its not the tank area (WARNING)
+*/
+
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        Vector3 moveDelta = new Vector3(mouseX, mouseY, 0) * cursorSpeed_curr * Time.deltaTime;
+        transform.position += moveDelta;
+
+        
+
 
         //if we have a trail active, we want to update our distance traveld
         if (isTrailActive)
@@ -94,6 +120,17 @@ public class Controller_Player : MonoBehaviour
             LastPosition = newPosition;
         }
 
+    }
+
+
+    //this is used to slow down player mouse from debuffs,
+    //give a percentage value of how much the debuff slows the player mouse down
+    public void MouseStat(float percentage)
+    {
+        //like Value = 100% - percentage;
+        cursorSpeed_curr = cursorSpeed_base + Mathf.FloorToInt(percentage * cursorSpeed_base);
+
+        Math.Clamp(cursorSpeed_curr, 0, cursorSpeed_base);
     }
 
 

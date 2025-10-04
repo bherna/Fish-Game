@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class LargeMBass_SM : Enemy_ParentClass
+public class LargeMBass_SM : Enemy_ParentClass, IPointerClickHandler
 {
 
     //Large Mouth Bass _ State Machine
@@ -35,6 +35,11 @@ public class LargeMBass_SM : Enemy_ParentClass
     private float attackSecs = 0f;
     private const int attackPower = 3; //attack power is in terms of bites (attack power = _ bites worth of damage) 
 
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("hit");
+    }
 
 
     private new void Update()

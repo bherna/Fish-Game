@@ -70,7 +70,7 @@ public class Pet_Cherry : Pet_ParentClass
             case Pet_States.grabbed:
                 //while grabbed, all we do extra is set our pos to be with mouse
                 Vector2 pos = Controller_Player.instance.mousePos;
-                pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4+coll.size.y);
+                pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4+coll.size.y); //clamp 
                 transform.position = pos;
                 break;
 

@@ -6,7 +6,7 @@ public enum FishType {Guppy, Enemy};
 
 
 
-public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
+public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 
     [SerializeField] int fishPrice = 0;
@@ -19,7 +19,10 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
     [SerializeField] GameObject guppyPrefab_tutorial; //if this is the tutorial tank, we use tutorial fish version
 
 
-
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("button  click");
+    }
     
 
 

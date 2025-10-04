@@ -8,7 +8,7 @@ public class Controller_MainMenu : MonoBehaviour
 {
     [SerializeField] GameObject slidePanelsParentObj;         //gameobject reference for all ui level panels + main menu
     [SerializeField] EventOnHover_PlayButton playButton; //used in turning the tank lights on
-    
+
 
     private string tankSceneName; //current tank level selected (name)
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
@@ -16,25 +16,30 @@ public class Controller_MainMenu : MonoBehaviour
     private float timer;
 
     //singleton this
-    public static Controller_MainMenu instance {get; private set; }
-    void Awake (){
+    public static Controller_MainMenu instance { get; private set; }
+    void Awake()
+    {
 
         //delete duplicate of this instance
 
-        if (instance != null && instance != this){
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
     }
 
-    private void Start() {
+    private void Start()
+    {
 
-        
+
         //set ui tabs positions 
-        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
-            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition = new Vector3(Screen.width*i,0,0); //set their pos
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++)
+        {
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition = new Vector3(Screen.width * i, 0, 0); //set their pos
             slidePanelsParentObj.transform.GetChild(i).gameObject.SetActive(true);
         }
 
@@ -45,7 +50,8 @@ public class Controller_MainMenu : MonoBehaviour
 
 
     //Go to scene currSceneSet
-    public void PlayLevel(){
+    public void PlayLevel()
+    {
 
         //save selected pets
         PetsAccess.UpdateSetSelectedPets(Controller_PetMenu.instance.selectedPets);
@@ -55,7 +61,8 @@ public class Controller_MainMenu : MonoBehaviour
     }
 
 
-    public void NewGame(){
+    public void NewGame()
+    {
 
         //reset our save files
         LevelsAccess.NewGame();
@@ -66,38 +73,45 @@ public class Controller_MainMenu : MonoBehaviour
 
         //reset our pets in main menu
         Controller_PetMenu.instance.ResetPets();
-        
+
     }
 
     //save game button reference
-    public void SaveGame(){
+    public void SaveGame()
+    {
         SaveLoad.SaveGame();
     }
 
-    public void QuitApp(){
+    public void QuitApp()
+    {
         Application.Quit();
         Debug.Log("application has quit.");
     }
 
-    public void Next_UIScreen(){
+    public void Next_UIScreen()
+    {
 
-        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
-            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(Screen.width,0,0);
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++)
+        {
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition -= new Vector3(Screen.width, 0, 0);
         }
 
         curr_screen += 1;
     }
 
-    public void Previous_UIScreen(){
+    public void Previous_UIScreen()
+    {
 
-        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++){
-            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition += new Vector3(Screen.width,0,0);
+        for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++)
+        {
+            slidePanelsParentObj.transform.GetChild(i).gameObject.transform.localPosition += new Vector3(Screen.width, 0, 0);
         }
 
         curr_screen -= 1;
 
         //logic to reset the play button to turn of the lights in the fish tank
-        if(curr_screen == 0){
+        if (curr_screen == 0)
+        {
             playButton.OnPointerReturnToTitleScreen();
         }
     }
@@ -105,19 +119,20 @@ public class Controller_MainMenu : MonoBehaviour
 
     //set scene currSceneSet
     //this lets us move from level select to pet select
-    public void GoToPetsPanel(string tankScene, string level){
-        
+    public void GoToPetsPanel(string tankScene, string level)
+    {
+
         //save current tank scene name, so we go to that level after selecting pets
         tankSceneName = tankScene;
         //update the level name aswell, used in the controller enemy script for choosing what json enemywaves file
-        LocalLevelVariables.UpdateLevel(level); 
+        LocalLevelVariables.UpdateLevel(level);
 
         //---move to last panell---//
         //disbale current level panel
         //eneable pet panel
         slidePanelsParentObj.transform.GetChild(curr_screen).gameObject.SetActive(false);
         transform.Find("Pets - Container").gameObject.SetActive(true);
-        
+
 
         //---have pets move to corresponding ui button location---//
         Controller_PetMenu.instance.PetsToButton();
@@ -128,7 +143,8 @@ public class Controller_MainMenu : MonoBehaviour
 
 
     //if player want to leave pet selection -> return to level selection, return to world panel they were last on
-    public void ReturnToLevelSelection(){
+    public void ReturnToLevelSelection()
+    {
 
         //return to last level panel player was on before
         //enable level panel
@@ -145,4 +161,10 @@ public class Controller_MainMenu : MonoBehaviour
     }
 
 
+
+    public void PlayTestingScene()
+    {
+        //start level last
+        SceneManager.LoadScene("TestingScene");
+    }
 }
