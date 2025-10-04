@@ -47,6 +47,7 @@ namespace Assests.Inputs
         public static Vector2 Position { get; private set; }
 
 
+
         private void Start()
         {
             InputSystemManager.Subscribe(this);
@@ -86,8 +87,10 @@ namespace Assests.Inputs
                 InputState.Change(virtualMouse.position, pos);
             }
 
-            //set our real mouse to be invisible
-            //UnityEngine.Cursor.visible = false;
+            //set our real mouse to be invisible + unusable.
+            //using confined: cause if we use locked it disables ui interaction with virtual mouse
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
 
             //then subscribe to input system On after update event
             UnityEngine.InputSystem.InputSystem.onAfterUpdate += UpdateMotion;
@@ -110,29 +113,21 @@ namespace Assests.Inputs
 
         private void UpdateMotion()
         {
-            Debug.Log("In Function:");
             //for exception handling
             if (virtualMouse == null)
             {
                 return;
             }
 
-            Debug.Log("!!virtual mouse exists!!");
+            //if we're using a controller
             if (Gamepad.current != null)
             {
-                var currentPos = MousePosition;
-                var deltaValue = GamepadDelta;
-                deltaValue *= cursorSpeed * Time.unscaledDeltaTime;
-                var newPos = currentPos + deltaValue;
-                Position = newPos;
-                newPos.x = Mathf.Clamp(newPos.x, 0f, Screen.width);
-                newPos.y = Mathf.Clamp(newPos.y, 0f, Screen.height);
-                Position = newPos;
-                InputState.Change(virtualMouse.delta, deltaValue);
+                UsingGamepad();
             }
+            //else we are using a mouse
             else
             {
-                Position = new Vector2(1920, 1080);
+                UsingMouse();   
             }
 
             InputState.Change(virtualMouse.position, Position);
@@ -141,6 +136,40 @@ namespace Assests.Inputs
             //Debug.Log("New Pos: \n" + cursorTransform.position);
             //raycast here
 
+        }
+
+        private void UsingGamepad()
+        {
+            var currentPos = MousePosition;
+            var deltaValue = GamepadDelta;
+            deltaValue *= cursorSpeed * Time.unscaledDeltaTime;
+            var newPos = currentPos + deltaValue;
+            Position = newPos;
+            newPos.x = Mathf.Clamp(newPos.x, 0f, Screen.width);
+            newPos.y = Mathf.Clamp(newPos.y, 0f, Screen.height);
+            Position = newPos;
+            InputState.Change(virtualMouse.delta, deltaValue);
+        }
+
+        private void UsingMouse()
+        {
+            //Position = new Vector2(1920, 1080); //testing
+
+            //get the change in mouse movement
+            float mouseX = Input.GetAxis("Mouse X");
+            float mouseY = Input.GetAxis("Mouse Y");
+
+            Vector2 moveDelta = new Vector2(mouseX, mouseY) * cursorSpeed * Time.deltaTime;
+            MousePosition += moveDelta;
+
+            //clamp new virtual mouse position 
+            var pos = MousePosition;
+            pos.x = Mathf.Clamp(pos.x, 0, Screen.width);
+            pos.y = Mathf.Clamp(pos.y, 0, Screen.height);
+            MousePosition = pos;
+
+            // update new position to be current position
+            Position = MousePosition;
         }
 
         private void AnchorCursor(Vector2 newPos)
