@@ -1,6 +1,7 @@
 
 using UnityEngine.EventSystems;
 using UnityEngine;
+using Assests.Inputs;
 
 
 public enum Enemy_States {idle, attack, stunned, ability};
@@ -129,7 +130,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
         Controller_Player.instance.Run_GunParticle();
 
         //knockback
-        Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
+        Vector2 kbVector = ((Vector2)transform.position - CustomVirtualCursor.GetMousePosition_V2()).normalized;
         rb.AddForce(kbVector * kbForce_player, ForceMode2D.Impulse);
 
 

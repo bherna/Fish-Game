@@ -1,5 +1,6 @@
 
 using System;
+using Assests.Inputs;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -69,7 +70,7 @@ public class Pet_Cherry : Pet_ParentClass
 
             case Pet_States.grabbed:
                 //while grabbed, all we do extra is set our pos to be with mouse
-                Vector2 pos = Controller_Player.instance.mousePos;
+                Vector2 pos = CustomVirtualCursor.GetMousePosition_V2();
                 pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4+coll.size.y); //clamp 
                 transform.position = pos;
                 break;
@@ -141,7 +142,7 @@ public class Pet_Cherry : Pet_ParentClass
     /*
     public void OMouseDrag()
     {
-        transform.position = Controller_Player.instance.mousePos;
+        transform.position = customvirtualcursor.getmouseposition_v2;
     }
     */
 

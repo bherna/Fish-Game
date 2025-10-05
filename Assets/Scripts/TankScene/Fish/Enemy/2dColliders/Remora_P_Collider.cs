@@ -12,6 +12,7 @@ public class Remora_P_Collider : MonoBehaviour
     protected void Start()
     {
         remora_sm = GetComponent<Remora_SM>();
+        coll = GetComponent<BoxCollider2D>();
 
         //send our collider size over to sm since its needed for sticky mode
         remora_sm.SetColliderSizeY(coll.size.y);

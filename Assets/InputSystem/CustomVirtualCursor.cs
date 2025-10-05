@@ -36,13 +36,23 @@ namespace Assests.Inputs
 
     class CustomVirtualCursor : PlayerInputDispatcher, NewControls.IUtilsActions
     {
-        [SerializeField] private float cursorSpeed = 1000f;
+        //the cursor speed that the player can set in the settings tab
+        [SerializeField] public static int cursorSpeed_playerSet { get; private set; } = 2500;
+        
+        //cursor speed used for actually moving the mouse (dynamically changes to status effects)
+        public static int cursorSpeed_current;
+
+
+        //if i ever need to reference the depth level we need the game to work on 
+        //idk why i'll ever need to push anything around the depth but this is used to keep everything within the same z
+        //else collisions won't happen, unless because its a 2d game that doesn't matter
+        public static Vector3 targetZ = new Vector3(0, 0, 0); 
 
         RectTransform cursorTransform;
         Canvas canvas;
         RectTransform canvas_Transform;
         Mouse virtualMouse;
-        private static Vector2 MousePosition { get; set; }
+        public static Vector2 MousePosition { get; private set; }
         private static Vector2 GamepadDelta { get; set; }
         public static Vector2 Position { get; private set; }
 
@@ -95,6 +105,8 @@ namespace Assests.Inputs
             //then subscribe to input system On after update event
             UnityEngine.InputSystem.InputSystem.onAfterUpdate += UpdateMotion;
 
+            //set mouse speed to what player want it
+            cursorSpeed_current = cursorSpeed_playerSet;
 
         }
 
@@ -127,7 +139,7 @@ namespace Assests.Inputs
             //else we are using a mouse
             else
             {
-                UsingMouse();   
+                UsingMouse();
             }
 
             InputState.Change(virtualMouse.position, Position);
@@ -142,7 +154,7 @@ namespace Assests.Inputs
         {
             var currentPos = MousePosition;
             var deltaValue = GamepadDelta;
-            deltaValue *= cursorSpeed * Time.unscaledDeltaTime;
+            deltaValue *= cursorSpeed_current * Time.unscaledDeltaTime;
             var newPos = currentPos + deltaValue;
             Position = newPos;
             newPos.x = Mathf.Clamp(newPos.x, 0f, Screen.width);
@@ -159,7 +171,7 @@ namespace Assests.Inputs
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
 
-            Vector2 moveDelta = new Vector2(mouseX, mouseY) * cursorSpeed * Time.deltaTime;
+            Vector2 moveDelta = new Vector2(mouseX, mouseY) * cursorSpeed_current * Time.deltaTime;
             MousePosition += moveDelta;
 
             //clamp new virtual mouse position 
@@ -195,6 +207,38 @@ namespace Assests.Inputs
         {
             Debug.Log("OnCursor_Move");
             GamepadDelta = context.ReadValue<Vector2>();
+        }
+
+
+
+
+
+        /// <summary>
+        /// Returns the current virtual mouse position in terms of physical tank position. (vector2)
+        /// To get UI virtual mouse position call the variable MousePosition
+        /// </summary>
+        /// <returns></returns>
+        public static Vector2 GetMousePosition_V2()
+        {
+
+            //get our TargetZ object to determine on what z we should be setting our mouse at
+            float z = Vector3.Dot(Camera.main.transform.forward, targetZ - Camera.main.transform.position);
+            Vector3 newMousePosition = new Vector3(MousePosition.x, MousePosition.y, z);
+
+            return Camera.main.ScreenToWorldPoint(newMousePosition); //convert to world pos
+
+        }
+
+
+        public static Vector3 GetMousePosition_V3()
+        {
+            
+            //get our TargetZ object to determine on what z we should be setting our mouse at
+            float z = Vector3.Dot(Camera.main.transform.forward, targetZ - Camera.main.transform.position);
+            Vector3 newMousePosition = new Vector3(MousePosition.x, MousePosition.y, z);
+
+            return Camera.main.ScreenToWorldPoint(newMousePosition); //convert to world pos
+            
         }
 
 

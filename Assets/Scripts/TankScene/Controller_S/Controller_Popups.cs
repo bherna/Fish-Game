@@ -1,4 +1,5 @@
 
+using Assests.Inputs;
 using TMPro;
 using UnityEngine;
 
@@ -59,13 +60,12 @@ public class Controller_PopUp : MonoBehaviour
         Vector2 fullSize = textSize+paddingSize;
 
         //update the tool tip position to be inside the screen view (so it doesnt type of screen)
-        Vector2 anchoredPos = Input.mousePosition / canvasRecTrans.localScale.x;
+        Vector2 anchoredPos = CustomVirtualCursor.MousePosition / canvasRecTrans.localScale.x;
         anchoredPos.x = Mathf.Clamp(anchoredPos.x, 0, canvasRecTrans.rect.width - fullSize.x);
         anchoredPos.y = Mathf.Clamp(anchoredPos.y, 0, canvasRecTrans.rect.height - fullSize.y);
 
         popup.GetComponent<RectTransform>().anchoredPosition = anchoredPos;
         
-        //Input.mousePosition + Vector3.right;
     }
 
 

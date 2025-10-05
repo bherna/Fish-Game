@@ -1,6 +1,7 @@
 
 using UnityEngine;
 using System;
+using Assests.Inputs;
 
 
 public class Remora_SM : Enemy_ParentClass
@@ -53,6 +54,12 @@ public class Remora_SM : Enemy_ParentClass
                 //suck mode, stay on player mouse
                 Suck();
                 break;
+            case Enemy_States.attack:
+                //since our parent class sets our base state as attack we reset to idle, 
+                //we do this here so we don't end up getting stuck in this state
+                curr_EnemyState = Enemy_States.idle;
+                break;
+            
             //if we add a pet that can remove our stuck state, we need to remove the debuff ***************
 
             default:
@@ -87,7 +94,7 @@ public class Remora_SM : Enemy_ParentClass
     private void Suck()
     {
         //got this from cherry grabb state
-        Vector2 pos = Controller_Player.instance.mousePos;
+        Vector2 pos = CustomVirtualCursor.GetMousePosition_V2();
         pos.y = MathF.Max(pos.y, TankCollision.instance.GetTrashArea().Item4+colliderSizeY); //clamp 
         transform.position = pos;
 
@@ -108,7 +115,7 @@ public class Remora_SM : Enemy_ParentClass
 
         if (curr_EnemyState == Enemy_States.ability)
         {
-            Controller_Player.instance.MouseStat(0.2f);
+            Controller_Player.instance.GiveMouseSpdStatusEffect(0.2f);
         }
     } 
 
@@ -141,7 +148,7 @@ public class Remora_SM : Enemy_ParentClass
         //enter state
         curr_EnemyState = Enemy_States.ability;
         //slow down player mouse
-        Controller_Player.instance.MouseStat(-0.2f);
+        Controller_Player.instance.GiveMouseSpdStatusEffect(-0.2f);
     }
 
 }

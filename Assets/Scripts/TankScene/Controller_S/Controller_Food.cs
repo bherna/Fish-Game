@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Assests.Inputs;
 using UnityEngine;
 
 
@@ -10,8 +11,6 @@ public class Controller_Food : MonoBehaviour
     [SerializeField] GameObject[] foodPellets;
     private int index_foodPelletType = 0;
     
-    //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
-    [SerializeField] public Transform targetZ;
 
     //audios
     [SerializeField] AudioClip createSound;
@@ -65,13 +64,7 @@ public class Controller_Food : MonoBehaviour
             //if we can buy food, spawn it
             if(Controller_Wallet.instance.IsAffordable(5))
             {
-            
-                //var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //orthagraphic
-                var screenPos = Input.mousePosition;
-                screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
-                var mousePos = Camera.main.ScreenToWorldPoint(screenPos); 
-                SpawnFood_Pellet(mousePos, true);
-
+                SpawnFood_Pellet(CustomVirtualCursor.GetMousePosition_V2(), true);
 
                 //sub money + visual
                 Controller_Wallet.instance.SubMoney(5);
@@ -84,7 +77,7 @@ public class Controller_Food : MonoBehaviour
 
 
     //used for spawning player placed food pellet
-    private void SpawnFood_Pellet(Vector3 mousePos, bool removeOld){
+    private void SpawnFood_Pellet(Vector3 pelletPos, bool removeOld){
         
         if(removeOld){
             //check if at max food,
@@ -94,7 +87,7 @@ public class Controller_Food : MonoBehaviour
         
 
         //spawn new
-        foodPellets_list.Add(Instantiate(foodPellets[index_foodPelletType], mousePos, Quaternion.identity));
+        foodPellets_list.Add(Instantiate(foodPellets[index_foodPelletType], pelletPos, Quaternion.identity));
 
     }
 

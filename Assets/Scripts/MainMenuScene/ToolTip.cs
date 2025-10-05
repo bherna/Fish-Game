@@ -1,4 +1,5 @@
 
+using Assests.Inputs;
 using TMPro;
 using UnityEngine;
 
@@ -57,7 +58,7 @@ public class ToolTip : MonoBehaviour
 
 
         //update our tool tip position
-        Vector2 anchoredPos = Input.mousePosition / canvasRecTrans.localScale.x;
+        Vector2 anchoredPos = CustomVirtualCursor.MousePosition / canvasRecTrans.localScale.x;
 
         anchoredPos.x = Mathf.Clamp(anchoredPos.x, 0, canvasRecTrans.rect.width - backgroundRecTrans.rect.width);
         anchoredPos.y = Mathf.Clamp(anchoredPos.y, 0, canvasRecTrans.rect.height - backgroundRecTrans.rect.height);

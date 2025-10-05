@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-
+using Assests.Inputs;
 using UnityEngine;
 
 
@@ -9,22 +9,27 @@ public class Controller_Player : MonoBehaviour
 
     [SerializeField] ParticleSystem Gun_particle;
     [SerializeField] GameObject trail;
-    
-    //used for getting mouse position (what is our target z axis) (is in the bg-level gameobject)
-    [SerializeField] Transform targetZ;
-
-
 
 
     //since this is public, if any ui elemnt needs it position when clicked, we can use this
-    public Vector3 mousePos = new Vector3(0,0,0);
+    //public Vector3 mousePos = new Vector3(0,0,0);
+    //THIS  IS  OLD, we are now  using a virtual mouse
+    //use:
+    //CustomVirtualCursor.GetMousePosition_V2() or  V3 for vector3
 
 
-    //player stats
-    //gun stat
+    // ---------------------------- player stats ------------------------------------------
+    //gun strength
     private int gunPower = 1;
-    public int cursorSpeed_base = 45; //player will be able to adjust this in the settings, Adjust this value
-    public int cursorSpeed_curr = 45; //what is used in game
+    //how long it takes for our gun to reload
+    private int recoilTime = 3;
+    //number of bulllets total the gun can hold
+    private const int MaxBullets = 5;
+    //current bullets holding at given time
+    private int currBullets = 5;
+
+    //curret cursor speed debuff
+    public float cursorSpeed_debuff = 0; 
 
 
 
@@ -37,13 +42,7 @@ public class Controller_Player : MonoBehaviour
     private Coroutine timer;
 
 
-    //used for clamping mousepos on screen
-    public Vector3 max { get; private set; }
-    public Vector3 min { get; private set; }
-
     
-
-
 
 
     //single ton this class
@@ -71,51 +70,20 @@ public class Controller_Player : MonoBehaviour
 
     private void Start()
     {
-        //set up mouse variables, im not sure what it all means tho ;p
-        float v3 = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
-        Camera cam = Camera.main;
-
 
         
-
-       
-        max = cam.ViewportToWorldPoint(new Vector3(1, 1, v3));
-        min = cam.ViewportToWorldPoint(new Vector3(0, 0, v3));
-
     }
 
     private void Update()
     {
-/*
-        //get mouse pos + make sure not to leave the screen
-        var screenPos = Input.mousePosition;
-        screenPos.z = Vector3.Dot(Camera.main.transform.forward, targetZ.position - Camera.main.transform.position);
-
-        mousePos = Camera.main.ScreenToWorldPoint(screenPos); //convert to world pos
-        mousePos.x = Mathf.Clamp(mousePos.x, min.x, max.x); //clamp
-        mousePos.y = Mathf.Clamp(mousePos.y, min.y, max.y); //clamp
-
-
-
-        //collider (since coll is attached to gameobject)
-        transform.position = new Vector2(mousePos.x, mousePos.y);
-        //if we need to use transfomr.position, just know its not the tank area (WARNING)
-*/
-
-        float mouseX = Input.GetAxis("Mouse X");
-        float mouseY = Input.GetAxis("Mouse Y");
-
-        Vector3 moveDelta = new Vector3(mouseX, mouseY, 0) * cursorSpeed_curr * Time.deltaTime;
-        transform.position += moveDelta;
-
-        
-
+        //will have the collider still follwing virtual mouse now
+        transform.position = CustomVirtualCursor.GetMousePosition_V2();
 
         //if we have a trail active, we want to update our distance traveld
         if (isTrailActive)
         {
             //update distance counter
-            Vector2 newPosition = mousePos;
+            Vector2 newPosition = CustomVirtualCursor.GetMousePosition_V2();
             distanceTraveled += (newPosition - LastPosition).magnitude;
             LastPosition = newPosition;
         }
@@ -125,12 +93,14 @@ public class Controller_Player : MonoBehaviour
 
     //this is used to slow down player mouse from debuffs,
     //give a percentage value of how much the debuff slows the player mouse down
-    public void MouseStat(float percentage)
+    public void GiveMouseSpdStatusEffect(float percentage)
     {
-        //like Value = 100% - percentage;
-        cursorSpeed_curr = cursorSpeed_base + Mathf.FloorToInt(percentage * cursorSpeed_base);
+        cursorSpeed_debuff += percentage;
 
-        Math.Clamp(cursorSpeed_curr, 0, cursorSpeed_base);
+        //like Value = 100% - percentage;
+        int newSpeed = CustomVirtualCursor.cursorSpeed_playerSet *(int)(1 - Math.Clamp(percentage, 0, 1));
+
+        CustomVirtualCursor.cursorSpeed_current = Math.Clamp(newSpeed, 0, CustomVirtualCursor.cursorSpeed_playerSet);;
     }
 
 
@@ -148,7 +118,7 @@ public class Controller_Player : MonoBehaviour
 
     public void Run_GunParticle()
     {
-        Instantiate(Gun_particle, mousePos, Quaternion.identity);
+        Instantiate(Gun_particle, CustomVirtualCursor.GetMousePosition_V2(), Quaternion.identity);
     }
 
     //--------------------------------
@@ -181,7 +151,7 @@ public class Controller_Player : MonoBehaviour
 
             //make sure values are reset
             distanceTraveled = 0;
-            LastPosition = mousePos;
+            LastPosition = CustomVirtualCursor.GetMousePosition_V2();
             trailTotal = 1;
 
             //init new trail obj

@@ -1,4 +1,5 @@
 
+using Assests.Inputs;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -260,11 +261,11 @@ public class Starfish_SM : Enemy_ParentClass
             //create flash of light, to show that we countered
 
             //we start to move backwards super slowly
-            Vector2 kbVector = (transform.position - Controller_Player.instance.mousePos).normalized;
+            Vector2 kbVector = (transform.position - CustomVirtualCursor.GetMousePosition_V3()).normalized;
             rb.velocity = kbVector * kbForce_stunned;
 
             //init a ripple particle
-            Vector2 midpoint = Vector2.Lerp(Controller_Player.instance.transform.position, transform.position, 0.5f);
+            Vector2 midpoint = Vector2.Lerp(CustomVirtualCursor.GetMousePosition_V2(), transform.position, 0.5f);
             Controller_Ripple.instance.CreateRipple(midpoint);
 
             //we create a trail particle

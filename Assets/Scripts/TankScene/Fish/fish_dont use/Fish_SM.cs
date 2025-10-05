@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
+using Assests.Inputs;
 
 //hungry
 //
@@ -80,7 +81,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
 
         current_Vel = idle_velocity;
 
-        zDepth = Controller_Food.instance.targetZ.position.z;
+        zDepth = CustomVirtualCursor.targetZ.z;
     }
 
     // Update is called once per frame
@@ -270,7 +271,7 @@ public class Fish_SM : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragH
     }
     public void OnDrag(PointerEventData data){
         //now just follow the mouse position
-        transform.position = Controller_Player.instance.mousePos;
+        transform.position = CustomVirtualCursor.GetMousePosition_V2();
 
     }
     public void OnEndDrag(PointerEventData data){

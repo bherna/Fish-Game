@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.Rendering;
 using Steamworks;
 using System.Linq;
+using Assests.Inputs;
 
 
 
@@ -42,10 +43,16 @@ public class EggPiece : MonoBehaviour
     private Rigidbody2D rb;
     public CapsuleCollider2D crackCollider;
     private SortingGroup sortGroup; //this lets egg mask avoid masking other egg peices
+    
+
+    //used for clamping mousepos on screen
+    private Vector2 max; 
+    private Vector2 min; 
 
 
-    private void Start() {
-        
+    private void Start()
+    {
+
         //set sprite renderers
         //egg silhouette
         EggSilhouette = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>();
@@ -63,6 +70,13 @@ public class EggPiece : MonoBehaviour
 
         sortGroup = GetComponent<SortingGroup>();
         sortGroup.sortingOrder = index[0];
+
+
+        float v3 = Vector3.Dot(Camera.main.transform.forward, CustomVirtualCursor.targetZ - Camera.main.transform.position);
+        Camera cam = Camera.main;
+
+        max = cam.ViewportToWorldPoint(new Vector3(1, 1, v3));
+        min = cam.ViewportToWorldPoint(new Vector3(0, 0, v3));
 
     }
 
@@ -269,7 +283,7 @@ public class EggPiece : MonoBehaviour
     void OnMouseDrag(){
 
         //now just follow the mouse position
-        transform.position = (Vector2)Controller_Player.instance.mousePos - crackCollider.offset;
+        transform.position = CustomVirtualCursor.GetMousePosition_V2() - crackCollider.offset;
         
 
     }
@@ -278,18 +292,26 @@ public class EggPiece : MonoBehaviour
     void OnMouseUp() {
 
         //when we are letting go, make sure we don't leave the screen
+        //so we  need to clamp our egg peice within tank bounds
+
+        //first need to set min and max clamp here to make sure we get most current egg peice shape/collider
+        var minimum = min + crackCollider.size;
+        var maximum = max - crackCollider.size;
+
+        //get clammped pos
         Vector2 tempTrans = transform.position;
-        tempTrans.x = Mathf.Clamp(tempTrans.x, Controller_Player.instance.min.x + crackCollider.size.x, Controller_Player.instance.max.x - crackCollider.size.x);
-        tempTrans.y = Mathf.Clamp(tempTrans.y, Controller_Player.instance.min.y + crackCollider.size.y, Controller_Player.instance.max.y - crackCollider.size.y);
+        tempTrans.x = Mathf.Clamp(tempTrans.x, minimum.x, maximum.x);
+        tempTrans.y = Mathf.Clamp(tempTrans.y, minimum.y, maximum.y);
         transform.position = tempTrans;
 
+        //reset variables
         rb.gravityScale = 1;
         rb.constraints = RigidbodyConstraints2D.None;
-        //drop state
+        //return to drop state
         eggState = EggPiece_States.Dropped;
 
 
-        //if we ddint collide, then just go into null state again, else bugg'n
+        //if we ddint collide with another egg piece, then just go into null state again, else bugg'n
         IEnumerator co = IdleReturn();
         StartCoroutine(co);
     }
