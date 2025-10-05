@@ -269,7 +269,7 @@ namespace Assests.Inputs
             /// so the opposite of the upper in everything
 
             restrain = newRestrain;
-            //Cursor.visible = !newRestrain;
+            Cursor.visible = !newRestrain;
             Cursor.lockState = newRestrain ? CursorLockMode.Confined : CursorLockMode.None;
 
         }
