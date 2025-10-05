@@ -12,6 +12,7 @@ namespace Assests.InputSystem
 
         public void OnExit(InputAction.CallbackContext context)
         {
+            //when we call esc key, we stop
             Debug.LogWarning("OnExit called in Exit");
         }
 

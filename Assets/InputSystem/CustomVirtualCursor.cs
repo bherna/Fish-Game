@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -38,15 +39,18 @@ namespace Assests.Inputs
     {
         //the cursor speed that the player can set in the settings tab
         [SerializeField] public static int cursorSpeed_playerSet { get; private set; } = 2500;
-        
+
         //cursor speed used for actually moving the mouse (dynamically changes to status effects)
         public static int cursorSpeed_current;
+
+        //used in keeping the real mouse cursor locked onto the virtual mouse
+        public static bool restrain { get; private set; } = true;
 
 
         //if i ever need to reference the depth level we need the game to work on 
         //idk why i'll ever need to push anything around the depth but this is used to keep everything within the same z
         //else collisions won't happen, unless because its a 2d game that doesn't matter
-        public static Vector3 targetZ = new Vector3(0, 0, 0); 
+        public static Vector3 targetZ = new Vector3(0, 0, 0);
 
         RectTransform cursorTransform;
         Canvas canvas;
@@ -93,8 +97,7 @@ namespace Assests.Inputs
             //now set virtual mouse initial position to the recttransform
             if (cursorTransform != null)
             {
-                var pos = cursorTransform.anchoredPosition;
-                InputState.Change(virtualMouse.position, pos);
+                InputState.Change(virtualMouse.position, new Vector2(Screen.width / 2, Screen.height / 2));
             }
 
             //set our real mouse to be invisible + unusable.
@@ -146,7 +149,17 @@ namespace Assests.Inputs
             AnchorCursor(Position);
             //cursorTransform.position = Position;
             //Debug.Log("New Pos: \n" + cursorTransform.position);
+
+
             //raycast here
+            //we are making our real mouse be following our virtual mouse to make it easier to click
+            //only do it if we are in a tank level and game is not paused
+
+            //if we are null then we should be in main menu
+            if (restrain)
+            {
+                Mouse.current.WarpCursorPosition(MousePosition);
+            }
 
         }
 
@@ -171,7 +184,7 @@ namespace Assests.Inputs
             float mouseX = Input.GetAxis("Mouse X");
             float mouseY = Input.GetAxis("Mouse Y");
 
-            Vector2 moveDelta = new Vector2(mouseX, mouseY) * cursorSpeed_current * Time.deltaTime;
+            Vector2 moveDelta = new Vector2(mouseX, mouseY) * cursorSpeed_current * Time.unscaledDeltaTime;
             MousePosition += moveDelta;
 
             //clamp new virtual mouse position 
@@ -232,13 +245,33 @@ namespace Assests.Inputs
 
         public static Vector3 GetMousePosition_V3()
         {
-            
+
             //get our TargetZ object to determine on what z we should be setting our mouse at
             float z = Vector3.Dot(Camera.main.transform.forward, targetZ - Camera.main.transform.position);
             Vector3 newMousePosition = new Vector3(MousePosition.x, MousePosition.y, z);
 
             return Camera.main.ScreenToWorldPoint(newMousePosition); //convert to world pos
-            
+
+        }
+
+
+        //used in setting our restrain variable
+        //if given true. we run like normal
+        public static void SetRestrain(bool newRestrain)
+        {
+            //how this should be:
+            ///if we are restrained (set to true)
+            ///     we are settting our restrain to true
+            ///     we are setting our cursur to not visable
+            ///     we are setting our cursor to be confined
+            /// 
+            /// else we are unconstrained
+            /// so the opposite of the upper in everything
+
+            restrain = newRestrain;
+            //Cursor.visible = !newRestrain;
+            Cursor.lockState = newRestrain ? CursorLockMode.Confined : CursorLockMode.None;
+
         }
 
 

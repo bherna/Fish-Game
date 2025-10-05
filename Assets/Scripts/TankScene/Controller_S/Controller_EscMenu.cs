@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Assests.Inputs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,7 +15,7 @@ public class Controller_EscMenu : MonoBehaviour
     //if the tank is alreadyyy paused and we open the esc menu, then we don't bother pausing, but we flag this
     
     public bool paused {get; private set;} = false;
-    private bool escMenuOpen = false;
+    public bool escMenuOpen {get; private set;} = false;
 
 
     //the flag bool is used to tell this esc menu class to either unpause the tank when we close the menu or not
@@ -55,34 +56,32 @@ public class Controller_EscMenu : MonoBehaviour
 
 
     private void Update() {
-        
+
 
         //escape - open menu
-        if(Input.GetKeyUp(KeyCode.Escape) && !escMenuOpen){
-            
+        if (Input.GetKeyUp(KeyCode.Escape) && !escMenuOpen)
+        {
             //pause game
             //open escape menu
             OpenMainMenu();
-            escMenuOpen = true;
-
-
+            //dont add anything  relased to opening menu here, put it in the funcction, else we risk bug
         }
-        else if(Input.GetKeyUp(KeyCode.Escape) && escMenuOpen) {
-
+        else if (Input.GetKeyUp(KeyCode.Escape) && escMenuOpen)
+        {
             //unpause game
             //close escape menu
             CloseMainMenu();
-            escMenuOpen = false;
-
-
+            //dont add anything  relased to closing menu here, put it in the funcction, else we risk bug
         }
     }
 
 
-//-----------------------------------------------------------------------------------------------------------
-//this functions are used for opening and closing the main menu ui stuff
-    public void OpenMainMenu(){
+    //-----------------------------------------------------------------------------------------------------------
+    //this functions are used for opening and closing the main menu ui stuff
+    public void OpenMainMenu()
+    {
 
+        escMenuOpen = true;
         //pause all time references (physics, time)
         PauseTank(true);
         //pause audio listeners
@@ -94,7 +93,8 @@ public class Controller_EscMenu : MonoBehaviour
         int i = 0;
         //                                                          the true here is on purpose, we want to grab all buttons,
         //                                                          not just the active ones
-        foreach(var btn in Shop_Container.GetComponentsInChildren<Button>(true)){
+        foreach (var btn in Shop_Container.GetComponentsInChildren<Button>(true))
+        {
 
             interactive_list[i] = btn.interactable;//save
             i++;
@@ -107,18 +107,26 @@ public class Controller_EscMenu : MonoBehaviour
 
         //if tutorial is active, hide from view
         //make sure it exists first
-        if(Controller_Tutorial.instance.tutorial_active){
+        if (Controller_Tutorial.instance.tutorial_active)
+        {
             TutorialReaderParent.instance.HideTutorial(false);
         }
+        
+        //in the virtual mouse:
+        //stop restraining real mouse
+        CustomVirtualCursor.SetRestrain(false);
     }
 
-    public void CloseMainMenu(){
+    public void CloseMainMenu()
+    {
 
+        escMenuOpen = false;
         PauseTank(false);
         AudioListener.pause = false;
 
         int i = 0;
-        foreach(var btn in Shop_Container.GetComponentsInChildren<Button>(true)){
+        foreach (var btn in Shop_Container.GetComponentsInChildren<Button>(true))
+        {
             btn.interactable = interactive_list[i];
             i++;
         }
@@ -128,6 +136,9 @@ public class Controller_EscMenu : MonoBehaviour
 
         //if tutorial is active, return its view
         TutorialReaderParent.instance.HideTutorial(true);
+        
+        //re-restrain our mouse
+        CustomVirtualCursor.SetRestrain(true);
     }
 
 
