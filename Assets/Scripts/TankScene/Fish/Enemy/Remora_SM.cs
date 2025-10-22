@@ -145,6 +145,9 @@ public class Remora_SM : Enemy_ParentClass
         //if the game is paused, return
         if (Controller_EscMenu.instance.paused) { return; }
 
+        //we also want to check if we are already in the abilty state
+        if(curr_EnemyState == Enemy_States.ability) { return; }
+
         //enter state
         curr_EnemyState = Enemy_States.ability;
         //slow down player mouse

@@ -93,14 +93,18 @@ public class Controller_Player : MonoBehaviour
 
     //this is used to slow down player mouse from debuffs,
     //give a percentage value of how much the debuff slows the player mouse down
+    //if we are given a negative number we slow the mouse down
+    //the slow can only go down as low as 0, which is straight up not moving, to up to 1 which is normal Mouse speed
     public void GiveMouseSpdStatusEffect(float percentage)
     {
         cursorSpeed_debuff += percentage;
 
-        //like Value = 100% - percentage;
-        int newSpeed = CustomVirtualCursor.cursorSpeed_playerSet *(int)(1 - Math.Clamp(percentage, 0, 1));
+        //like Value = 100% - percentage; 
+        int newSpeed = (int)Math.Ceiling(CustomVirtualCursor.cursorSpeed_playerSet * Math.Clamp(1 + cursorSpeed_debuff, 0, 1));
 
-        CustomVirtualCursor.cursorSpeed_current = Math.Clamp(newSpeed, 0, CustomVirtualCursor.cursorSpeed_playerSet);;
+        CustomVirtualCursor.cursorSpeed_current = Math.Clamp(newSpeed, 0, CustomVirtualCursor.cursorSpeed_playerSet);
+
+        Debug.Log(String.Format("\nNewSpeed: {0},\n cursorSpeed_debuff: {1},\nCursorSetted as: {2}", newSpeed, cursorSpeed_debuff, CustomVirtualCursor.cursorSpeed_current));
     }
 
 
