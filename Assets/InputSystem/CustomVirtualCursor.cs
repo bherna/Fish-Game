@@ -257,6 +257,7 @@ namespace Assests.Inputs
 
         //used in setting our restrain variable
         //if given true. we run like normal
+        //dont bother using this since it sucks for now, used in the esc menu to make the real mouse visable to make it easeir to debug, but meh
         public static void SetRestrain(bool newRestrain)
         {
             //how this should be:
@@ -273,6 +274,15 @@ namespace Assests.Inputs
             Cursor.lockState = newRestrain ? CursorLockMode.Confined : CursorLockMode.None;
 
         }
+
+
+
+        //when the player needs to update their cursorSpeed_playerSet from the settings page
+        public static void UpdateMouseSpeed(int value)
+        {
+            cursorSpeed_playerSet = value;
+        }
+
 
 
     }

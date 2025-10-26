@@ -91,7 +91,16 @@ public class ToolTip : MonoBehaviour
     private void Hide(){
         gameObject.SetActive(false);
     }
-    public static void HideToolTip(){
+    public static void HideToolTip()
+    {
         instance.Hide();
+    }
+
+
+    //incase this gets deleted we call
+    void OnDestroy()
+    {
+        //Debug.Log("Tool TIp: we got deleted !!");
+        //Debug.Log($"GameObject '{name}' was destroyed. Call Stack:\n{StackTraceUtility.ExtractStackTrace()}", this);
     }
 }

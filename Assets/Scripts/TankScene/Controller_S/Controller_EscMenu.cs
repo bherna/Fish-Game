@@ -114,7 +114,7 @@ public class Controller_EscMenu : MonoBehaviour
         
         //in the virtual mouse:
         //stop restraining real mouse
-        CustomVirtualCursor.SetRestrain(false);
+        //CustomVirtualCursor.SetRestrain(false);
     }
 
     public void CloseMainMenu()
@@ -138,7 +138,7 @@ public class Controller_EscMenu : MonoBehaviour
         TutorialReaderParent.instance.HideTutorial(true);
         
         //re-restrain our mouse
-        CustomVirtualCursor.SetRestrain(true);
+        //CustomVirtualCursor.SetRestrain(true);
     }
 
 
