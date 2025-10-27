@@ -29,7 +29,7 @@ public class Drop_Money : Drop_Parent
         //playsound
         //add a bit of randomness to the pitch to add variance
         var pitch = Random.Range(0.85f, 1.15f);
-        AudioManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
+        Controller_FXSoundsManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
 
         //instantiate text pop up
         Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyValue));

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2505470533763610894}
   - component: {fileID: 7026401551242931772}
   m_Layer: 0
-  m_Name: SoundMixerManager
+  m_Name: Controller_SoundMixerManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,3 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 8ada727147cef3d4c9c3136c9fa99a00, type: 2}
+  paused: {fileID: 3213199869839177523, guid: 8ada727147cef3d4c9c3136c9fa99a00, type: 2}
+  unpaused: {fileID: 24500006, guid: 8ada727147cef3d4c9c3136c9fa99a00, type: 2}

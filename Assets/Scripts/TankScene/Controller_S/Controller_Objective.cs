@@ -101,7 +101,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
             Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", eggPrices[obj_index]));
 
             //show we bought, with sound effect as well
-            AudioManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
+            Controller_FXSoundsManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
 
             //spawn egg piece
             var tankArea = TankCollision.instance.GetTankSpawnArea();
@@ -180,15 +180,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
         petDescPanel.SetActive(true);
     }
 
-    public void GoToMainMenu(){
-
-        //return time and audio back to normal
-        Time.timeScale = 1;
-        AudioListener.pause = false;
-        
-        //return
-        SceneManager.LoadScene("MainMenu");
-    }
+    
 
 
 

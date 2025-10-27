@@ -2,35 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class Controller_FXSoundsManager : MonoBehaviour
 {
 
-    
+
     //gameobject we are instancing
     //doesn't need to be gameobject (we can just get the component, hm)
     [SerializeField] private AudioSource soundFXObject;
 
 
-    //static variable for fish coin value
-    public static AudioManager instance {get; private set; }
-    void Awake (){
+    //singleton settup
+    public static Controller_FXSoundsManager instance {get; private set; }
+    void Awake()
+    {
 
         //delete duplicate of this instance
 
-        if (instance != null && instance != this){
+        if (instance != null && instance != this)
+        {
             Destroy(this);
         }
-        else{
+        else
+        {
             instance = this;
         }
     }
 
 
 
-    //instance audio
-    //play audio
+    //this function is used in creating all the little sound effects that happen through out the game,
+    //it creates an instance audio that
+    //plays its audio, then after finishing
     //destroy self
-    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volume, float pitch){
+    //for parameters: 
+    //      volume - its just used in layer sound effects with each other, not true percentage value cause thats controlled by  soundmixermanager
+    //               we dont need to multply or nothing since thats already done with the fx volume control (soundMixerManager)
+    public void PlaySoundFXClip(AudioClip audioClip, Transform spawnTransform, float volumePercent, float pitch)
+    {
 
         //spawn in gameobject
         AudioSource audioSource = Instantiate(soundFXObject, spawnTransform.position, Quaternion.identity);
@@ -42,7 +50,7 @@ public class AudioManager : MonoBehaviour
         audioSource.pitch = pitch;
 
         //assign volume
-        audioSource.volume = volume;
+        audioSource.volume = volumePercent;
 
         //play sound
         audioSource.Play();
@@ -56,7 +64,7 @@ public class AudioManager : MonoBehaviour
     }
 
 
-    //play a random audio clip
+    //play a random audio clip, given a list of them,
     public void PlayRandomSoundFXClip(AudioClip[] audioClip, Transform spawnTransform, float volume){
 
         //random index

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
@@ -178,6 +179,11 @@ namespace Assests.Inputs
 
         private void UsingMouse()
         {
+            //first
+            //if the player mouse is not restrained, and outside the game window, then we dont update virtual mouse position
+            if(  !restrain && MouseOutsideGameScreen()){ Debug.Log("virtual disabled..."); return; }
+
+
             //Position = new Vector2(1920, 1080); //testing
 
             //get the change in mouse movement
@@ -275,6 +281,27 @@ namespace Assests.Inputs
 
         }
 
+
+        //unity code for gettin if mouse is outside the game window
+        //returns true if mouse is outside screen
+        public bool MouseOutsideGameScreen()
+        {
+
+            if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Handles.GetMainGameViewSize().x - 1 || Input.mousePosition.y >= Handles.GetMainGameViewSize().y - 1)
+            {
+                return true;
+            }
+
+            if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Screen.width - 1 || Input.mousePosition.y >= Screen.height - 1)
+            {
+                return true;
+            }
+
+            else
+            {
+                return false;
+            }
+        }
 
 
         //when the player needs to update their cursorSpeed_playerSet from the settings page

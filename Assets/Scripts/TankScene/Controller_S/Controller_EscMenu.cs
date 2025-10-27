@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Assests.Inputs;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Controller_EscMenu : MonoBehaviour
@@ -84,9 +85,7 @@ public class Controller_EscMenu : MonoBehaviour
         escMenuOpen = true;
         //pause all time references (physics, time)
         PauseTank(true);
-        //pause audio listeners
-        AudioListener.pause = true;
-
+        
 
         //disable ui buttons (so player can't purchase)
         interactive_list = new bool[Shop_Container.transform.childCount];
@@ -114,7 +113,7 @@ public class Controller_EscMenu : MonoBehaviour
         
         //in the virtual mouse:
         //stop restraining real mouse
-        //CustomVirtualCursor.SetRestrain(false);
+        CustomVirtualCursor.SetRestrain(false);
     }
 
     public void CloseMainMenu()
@@ -122,7 +121,7 @@ public class Controller_EscMenu : MonoBehaviour
 
         escMenuOpen = false;
         PauseTank(false);
-        AudioListener.pause = false;
+
 
         int i = 0;
         foreach (var btn in Shop_Container.GetComponentsInChildren<Button>(true))
@@ -138,13 +137,13 @@ public class Controller_EscMenu : MonoBehaviour
         TutorialReaderParent.instance.HideTutorial(true);
         
         //re-restrain our mouse
-        //CustomVirtualCursor.SetRestrain(true);
+        CustomVirtualCursor.SetRestrain(true);
     }
 
 
-//-----------------------------------------------------------------------------------------------------------
+    //-----------------------------------------------------------------------------------------------------------
 
-    
+
 
 
 
@@ -153,29 +152,55 @@ public class Controller_EscMenu : MonoBehaviour
     //if it is, we don't want to unpause after we close the esc menu
     //it can also be referenced by other functions, outside this obj
     //parameter: true == pause the tank, false == unpause
-    public void PauseTank(bool pauseOrNot){
+    public void PauseTank(bool pauseOrNot)
+    {
 
-        
-        if(pauseOrNot){
-            //just add one to flag
-            flag++;
-            //since we don't know if this is the first or not
-            //we just set to 0, doesn't hurt
-            Time.timeScale = 0; 
+
+        if (pauseOrNot)
+        {
+            //since we don't know if this is the first or not, we are going to treat it if it is
+
+            //before we do any time changes, we do things that are reliant on it
+            //pause audio listeners
+            Controller_SoundMixerManager.instance.LowPass(true);
+
+            //now
+            //we just set to 0
+            Time.timeScale = 0;
+
             //now we are offisshally paused
             paused = true;
+            //just add one to flag
+            flag++;
         }
-        else{
+        else
+        {
             //we want to unpause
             //so
             flag--; //sub 1
+
             //then check for 0
-            if(flag <= 0){
-                //unpause
+            if (flag <= 0)
+            {
+                //pre time scale change
+                //pause audio listeners
+                Controller_SoundMixerManager.instance.LowPass(false);
+
+                //unpause time and bool
                 Time.timeScale = 1;
-                //yea
                 paused = false;
             }
         }
+    }
+    
+
+    public void GoToMainMenu(){
+
+        //return time and audio back to normal
+        Time.timeScale = 1;
+        AudioListener.pause = false;
+        
+        //return
+        SceneManager.LoadScene("MainMenu");
     }
 }

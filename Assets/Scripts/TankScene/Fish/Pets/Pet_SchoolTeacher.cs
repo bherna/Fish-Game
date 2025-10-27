@@ -150,7 +150,7 @@ public class Pet_SchoolTeacher : Pet_ParentClass
 
         //guppy whistle sound 
         yield return new WaitForSeconds(audioDelay*Time.deltaTime);//wait for delay
-        AudioManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f, 1f);
+        Controller_FXSoundsManager.instance.PlaySoundFXClip(whistle_audio, transform, 1f, 1f);
         face_meshRender.material = faces[1]; //1 == closed eye 'blink'
 
         //event call to guppys

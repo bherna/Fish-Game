@@ -42,7 +42,7 @@ public class PostGame : MonoBehaviour
     //if you end up removing this, exit level button will stop working
     public void GoToMainMenu(){
 
-        Controller_Objective.instance.GoToMainMenu();
+        Controller_EscMenu.instance.GoToMainMenu();
     }
 
 }

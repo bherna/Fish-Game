@@ -78,7 +78,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
         Controller_Enemy.instance.CloserToWaveEnded();
 
         //play sound
-        AudioManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f, 1f);
+        Controller_FXSoundsManager.instance.PlaySoundFXClip(diedSoundClip, transform, 1f, 1f);
 
         //drop gem
         Instantiate(gem, transform.position, Quaternion.identity);

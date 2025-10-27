@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class EscMenu : MonoBehaviour
+public class UI_EscMenu : MonoBehaviour
 {
     //reference gameobjects we want this button to run on
     //should be the children attached to this object (this onject is the esc - UI)
@@ -36,7 +36,7 @@ public class EscMenu : MonoBehaviour
 
     public void OnGoToMainMenu()
     {
-        Controller_Objective.instance.GoToMainMenu();
+        Controller_EscMenu.instance.GoToMainMenu();
     }
 
     private void OnCloseMenu()

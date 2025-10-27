@@ -184,7 +184,7 @@ public class Guppy_Stats : FishStats_ParentClass
     private void Ate(){
 
         //play eating sound
-        AudioManager.instance.PlaySoundFXClip(ateClip, transform, 1f, 1f);
+        Controller_FXSoundsManager.instance.PlaySoundFXClip(ateClip, transform, 1f, 1f);
 
         if(updateAge){
 
@@ -212,7 +212,7 @@ public class Guppy_Stats : FishStats_ParentClass
         //sprite
         //
         StartCoroutine(ChangeGuppySize(spriteGrowthFor_ageStage[curr_ageStage])); 
-        AudioManager.instance.PlaySoundFXClip(ageUpClip, transform, 1f, 1f);
+        Controller_FXSoundsManager.instance.PlaySoundFXClip(ageUpClip, transform, 1f, 1f);
         
         //reset
         curr_foodAte = 0;
@@ -250,7 +250,7 @@ public class Guppy_Stats : FishStats_ParentClass
         Controller_Fish.instance.RemoveFish(gameObject);
         
         //play die sound
-        if(playSound){AudioManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
+        if(playSound){Controller_FXSoundsManager.instance.PlaySoundFXClip(dieSoundClip, transform, 1f, 1f);}
         
         //update pet req if needed
         PetReq_ParentClass.instance.UpdateGuppyCounter_Age(curr_ageStage, -1);

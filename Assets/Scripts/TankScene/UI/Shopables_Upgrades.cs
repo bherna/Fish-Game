@@ -94,7 +94,7 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
             //visual
             Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", prices[index_array]));
             //sound
-            AudioManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
+            Controller_FXSoundsManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
         }
     
     }

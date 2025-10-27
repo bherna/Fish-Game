@@ -1,5 +1,23 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-5146235231387357322
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 41b4417fba9bce542b794f0bf1dee45e
+  m_EffectName: Lowpass
+  m_MixLevel: cc9fe4866209a5f40bb4326065ce428b
+  m_Parameters:
+  - m_ParameterName: Cutoff freq
+    m_GUID: a0e67c808ae010d4f9dc2009e00b266f
+  - m_ParameterName: Resonance
+    m_GUID: 3533c207c603aa54685f8e621a000bb7
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!243 &-4747829852163145765
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -44,6 +62,7 @@ AudioMixerController:
   m_MasterGroup: {fileID: 24300002}
   m_Snapshots:
   - {fileID: 24500006}
+  - {fileID: 3213199869839177523}
   m_StartSnapshot: {fileID: 24500006}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
@@ -62,7 +81,7 @@ AudioMixerController:
     - 783a159f5afff61489f0559621f3ad42
     name: View
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: 3213199869839177523}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -104,7 +123,7 @@ AudioMixerSnapshotController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Snapshot
+  m_Name: UnPaused
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: 12e65bd3f18805d44be8bad79803c656
   m_FloatValues: {}
@@ -138,7 +157,21 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 1704921222449152550}
+  - {fileID: -5146235231387357322}
   m_UserColorIndex: 0
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
+--- !u!245 &3213199869839177523
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Paused
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 48f4cba19e332df41aae820bd9c030d8
+  m_FloatValues:
+    a0e67c808ae010d4f9dc2009e00b266f: 200
+    3caa7fbfa6db6624ebf99f090d8770ce: 365
+  m_TransitionOverrides: {}
