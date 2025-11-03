@@ -57,9 +57,14 @@ namespace Assests.Inputs
         Canvas canvas;
         RectTransform canvas_Transform;
         Mouse virtualMouse;
+        private bool mouseWasOutside = false;
+
         public static Vector2 MousePosition { get; private set; }
         private static Vector2 GamepadDelta { get; set; }
         public static Vector2 Position { get; private set; }
+
+
+
 
 
 
@@ -164,6 +169,7 @@ namespace Assests.Inputs
 
         }
 
+
         private void UsingGamepad()
         {
             var currentPos = MousePosition;
@@ -177,14 +183,53 @@ namespace Assests.Inputs
             InputState.Change(virtualMouse.delta, deltaValue);
         }
 
+
+
+        //used in getting real mouse input data, for determining next virtual mouse position
         private void UsingMouse()
         {
-            //first
-            //if the player mouse is not restrained, and outside the game window, then we dont update virtual mouse position
-            if(  !restrain && MouseOutsideGameScreen()){ Debug.Log("virtual disabled..."); return; }
 
 
-            //Position = new Vector2(1920, 1080); //testing
+
+            //determine if we are in pause menu or currently playing game
+            if (Controller_EscMenu.instance.paused)
+            {
+                //Debug.Log("Game is paused ...");
+
+                //if we are paused, we want to see if we are within the game screen
+                //if mouse is outside, then..
+                if (MouseOutsideGameScreen())
+                {
+                    //we want to move disable mouse restrain here,
+                    SetRestrain(false);
+
+                    //need to keep track for when we return to game window. so we have a better entry point for our mouse, else it
+                    //makes this ugly mess with the mouse
+                    mouseWasOutside = true;
+                }
+                else
+                {
+                    //if we dont check for this, we get the game refresing this chunk every time  we are inside
+                    //when we only want it to happen once
+                    if (mouseWasOutside)
+                    {
+                        //Debug.Log("Returned");
+                        mouseWasOutside = false;
+
+                        //we want to get the new entry position of the real mouse, so the virtual is matched to it
+                        Vector2 newpos = Input.mousePosition;
+                        newpos = ClampPosition(newpos);
+                        MousePosition = newpos;
+
+                        //restrain mouse
+                        SetRestrain(true);
+
+                        //since we set the new position, we can return
+                        return;
+                    }
+                }
+            }
+
 
             //get the change in mouse movement
             float mouseX = Input.GetAxis("Mouse X");
@@ -195,14 +240,23 @@ namespace Assests.Inputs
 
             //clamp new virtual mouse position 
             var pos = MousePosition;
+            pos = ClampPosition(pos);
+            MousePosition = pos;
+            Position = MousePosition;
+
+
+
+        }
+        
+        private Vector2 ClampPosition(Vector2 pos)
+        {
             pos.x = Mathf.Clamp(pos.x, 0, Screen.width);
             pos.y = Mathf.Clamp(pos.y, 0, Screen.height);
-            MousePosition = pos;
-
-            // update new position to be current position
-            Position = MousePosition;
+            return pos;
         }
 
+
+        //used in moving virtual mouse
         private void AnchorCursor(Vector2 newPos)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(canvas_Transform,
@@ -261,15 +315,18 @@ namespace Assests.Inputs
         }
 
 
+
+
         //used in setting our restrain variable
-        //if given true. we run like normal
-        //dont bother using this since it sucks for now, used in the esc menu to make the real mouse visable to make it easeir to debug, but meh
+        //when the real mouse needs to leave the game window, we have to disable the restrain, else player mouse is stuck in game window forever
+        //this function is not used in determining if we are inside or not, thats the next function
+        //was used in escmain
         public static void SetRestrain(bool newRestrain)
         {
-            //how this should be:
+            //how this works:
             ///if we are restrained (set to true)
             ///     we are settting our restrain to true
-            ///     we are setting our cursur to not visable
+            ///     we are setting our cursur to be not visable
             ///     we are setting our cursor to be confined
             /// 
             /// else we are unconstrained
@@ -281,19 +338,21 @@ namespace Assests.Inputs
 
         }
 
-
+        
         //unity code for gettin if mouse is outside the game window
         //returns true if mouse is outside screen
         public bool MouseOutsideGameScreen()
         {
 
-            if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Handles.GetMainGameViewSize().x - 1 || Input.mousePosition.y >= Handles.GetMainGameViewSize().y - 1)
+            if (Input.mousePosition.x <= 0 || Input.mousePosition.y <= 0 || Input.mousePosition.x >= Handles.GetMainGameViewSize().x - 1 || Input.mousePosition.y >= Handles.GetMainGameViewSize().y - 1)
             {
+                //Debug.Log("At Max/min.");
                 return true;
             }
 
-            if (Input.mousePosition.x == 0 || Input.mousePosition.y == 0 || Input.mousePosition.x >= Screen.width - 1 || Input.mousePosition.y >= Screen.height - 1)
+            if (Input.mousePosition.x <= 0 || Input.mousePosition.y <= 0 || Input.mousePosition.x >= Screen.width - 1 || Input.mousePosition.y >= Screen.height - 1)
             {
+                //Debug.Log("At Max/min.");
                 return true;
             }
 

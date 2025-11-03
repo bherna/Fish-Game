@@ -113,7 +113,8 @@ public class Controller_EscMenu : MonoBehaviour
         
         //in the virtual mouse:
         //stop restraining real mouse
-        CustomVirtualCursor.SetRestrain(false);
+        //dont want to do this here, cause we have another if case to check for noooow
+        //CustomVirtualCursor.SetRestrain(false);
     }
 
     public void CloseMainMenu()

@@ -66,7 +66,7 @@ public class Controller_SoundMixerManager : MonoBehaviour
         int newVolume = (int)((-70) * Mathf.Pow(newPercent - 1, 2) - 10); //keep as whole number for clarity
         
         audioMixer.SetFloat(volumeTypeStrings[type], newVolume);
-        Debug.Log(string.Format("New {0} at {1:0%} is {2} hrtz", volumeTypeStrings[type], newPercent, newVolume));
+        //Debug.Log(string.Format("New {0} at {1:0%} is {2} hrtz", volumeTypeStrings[type], newPercent, newVolume));
     }
 
 
