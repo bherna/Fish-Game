@@ -7,28 +7,39 @@ using UnityEngine;
 public class SteamManager : MonoBehaviour
 {
 
-    private void Awake(){
-        try
+    public static SteamManager instance { get; private set; }
+    void Awake()
+    {
+
+        //delete duplicate of this instance
+
+        if (instance != null)
         {
-            SteamClient.Init( 3099090 );
+            Destroy(gameObject);
         }
-        catch (Exception)
+        else
         {
-            // Something went wrong - it's one of these:
-            //
-            //     Steam is closed?
-            //     Can't find steam_api dll?
-            //     Don't have permission to play app?
-            //
-            Debug.Log("Count not initialize steam client.");
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+
+            try
+            {
+                SteamClient.Init(3099090);
+            }
+            catch (Exception)
+            {
+                // Something went wrong - it's one of these:
+                //
+                //     Steam is closed?
+                //     Can't find steam_api dll?
+                //     Don't have permission to play app?
+                //
+                Debug.Log("Count not initialize steam client.");
+            }
+        
         }
-
-        //ensure steam manager cannot be destroyed in changing scenes
-        DontDestroyOnLoad(this.gameObject);
-
-
-        //test();
     }
+
 
     private void test() {
 

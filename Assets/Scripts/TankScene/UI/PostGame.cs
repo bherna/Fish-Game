@@ -4,11 +4,13 @@ using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PostGame : MonoBehaviour
 {
 
     [SerializeField] TextMeshProUGUI showStats;
+    [SerializeField] GameObject ExitLevel_ButtonObj;
 
     private void Awake() {
         
@@ -39,9 +41,17 @@ public class PostGame : MonoBehaviour
     }
 
 
-    //if you end up removing this, exit level button will stop working
-    public void GoToMainMenu(){
-
+    void OnEnable()
+    {
+        ExitLevel_ButtonObj.GetComponent<Button>().onClick.AddListener(() => OnGoToMainMenu());
+    }
+    void OnDisable()
+    {
+        ExitLevel_ButtonObj.GetComponent<Button>().onClick.RemoveAllListeners();
+    }
+    
+    public void OnGoToMainMenu()
+    {
         Controller_EscMenu.instance.GoToMainMenu();
     }
 

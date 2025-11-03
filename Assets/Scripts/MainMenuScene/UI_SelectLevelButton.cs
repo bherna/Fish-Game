@@ -2,13 +2,21 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+[System.Serializable]
+public class WorldLevelTuple
+{
+    public int Item1;
+    public int Item2;
+}
+
 public class UI_SelectLevelButton : MonoBehaviour
 {
 
     //reference to which tank scene we are going to use
     [SerializeField] string tankScene;
     //reference to the name of the level (ie: level_1-1 level_1-2 ...)
-    [SerializeField] string level;
+    [SerializeField] WorldLevelTuple level;
 
     void OnEnable()
     {
@@ -21,7 +29,7 @@ public class UI_SelectLevelButton : MonoBehaviour
         //Un-Register Button Events
         GetComponent<Button>().onClick.RemoveAllListeners();
     }
-    
 
-    
+
+
 }

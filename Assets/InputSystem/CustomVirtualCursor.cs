@@ -188,11 +188,10 @@ namespace Assests.Inputs
         //used in getting real mouse input data, for determining next virtual mouse position
         private void UsingMouse()
         {
-
-
-
+            
+            //check if we are in main menu
             //determine if we are in pause menu or currently playing game
-            if (Controller_EscMenu.instance.paused)
+            if (Controller_EscMenu.instance == null || Controller_EscMenu.instance.paused)
             {
                 //Debug.Log("Game is paused ...");
 

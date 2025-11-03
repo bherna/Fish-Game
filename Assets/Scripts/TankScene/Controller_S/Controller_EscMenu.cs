@@ -200,6 +200,9 @@ public class Controller_EscMenu : MonoBehaviour
         //return time and audio back to normal
         Time.timeScale = 1;
         AudioListener.pause = false;
+
+        //set our discord activity to in main menu
+        DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Menu, 0, 0);
         
         //return
         SceneManager.LoadScene("MainMenu");

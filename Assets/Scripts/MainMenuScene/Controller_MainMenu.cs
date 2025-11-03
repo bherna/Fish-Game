@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,8 +13,8 @@ public class Controller_MainMenu : MonoBehaviour
 
     private string tankSceneName; //current tank level selected (name)
     private int curr_screen = 0; //main menu == 0, levels, pet panel == -1
+    private WorldLevelTuple worldLevel; //used for getting world + level in ints,  currently selected
 
-    private float timer;
 
     //singleton this
     public static Controller_MainMenu instance { get; private set; }
@@ -30,12 +31,11 @@ public class Controller_MainMenu : MonoBehaviour
         {
             instance = this;
         }
+        
     }
 
     private void Start()
     {
-
-
         //set ui tabs positions 
         for (int i = 0; i < slidePanelsParentObj.transform.childCount; i++)
         {
@@ -46,6 +46,9 @@ public class Controller_MainMenu : MonoBehaviour
         //set pets panel false, since we dont want to see it
         //also avoid moving it since our pet coords are saved from this (0,0) position
         transform.Find("Pets - Container").gameObject.SetActive(false);
+
+        //set our discord activity to in main menu
+        DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Menu, 0, 0);
     }
 
 
@@ -55,6 +58,9 @@ public class Controller_MainMenu : MonoBehaviour
 
         //save selected pets
         PetsAccess.UpdateSetSelectedPets(Controller_PetMenu.instance.selectedPets);
+
+        //set our current level in discord
+        DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Level, worldLevel.Item1, worldLevel.Item2);
 
         //start level last
         SceneManager.LoadScene(tankSceneName);
@@ -119,11 +125,12 @@ public class Controller_MainMenu : MonoBehaviour
 
     //set scene currSceneSet
     //this lets us move from level select to pet select
-    public void GoToPetsPanel(string tankScene, string level)
+    public void GoToPetsPanel(string tankScene, WorldLevelTuple level)
     {
 
         //save current tank scene name, so we go to that level after selecting pets
         tankSceneName = tankScene;
+        worldLevel = level;
         //update the level name aswell, used in the controller enemy script for choosing what json enemywaves file
         LocalLevelVariables.UpdateLevel(level);
 

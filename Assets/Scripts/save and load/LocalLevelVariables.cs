@@ -46,11 +46,12 @@ public static class LocalLevelVariables
   
     private static WholeJsonScript wholeJsonScript;
 
-    public static void UpdateLevel(string newLevel){
+    public static void UpdateLevel(WorldLevelTuple newLevel){
 
         //update what our level name is
         //in other words what are json script we are reading
-        curr_level = newLevel;
+        //ie level_1-2
+        curr_level = string.Format("level_{0}-{1}", newLevel.Item1, newLevel.Item2);
 
         //update our whole json script class to hold reference to json file
         wholeJsonScript = JsonUtility.FromJson<WholeJsonScript>(LoadResourceTextfile());
