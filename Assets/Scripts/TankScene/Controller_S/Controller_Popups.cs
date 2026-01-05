@@ -42,7 +42,7 @@ public class Controller_PopUp : MonoBehaviour
 
 
     //all we need is other  classes to reference the popup creation
-    public void CreateTextPopUp(string displayText){
+    public void CreateTextPopUp(string displayText, Vector3 newPos){
 
         //create a pop up
         var popup = Instantiate(textPopUp);
@@ -57,10 +57,11 @@ public class Controller_PopUp : MonoBehaviour
         //update the background dimensions to fit text
         Vector2 textSize = text.GetRenderedValues(false);
         Vector2 paddingSize = new Vector2(text.margin.x, text.margin.y*2);
-        Vector2 fullSize = textSize+paddingSize;
+        Vector2 fullSize = textSize + paddingSize;
 
-        //update the tool tip position to be inside the screen view (so it doesnt type of screen)
-        Vector2 anchoredPos = CustomVirtualCursor.MousePosition / canvasRecTrans.localScale.x;
+        //update the tool tip position to be inside the screen view (so it doesnt type off screen)
+        //Vector2 anchoredPos = CustomVirtualCursor.MousePosition / canvasRecTrans.localScale.x;    
+        Vector2 anchoredPos = newPos / canvasRecTrans.localScale.x;    
         anchoredPos.x = Mathf.Clamp(anchoredPos.x, 0, canvasRecTrans.rect.width - fullSize.x);
         anchoredPos.y = Mathf.Clamp(anchoredPos.y, 0, canvasRecTrans.rect.height - fullSize.y);
 

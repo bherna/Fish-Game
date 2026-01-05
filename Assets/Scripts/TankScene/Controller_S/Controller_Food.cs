@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Assests.Inputs;
 using UnityEngine;
+using UnityEngine.InputSystem.UI;
 
 
 public class Controller_Food : MonoBehaviour
@@ -68,7 +69,7 @@ public class Controller_Food : MonoBehaviour
 
                 //sub money + visual
                 Controller_Wallet.instance.SubMoney(5);
-                Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", 5));
+                Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", 5), CustomVirtualCursor.MousePosition);
             }
         }
     }

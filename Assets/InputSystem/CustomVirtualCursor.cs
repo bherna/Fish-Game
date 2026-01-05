@@ -39,7 +39,7 @@ namespace Assests.Inputs
     class CustomVirtualCursor : PlayerInputDispatcher, NewControls.IUtilsActions
     {
         //the cursor speed that the player can set in the settings tab
-        [SerializeField] public static int cursorSpeed_playerSet { get; private set; } = 2500;
+        public static int cursorSpeed_playerSet { get; private set; } = 2500;
 
         //cursor speed used for actually moving the mouse (dynamically changes to status effects)
         public static int cursorSpeed_current;

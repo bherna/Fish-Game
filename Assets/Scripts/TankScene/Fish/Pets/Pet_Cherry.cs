@@ -117,7 +117,7 @@ public class Pet_Cherry : Pet_ParentClass
         curr_PetState = Pet_States.idle;
         //set gravity scale to 0 since we are at bottom
         rb.gravityScale = 0;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
     //one from player onmousedown, idle/dropped -> grabbed
     public void OnMouseDown()
@@ -125,7 +125,7 @@ public class Pet_Cherry : Pet_ParentClass
         curr_PetState = Pet_States.grabbed;
         //set gravity to 0
         rb.gravityScale = 0;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
     // ----------- WE DONT NEED ONE FOR ON DRAG, SINCE WE JUST CARE ABOUT THE DOWN AND UP EVENTS ------------ 
     //one from player onmouseup, grabbed -> dropped
@@ -134,7 +134,7 @@ public class Pet_Cherry : Pet_ParentClass
         curr_PetState = Pet_States.dropped;
         //set gravity scale to _ since we are now wanting to fall
         rb.gravityScale = 1;
-        rb.velocity = Vector3.zero;
+        rb.linearVelocity = Vector3.zero;
     }
 
 

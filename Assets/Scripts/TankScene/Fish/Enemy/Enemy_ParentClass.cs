@@ -106,7 +106,7 @@ public class Enemy_ParentClass : Fish_ParentClass_Movement
             //set our velocity towards middle of tank
             //(IF CHANGED, UPDATE THIS IN CHILD CLASSES)
             Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
-            rb.velocity = kb; 
+            rb.linearVelocity = kb; 
 
         }
     }

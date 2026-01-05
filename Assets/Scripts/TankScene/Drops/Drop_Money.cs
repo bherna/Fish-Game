@@ -1,5 +1,6 @@
 
 using System.Collections;
+using Assests.Inputs;
 using UnityEngine;
 
 public class Drop_Money : Drop_Parent
@@ -32,7 +33,7 @@ public class Drop_Money : Drop_Parent
         Controller_FXSoundsManager.instance.PlaySoundFXClip(collectCoinSoundClip, transform, 1f, pitch);
 
         //instantiate text pop up
-        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyValue));
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyValue), CustomVirtualCursor.MousePosition);
         //destroy
         Destroy(gameObject);
     }

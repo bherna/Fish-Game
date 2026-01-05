@@ -52,7 +52,7 @@ public class Starfish_SM : Enemy_ParentClass
         //set target fish
         currFishTarget = Controller_Fish.instance.GetRandomFish();
 
-        linearDrag = rb.drag;
+        linearDrag = rb.linearDamping;
 
         //front facing enemy
         IProfile = false;
@@ -136,8 +136,8 @@ public class Starfish_SM : Enemy_ParentClass
                 
                 //spin move
                 var target_dir = (currFishTarget.position - transform.position).normalized;
-                rb.velocity = target_dir * burst_vel;
-                rb.drag = 0; //we remove drag, just so we dont get stuck in the middle of the tank (since we expect some obstacle to reset our attack)
+                rb.linearVelocity = target_dir * burst_vel;
+                rb.linearDamping = 0; //we remove drag, just so we dont get stuck in the middle of the tank (since we expect some obstacle to reset our attack)
 
                 //allso set our collider orientation here finally
                 int angle = (int)(Mathf.Atan2(currFishTarget.position.y - transform.position.y, currFishTarget.position.x - transform.position.x) * Mathf.Rad2Deg);
@@ -176,7 +176,7 @@ public class Starfish_SM : Enemy_ParentClass
         spinning = false;
         curr_r_vel = 0;
         curr_sprite_r = 0;      //reset this so it doesn't keep growing past max INT size
-        rb.drag = linearDrag; //reset drag, since we dont want to be gliding everywhere
+        rb.linearDamping = linearDrag; //reset drag, since we dont want to be gliding everywhere
     }
 
 
@@ -190,7 +190,7 @@ public class Starfish_SM : Enemy_ParentClass
 
             //set our velocity towards middle of tank
             Vector2 kb = (other.gameObject.transform.position - transform.position).normalized;
-            rb.velocity = kb;
+            rb.linearVelocity = kb;
 
             //if we are currently stunned we dont want to reset our attack just yet
             if (curr_EnemyState != Enemy_States.stunned) {
@@ -262,7 +262,7 @@ public class Starfish_SM : Enemy_ParentClass
 
             //we start to move backwards super slowly
             Vector2 kbVector = (transform.position - CustomVirtualCursor.GetMousePosition_V3()).normalized;
-            rb.velocity = kbVector * kbForce_stunned;
+            rb.linearVelocity = kbVector * kbForce_stunned;
 
             //init a ripple particle
             Vector2 midpoint = Vector2.Lerp(CustomVirtualCursor.GetMousePosition_V2(), transform.position, 0.5f);

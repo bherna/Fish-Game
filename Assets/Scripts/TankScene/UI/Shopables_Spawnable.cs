@@ -1,3 +1,4 @@
+using Assests.Inputs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -82,7 +83,7 @@ public class Shopables_Spawnable : Shopables_ParentClass, IPointerEnterHandler, 
     private void PrintTransaction(){
 
         //show price pop up
-        Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", fishPrice));
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", fishPrice), CustomVirtualCursor.MousePosition);
         //and sound pop up
         Controller_FXSoundsManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
     }

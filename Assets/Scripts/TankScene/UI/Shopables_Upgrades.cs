@@ -1,3 +1,4 @@
+using Assests.Inputs;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -92,7 +93,7 @@ public class Shopables_Upgrades : Shopables_ParentClass, IPointerEnterHandler, I
             //purchase obj
             Controller_Wallet.instance.SubMoney(prices[index_array]);
             //visual
-            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", prices[index_array]));
+            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", prices[index_array]), CustomVirtualCursor.MousePosition);
             //sound
             Controller_FXSoundsManager.instance.PlaySoundFXClip(buySoundClip, transform, 1f, 1f);
         }

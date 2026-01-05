@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1319953725339221095}
   - component: {fileID: 4683593446461236281}
   - component: {fileID: 6463871585753004192}
-  - component: {fileID: 8499191942169627169}
   - component: {fileID: 3951668465967995273}
   m_Layer: 0
   m_Name: Main Camera
@@ -94,22 +93,6 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2019108047928751893}
   m_Enabled: 1
---- !u!114 &8499191942169627169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2019108047928751893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 56666c5a40171f54783dd416a44f42bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_EventMask:
-    serializedVersion: 2
-    m_Bits: 11840
-  m_MaxRayIntersections: 0
 --- !u!114 &3951668465967995273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,11 +129,11 @@ MonoBehaviour:
   m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
-  m_Version: 2
   m_TaaSettings:
-    quality: 3
-    frameInfluence: 0.1
-    jitterScale: 1
-    mipBias: 0
-    varianceClampScale: 0.9
-    contrastAdaptiveSharpening: 0
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+  m_Version: 2

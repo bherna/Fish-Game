@@ -48,7 +48,7 @@ public class Controller_MainMenu : MonoBehaviour
         transform.Find("Pets - Container").gameObject.SetActive(false);
 
         //set our discord activity to in main menu
-        DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Menu, 0, 0);
+        //DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Menu, 0, 0);
     }
 
 
@@ -60,7 +60,7 @@ public class Controller_MainMenu : MonoBehaviour
         PetsAccess.UpdateSetSelectedPets(Controller_PetMenu.instance.selectedPets);
 
         //set our current level in discord
-        DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Level, worldLevel.Item1, worldLevel.Item2);
+        //DiscordManager.instance.ChangeActivity(DiscordManager.DiscordState.Level, worldLevel.Item1, worldLevel.Item2);
 
         //start level last
         SceneManager.LoadScene(tankSceneName);

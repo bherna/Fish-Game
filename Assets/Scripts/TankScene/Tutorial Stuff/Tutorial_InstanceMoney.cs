@@ -65,8 +65,10 @@ public class Tutorial_InstanceMoney : MonoBehaviour
 
         yield return new WaitForSeconds(seconds);
 
+        //Vector2 anchoredPos = new Vector3(screenPos.x, Screen.height - screenPos.y); incase its mirror'd
+
         //instantiate text pop up
-        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyToAdd));
+        Controller_PopUp.instance.CreateTextPopUp(string.Format("+ {0}", moneyToAdd), Camera.main.WorldToScreenPoint(transform.position));
         Controller_Wallet.instance.AddMoney(moneyToAdd);
         //destroy obj
         Destroy(gameObject);

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Assests.Inputs;
 
 
 public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler, IPointerExitHandler
@@ -98,7 +99,7 @@ public class Controller_Objective : Shopables_ParentClass, IPointerEnterHandler,
 
 
             //show we bought, with a pop up
-            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", eggPrices[obj_index]));
+            Controller_PopUp.instance.CreateTextPopUp(string.Format("- {0}", eggPrices[obj_index]), CustomVirtualCursor.MousePosition);
 
             //show we bought, with sound effect as well
             Controller_FXSoundsManager.instance.PlaySoundFXClip(eggPieces_audioClips[obj_index], transform, 1f, 1f);
